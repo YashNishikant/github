@@ -1,0 +1,18 @@
+
+public class App {
+	public static void main(String[] args) {
+		String[] words = new String[2];
+		
+		words[0] = "FOOD ";
+		words[1] = "LIST ";
+	
+		System.out.println(words[0] + words[1]);
+	
+		String[] foods = {"Apple", "Bananna", "Kiwi", "Orange"};
+	
+		for(String food: foods) {
+		System.out.println(food);
+		
+		}
+	}
+}

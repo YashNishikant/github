@@ -1,0 +1,24 @@
+public class numbersdisplay {
+	public static void main(String[] args) {
+
+		int start = 1;
+		int end = 100;
+
+		for (int value = start; value < end; value++) {
+
+			if (value % 3 == 0) {
+				System.out.println("Numbers divisible by 3:");
+				System.out.println(value);
+			}
+
+		}
+
+		int value = start;
+			if (value % 5 == 0) {
+				System.out.println("Numbers divisible by 5:");
+				System.out.println(value);
+
+			}
+		}
+	}
+

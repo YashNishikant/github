@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class NewApp {
+	private static Scanner input;
+
+	public static void main(String[] args) {
+
+		input = new Scanner(System.in);
+
+		String mystring = new String();
+		
+		
+		System.out.println("Greeting: ");
+		String text = input.nextLine();
+
+		switch (text) {
+		case "ujk":
+			System.out.println("Hello " + input);
+			break;
+		
+			
+		default: 
+		System.out.println("ERROR");
+		break;
+		
+		}
+		input.close();
+	}
+}

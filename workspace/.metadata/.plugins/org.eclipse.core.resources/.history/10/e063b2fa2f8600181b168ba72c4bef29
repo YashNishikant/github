@@ -1,0 +1,22 @@
+
+public class EvenOddApp {
+	public static void main(String[] args) {
+	
+		int start = 1;
+		int end = 100;
+
+		for (int val = start; val < end; val++)
+		{
+		 
+		    if (val % 2 == 0) 
+		    {
+		        System.out.println("Even" + val);
+		    }
+		    else
+		    {
+		        System.out.println("Odd" + val);
+		    }
+		}
+	
+	}
+}

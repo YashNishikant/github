@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class NewApp {
+	public static void main(String[] args) {
+
+		Scanner greetings= new Scanner(System.in);
+
+		System.out.println("Greeting: ");
+		String text = greetings.nextLine();
+
+		switch (text) {
+		case "I am Bob":
+			System.out.println("Hello Bob!");
+			break;
+		
+			
+			
+		}
+		greetings.close();
+	}
+}
