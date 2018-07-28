@@ -7,13 +7,12 @@ public class Application {
 
 		input = new Scanner(System.in);
 		
-		//Output the prompt
 		System.out.println("Enter in something!");
-		
-		//Wait for user to enter text
 		int value = input.nextInt();
 		
-		//Tell them what they entered
-		System.out.println("You entered: " + value);
+		System.out.println("Enter in something!");
+		int value2 = input.nextInt();
+
+		System.out.println("You entered: " + value + " and " + value2);
 	}
 }
