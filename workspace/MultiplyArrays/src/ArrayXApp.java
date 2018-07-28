@@ -1,4 +1,3 @@
-
 public class ArrayXApp {
 	public static void main(String[] args) {
 		
