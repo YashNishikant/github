@@ -9,7 +9,7 @@ public class backwardElement {
 
 		System.out.println("My Array");
 		for (int i = 0; i < myArr.length; i++) {
-			System.out.print(myArr[i] + ",");
+			System.out.print(myArr[i] + ", ");
 		}
 
 		myArr[0] = myArr[myArr.length - 1];
@@ -17,7 +17,7 @@ public class backwardElement {
 		System.out.println("\nPut last in first");
 
 		for (int i = 0; i < myArr.length; i++) {
-			System.out.print(myArr[i] + ",");
+			System.out.print(myArr[i] + ", ");
 		}
 
 		System.out.println("\nPut first to last");
@@ -25,7 +25,7 @@ public class backwardElement {
 		myArr[myArr.length - 1] = myInt;
 
 		for (int i = 0; i < myArr.length; i++) {
-			System.out.print(myArr[i] + ",");
+			System.out.print(myArr[i] + ", ");
 		}
 	}
 }
