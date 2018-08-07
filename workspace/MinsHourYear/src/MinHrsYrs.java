@@ -9,7 +9,7 @@ public class MinHrsYrs {
 
 		int years = (min / 525600);
 		int hours = (min % 525600) / 60;
-		int minutes = (min% 525600) % 60;
+		int minutes = (min % 525600) % 60;
 	
 		System.out.println("Years: " + years);
 		System.out.println("Hours: " + hours);

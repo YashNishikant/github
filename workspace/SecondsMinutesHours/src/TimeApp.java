@@ -9,7 +9,7 @@ public class TimeApp {
 		System.out.print("Enter in the number of seconds: ");
 		int sec = in.nextInt();
 		
-		int hours = sec / 3600;
+		int hours = (sec / 3600);
 		int minutes = (sec % 3600) / 60;
 	    int seconds = (sec % 3600) % 60;
 		
