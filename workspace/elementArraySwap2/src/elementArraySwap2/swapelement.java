@@ -17,7 +17,7 @@ public class swapelement {
 		}
 		for (int i = 0; i < myArr2.length; i++) {
 
-			if (i == myArr2.length-1) {
+			if (i == myArr2.length - 1) {
 				System.out.print(myArr2[i]);
 
 			}
