@@ -30,7 +30,7 @@ public class lcmNumb {
 
 			if (myInt % lcm1 == 0 && myInt % lcm2== 0) {
 				System.out.println("The LCM of the two numbers are: " + myInt);
-			break;
+				break;
 			}
 			myInt++;		
 		}

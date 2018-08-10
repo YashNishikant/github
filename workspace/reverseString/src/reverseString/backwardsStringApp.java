@@ -10,7 +10,7 @@ public class backwardsStringApp {
 
 		input = new Scanner(System.in);
 		System.out.println("Enter in a string to reverse!");
-		String strInput = input.next();
+		String strInput = input.nextLine();
 
 		StringBuilder input1 = new StringBuilder(strInput);
 
