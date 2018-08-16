@@ -6,11 +6,6 @@ public class letteroneline {
 
 	public static void main(String[] args) {
 
-		char yashchar = 10;
-
-		System.out.print("Yash Char:" + yashchar);
-		System.out.println("End Yash Char.");
-
 		input = new Scanner(System.in);
 
 		System.out.println("Enter a string:");

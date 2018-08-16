@@ -19,8 +19,7 @@ public class membArrayApp {
 
 			if (value == myArr[i]) {
 				arrBool = true;
-
-				
+	
 			}
 		}
 		System.out.println(arrBool);
