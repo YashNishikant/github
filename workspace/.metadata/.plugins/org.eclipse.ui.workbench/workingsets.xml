@@ -43,6 +43,7 @@
 <item elementID="=MultNumbers/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=MultiplyArrays/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=NonPrimitiveTypes/" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=NumberWord/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=OneToHundred/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=OneToSevenWeekdays/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Password/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -77,6 +78,7 @@
 <item elementID="=newFile/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=random/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=reverseString/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=alphabetical order/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530473721680_2" label="Java Test Sources" name="test"/>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530548952253_4" label="OtherProjects" name="OtherProjects">
@@ -98,6 +100,7 @@
 <item elementID="=random" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=3And5And15Numbers" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Rounding Numbers" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=NumberWord" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=MemberOfAnArray" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=reverseString" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=D replace F" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -141,6 +144,7 @@
 <item elementID="=AreaShapes" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=MoreRows" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=DoubleInt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=alphabetical order" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530549028869_5" label="MyProjects" name="MyProjects">
 <item elementID="=Tutorial-10" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>

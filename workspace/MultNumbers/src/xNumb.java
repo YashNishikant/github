@@ -30,6 +30,6 @@ public class xNumb {
 			myInt = input.nextInt();
 		}
 
-		System.out.println("Bye Bye you pooper.");
+		System.out.println("Bye Bye");
 	}
 }
