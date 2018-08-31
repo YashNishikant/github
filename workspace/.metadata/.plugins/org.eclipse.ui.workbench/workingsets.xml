@@ -3,6 +3,7 @@
 <workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530473721651_1" label="Java Main Sources" name="main">
 <item elementID="=2Tutorial/" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=3And5And15Numbers/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=AddDigits/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddNumbersNoOperators/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddNumbersTrueFalse/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddingNumbers/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -70,6 +71,7 @@
 <item elementID="=Tutorial3/" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=UpperFirstLetter/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=absolute value/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=alphabetical order/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=combineArray/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=elementArraySwap2/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=elementsArraySwap/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -78,7 +80,8 @@
 <item elementID="=newFile/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=random/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=reverseString/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=alphabetical order/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=ArrayList/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=IterateArrayList/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530473721680_2" label="Java Test Sources" name="test"/>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530548952253_4" label="OtherProjects" name="OtherProjects">
@@ -87,6 +90,7 @@
 <item elementID="=SquareRoots" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=IncreasingOrDecreasing" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=File" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=alphabetical order" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Digits in a number" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=combineArray" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=OneToSevenWeekdays" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -95,6 +99,7 @@
 <item elementID="=How old am I" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddNumbersTrueFalse" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=LCM" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=AddDigits" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=StringInt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=DisplayOddNumbers" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=random" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -144,7 +149,8 @@
 <item elementID="=AreaShapes" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=MoreRows" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=DoubleInt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=alphabetical order" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=ArrayList" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=IterateArrayList" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530549028869_5" label="MyProjects" name="MyProjects">
 <item elementID="=Tutorial-10" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
