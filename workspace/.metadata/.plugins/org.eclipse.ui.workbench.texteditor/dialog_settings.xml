@@ -6,12 +6,14 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="File" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="file"/>
+			<item value="al"/>
 			<item value="local"/>
 			<item value="bool = true;"/>
 			<item value="largest"/>
@@ -21,6 +23,7 @@
 			<item value="value"/>
 		</list>
 		<list key="replacehistory">
+			<item value="myArrL"/>
 			<item value="myInt"/>
 			<item value="largest"/>
 		</list>

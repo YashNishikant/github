@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class file {
 	public static void main(String[] args) throws FileNotFoundException {
+	
 		File file = new File("C:\\Users\\yash0\\EclipseFiles\\new.txt");
 		Scanner sc = new Scanner(file);
 
