@@ -13,7 +13,7 @@ public class app {
 		System.out.println("Enter a sentence: ");
 		String value = input.nextLine();
 
-		String[] splitStr = value.split(" ", -1);
+		String[] splitStr = value.split(",", -1);
 		ArrayList<String> myArrL = new ArrayList<String>();
 
 		for (int i = 0; i < splitStr.length; i++) {
