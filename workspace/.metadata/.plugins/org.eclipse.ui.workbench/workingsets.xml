@@ -78,11 +78,12 @@
 <item elementID="=elementsArraySwap/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=frequentWords/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=greatestNumber/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=moreWords/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=nString/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=newFile/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=random/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=reverseString/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=moreWords/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=duplicateArray/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530473721680_2" label="Java Test Sources" name="test"/>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530548952253_4" label="OtherProjects" name="OtherProjects">
@@ -103,6 +104,7 @@
 <item elementID="=LCM" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddDigits" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=StringInt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=moreWords" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=DisplayOddNumbers" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=random" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=3And5And15Numbers" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -134,6 +136,7 @@
 <item elementID="=CircleInfo" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=SecondsMinutesHours" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Time plus five hours" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=duplicateArray" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=CubeNumbers" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=elementArraySwap2" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Longest Word txt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -152,7 +155,7 @@
 <item elementID="=AreaShapes" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=MoreRows" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=DoubleInt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=moreWords" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=numbers in one or both array" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530549028869_5" label="MyProjects" name="MyProjects">
 <item elementID="=Tutorial-10" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
