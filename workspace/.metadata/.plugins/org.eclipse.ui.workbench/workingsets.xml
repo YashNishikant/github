@@ -74,6 +74,7 @@
 <item elementID="=UpperFirstLetter/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=absolute value/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=combineArray/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=duplicateArray/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=elementArraySwap2/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=elementsArraySwap/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=frequentWords/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -81,9 +82,11 @@
 <item elementID="=moreWords/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=nString/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=newFile/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=numbers in one or both array/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=random/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=reverseString/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=duplicateArray/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=words in order/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=MultiDimensional/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530473721680_2" label="Java Test Sources" name="test"/>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530548952253_4" label="OtherProjects" name="OtherProjects">
@@ -96,6 +99,7 @@
 <item elementID="=combineArray" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=OneToSevenWeekdays" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=frequentWords" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=numbers in one or both array" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=InchMeters" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=MultiplyArrays" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=How old am I" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -121,6 +125,7 @@
 <item elementID="=EveryCharEachLine" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddNumbersNoOperators" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Password" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=words in order" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=newFile" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=DateAndTime" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=JavaChallenge" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -155,7 +160,7 @@
 <item elementID="=AreaShapes" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=MoreRows" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=DoubleInt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=numbers in one or both array" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=MultiDimensional" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 </workingSet>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1530549028869_5" label="MyProjects" name="MyProjects">
 <item elementID="=Tutorial-10" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
