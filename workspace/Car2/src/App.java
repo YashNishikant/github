@@ -70,6 +70,7 @@ class Nissan extends Car {
 	}
 }
 
+
 public class App {
 	private static Scanner input;
 

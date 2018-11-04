@@ -10,8 +10,8 @@
 <item elementID="=AreaShapes/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=ArrayList/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AverageOfNumbers/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=Car2/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=CircleInfo/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=ClassObject/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Commands\!/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=ConcatenateString/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=CubeNumbers/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -104,7 +104,6 @@
 <item elementID="=InchMeters" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=MultiplyArrays" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=How old am I" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
-<item elementID="=ClassObject" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=IterateArrayList" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddNumbersTrueFalse" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=LCM" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -133,6 +132,7 @@
 <item elementID="=JavaChallenge" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddingNumbers" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=elementsArraySwap" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=Car2" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=LoopyLoop" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=RowsNumbers" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=UpperFirstLetter" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
