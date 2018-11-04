@@ -5,7 +5,7 @@
 	</list>
 	<section name="WorkbenchPreferenceDialogSettings">
 		<item value="109" key="DIALOG_X_ORIGIN"/>
-		<item value="-16" key="DIALOG_Y_ORIGIN"/>
+		<item value="8" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.ui.internal.QuickAccess">
 		<item value="-1" key="dialogHeight"/>
