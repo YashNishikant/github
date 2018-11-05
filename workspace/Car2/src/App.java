@@ -4,11 +4,23 @@ import java.util.Scanner;
 class Car {
 
 	String Color;
-	private int Speed;
+	protected int Speed;
 	String Seats;
+	private int TSpeed;
+	private int rateOfAcc;
+	
+	public Car(int topSpeed, int rateAcceleration)
+	{
+		TSpeed = topSpeed;
+		rateOfAcc = rateAcceleration;
+	}	
 	
 	void Accelerate() {
-		Speed = Speed + 10;
+		Speed = Speed + rateOfAcc;
+		if (Speed > TSpeed) {
+			Speed = TSpeed;
+			System.out.println("Top Speed Reached"); 
+		}
 	}
 
 	void Decelerate() {
@@ -22,6 +34,10 @@ class Car {
 		return Speed;
 	}
 
+	int GetTopSpeed() {
+		return TSpeed;
+	}
+	
 	int Brake() {
 		Speed = 0;
 		return Speed;
@@ -29,45 +45,32 @@ class Car {
 }
 
 //Honda
-class Honda extends Car{
+class Honda extends Car {
 
+	public Honda()
+	{
+		super(150, 5);
+	}
+	
+	
 	String Color;
-	private int Speed = 0;
 	String Seats;
-	private int TSpeedH = 120;
-
-	void TopSpeed() {
-		if (Speed > TSpeedH) {
-			Speed = TSpeedH;
-			System.out.println("Top Speed Reached");
-		}
-	}
-
-	int GetTopSpeed() {
-		return TSpeedH;
-	}
+	
 }
 
 //Nissan
 
 class Nissan extends Car {
 
-	String Color;
-	private int Speed;
-	String Seats;
-	private int TSpeedN = 150;
-
+	public Nissan()
+	{
+		super(200, 10);
+	}
 	
-	void TopSpeed() {
-		if (Speed > TSpeedN) {
-			Speed = TSpeedN;
-			System.out.println("Top Speed Reached");
-		}
-	}
-
-	int GetTopSpeedN() {
-		return TSpeedN;
-	}
+	
+	
+	String Color;
+	String Seats;
 }
 
 
@@ -76,11 +79,7 @@ public class App {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		input = new Scanner(System.in);
-		System.out.println("Which car would you like to purchase? (Honda or Nissan)");
-
-		String value = input.nextLine();
-
+			
 		Honda HondaCar = new Honda();
 		HondaCar.Color = "Color: Blue";
 		HondaCar.Seats = "7 seats";
@@ -89,8 +88,13 @@ public class App {
 		Nissan NissanCar = new Nissan();
 		NissanCar.Color = "Color: Gray";
 		NissanCar.Seats = "5 seats";
-		NissanCar.GetTopSpeedN();
+		NissanCar.GetTopSpeed();
 
+		input = new Scanner(System.in);
+		System.out.println("Which car would you like to purchase? (Honda or Nissan)");
+
+		String value = input.nextLine();
+		
 		if (value.equals("Honda")) {
 			System.out.println("INFORMATION ON HONDA");
 			System.out.println(HondaCar.Color);
@@ -104,16 +108,16 @@ public class App {
 			System.out.println("INFORMATION ON NISSAN");
 			System.out.println(NissanCar.Color);
 			System.out.println(NissanCar.Seats);
-			System.out.println("Top Speed: " + NissanCar.GetTopSpeedN());
+			System.out.println("Top Speed: " + NissanCar.GetTopSpeed());
 			Thread.sleep(500);
 			System.out.println("Would you like to test drive this car?");
 
 		}
-
+	
 		String value2 = input.nextLine();
 
 		if (value2.equals("Yes")) {
-			System.out.println("Ok, lets go! (Type 'END' to stop the test drive)");
+			System.out.println("Ok, lets go! (Type 'END' to stop the test drive) Accelerate/Decelerate");
 			System.out.println("_____________________");
 		}
 
@@ -129,13 +133,11 @@ public class App {
 			if (value3.equals("Accelerate")) {
 				if (value.equals("Nissan")) {
 					NissanCar.Accelerate();
-					NissanCar.TopSpeed();
 					System.out.println(NissanCar.GetSpeed() + " MPH");
 				}
 
 				if (value.equals("Honda")) {
 					HondaCar.Accelerate();
-					HondaCar.TopSpeed();
 					System.out.println(HondaCar.GetSpeed() + " MPH");
 				}
 			}
