@@ -5,14 +5,11 @@ public class App {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		Honda HondaCar = new Honda();
-		HondaCar.Color = "Color: Blue";
-		HondaCar.Seats = "7 seats";
-		HondaCar.GetTopSpeed();
-
-		Nissan NissanCar = new Nissan();
-		NissanCar.Color = "Color: Gray";
-		NissanCar.Seats = "5 seats";
+		HondaOdyssey hondaOdyssey = new HondaOdyssey(false, true, "Blue");
+		hondaOdyssey.GetNumberOfSeats();
+		System.out.println(" Color:" + hondaOdyssey.GetColor() + " NumberOfSeats:" + hondaOdyssey.GetNumberOfSeats() + " SeatMaterial:" + hondaOdyssey.SeatMaterial() + " Entertainment:" + hondaOdyssey.EntertainmentSystem());
+		
+		NissanRogue NissanCar = new NissanRogue(true, false, "silver");
 		NissanCar.GetTopSpeed();
 
 		input = new Scanner(System.in);
@@ -22,9 +19,9 @@ public class App {
 
 		if (value.equals("Honda")) {
 			System.out.println("INFORMATION ON HONDA");
-			System.out.println(HondaCar.Color);
-			System.out.println(HondaCar.Seats);
-			System.out.println("Top Speed: " + HondaCar.GetTopSpeed());
+			System.out.println(hondaOdyssey.Color);
+			System.out.println(hondaOdyssey.Seats);
+			System.out.println("Top Speed: " + hondaOdyssey.GetTopSpeed());
 			Thread.sleep(500);
 			System.out.println("Would you like to test drive this car?");
 		}
@@ -62,15 +59,15 @@ public class App {
 				}
 
 				if (value.equals("Honda")) {
-					HondaCar.Accelerate();
-					System.out.println(HondaCar.GetSpeed() + " MPH");
+					hondaOdyssey.Accelerate();
+					System.out.println(hondaOdyssey.GetSpeed() + " MPH");
 				}
 			}
 
 			if (value3.equals("Decelerate")) {
 				if (value.equals("Honda")) {
-					HondaCar.Decelerate();
-					System.out.println(HondaCar.GetSpeed() + " MPH");
+					hondaOdyssey.Decelerate();
+					System.out.println(hondaOdyssey.GetSpeed() + " MPH");
 				}
 
 				if (value.equals("Nissan")) {
@@ -85,13 +82,13 @@ public class App {
 					System.out.println(NissanCar.Brake() + " MPH Car Stopped");
 				}
 				if (value.equals("Honda")) {
-					System.out.println(HondaCar.Brake() + " MPH Car Stopped");
+					System.out.println(hondaOdyssey.Brake() + " MPH Car Stopped");
 				}
 			}
 
 			if (value3.equals("Speed")) {
 				if (value.equals("Honda")) {
-					System.out.println("Current Speed: " + HondaCar.GetSpeed() + " MPH");
+					System.out.println("Current Speed: " + hondaOdyssey.GetSpeed() + " MPH");
 				}
 				if (value.equals("Nissan")) {
 					System.out.println("Current Speed: " + NissanCar.GetSpeed() + " MPH");
