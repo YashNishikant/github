@@ -1,4 +1,3 @@
-
 public class HondaOdyssey extends Honda {
 
 	public HondaOdyssey(boolean leatherSeats, boolean entertainment, String OdessyColor) {
@@ -8,5 +7,4 @@ public class HondaOdyssey extends Honda {
 		Seats = 7;
 	}
 
-	
 }

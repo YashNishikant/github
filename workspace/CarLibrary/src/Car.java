@@ -1,5 +1,5 @@
 //car
-class Car {
+public class Car {
 
 	String Color;
 	protected int Speed;
