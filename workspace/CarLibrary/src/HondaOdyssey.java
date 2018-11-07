@@ -6,5 +6,14 @@ public class HondaOdyssey extends Honda {
 		Color = OdessyColor;
 		Seats = 7;
 	}
+	
+	public String GetMake()
+	{
+		return "Honda";
+	}
 
+	public String GetModel()
+	{
+		return "Odyssey";
+	}
 }
