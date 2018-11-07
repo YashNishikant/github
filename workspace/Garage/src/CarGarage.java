@@ -5,12 +5,12 @@ public class CarGarage {
 	
 	void Enter(Car car) {
 		i++;
-		System.out.println("Car entered garage");
+		System.out.println("Car entered garage: Make:" + car.GetMake() + " Model:" + car.GetModel());
 	}
 
 	void Exit(Car car) {
 		i--;
-		System.out.println("Car exited garage");
+		System.out.println("Car exited garage: Make:" + car.GetMake() + " Model:" + car.GetModel());
 	}
 
 	int CountCar() {
@@ -23,11 +23,16 @@ public class CarGarage {
 		NissanRogue nissanCar = new NissanRogue(true, false, "silver");
 		
 		CarGarage garage = new CarGarage();
-
+		
+		
 		
 		garage.Enter(hondaOdyssey);
 		garage.Enter(nissanCar);
+		garage.Enter(nissanCar);
+		garage.Enter(nissanCar);
 		garage.Exit(nissanCar);
+		Car car = new Car(100,10);
+		garage.Enter(car);
 	
 		System.out.println(garage.CountCar());
 	}

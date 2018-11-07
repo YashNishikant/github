@@ -61,4 +61,14 @@ public class Car {
 			return "cloth";
 		}
 	}
+	
+	public String GetMake()
+	{
+		return "Dont Know";
+	}
+
+	public String GetModel()
+	{
+		return "Dont Know";
+	}
 }
