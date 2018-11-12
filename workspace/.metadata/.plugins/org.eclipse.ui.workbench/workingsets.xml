@@ -7,6 +7,7 @@
 <item elementID="=AddNumbersNoOperators/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddNumbersTrueFalse/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddingNumbers/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=Animals/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AreaShapes/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=ArrayList/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AverageOfNumbers/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -99,6 +100,7 @@
 <item elementID="=Garage" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=IncreasingOrDecreasing" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=File" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=Animals" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Digits in a number" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=combineArray" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=OneToSevenWeekdays" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
