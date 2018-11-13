@@ -1,31 +1,31 @@
 
-public class Animal {
-
-	void Transportation() {
-		System.out.println("Don't Know");
+public class Zoo {
+	void Transportation(Animal animal) {
+		animal.Transportation();
+	
 	}
 
-	void Sound() {
-		System.out.println("Don't Know");
+	void Sound(Animal animal) {
+		animal.Sound();
 	}
 
-	void Live() {
-		System.out.println("Don't Know");
+	void Live(Animal animal) {
+		animal.Live();
 	}
 
 	public static void main(String[] args) {
 
-		System.out.println("ANIMAL INFORMATION");
-		System.out.println("____________");
-
+		Zoo zoo = new Zoo();
+		
+		
 		// Lion
 		System.out.println("Lion:");
 		System.out.println();
 		Lion Lion1 = new Lion();
 
-		Lion1.Transportation();
-		Lion1.Sound();
-		Lion1.Live();
+		zoo.Transportation(Lion1);
+		zoo.Sound(Lion1);	
+		zoo.Live(Lion1);
 		System.out.println("____________");
 
 		// Eagle
@@ -33,9 +33,9 @@ public class Animal {
 		System.out.println();
 		Eagle Eagle1 = new Eagle();
 
-		Eagle1.Transportation();
-		Eagle1.Sound();
-		Eagle1.Live();
+		zoo.Transportation(Eagle1);
+		zoo.Sound(Eagle1);
+		zoo.Live(Eagle1);
 		System.out.println("____________");
 
 		// Shark
@@ -43,9 +43,9 @@ public class Animal {
 		System.out.println();
 		Shark Shark1 = new Shark();
 
-		Shark1.Transportation();
-		Shark1.Sound();
-		Shark1.Live();
+		zoo.Transportation(Shark1);
+		zoo.Sound(Shark1);
+		zoo.Live(Shark1);
 		System.out.println("____________");
 
 		// Cobra
@@ -53,9 +53,10 @@ public class Animal {
 		System.out.println();
 		Cobra Cobra1 = new Cobra();
 
-		Cobra1.Transportation();
-		Cobra1.Sound();
-		Cobra1.Live();
+		zoo.Transportation(Cobra1);
+		zoo.Sound(Cobra1);
+		zoo.Live(Cobra1);
 		System.out.println("____________");
+
 	}
 }
