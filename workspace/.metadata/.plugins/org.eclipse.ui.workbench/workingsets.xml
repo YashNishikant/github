@@ -31,6 +31,7 @@
 <item elementID="=File/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=FreqencyNumberApp/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=Garage/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=GraphicShapes/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=HelloWorld/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=How old am I/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=InchMeters/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -110,6 +111,7 @@
 <item elementID="=MultiplyArrays" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=How old am I" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=CarLibrary" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=GraphicShapes" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=IterateArrayList" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=AddNumbersTrueFalse" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=LCM" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
