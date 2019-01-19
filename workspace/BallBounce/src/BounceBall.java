@@ -4,7 +4,7 @@ import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
 import java.util.concurrent.TimeUnit;
 
-public class Shapes{
+public class BounceBall{
 
 	static GraphicsConfiguration gc;
 
@@ -13,21 +13,21 @@ public class Shapes{
 		JFrame frame = new JFrame(gc);
 		
 		Container contentpane = frame.getContentPane();
-		ShapePanel SPanel = new ShapePanel();
+		BallPanel BPanel = new BallPanel();
 		
 		Dimension preferredSize = new Dimension();
 		preferredSize.setSize(600, 600);
 		
 		//newPanel.setSize(preferredSize);
 		frame.setSize(preferredSize);
-		contentpane.add(SPanel);
+		contentpane.add(BPanel);
 	
 		frame.setVisible(true);
 		
 		while(true)
 		{
-			SPanel.repaint();
-			TimeUnit.SECONDS.sleep(1);
+			BPanel.repaint();
+			TimeUnit.MILLISECONDS.sleep(1);
 		}
 	}
 }
