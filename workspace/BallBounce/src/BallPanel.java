@@ -33,9 +33,6 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		g.setColor(Color.gray);
-		g.fillRect(x, 540, 200, 300);
-		
 		g.setColor(Color.red);
 
 		// down right
@@ -74,10 +71,29 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 			a--;
 		}
 		g.fillOval(a, b, 50, 50);
- 
+
+		
+		g.setColor(Color.gray);
+	
+		g.fillRect(x, 540, 200, 30);
+		
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		
+		if (x < 0) 
+		{
+		speedX = 0;	
+		x = 0;
+		}
+		
+		if (x > 385) 
+		{
+		speedX = 0;	
+		x = 385;
+		}
+		
 		x = x + speedX;
 		repaint();
 	}
@@ -108,6 +124,8 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 		
 	}
 
+	
+	
 	
 
 	public static void main(String[] args) {
