@@ -6,12 +6,15 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value=" y" key="selection"/>
+		<item value="speedY" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="speedY"/>
+			<item value="d = 1"/>
+			<item value="1"/>
 			<item value=" y"/>
 			<item value="y"/>
 			<item value="speedX"/>
@@ -24,8 +27,6 @@
 			<item value="largest"/>
 			<item value="import java.util.Scanner;"/>
 			<item value="a_char"/>
-			<item value="smallest"/>
-			<item value="value"/>
 		</list>
 		<list key="replacehistory">
 			<item value="mousePress"/>

@@ -20,7 +20,7 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 	boolean right2 = true;
 	boolean right = true;
 	Timer time = new Timer(5, this);
-	int x = 210, speedX = 0, y = 490, speedY = 0, a = 100, b = 700, c = 7, d = 25;
+	int x = 210, speedX = 0, y = 885, speedY = 0, a = 100, b = 700, c = 7, d = 25;
 
 	public worldPanel() {
 		time.start();
@@ -131,11 +131,6 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 		b = -900;	
 		}
 		
-		
-	
-		
-		
-		
 	}
 	
 
@@ -185,27 +180,20 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 
 		if (i == KeyEvent.VK_D) {
 
-			speedX = 1;
+			speedX = 2;
 
 		}
 
 		if (i == KeyEvent.VK_A) {
 
-			speedX = -1;
+			speedX = -2;
 
 		}
 	
 		
-		
 		if (i == KeyEvent.VK_W) {
 
 		speedY = -2;
-		
-		}
-		
-		if (i == KeyEvent.VK_S) {
-
-		speedY = 2;
 		
 		}
 		
@@ -217,13 +205,6 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 					
 		}
 	
-	
-		if (i == KeyEvent.VK_B) {
-
-			c = 7;
-			d = 25;
-						
-			}
 	}
 	
 	@Override
@@ -233,7 +214,12 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 	
 	speedX = 0;
-	speedY = 0;	
+	speedY = 0;
+	
+	d = 25;
+	c = 7;
+	
+	speedY = 3;
+	
 	}
 }
-	
