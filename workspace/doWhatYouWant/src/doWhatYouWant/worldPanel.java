@@ -1,18 +1,17 @@
 package doWhatYouWant;
 
-import java.awt.Color;
+import java.awt.Color; 
 
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 
-
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.Timer;
 
 public class worldPanel extends JPanel implements ActionListener, KeyListener {
@@ -20,7 +19,7 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 	boolean right2 = true;
 	boolean right = true;
 	Timer time = new Timer(5, this);
-	int x = 210, speedX = 0, y = 885, speedY = 0, a = 100, b = 700, c = 7, d = 25;
+	int x = 210, speedX = 0, y = 885, speedY = 0, a = 100, b = 700, c = 5, d = 25, e = 1100, f = 885;
 
 	public worldPanel() {
 		time.start();
@@ -35,6 +34,15 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 	
+		g.drawString("Hello to JavaTutorial.net", 10, 10);
+		
+		JFrame frame= new JFrame("JavaTutorial.net");	
+		frame.getContentPane().add(new worldPanel());
+		frame.setSize(300, 300);
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);		
+		
 		g.fillRect(30, 10, 90, 90);
 		
 		g.setColor(Color.cyan);
@@ -49,51 +57,67 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 		
 		g.fillRect(30, 10, 90, 90);
 		
-		g.setColor(Color.DARK_GRAY);
+		g.setColor(Color.blue);
 		
-		g.fillRect(x, y, 30, 60);
+		g.fillRect(x + 5, y + 30, 20, 30);
 		
-		g.setColor(Color.LIGHT_GRAY);
+		g.setColor(Color.orange);
 		
-		g.fillRect(x, y, 30, 30);
+		g.fillRect(x + 5, y + 8, 20, 20);
 		
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		
-		g.fillRect(x, y + 8, 10, 5);
+		g.fillRect(x + 5, y + 16, 5, 5);
 		
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		
-		g.fillRect(x + 20, y + 8, 10, 5);
-		
-		g.setColor(Color.cyan);
-		
-		g.fillRect(x, y + 20, 5, 10);
-		
-		g.setColor(Color.cyan);
-		
-		g.fillRect(x + 25, y + 20, 5, 10);
-		
-		g.setColor(Color.white);
-		
-		g.fillRect(x + 12, y + 40, 8, 8);
+		g.fillRect(x + 20, y + 16, 5, 5);
 		
 		g.setColor(Color.gray);
 		
-		g.fillRect(x + 3, y + 61, 7, 25);
+		g.fillRect(x + 5, y + 61, 5, 25);
 		
 		g.setColor(Color.gray);
 		
-		g.fillRect(x + 19, y + 61, 7, 25);
+		g.fillRect(x + 19, y + 61, 5, 25);
 		
 		//left arm
 		g.setColor(Color.gray);
 		
-		g.fillRect(x + 31, y - 30 + 60, c, d);
+		g.fillRect(x + 26, y - 30 + 60, c, d);
 		
 		//right arm
 		g.setColor(Color.gray);
 		
-		g.fillRect(x - 8, y - 30 + 60, 7, 25);
+		g.fillRect(x - 2, y - 30 + 60, 5, 25);
+		
+		//HouseWallLeft
+		g.setColor(Color.gray);
+		
+		g.fillRect(e, f - 360, 90, 450);
+		
+		//HouseWallRight
+		g.setColor(Color.gray);
+		
+		g.fillRect(e + 360, f - 360, 90, 450);
+		
+		//HouseMiddle
+		
+		g.setColor(Color.white);
+		
+		g.fillRect(e + 90, f + 90, 270, -450);
+		
+		//HouseRoof
+		
+		g.setColor(Color.gray);
+		
+		g.fillRect(e - 15, f - 360, 480, 30);
+		
+		//HouseDoor
+		
+		g.setColor(Color.black);
+		
+		g.fillRect(e - 15, f - 360, 480, 30);
 		
 		if (a == 100) {
 			
@@ -130,6 +154,10 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 			
 		b = -900;	
 		}
+	
+		if(x > e - 30)
+	
+		x = e - 30;	
 		
 	}
 	
@@ -143,11 +171,6 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 		
 		}
 		
-		if (x > 1900) 
-		{
-		speedX = 0;	
-		x = 1900;
-		}
 		
 		x = x + speedX;
 
@@ -177,7 +200,14 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int i = e.getKeyCode();
+/*
+		if (i == KeyEvent.VK_W) {
 
+			speedY = -2;
+
+		}
+*/	
+		
 		if (i == KeyEvent.VK_D) {
 
 			speedX = 2;
@@ -189,19 +219,17 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 			speedX = -2;
 
 		}
-	
-		
-		if (i == KeyEvent.VK_W) {
+/*	
+		if (i == KeyEvent.VK_S) {
 
-		speedY = -2;
-		
+			speedY = 2;
+
 		}
-		
-		
+*/	
 		if (i == KeyEvent.VK_V) {
 
 		c = 25;
-		d = 7;
+		d = 5;
 					
 		}
 	
@@ -217,9 +245,7 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 	speedY = 0;
 	
 	d = 25;
-	c = 7;
-	
-	speedY = 3;
+	c = 5;
 	
 	}
 }
