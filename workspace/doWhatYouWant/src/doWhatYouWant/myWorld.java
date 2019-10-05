@@ -20,8 +20,7 @@ public class myWorld {
 			
 		Dimension preferredSize = new Dimension();
 		preferredSize.setSize(600, 600);
-			
-		//newPanel.setSize(preferredSize);
+
 		frame.setSize(preferredSize);
 		contentpane.add(WPanel);
 		

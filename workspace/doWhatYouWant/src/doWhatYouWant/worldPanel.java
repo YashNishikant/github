@@ -3,8 +3,6 @@ package doWhatYouWant;
 import java.awt.Color; 
 
 import java.awt.Graphics;
-import java.awt.GridBagLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -33,10 +31,9 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-	
-		g.drawString("Hello to JavaTutorial.net", 10, 10);
+			
 		
-		JFrame frame= new JFrame("JavaTutorial.net");	
+		JFrame frame= new JFrame();	
 		frame.getContentPane().add(new worldPanel());
 		frame.setSize(300, 300);
 		frame.setVisible(true);
@@ -200,13 +197,13 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int i = e.getKeyCode();
-/*
+
 		if (i == KeyEvent.VK_W) {
 
 			speedY = -2;
 
 		}
-*/	
+	
 		
 		if (i == KeyEvent.VK_D) {
 
@@ -219,13 +216,13 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 			speedX = -2;
 
 		}
-/*	
+	
 		if (i == KeyEvent.VK_S) {
 
 			speedY = 2;
 
 		}
-*/	
+	
 		if (i == KeyEvent.VK_V) {
 
 		c = 25;
