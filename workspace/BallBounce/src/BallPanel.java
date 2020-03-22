@@ -124,7 +124,7 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 			
 			g.setColor(Color.black);
 			g.setFont(new Font("default", Font.BOLD,45));
-			g.drawString("Press R to go back to the main menu", 450, 400);	
+			g.drawString("Press R to go back to the main menu", 580, 400);	
 			
 			scoreL = 0; 
 			scoreR = 0;
@@ -152,7 +152,7 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 			
 			g.setColor(Color.black);
 			g.setFont(new Font("default", Font.BOLD,45));
-			g.drawString("Press R to go back to the main menu", 450, 400);	
+			g.drawString("Press R to go back to the main menu", 580, 400);	
 		
 			scoreL = 0; 
 			scoreR = 0;

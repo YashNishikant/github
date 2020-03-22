@@ -6,8 +6,8 @@ public class ball {
 	int xCoordBall = 900;
 	int yCoordBall = 480;
 
-	int randomStartup_down = (int)(Math.random() *2 ) + 1;
-	int randomStartleft_right = (int)(Math.random() *2 ) + 1;
+	int randomStartup_down = 0;
+	int randomStartleft_right = 0;
 	
 	boolean down = false;
 	boolean right = false;
@@ -23,6 +23,9 @@ public class ball {
 	
 	public void starting() {
 			
+		randomStartup_down = (int)(Math.random() *2 ) + 1;
+		randomStartleft_right = (int)(Math.random() *2 ) + 1;
+		
 		//randomStart
 		if(randomStartup_down == 1) {		
 			down = true;
