@@ -6,29 +6,37 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
+		<item value="hitN" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="while"/>
-			<item value="speedY"/>
-			<item value="d = 1"/>
-			<item value="1"/>
-			<item value=" y"/>
-			<item value="y"/>
+			<item value="hitn"/>
+			<item value="random"/>
+			<item value="sleep"/>
+			<item value="xCoordBall"/>
+			<item value="a"/>
+			<item value="1870"/>
 			<item value="speedX"/>
-			<item value="keyPress"/>
-			<item value="TopSpeed"/>
-			<item value="file"/>
-			<item value="al"/>
-			<item value="local"/>
-			<item value="bool = true;"/>
-			<item value="largest"/>
-			<item value="import java.util.Scanner;"/>
+			<item value="repaint"/>
+			<item value="3"/>
+			<item value="block"/>
+			<item value="countC"/>
+			<item value="x3"/>
+			<item value="x2"/>
+			<item value="x1"/>
+			<item value=" a"/>
 		</list>
 		<list key="replacehistory">
+			<item value="speed"/>
+			<item value="xWither"/>
+			<item value="xZombie"/>
+			<item value="xCreeper"/>
+			<item value=" limit"/>
+			<item value="limit"/>
+			<item value="a"/>
+			<item value="630"/>
 			<item value="mousePress"/>
 			<item value="myArrL"/>
 			<item value="myInt"/>
@@ -39,7 +47,7 @@
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="391" key="DIALOG_HEIGHT"/>
-		<item value="1472" key="DIALOG_X_ORIGIN"/>
-		<item value="151" key="DIALOG_Y_ORIGIN"/>
+		<item value="1322" key="DIALOG_X_ORIGIN"/>
+		<item value="134" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

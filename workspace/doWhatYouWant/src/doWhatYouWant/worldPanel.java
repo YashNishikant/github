@@ -40,27 +40,7 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);		
 		
-		g.fillRect(30, 10, 90, 90);
 		
-		g.setColor(Color.cyan);
-		
-		g.fillRect(0, 0, 7000, 7000);
-		
-		g.setColor(Color.green);
-		
-		g.fillRect(-100, 970, 7000, 80);
-			
-		g.setColor(Color.yellow);
-		
-		g.fillRect(30, 10, 90, 90);
-		
-		g.setColor(Color.blue);
-		
-		g.fillRect(x + 5, y + 30, 20, 30);
-		
-		g.setColor(Color.orange);
-		
-		g.fillRect(x + 5, y + 8, 20, 20);
 		
 		g.setColor(Color.black);
 		
@@ -88,33 +68,7 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 		
 		g.fillRect(x - 2, y - 30 + 60, 5, 25);
 		
-		//HouseWallLeft
-		g.setColor(Color.gray);
 		
-		g.fillRect(e, f - 360, 90, 450);
-		
-		//HouseWallRight
-		g.setColor(Color.gray);
-		
-		g.fillRect(e + 360, f - 360, 90, 450);
-		
-		//HouseMiddle
-		
-		g.setColor(Color.white);
-		
-		g.fillRect(e + 90, f + 90, 270, -450);
-		
-		//HouseRoof
-		
-		g.setColor(Color.gray);
-		
-		g.fillRect(e - 15, f - 360, 480, 30);
-		
-		//HouseDoor
-		
-		g.setColor(Color.black);
-		
-		g.fillRect(e - 15, f - 360, 480, 30);
 		
 		if (a == 100) {
 			
@@ -201,26 +155,22 @@ public class worldPanel extends JPanel implements ActionListener, KeyListener {
 		if (i == KeyEvent.VK_W) {
 
 			speedY = -2;
-
 		}
 	
 		
 		if (i == KeyEvent.VK_D) {
 
 			speedX = 2;
-
 		}
 
 		if (i == KeyEvent.VK_A) {
 
 			speedX = -2;
-
 		}
 	
 		if (i == KeyEvent.VK_S) {
 
 			speedY = 2;
-
 		}
 	
 		if (i == KeyEvent.VK_V) {
