@@ -10,6 +10,14 @@
       <link>http://www.eclipse.org</link>
     </image>
     <item>
+      <title><![CDATA[Eclipse Foundation Board Election Results]]></title>
+      <link><![CDATA[https://www.eclipse.org/org/press-release/20200319-boardelection.php]]></link>
+      <description><![CDATA[Today we are pleased to announce the results of the Eclipse Foundation Sustaining Member and Committer Member elections for representatives to our Board of Directors. The positions of Sustaining Members and Committer representatives are a vitally important part of the Eclipse Foundation's governance.]]></description>
+      <pubDate>Thu, 19 Mar 2020 09:45:00 EST</pubDate>
+      <category>news</category>
+      <pressrelease>1</pressrelease>
+    </item>
+    <item>
       <title><![CDATA[Real-World IoT Adoption]]></title>
       <link><![CDATA[https://blogs.eclipse.org/post/mike-milinkovich/real-world-iot-adoption]]></link>
       <description><![CDATA[The results of our first IoT Commercial Adoption survey tell a clear story about what organizations are doing with IoT right now and their plans for production deployments.]]></description>

@@ -1,4 +1,4 @@
-import java.awt.Color;
+import java.awt.Color; 
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -16,36 +16,36 @@ import java.awt.Rectangle;
 
 public class BallPanel extends JPanel implements ActionListener, KeyListener {
 
-
 	Timer time = new Timer(5, this);
 
 	ball bounceBall = new ball();
 	paddleR RPaddle = new paddleR();
 	paddleL LPaddle = new paddleL();
-
+	
 	int scoreL = 0;
 	int scoreR = 0;
-	
+	int roundNum = 1;
 	int hitNum = 0;
 	
 	int x = 1;
 	
 	boolean speedUP = false;
-	boolean startScreen = true;
-	boolean replay = false;
 	
 	boolean gWin = false;
 	boolean bWin = false;
 	
 	boolean goingUpL = false;
 	boolean goingDownL = false;
-	
 	boolean goingUpR = false;
 	boolean goingDownR = false;
-	
 	boolean startDirection = true;
 	
+	boolean startScreenPingPong = true;
+	boolean replay = false;
+	
 	public BallPanel() {
+		
+		startScreenPingPong = true;
 		
 		time.start();
 		addKeyListener(this);
@@ -58,9 +58,11 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		//Round
+		g.setFont(new Font("default", Font.BOLD,24));
+		g.drawString("Round: " + roundNum, 930, 20);
 		
-		//Score left
-		
+		//Score left	
 		g.setFont(new Font("default", Font.BOLD,24));
 		g.drawString("TEAM BLUE: " + scoreL, 10, 20);
 		
@@ -73,9 +75,13 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Total hits: " + hitNum, 10, 1010);
 		
 		// ball
-		g.setColor(Color.red);
+		g.setColor(Color.BLACK);
 		g.fillOval(bounceBall.xCoordBall, bounceBall.yCoordBall, 50, 50);
 
+		// innerBall
+		g.setColor(Color.red);
+		g.fillOval(bounceBall.xCoordBall + 3, bounceBall.yCoordBall + 3, 45, 45);
+		
 		// paddle on the left
 		g.setColor(Color.blue);
 		g.fillRect(LPaddle.xPaddleL, LPaddle.yPaddleL, 30, 150);
@@ -83,9 +89,11 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 		// paddle on the right
 		g.setColor(Color.green);
 		g.fillRect(RPaddle.xPaddleR + 30, RPaddle.yPaddleR, 30, 150);
-	
-		if(startScreen == true) {
+		
+		if(startScreenPingPong == true) {
 			
+			roundNum = 1;
+			hitNum = 0;
 			gWin = false;
 			bWin = false;
 			
@@ -133,7 +141,7 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 				
 			gWin = false;
 			bWin = false;
-			startScreen = true;
+			startScreenPingPong = true;
 			}
 				
 		}
@@ -161,7 +169,7 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 			
 			bWin = false;
 			gWin = false;
-			startScreen = true;
+			startScreenPingPong = true;
 			}
 		}
 		
@@ -193,6 +201,18 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 		
 		}
 		
+		if(scoreL == 3 && scoreR == 2) {
+			
+			bWin = true;
+
+		}
+		
+		if(scoreR == 3 && scoreL == 2) {
+			
+			gWin = true;
+		
+		}
+		
 		//NUMBER OF HITS FOR SPEED UP
 		if(hitNum % 5 == 0 && hitNum >= 5 && speedUP == true) {
 			
@@ -212,6 +232,9 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 			
 			hitNum = 0;
 			x = 1;
+			
+			roundNum++;
+		
 		}
 		
 		if(bounceBall.xCoordBall <= -14) {
@@ -225,6 +248,9 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 			
 			hitNum = 0;
 			x = 1;
+		
+			roundNum++;
+		
 		}
 		
 		repaint();
@@ -243,7 +269,7 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 		
 		if (i == KeyEvent.VK_P) {
 
-			startScreen = false;
+			startScreenPingPong = false;
 
 		}
 		
@@ -317,6 +343,9 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 		
 		hitNum++;
 		speedUP = true;
+	
+		bounceBall.yCoordBall += 1;
+		
 	}
 	
 	if(ballRec.intersects(paddleRight)) {
@@ -331,9 +360,12 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 
 		hitNum++;
 		speedUP = true;
+	
+		bounceBall.yCoordBall += 1;		
+		
 	}
 	
-	}
+}
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
