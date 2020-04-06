@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,33 +18,84 @@ import javax.swing.Timer;
 import java.awt.Rectangle;
 
 
-public class breakoutGAME  extends JPanel implements ActionListener, KeyListener {
-
-	//add to paddle class
-
+public class breakoutGAME  extends JPanel implements ActionListener, MouseMotionListener {
+	
 	paddleClass paddle = new paddleClass();
+	paddleL pL = new paddleL();
+	paddleR pR = new paddleR();
 	ballBreakout ball = new ballBreakout();
 	
 	Timer time = new Timer(5, this);	
 	
+	int mouseX;
+	boolean mouseMove = false;
+	
+	boolean pHit = false;
+	boolean pLHit = false;
+	boolean pRHit = false;
+	
 	public breakoutGAME() {
 		time.start();
-		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
+		addMouseMotionListener(this);
 	}
 	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		// paddle
-		g.setColor(Color.cyan);
-		g.fillRect(paddle.paddleX, 970, 300, 20);
 		
+		//paddle right
+		if(pRHit == true) {
+			g.setColor(Color.RED);
+			g.fillRect(pR.paddleXR, 970, 75, 20);	
+			
+			if(ball.ballY < 900)
+			pRHit = false;	
+		}
+		else {
+			g.setColor(Color.BLUE);
+			g.fillRect(pR.paddleXR, 970, 75, 20);
+		}
+		
+		//paddle left
+		if(pLHit == true) {
+			g.setColor(Color.RED);
+			g.fillRect(pL.paddleXL, 970, 75, 20);
+		
+			if(ball.ballY < 900)
+			pLHit = false;
+		
+		}
+		else {
+			g.setColor(Color.BLUE);
+			g.fillRect(pL.paddleXL, 970, 75, 20);
+		}
+		
+		//paddle mid
+		if(pHit == true) {
+		g.setColor(Color.RED);
+		g.fillRect(paddle.paddleX, 970, 150, 20);
+		
+		if(ball.ballY < 900)		
+		pHit = false;
+		
+		}
+		else {		
+			g.setColor(Color.BLUE);	
+			g.fillRect(paddle.paddleX, 970, 150, 20);	
+		}
 		//ball
-		g.setColor(Color.LIGHT_GRAY);
+		g.setColor(Color.GRAY);
 		g.fillOval(ball.ballX, ball.ballY, 30, 30);
+		
+		if(mouseMove) {
+
+			paddle.paddleX = mouseX;
+			pR.paddleXR = mouseX + 150;
+			pL.paddleXL = mouseX - 75;
+	
+		}
 		
 	}
 
@@ -50,65 +103,56 @@ public class breakoutGAME  extends JPanel implements ActionListener, KeyListener
 	public void actionPerformed(ActionEvent arg0) {
 
 		paddle.move();
+		pL.moveL();
+		pR.moveR();
+		
 		ball.move();
 		Collision();
 		repaint();
 		
 	}
 	
-	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		int i = e.getKeyCode();
-		
-		if (i == KeyEvent.VK_A) {
-
-			paddle.speedPaddle = -4;
-
-		}
-		
-		if (i == KeyEvent.VK_D) {
-
-			paddle.speedPaddle = 4;
-
-		}
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-
-		paddle.speedPaddle = 0;
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-	
-		
-	}
-
-	public breakoutGAME(int startX, int startY) {
-
-		ball.ballX = startX;
-		ball.ballY = startY;
-
-	}
-	
 	public void Collision() {
 		
 	Rectangle ballRec = ball.bounds();
 	Rectangle paddleRec = paddle.bounds();
-
+	Rectangle RECpL = pL.bounds();
+	Rectangle RECpR = pR.bounds();
 	
 	if(ballRec.intersects(paddleRec)) {
-		
+	
+		ball.ballSpeedY = 4;
 		ball.down = false;
 		
+		pHit = true;
 	}
-}
+
+	if(ballRec.intersects(RECpL)) {
+		
+		ball.down = false;
+		ball.leftangled = true;
+		ball.right = false;
+
+		pLHit = true;
+
+	}
+	
+	if(ballRec.intersects(RECpR)) {
+		
+		ball.down = false;
+		ball.rightangled = true;
+		ball.right = true;
+		
+		pRHit = true;
+		
+	}
+	
+	}
 	
 	public static void main(String[] args) {
+		
+		breakoutGAME mouse = new breakoutGAME();
+		
 		JFrame frame = new JFrame();
 
 		Container contentpane = frame.getContentPane();
@@ -121,6 +165,22 @@ public class breakoutGAME  extends JPanel implements ActionListener, KeyListener
 		contentpane.add(bPanel);
 
 		frame.setVisible(true);
+		
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		mouseX = e.getX()-10;
+		
+		e.consume();
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		mouseX = e.getX()-10;
+		mouseMove = true;
+		e.consume();
 		
 	}
 	

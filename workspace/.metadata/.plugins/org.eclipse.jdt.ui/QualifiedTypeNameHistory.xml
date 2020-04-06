@@ -52,4 +52,5 @@
 <fullyQualifiedTypeName name="java.math.BigDecimal"/>
 <fullyQualifiedTypeName name="javax.swing.JPanel"/>
 <fullyQualifiedTypeName name="alienz.target"/>
+<fullyQualifiedTypeName name="java.awt.event.MouseMotionListener"/>
 </qualifiedTypeNameHistroy>

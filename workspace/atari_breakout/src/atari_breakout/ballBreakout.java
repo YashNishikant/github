@@ -6,22 +6,25 @@ public class ballBreakout {
 
 	boolean right = true;
 	boolean down = false;
+	boolean rightangled = false;
+	boolean leftangled = false;
+	
+	int ballX = 500;
+	int ballY = 900;
 
-	int ballX = 0;
-	int ballY = 0;
-
-	int ballSpeed = 4;
-
+	int ballSpeedX = 4;
+	int ballSpeedY = 4;
+	
 	public void ballBreakout() {
 
 		right = true;
 		down = false;
 
-		ballX = 600;
-		ballY = 800;
+		ballX = 500;
+		ballY = 900;
 
-		ballSpeed = 3;
-
+		ballSpeedX = 4;
+		ballSpeedY = 4;
 	}
 
 	public void move() {
@@ -39,21 +42,44 @@ public class ballBreakout {
 		}
 		// bottom
 		if (ballY >= 1000) {
-			ballSpeed = 0;
+			ballSpeedY = 0;
+			ballSpeedX = 0;
 		}
 
-		if (down == true) {
-			ballY += ballSpeed;
+		if (down == true) {			
+			ballY += ballSpeedY;
 		} else {
-			ballY -= ballSpeed;
+			ballY -= ballSpeedY;
 		}
 
 		if (right == true) {
-			ballX += ballSpeed;
+			
+			ballX += ballSpeedX;
 		} else {
-			ballX -= ballSpeed;
+			ballX -= ballSpeedX;
 		}
 
+		//angled
+		if (rightangled == true) {
+			ballSpeedY = 2;
+			
+			ballX += ballSpeedX;
+			ballY -= ballSpeedY;
+		
+			rightangled = false;
+			
+		} 
+		
+		//angled
+		if (leftangled == true) {			
+			ballSpeedY = 2;
+			
+			ballX -= ballSpeedX;
+			ballY -= ballSpeedY;
+			
+			leftangled = false;
+		} 
+		
 	}
 
 	public Rectangle bounds() {

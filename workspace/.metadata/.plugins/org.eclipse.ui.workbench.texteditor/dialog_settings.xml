@@ -6,12 +6,14 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="bWin" key="selection"/>
+		<item value="ball" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="ball"/>
+			<item value="ballS"/>
 			<item value="bWin"/>
 			<item value="rand"/>
 			<item value="hitn"/>
@@ -25,8 +27,6 @@
 			<item value="3"/>
 			<item value="block"/>
 			<item value="countC"/>
-			<item value="x3"/>
-			<item value="x2"/>
 		</list>
 		<list key="replacehistory">
 			<item value="speed"/>
