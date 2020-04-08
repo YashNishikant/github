@@ -24,6 +24,13 @@ public class breakoutGAME  extends JPanel implements ActionListener, MouseMotion
 	paddleL pL = new paddleL();
 	paddleR pR = new paddleR();
 	ballBreakout ball = new ballBreakout();
+	block block1 = new block();
+	block block2 = new block();
+	block block3 = new block();
+	block block4 = new block();
+	block block5 = new block();
+	block block6 = new block();
+
 	
 	Timer time = new Timer(5, this);	
 	
@@ -33,6 +40,7 @@ public class breakoutGAME  extends JPanel implements ActionListener, MouseMotion
 	boolean pHit = false;
 	boolean pLHit = false;
 	boolean pRHit = false;
+	boolean blockhit = false;
 	
 	public breakoutGAME() {
 		time.start();
@@ -44,6 +52,52 @@ public class breakoutGAME  extends JPanel implements ActionListener, MouseMotion
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+/*		
+		borders:
+		maybe use for future reference
+		
+		//left
+		g.setColor(Color.RED);
+		g.fillRect(197, 200, 1, 60);	
+		//right
+		g.setColor(Color.GREEN);
+		g.fillRect(262, 200, 1, 60);	
+		//up
+		g.setColor(Color.BLUE);
+		g.fillRect(200, 197, 60, 1);
+		//down
+		g.setColor(Color.YELLOW);
+		g.fillRect(200, 262, 60, 1);
+		
+		
+		//left
+		g.setColor(Color.RED);
+		g.fillRect(397, 200, 1, 60);	
+		//right
+		g.setColor(Color.GREEN);
+		g.fillRect(462, 200, 1, 60);	
+		//up
+		g.setColor(Color.BLUE);
+		g.fillRect(400, 197, 60, 1);
+		//down
+		g.setColor(Color.YELLOW);
+		g.fillRect(400, 262, 60, 1);
+*/		
+		
+		//block
+		
+		if(blockhit) {
+			
+			block1.xBlock = -100;		
+			blockhit = false;
+		}
+	
+		if(blockhit == false) {	
+		g.setColor(Color.RED);
+		g.fillRect(200, 200, 60, 60);	
+		}
+		
 		
 		//paddle right
 		if(pRHit == true) {
@@ -73,6 +127,7 @@ public class breakoutGAME  extends JPanel implements ActionListener, MouseMotion
 		}
 		
 		//paddle mid
+		
 		if(pHit == true) {
 		g.setColor(Color.RED);
 		g.fillRect(paddle.paddleX, 970, 150, 20);
@@ -107,7 +162,9 @@ public class breakoutGAME  extends JPanel implements ActionListener, MouseMotion
 		pR.moveR();
 		
 		ball.move();
+		
 		Collision();
+		
 		repaint();
 		
 	}
@@ -118,6 +175,38 @@ public class breakoutGAME  extends JPanel implements ActionListener, MouseMotion
 	Rectangle paddleRec = paddle.bounds();
 	Rectangle RECpL = pL.bounds();
 	Rectangle RECpR = pR.bounds();
+	Rectangle boundaryleft = block1.bounds1();
+	Rectangle boundaryright = block1.bounds2();
+	Rectangle boundaryup = block1.bounds3();
+	Rectangle boundarydown = block1.bounds4();
+
+	if(ballRec.intersects(boundaryleft)) {
+
+	blockhit = true;
+	ball.right = false;
+	
+	}
+
+	if(ballRec.intersects(boundaryright)) {
+
+	blockhit = true;
+	ball.right = true;
+	
+	}
+	
+	if(ballRec.intersects(boundaryup)) {
+
+	blockhit = true;
+	ball.down = false;
+	
+	}
+	
+	if(ballRec.intersects(boundarydown)) {
+
+	blockhit = true;
+	ball.down = true;
+	
+	}
 	
 	if(ballRec.intersects(paddleRec)) {
 	
