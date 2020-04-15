@@ -25,16 +25,16 @@ public class ballBreakout {
 	//x 10
 	//y 210
 	
-	int ballX = 10;
-	int ballY = 210;
+	int ballX = 20;
+	int ballY = 900;
 
-	int ballSpeedX = 4;
-	int ballSpeedY = 0;
+	int ballSpeedX = 3;
+	int ballSpeedY = 3;
 	
 	public void ballBreakout() {
 
 		right = true;
-		down = false;
+		down = true;
 
 		ballX = 210;
 		ballY = 10;
