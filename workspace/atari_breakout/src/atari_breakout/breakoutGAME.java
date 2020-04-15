@@ -164,8 +164,8 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	}
 
 	public boolean BlockComparisonsRight(block b, boolean blocklock) {
-		if (ball.ballX >= b.xBlock) {
-			if (ball.ballX >= b.xBlock + blockwidth) {
+		if (ball.ballX >= b.xBlock) {		
+			if (ball.ballX <= b.xBlock + blockwidth) {
 				if (ball.ballY >= b.yBlock) {
 					if (ball.ballY <= b.yBlock + blocklength) {
 						top = false;
@@ -225,11 +225,17 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 
 	public boolean BlockComparisonsLeft(block b, boolean blocklock) {
 		if (ball.ballX >= b.xBlock - 30) {
-			if (ball.ballX <= (b.yBlock + blockwidth)) {
+			System.out.println("1");
+			if (ball.ballX <= (b.xBlock + blockwidth)) {
+				System.out.println("2");
 				if (ball.ballY >= b.yBlock) {
+					System.out.println("3");
 					if (ball.ballY <= b.yBlock + blocklength) {
+						System.out.println("4");
 						if (left == true) {
+							System.out.println("5");
 							if (ball.right == true) {
+								System.out.println("6");
 								b.hitBlock = true;
 								ball.right = false;
 								blocklock = false;
@@ -281,25 +287,21 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 
 		// RIGHT HIT
 		if (ballRec.intersects(blocktwo) && collisionlock2 == true) {
-
 			collisionlock2 = BlockComparisonsRight(block2, collisionlock2);
 		}
 
 		// BOTTOM HIT
 		if (ballRec.intersects(blocktwo) && collisionlock2 == true) {
-
 			collisionlock2 = BlockComparisonsBottom(block2, collisionlock2);
 		}
 
 		// TOP HIT
 		if (ballRec.intersects(blocktwo) && collisionlock2 == true) {
-
 			collisionlock2 = BlockComparisonsTop(block2, collisionlock2);
 		}
 
 		// LEFT HIT
 		if (ballRec.intersects(blocktwo) && collisionlock2 == true) {
-
 			collisionlock2 = BlockComparisonsLeft(block2, collisionlock2);
 		}
 
