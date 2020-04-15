@@ -27,6 +27,9 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	block block1 = new block(200, 200);
 	block block2 = new block(400, 200);
 	block block3 = new block(600, 200);
+	block block4 = new block(800, 200);
+	block block5 = new block(1000, 200);
+	block block6 = new block(1200, 200);
 
 	Timer time = new Timer(5, this);
 
@@ -46,11 +49,8 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	boolean collisionlock = true;
 	boolean collisionlock2 = true;
 	boolean collisionlock3 = true;
-	
-	boolean collisionlockCheck = true;
-	boolean collisionlockCheck2 = true;
-	boolean collisionlockCheck3 = true;
 
+	
 	boolean right = true;
 	boolean left = true;
 	boolean bottom = true;
@@ -93,6 +93,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			g.setColor(Color.RED);
 			g.fillRect(block3.xBlock, yCoordLVL1, 60, 60);
 		}
+
 
 		// paddle right----------------------------------------
 		if (pRHit == true) {
@@ -164,7 +165,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 
 	public boolean BlockComparisonsRight(block b, boolean blocklock) {
 		if (ball.ballX >= b.xBlock) {
-			if (ball.ballX <= b.xBlock + blockwidth) {
+			if (ball.ballX >= b.xBlock + blockwidth) {
 				if (ball.ballY >= b.yBlock) {
 					if (ball.ballY <= b.yBlock + blocklength) {
 						top = false;
@@ -251,6 +252,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		Rectangle block = block1.bounds();
 		Rectangle blocktwo = block2.bounds();
 		Rectangle blockthree = block3.bounds();
+		
 
 		// block1-------------------------------------------
 
@@ -327,7 +329,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			collisionlock3 = BlockComparisonsLeft(block3, collisionlock3);
 		}
 
-		// block4---------------------------------------------------
+		
 		if (ballRec.intersects(RECpL)) {
 
 			ball.down = false;

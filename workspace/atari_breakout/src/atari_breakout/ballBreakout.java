@@ -25,7 +25,7 @@ public class ballBreakout {
 	//x 10
 	//y 210
 	
-	int ballX = 500;
+	int ballX = 800;
 	int ballY = 900;
 
 	int ballSpeedX = 4;
