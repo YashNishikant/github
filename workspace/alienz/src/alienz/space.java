@@ -26,6 +26,8 @@ public class space extends JPanel implements ActionListener, KeyListener {
 	
 	boolean collision = false;
 
+	boolean jump = false;
+	
 	boolean pause = false;
 	
 	public space() {
@@ -73,6 +75,24 @@ public class space extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		
+		if(jump == true) {
+		
+			ship.speedY -= ship.speedY;
+			
+		}
+		else {
+		
+			ship.speedY += ship.speedY;
+			
+		}
+		
+		if(ship.speedY < 300) {
+			
+		ship.speedY = 310;
+		ship.speedY = 0;
+			
+		}
 		
 		if (collision == true) {
 
@@ -165,8 +185,20 @@ public class space extends JPanel implements ActionListener, KeyListener {
 
 		}
 
-	}
+		if (i == KeyEvent.VK_J && jump == false) {
 
+		jump = true;	
+
+		if(ship.yShip > 340) {
+			
+		jump = false;	
+			
+		}
+		
+		}
+		
+	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
@@ -174,6 +206,9 @@ public class space extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 
+		ship.speedX = 0;
+		ship.speedY = 0;
+		
 	}
 
 	public void collision() {

@@ -5,37 +5,37 @@ import java.awt.Rectangle;
 public class block {
 
 	boolean hitBlock = false;
-	int xBlock = 200;
-	int yBlock = 200;
+	int xBlock;
+	int yBlock;
 	
-	public block() {
+	public block(int x, int y) {
+		xBlock = x;
+		yBlock = y;
 		
-		xBlock = 200;
-		yBlock = 200;
 		hitBlock = false;
 	}
-
+	
+	public void disappear()
+	{
+		xBlock = -100;
+	}
+	
+	public void hitdetect() {
+		
+	if(hitBlock) {
+		
+		xBlock = -100;	
+		
+	}	
+		
+	}
 	
 	//borders for squares
-	public Rectangle bounds1() {
+	public Rectangle bounds() {
 
-		return (new Rectangle(197, 200, 1, 60));
-
-	}
-	public Rectangle bounds2() {
-
-		return (new Rectangle(262, 200, 1, 60));
+		return (new Rectangle(xBlock, yBlock, 60, 60));
 
 	}
-	public Rectangle bounds3() {
 
-		return (new Rectangle(200, 197, 60, 1));
-
-	}
-	public Rectangle bounds4() {
-
-		return (new Rectangle(200, 262, 60, 1));
-
-	}
 	
 }

@@ -9,6 +9,22 @@ public class ballBreakout {
 	boolean rightangled = false;
 	boolean leftangled = false;
 	
+	//top test:
+	//x 210
+	//y 10
+	//
+	//bottom test:
+	//x 210
+	//y 700
+	//
+	//right test:
+	//x 400
+	//y 210
+	//
+	//left test:
+	//x 10
+	//y 210
+	
 	int ballX = 500;
 	int ballY = 900;
 
@@ -20,14 +36,15 @@ public class ballBreakout {
 		right = true;
 		down = false;
 
-		ballX = 500;
-		ballY = 900;
+		ballX = 210;
+		ballY = 10;
 
 		ballSpeedX = 4;
 		ballSpeedY = 4;
 	}
 
 	public void move() {
+	
 		// top
 		if (ballY <= 0) {
 			down = true;
@@ -48,15 +65,17 @@ public class ballBreakout {
 
 		if (down == true) {			
 			ballY += ballSpeedY;
-		} else {
+		} 
+		if(down == false){
 			ballY -= ballSpeedY;
 		}
 
 		if (right == true) {
-			
 			ballX += ballSpeedX;
-		} else {
+		} 
+		if(right == false) {
 			ballX -= ballSpeedX;
+
 		}
 
 		//angled
