@@ -31,17 +31,6 @@ public class ballBreakout {
 	int ballSpeedX = 3;
 	int ballSpeedY = 3;
 	
-	public void ballBreakout() {
-
-		right = true;
-		down = true;
-
-		ballX = 210;
-		ballY = 10;
-
-		ballSpeedX = 4;
-		ballSpeedY = 4;
-	}
 
 	public void move() {
 	

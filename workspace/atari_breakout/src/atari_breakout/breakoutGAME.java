@@ -17,13 +17,14 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.Rectangle;
 
-public class breakoutGAME extends JPanel implements ActionListener, MouseMotionListener {
+public class breakoutGAME extends JPanel implements ActionListener, MouseMotionListener, KeyListener {
 
 	paddleClass paddle = new paddleClass();
 	paddleL pL = new paddleL();
 	paddleR pR = new paddleR();
 	ballBreakout ball = new ballBreakout();
-
+	scoreboard board = new scoreboard();
+	
 	block block1 = new block(200, 200);
 	block block2 = new block(400, 200);
 	block block3 = new block(600, 200);
@@ -32,7 +33,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	block block6 = new block(1200, 200);
 
 	Timer time = new Timer(5, this);
-
+	
 	int yCoordLVL1 = 200;
 	int paddleYLoc = 970;
 
@@ -68,8 +69,20 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 
 	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
+		super.paintComponent(g);	
+			
+		//scoreboard----------------------------------------
+		
+		g.setColor(Color.BLUE);
+		g.fillRect(0, board.boardY, 200, 90);
+		
+		g.setColor(Color.CYAN);
+		g.fillRect(10, board.boardY + 10, 180, 70);
+		
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("default", Font.BOLD,25));
+		g.drawString("Score: " + board.score, 20,board.boardY + 50);
+		
 		// block1----------------------------------------
 
 		if (block1.hitBlock) {
@@ -173,12 +186,13 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			pL.paddleXL = mouseX - 75;
 
 		}
-
-	}
+}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
+		board.scoreboardmove();
+		
 		paddle.move();
 		pL.moveL();
 		pR.moveR();
@@ -204,6 +218,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 							ball.right = true;
 							blocklock = false;
 							top = true;
+							board.score+=50;
 							System.out.println("right");
 							}
 						}
@@ -227,6 +242,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 							blocklock = false;
 							left = true;
 							right = true;
+							board.score+=50;
 							System.out.println("bottom");
 						}
 					}
@@ -246,6 +262,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 								b.hitBlock = true;
 								ball.down = false;
 								blocklock = false;
+								board.score+=50;
 								System.out.println("top");
 							}
 						}
@@ -266,6 +283,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 								b.hitBlock = true;
 								ball.right = false;
 								blocklock = false;
+								board.score+=50;
 								System.out.println("left");
 							}
 						}
@@ -470,6 +488,22 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 
 	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int i = e.getKeyCode();
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		
+	}
+	
 	public static void main(String[] args) {
 
 		breakoutGAME mouse = new breakoutGAME();
