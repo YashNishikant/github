@@ -73,6 +73,11 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			
 		//scoreboard----------------------------------------
 		
+		g.setColor(Color.BLACK);
+		g.fillRect(20, board.boardY-30, 10, 90);
+
+		g.fillRect(160, board.boardY-30, 10, 90);
+		
 		g.setColor(Color.BLUE);
 		g.fillRect(0, board.boardY, 200, 90);
 		
@@ -138,43 +143,43 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		}
 		
 		// paddle right----------------------------------------
-		if (pRHit == true) {
-			g.setColor(Color.RED);
-			g.fillRect(pR.paddleXR, paddleYLoc, 75, 20);
-
-			if (ball.ballY < 900)
-				pRHit = false;
-		} else {
+		//if (pRHit == true) {
 			g.setColor(Color.BLUE);
 			g.fillRect(pR.paddleXR, paddleYLoc, 75, 20);
-		}
+
+			//if (ball.ballY < 900)
+				//pRHit = false;
+		//} else {
+			//g.setColor(Color.BLUE);
+			//g.fillRect(pR.paddleXR, paddleYLoc, 75, 20);
+		//}
 
 		// paddle left----------------------------------------
-		if (pLHit == true) {
-			g.setColor(Color.RED);
-			g.fillRect(pL.paddleXL, paddleYLoc, 75, 20);
-
-			if (ball.ballY < 900)
-				pLHit = false;
-
-		} else {
+		//if (pLHit == true) {
 			g.setColor(Color.BLUE);
 			g.fillRect(pL.paddleXL, paddleYLoc, 75, 20);
-		}
+
+			//if (ball.ballY < 900)
+			//	pLHit = false;
+
+		//} else {
+		//	g.setColor(Color.BLUE);
+		//	g.fillRect(pL.paddleXL, paddleYLoc, 75, 20);
+		//}
 
 		// paddle mid----------------------------------------
 
-		if (pHit == true) {
-			g.setColor(Color.RED);
-			g.fillRect(paddle.paddleX, paddleYLoc, 150, 20);
-
-			if (ball.ballY < 900)
-				pHit = false;
-
-		} else {
+		//if (pHit == true) {
 			g.setColor(Color.BLUE);
 			g.fillRect(paddle.paddleX, paddleYLoc, 150, 20);
-		}
+
+			//if (ball.ballY < 900)
+			//	pHit = false;
+
+		//} else {
+		//	g.setColor(Color.BLUE);
+		//	g.fillRect(paddle.paddleX, paddleYLoc, 150, 20);
+		//}
 		// ball----------------------------------------
 		g.setColor(Color.GRAY);
 		g.fillOval(ball.ballX, ball.ballY, 30, 30);
@@ -219,7 +224,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 							blocklock = false;
 							top = true;
 							board.score+=50;
-							System.out.println("right");
+							//System.out.println("right");
 							}
 						}
 					}
@@ -243,7 +248,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 							left = true;
 							right = true;
 							board.score+=50;
-							System.out.println("bottom");
+							//System.out.println("bottom");
 						}
 					}
 				}
@@ -263,7 +268,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 								ball.down = false;
 								blocklock = false;
 								board.score+=50;
-								System.out.println("top");
+								//System.out.println("top");
 							}
 						}
 					}
@@ -284,7 +289,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 								ball.right = false;
 								blocklock = false;
 								board.score+=50;
-								System.out.println("left");
+								//System.out.println("left");
 							}
 						}
 					}
