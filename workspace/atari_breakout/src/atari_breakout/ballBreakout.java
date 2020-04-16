@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 public class ballBreakout {
 
 	boolean right = true;
-	boolean down = false;
+	boolean down = true;
 	boolean rightangled = false;
 	boolean leftangled = false;
 	
@@ -25,8 +25,8 @@ public class ballBreakout {
 	//x 10
 	//y 210
 	
-	int ballX = 20;
-	int ballY = 900;
+	int ballX = (int)(Math.random()*1000) + 10;
+	int ballY = 610;
 
 	int ballSpeedX = 3;
 	int ballSpeedY = 3;

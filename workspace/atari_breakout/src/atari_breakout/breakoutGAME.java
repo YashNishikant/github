@@ -31,10 +31,31 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	block block4 = new block(800, 200);
 	block block5 = new block(1000, 200);
 	block block6 = new block(1200, 200);
+	
+	block block7 = new block(200, 400);
+	block block8 = new block(400, 400);
+	block block9 = new block(600, 400);
+	block block10 = new block(800, 400);
+	block block11 = new block(1000, 400);
+	block block12 = new block(1200, 400);
+	
+	block block13 = new block(200, 600);
+	block block14 = new block(400, 600);
+	block block15 = new block(600, 600);
+	block block16 = new block(800, 600);
+	block block17 = new block(1000, 600);
+	block block18 = new block(1200, 600);
 
 	Timer time = new Timer(5, this);
 	
+	boolean startscreen = true;
+	
+	int barY = 10;
+	int barSpeed = 10;
+	
 	int yCoordLVL1 = 200;
+	int yCoordLVL2 = 400;
+	int yCoordLVL3 = 600;
 	int paddleYLoc = 970;
 
 	int blockwidth = 60;
@@ -54,6 +75,19 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	boolean collisionlock5 = true;
 	boolean collisionlock6 = true;
 
+	boolean collisionlock7 = true;
+	boolean collisionlock8 = true;
+	boolean collisionlock9 = true;
+	boolean collisionlock10 = true;
+	boolean collisionlock11 = true;
+	boolean collisionlock12= true;
+	
+	boolean collisionlock13 = true;
+	boolean collisionlock14 = true;
+	boolean collisionlock15 = true;
+	boolean collisionlock16 = true;
+	boolean collisionlock17 = true;
+	boolean collisionlock18 = true;
 	
 	boolean right = true;
 	boolean left = true;
@@ -70,7 +104,12 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);	
-			
+		
+		//meter---------------------------------------------
+		
+		g.setColor(Color.BLUE);
+		g.fillRect(1700, barY, 100, 20);
+		
 		//scoreboard----------------------------------------
 		
 		g.setColor(Color.BLACK);
@@ -88,98 +127,47 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		g.setFont(new Font("default", Font.BOLD,25));
 		g.drawString("Score: " + board.score, 20,board.boardY + 50);
 		
-		// block1----------------------------------------
-
-		if (block1.hitBlock) {
-			block1.disappear();
-		} else {
-			g.setColor(Color.RED);
-			g.fillRect(block1.xBlock, yCoordLVL1, 60, 60);
-		}
-
-		// block2----------------------------------------
-
-		if (block2.hitBlock) {
-			block2.disappear();
-		} else {
-			g.setColor(Color.RED);
-			g.fillRect(block2.xBlock, yCoordLVL1, 60, 60);
-		}
-
-		// block3----------------------------------------
-
-		if (block3.hitBlock) {
-			block3.disappear();
-		} else {
-			g.setColor(Color.RED);
-			g.fillRect(block3.xBlock, yCoordLVL1, 60, 60);
-		}
-
-		// block4----------------------------------------
-
-		if (block4.hitBlock) {
-			block4.disappear();
-		} else {
-			g.setColor(Color.RED);
-			g.fillRect(block4.xBlock, yCoordLVL1, 60, 60);
-		}
-
-		// block5----------------------------------------
-
-		if (block5.hitBlock) {
-			block5.disappear();
-		} else {
-			g.setColor(Color.RED);
-			g.fillRect(block5.xBlock, yCoordLVL1, 60, 60);
-		}
-
-		// block6----------------------------------------
-
-		if (block6.hitBlock) {
-			block6.disappear();
-		} else {
-			g.setColor(Color.RED);
-			g.fillRect(block6.xBlock, yCoordLVL1, 60, 60);
-		}
+//ROW 1
+		blockhit(g, block1, yCoordLVL1);
+		blockhit(g, block2, yCoordLVL1);
+		blockhit(g, block3, yCoordLVL1);
+		blockhit(g, block4, yCoordLVL1);
+		blockhit(g, block5, yCoordLVL1);
+		blockhit(g, block6, yCoordLVL1);
+		
+//ROW 2
+		
+		blockhit(g, block7, yCoordLVL2);
+		blockhit(g, block8, yCoordLVL2);
+		blockhit(g, block9, yCoordLVL2);
+		blockhit(g, block10, yCoordLVL2);
+		blockhit(g, block11, yCoordLVL2);
+		blockhit(g, block12, yCoordLVL2);
+		
+//ROW3
+		
+		blockhit(g, block13, yCoordLVL3);
+		blockhit(g, block14, yCoordLVL3);
+		blockhit(g, block15, yCoordLVL3);
+		blockhit(g, block16, yCoordLVL3);
+		blockhit(g, block17, yCoordLVL3);
+		blockhit(g, block18, yCoordLVL3);
 		
 		// paddle right----------------------------------------
-		//if (pRHit == true) {
-			g.setColor(Color.BLUE);
-			g.fillRect(pR.paddleXR, paddleYLoc, 75, 20);
 
-			//if (ball.ballY < 900)
-				//pRHit = false;
-		//} else {
-			//g.setColor(Color.BLUE);
-			//g.fillRect(pR.paddleXR, paddleYLoc, 75, 20);
-		//}
+		g.setColor(Color.BLUE);
+		g.fillRect(pR.paddleXR, paddleYLoc, 75, 20);
 
 		// paddle left----------------------------------------
-		//if (pLHit == true) {
-			g.setColor(Color.BLUE);
-			g.fillRect(pL.paddleXL, paddleYLoc, 75, 20);
-
-			//if (ball.ballY < 900)
-			//	pLHit = false;
-
-		//} else {
-		//	g.setColor(Color.BLUE);
-		//	g.fillRect(pL.paddleXL, paddleYLoc, 75, 20);
-		//}
+		
+		g.setColor(Color.BLUE);
+		g.fillRect(pL.paddleXL, paddleYLoc, 75, 20);
 
 		// paddle mid----------------------------------------
 
-		//if (pHit == true) {
-			g.setColor(Color.BLUE);
-			g.fillRect(paddle.paddleX, paddleYLoc, 150, 20);
+		g.setColor(Color.BLUE);
+		g.fillRect(paddle.paddleX, paddleYLoc, 150, 20);
 
-			//if (ball.ballY < 900)
-			//	pHit = false;
-
-		//} else {
-		//	g.setColor(Color.BLUE);
-		//	g.fillRect(paddle.paddleX, paddleYLoc, 150, 20);
-		//}
 		// ball----------------------------------------
 		g.setColor(Color.GRAY);
 		g.fillOval(ball.ballX, ball.ballY, 30, 30);
@@ -191,8 +179,42 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			pL.paddleXL = mouseX - 75;
 
 		}
-}
 
+		if(startscreen == false) {
+
+			board.score = 0;
+			
+			g.setColor(Color.white);
+			g.fillRect(0, 0, 20000, 20000);
+			
+			g.setColor(Color.black);
+			g.setFont(new Font("default", Font.BOLD,75));
+			g.drawString("BREAKOUT", 700, 300);
+			
+			g.setColor(Color.black);
+			g.setFont(new Font("default", Font.BOLD,45));
+			g.drawString("Press P to play", 750, 400);	
+			
+			ball.ballSpeedX = 0;
+			ball.ballSpeedY = 0;
+		}
+		
+	}
+
+	public void blockhit (Graphics g, block b, int yCoordLVL) {
+		
+		if (b.hitBlock) {
+			b.disappear();
+			
+		} else {
+			g.setColor(Color.RED);
+			g.fillRect(b.xBlock, yCoordLVL, 60, 60);
+		}
+		
+	}
+	
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
@@ -206,7 +228,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 
 		Collision();
 		block1.hitdetect();
-
+		
 		repaint();
 
 	}
@@ -304,163 +326,28 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		Rectangle ballRec = ball.bounds();
 		Rectangle paddleRec = paddle.bounds();
 		Rectangle RECpL = pL.bounds();
-		Rectangle RECpR = pR.bounds();
-		Rectangle block = block1.bounds();
-		Rectangle blocktwo = block2.bounds();
-		Rectangle blockthree = block3.bounds();
-		Rectangle blockfour = block4.bounds();
-		Rectangle blockfive = block5.bounds();
-		Rectangle blocksix = block6.bounds();
+		Rectangle RECpR = pR.bounds();		
+//ROW 1
+		rectanglebound(ballRec, collisionlock, block1);
+		rectanglebound(ballRec, collisionlock2, block2);	
+		rectanglebound(ballRec, collisionlock3, block3);
+		rectanglebound(ballRec, collisionlock4, block4);
+		rectanglebound(ballRec, collisionlock5, block5);
+		rectanglebound(ballRec, collisionlock6, block6);
 		
-
-		// block1-------------------------------------------
-
-		// RIGHT HIT
-		if (ballRec.intersects(block) && collisionlock == true) {
-			collisionlock = BlockComparisonsRight(block1, collisionlock);
-			
-		}
-
-		// BOTTOM HIT
-		if (ballRec.intersects(block) && collisionlock == true) {
-			collisionlock = BlockComparisonsBottom(block1, collisionlock);
-		}
-
-		// TOP HIT
-		if (ballRec.intersects(block) && collisionlock == true) {
-			collisionlock = BlockComparisonsTop(block1, collisionlock);
-		}
-
-		// LEFT HIT
-		if (ballRec.intersects(block) && collisionlock == true) {
-			collisionlock = BlockComparisonsLeft(block1, collisionlock);
-		}
-
-		// block2-------------------------------------------
-
-		// RIGHT HIT
-		if (ballRec.intersects(blocktwo) && collisionlock2 == true) {
-			collisionlock2 = BlockComparisonsRight(block2, collisionlock2);
-		}
-
-		// BOTTOM HIT
-		if (ballRec.intersects(blocktwo) && collisionlock2 == true) {
-			collisionlock2 = BlockComparisonsBottom(block2, collisionlock2);
-		}
-
-		// TOP HIT
-		if (ballRec.intersects(blocktwo) && collisionlock2 == true) {
-			collisionlock2 = BlockComparisonsTop(block2, collisionlock2);
-		}
-
-		// LEFT HIT
-		if (ballRec.intersects(blocktwo) && collisionlock2 == true) {
-			collisionlock2 = BlockComparisonsLeft(block2, collisionlock2);
-		}
-
-		// block3---------------------------------------------------
-
-		// RIGHT HIT
-		if (ballRec.intersects(blockthree) && collisionlock3 == true) {
-
-			collisionlock3 = BlockComparisonsRight(block3, collisionlock3);
-		}
-
-		// BOTTOM HIT
-		if (ballRec.intersects(blockthree) && collisionlock3 == true) {
-
-			collisionlock3 = BlockComparisonsBottom(block3, collisionlock3);
-		}
-
-		// TOP HIT
-		if (ballRec.intersects(blockthree) && collisionlock3 == true) {
-
-			collisionlock3 = BlockComparisonsTop(block3, collisionlock3);
-		}
-
-		// LEFT HIT
-		if (ballRec.intersects(blockthree) && collisionlock3 == true) {
-
-			collisionlock3 = BlockComparisonsLeft(block3, collisionlock3);
-		}
-
-		// block4---------------------------------------------------
-
-		// RIGHT HIT
-		if (ballRec.intersects(blockfour) && collisionlock4 == true) {
-
-			collisionlock4 = BlockComparisonsRight(block4, collisionlock4);
-		}
-
-		// BOTTOM HIT
-		if (ballRec.intersects(blockfour) && collisionlock4 == true) {
-
-			collisionlock4 = BlockComparisonsBottom(block4, collisionlock4);
-		}
-
-		// TOP HIT
-		if (ballRec.intersects(blockfour) && collisionlock4 == true) {
-
-			collisionlock4 = BlockComparisonsTop(block4, collisionlock4);
-		}
-
-		// LEFT HIT
-		if (ballRec.intersects(blockfour) && collisionlock4 == true) {
-
-			collisionlock4 = BlockComparisonsLeft(block4, collisionlock4);
-		}
+		rectanglebound(ballRec, collisionlock7, block7);
+		rectanglebound(ballRec, collisionlock8, block8);	
+		rectanglebound(ballRec, collisionlock9, block9);
+		rectanglebound(ballRec, collisionlock10, block10);
+		rectanglebound(ballRec, collisionlock11, block11);
+		rectanglebound(ballRec, collisionlock12, block12);
 		
-		// block5---------------------------------------------------
-
-		// RIGHT HIT
-		if (ballRec.intersects(blockfive) && collisionlock5 == true) {
-
-			collisionlock5 = BlockComparisonsRight(block5, collisionlock5);
-		}
-
-		// BOTTOM HIT
-		if (ballRec.intersects(blockfive) && collisionlock5 == true) {
-
-			collisionlock5 = BlockComparisonsBottom(block5, collisionlock5);
-		}
-
-		// TOP HIT
-		if (ballRec.intersects(blockfive) && collisionlock5 == true) {
-
-			collisionlock5 = BlockComparisonsTop(block5, collisionlock5);
-		}
-
-		// LEFT HIT
-		if (ballRec.intersects(blockfive) && collisionlock5 == true) {
-
-			collisionlock5 = BlockComparisonsLeft(block5, collisionlock5);
-		}
-		
-		// block6---------------------------------------------------
-
-		// RIGHT HIT
-		if (ballRec.intersects(blocksix) && collisionlock6 == true) {
-
-			collisionlock6 = BlockComparisonsRight(block6, collisionlock6);
-		}
-
-		// BOTTOM HIT
-		if (ballRec.intersects(blocksix) && collisionlock6 == true) {
-
-			collisionlock6 = BlockComparisonsBottom(block6, collisionlock6);
-		}
-
-		// TOP HIT
-		if (ballRec.intersects(blocksix) && collisionlock6 == true) {
-
-			collisionlock6 = BlockComparisonsTop(block6, collisionlock6);
-		}
-
-		// LEFT HIT
-		if (ballRec.intersects(blocksix) && collisionlock6 == true) {
-
-			collisionlock6 = BlockComparisonsLeft(block6, collisionlock6);
-		}
+		rectanglebound(ballRec, collisionlock13, block13);
+		rectanglebound(ballRec, collisionlock14, block14);	
+		rectanglebound(ballRec, collisionlock15, block15);
+		rectanglebound(ballRec, collisionlock16, block16);
+		rectanglebound(ballRec, collisionlock17, block17);
+		rectanglebound(ballRec, collisionlock18, block18);
 		
 		
 		if (ballRec.intersects(RECpL)) {
@@ -492,10 +379,48 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		}
 
 	}
+	
+	public void rectanglebound(Rectangle ball, boolean CollisionLock, block b) {
+		
+		Rectangle r = b.bounds();
+		
+		// RIGHT HIT
+		if (ball.intersects(r) && CollisionLock == true) {
+
+			CollisionLock = BlockComparisonsRight(b, CollisionLock);
+		}
+
+		// BOTTOM HIT
+		if (ball.intersects(r) && CollisionLock == true) {
+
+			CollisionLock = BlockComparisonsBottom(b, CollisionLock);
+		}
+
+		// TOP HIT
+		if (ball.intersects(r) && CollisionLock == true) {
+
+			CollisionLock = BlockComparisonsTop(b, CollisionLock);
+		}
+
+		// LEFT HIT
+		if (ball.intersects(r) && CollisionLock == true) {
+
+			CollisionLock = BlockComparisonsLeft(b, CollisionLock);
+		}
+		
+		
+		
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int i = e.getKeyCode();
+		
+		if (i == KeyEvent.VK_A) {
+
+			startscreen = false;
+			
+		}
 		
 	}
 
