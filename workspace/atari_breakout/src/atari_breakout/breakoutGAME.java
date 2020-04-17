@@ -1,15 +1,18 @@
 package atari_breakout;
 
-import java.awt.Color;
+import java.awt.Color; 
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JFrame;
@@ -17,13 +20,15 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 import java.awt.Rectangle;
 
-public class breakoutGAME extends JPanel implements ActionListener, MouseMotionListener, KeyListener {
+public class breakoutGAME extends JPanel implements ActionListener, MouseMotionListener, MouseListener{
 
 	paddleClass paddle = new paddleClass();
 	paddleL pL = new paddleL();
 	paddleR pR = new paddleR();
 	ballBreakout ball = new ballBreakout();
 	scoreboard board = new scoreboard();
+	playbutton p = new playbutton();
+	clicker c = new clicker();
 	
 	block block1 = new block(200, 200);
 	block block2 = new block(400, 200);
@@ -32,42 +37,48 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	block block5 = new block(1000, 200);
 	block block6 = new block(1200, 200);
 	
-	block block7 = new block(200, 400);
-	block block8 = new block(400, 400);
-	block block9 = new block(600, 400);
-	block block10 = new block(800, 400);
-	block block11 = new block(1000, 400);
-	block block12 = new block(1200, 400);
+	block block7 = new block(200, 300);
+	block block8 = new block(400, 300);
+	block block9 = new block(600, 300);
+	block block10 = new block(800, 300);
+	block block11 = new block(1000, 300);
+	block block12 = new block(1200, 300);
 	
-	block block13 = new block(200, 600);
-	block block14 = new block(400, 600);
-	block block15 = new block(600, 600);
-	block block16 = new block(800, 600);
-	block block17 = new block(1000, 600);
-	block block18 = new block(1200, 600);
+	block block13 = new block(200, 400);
+	block block14 = new block(400, 400);
+	block block15 = new block(600, 400);
+	block block16 = new block(800, 400);
+	block block17 = new block(1000, 400);
+	block block18 = new block(1200, 400);
 
 	Timer time = new Timer(5, this);
 	
 	boolean startscreen = true;
 	
-	int barY = 10;
-	int barSpeed = 10;
-	
 	int yCoordLVL1 = 200;
-	int yCoordLVL2 = 400;
-	int yCoordLVL3 = 600;
+	int yCoordLVL2 = 300;
+	int yCoordLVL3 = 400;
 	int paddleYLoc = 970;
 
 	int blockwidth = 60;
 	int blocklength = 60;
 
 	int mouseX;
+	
+	int xmouse;
+	int ymouse;
+	
 	boolean mouseMove = false;
-
+	boolean mouseMoveForButton = false;
+	
+	boolean colorchange = false;
+	
 	boolean pHit = false;
 	boolean pLHit = false;
 	boolean pRHit = false;
 
+	boolean blockIsHit = false;
+	
 	boolean collisionlock = true;
 	boolean collisionlock2 = true;
 	boolean collisionlock3 = true;
@@ -99,17 +110,13 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 		addMouseMotionListener(this);
+		addMouseListener(this);
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);	
-		
-		//meter---------------------------------------------
-		
-		g.setColor(Color.BLUE);
-		g.fillRect(1700, barY, 100, 20);
-		
+				
 		//scoreboard----------------------------------------
 		
 		g.setColor(Color.BLACK);
@@ -180,7 +187,29 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 
 		}
 
-		if(startscreen == false) {
+		if(board.score == 900) {
+			
+			g.setColor(Color.WHITE);
+			g.fillRect(0, 0, 20000, 20000);	
+			
+			g.setColor(Color.black);
+			g.setFont(new Font("default", Font.BOLD,75));
+			g.drawString("YOU WIN!", 720, 300);
+			
+		}
+		
+		if(ball.lose == true) {
+			
+			g.setColor(Color.WHITE);
+			g.fillRect(0, 0, 20000, 20000);	
+			
+			g.setColor(Color.black);
+			g.setFont(new Font("default", Font.BOLD,75));
+			g.drawString("You lost noob", 700, 300);
+			
+		}
+		
+		if(startscreen == true) {
 
 			board.score = 0;
 			
@@ -191,12 +220,36 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			g.setFont(new Font("default", Font.BOLD,75));
 			g.drawString("BREAKOUT", 700, 300);
 			
+			if(colorchange)
+			g.setColor(Color.cyan);
+			if(colorchange == false)
+			g.setColor(Color.green);
+			
+			g.fillOval(p.x, p.y, 80, 80);
+			
 			g.setColor(Color.black);
-			g.setFont(new Font("default", Font.BOLD,45));
-			g.drawString("Press P to play", 750, 400);	
+			g.setFont(new Font("default", Font.BOLD,20));
+			g.drawString("Play", 900, 400);	
 			
 			ball.ballSpeedX = 0;
 			ball.ballSpeedY = 0;
+		
+			g.setColor(Color.black);
+			g.fillRect(c.xclick + 10, c.yclick + 20, 1, 1);
+			
+			if (mouseMoveForButton) {
+			
+				c.xclick = xmouse;
+				c.yclick = ymouse;
+			
+			}
+		}
+		
+		else {
+			
+			ball.ballSpeedX = 3;
+			ball.ballSpeedY = 3;			
+			
 		}
 		
 	}
@@ -204,20 +257,19 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	public void blockhit (Graphics g, block b, int yCoordLVL) {
 		
 		if (b.hitBlock) {
+			
 			b.disappear();
 			
 		} else {
 			g.setColor(Color.RED);
 			g.fillRect(b.xBlock, yCoordLVL, 60, 60);
+			
 		}
-		
 	}
-	
-	
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-
+		
 		board.scoreboardmove();
 		
 		paddle.move();
@@ -320,13 +372,16 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		}
 		return blocklock;
 	}
-
+	
 	public void Collision() {
 
 		Rectangle ballRec = ball.bounds();
 		Rectangle paddleRec = paddle.bounds();
 		Rectangle RECpL = pL.bounds();
 		Rectangle RECpR = pR.bounds();		
+		Rectangle playREC = p.bounds();
+		Rectangle click = c.bounds();
+		
 //ROW 1
 		rectanglebound(ballRec, collisionlock, block1);
 		rectanglebound(ballRec, collisionlock2, block2);	
@@ -349,7 +404,15 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		rectanglebound(ballRec, collisionlock17, block17);
 		rectanglebound(ballRec, collisionlock18, block18);
 		
-		
+		if(playREC.intersects(click)) {
+			
+			colorchange = true;	
+		}
+		else {
+			
+			colorchange = false;
+			
+		}
 		if (ballRec.intersects(RECpL)) {
 
 			ball.down = false;
@@ -412,28 +475,6 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		int i = e.getKeyCode();
-		
-		if (i == KeyEvent.VK_A) {
-
-			startscreen = false;
-			
-		}
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		
-	}
-	
 	public static void main(String[] args) {
 
 		breakoutGAME mouse = new breakoutGAME();
@@ -444,8 +485,10 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		breakoutGAME bPanel = new breakoutGAME();
 
 		Dimension preferredSize = new Dimension();
-		preferredSize.setSize(600, 600);
+		//preferredSize.setSize(1920, 1280);
 
+		preferredSize.setSize(600, 600);
+		
 		frame.setSize(preferredSize);
 		contentpane.add(bPanel);
 
@@ -457,16 +500,59 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	public void mouseDragged(MouseEvent e) {
 		mouseX = e.getX() - 10;
 
+		xmouse = e.getX() - 10;
+		ymouse = e.getY() - 10;
+		
 		e.consume();
 
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
+		
+		if(startscreen) {
+		
+		xmouse = e.getX() - 10;
+		ymouse = e.getY() - 10;
+		
+		mouseMoveForButton = true;	
+			
+		}	
+			
+		if(startscreen == false) {
 		mouseX = e.getX() - 10;
 		mouseMove = true;
+		}
+		
 		e.consume();
 
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+		if(colorchange) {
+			
+		startscreen = false;	
+			
+		}
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {	
 	}
 
 }

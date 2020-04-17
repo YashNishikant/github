@@ -1,4 +1,4 @@
-import java.awt.Color; 
+import java.awt.Color;  
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -282,7 +282,7 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if (i == KeyEvent.VK_W) {
-
+			
 			LPaddle.speed = -2;
 			goingUpL = true;
 

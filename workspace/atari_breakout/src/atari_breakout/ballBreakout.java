@@ -9,6 +9,8 @@ public class ballBreakout {
 	boolean rightangled = false;
 	boolean leftangled = false;
 	
+	boolean lose = false;
+	
 	//top test:
 	//x 210
 	//y 10
@@ -50,6 +52,9 @@ public class ballBreakout {
 		if (ballY >= 1000) {
 			ballSpeedY = 0;
 			ballSpeedX = 0;
+		
+			lose = true;
+		
 		}
 
 		if (down == true) {			
