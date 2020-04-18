@@ -8,6 +8,8 @@ public class ballBreakout {
 	boolean down = true;
 	boolean rightangled = false;
 	boolean leftangled = false;
+
+	int angledSpeed = 1;
 	
 	boolean lose = false;
 	
@@ -30,10 +32,10 @@ public class ballBreakout {
 	int ballX = (int)(Math.random()*1000) + 10;
 	int ballY = 610;
 
-	int ballSpeedX = 3;
-	int ballSpeedY = 3;
-	
+	int ballSpeedX = 2;
+	int ballSpeedY = 2;
 
+	
 	public void move() {
 	
 		// top
@@ -73,8 +75,8 @@ public class ballBreakout {
 		}
 
 		//angled
-		if (rightangled == true) {
-			ballSpeedY = 2;
+		if (rightangled == true) {	
+			ballSpeedY = angledSpeed;
 			
 			ballX += ballSpeedX;
 			ballY -= ballSpeedY;
@@ -85,7 +87,7 @@ public class ballBreakout {
 		
 		//angled
 		if (leftangled == true) {			
-			ballSpeedY = 2;
+			ballSpeedY = angledSpeed;
 			
 			ballX -= ballSpeedX;
 			ballY -= ballSpeedY;

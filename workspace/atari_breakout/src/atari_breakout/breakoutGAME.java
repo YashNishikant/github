@@ -53,6 +53,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 
 	Timer time = new Timer(5, this);
 	
+	boolean onetimeboolean = true;
 	boolean startscreen = true;
 	
 	int yCoordLVL1 = 200;
@@ -105,6 +106,9 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	boolean bottom = true;
 	boolean top = true;
 
+	int speedofBallX = 2;
+	int speedofBallY = 2;
+	
 	public breakoutGAME() {
 		time.start();
 		setFocusable(true);
@@ -205,7 +209,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			
 			g.setColor(Color.black);
 			g.setFont(new Font("default", Font.BOLD,75));
-			g.drawString("You lost noob", 700, 300);
+			g.drawString("You lost", 700, 300);
 			
 		}
 		
@@ -231,11 +235,12 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			g.setFont(new Font("default", Font.BOLD,20));
 			g.drawString("Play", 900, 400);	
 			
-			ball.ballSpeedX = 0;
 			ball.ballSpeedY = 0;
 		
 			g.setColor(Color.black);
 			g.fillRect(c.xclick + 10, c.yclick + 20, 1, 1);
+			
+			board.bringDown = false;
 			
 			if (mouseMoveForButton) {
 			
@@ -244,15 +249,18 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			
 			}
 		}
-		
 		else {
 			
-			ball.ballSpeedX = 3;
-			ball.ballSpeedY = 3;			
-			
-		}
+		board.bringDown = true;	
 		
+		if(onetimeboolean) {
+		
+		ball.ballSpeedY = speedofBallY;
+		onetimeboolean = false;
+		
+		}
 	}
+}
 
 	public void blockhit (Graphics g, block b, int yCoordLVL) {
 		
@@ -271,22 +279,18 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	public void actionPerformed(ActionEvent arg0) {
 		
 		board.scoreboardmove();
-		
 		paddle.move();
 		pL.moveL();
 		pR.moveR();
-
 		ball.move();
-
 		Collision();
 		block1.hitdetect();
-		
 		repaint();
 
 	}
 
 	public boolean BlockComparisonsRight(block b, boolean blocklock) {
-		if (ball.ballX >= b.xBlock) {		
+		if (ball.ballX >= b.xBlock) {
 			if (ball.ballX <= b.xBlock + blockwidth) {
 				if (ball.ballY >= b.yBlock) {
 					if (ball.ballY <= b.yBlock + blocklength) {
@@ -332,7 +336,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	}
 
 	public boolean BlockComparisonsTop(block b, boolean blocklock) {
-		if (ball.ballY >= b.yBlock - 30) {
+		if (ball.ballY >= b.yBlock - 50) {
 			if (ball.ballY <= b.yBlock + blocklength) {
 				if (ball.ballX >= b.xBlock) {
 					if (ball.ballX <= b.xBlock + blockwidth) {
@@ -420,7 +424,6 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			ball.right = false;
 
 			pLHit = true;
-
 		}
 
 		if (ballRec.intersects(RECpR)) {
@@ -430,12 +433,11 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			ball.right = true;
 
 			pRHit = true;
-
 		}
 
 		if (ballRec.intersects(paddleRec)) {
 
-			ball.ballSpeedY = 4;
+			ball.ballSpeedY = speedofBallY;
 
 			ball.down = false;
 			pHit = true;

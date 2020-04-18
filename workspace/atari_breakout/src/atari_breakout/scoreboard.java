@@ -6,6 +6,8 @@ public class scoreboard {
 	int boardY = -200;
 	int boardSpeed = 1;
 	
+	boolean bringDown = false;
+	
 	public scoreboard(){
 		
 	score = 0;	
@@ -17,6 +19,7 @@ public class scoreboard {
 	
 	public void scoreboardmove() {	
 
+		if(bringDown) {
 		boardY+=boardSpeed;
 
 		if(boardY > 20) {
@@ -26,3 +29,4 @@ public class scoreboard {
 			}
 		}
 	}	
+}
