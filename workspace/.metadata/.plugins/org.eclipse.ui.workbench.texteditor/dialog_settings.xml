@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="speedUP" key="selection"/>
+		<item value="cloudMove" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="speedUP"/>
-			<item value="4"/>
-			<item value="3"/>
-			<item value="mouseX"/>
-			<item value="board.score"/>
+			<item value="cloudMove"/>
+			<item value="track = false"/>
+			<item value="fire"/>
+			<item value="canfly"/>
+			<item value="ignore"/>
+			<item value="mech"/>
+			<item value=" x "/>
+			<item value="x "/>
 			<item value="x"/>
-			<item value="ball"/>
-			<item value="ballS"/>
-			<item value="bWin"/>
-			<item value="rand"/>
-			<item value="hitn"/>
-			<item value="random"/>
-			<item value="sleep"/>
-			<item value="xCoordBall"/>
-			<item value="a"/>
+			<item value="breakoutGAME"/>
+			<item value="blocklength"/>
+			<item value="location"/>
+			<item value="rectangleb"/>
+			<item value="rectangle"/>
+			<item value="recta"/>
 		</list>
 		<list key="replacehistory">
 			<item value="speed"/>

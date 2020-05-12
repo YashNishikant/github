@@ -1,13 +1,16 @@
-  package battleGame;
+package battleGame;
 
-import java.awt.Color;
+import java.awt.Color; 
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.event.ActionEvent;
@@ -19,17 +22,15 @@ import java.awt.Rectangle;
 
 public class fight extends JPanel implements ActionListener, KeyListener{
 
-	int a = 50, b = -800, c = -1000;
-	int mechX = 210; 
-	int mechY = 865; 
-	int fireNum = 61;
-	int speedX = 5;
-	int speedY = 5;
-	int armMoveX = 5;
-	int armMoveY = 25;
+	human user = new human();
+	clouds cloud = new clouds();
+	armor iron = new armor();
+
 	
-	boolean cloudMove = true;
 	Timer time = new Timer(5, this);
+	
+	private ImageIcon image;
+	private JLabel label;
 	
 	public fight() {
 		
@@ -38,7 +39,6 @@ public class fight extends JPanel implements ActionListener, KeyListener{
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 	}
-
 	
 	@Override
 	public void paintComponent(Graphics g) {
@@ -54,75 +54,59 @@ public class fight extends JPanel implements ActionListener, KeyListener{
 		
 		//Clouds
 		g.setColor(Color.white);
-		g.fillRect(a, 60, 200, 40);
+		g.fillRect(cloud.cloud1start, 60, 200, 40);
 		
 		g.setColor(Color.white);
-		g.fillRect(b, 120, 200, 40);
+		g.fillRect(cloud.cloud2start, 120, 200, 40);
 		
 		g.setColor(Color.white);
-		g.fillRect(c, 80, 200, 40);
+		g.fillRect(cloud.cloud3start, 80, 200, 40);
 		
 		//mechIMG
 		g.setColor(Color.black);
 		
 		//main
-		g.fillRect(mechX + 5, mechY + 30, 20, 30);
-		
-		//eyes
-		g.setColor(Color.white);
-		g.fillRect(mechX + 5, mechY + 16, 5, 5);			
-		g.fillRect(mechX + 20, mechY + 16, 5, 5);			
-		
-		//fire
-		g.setColor(Color.red);	
-		g.fillRect(mechX + 5, mechY + fireNum, 5, 15);		
-		g.fillRect(mechX + 19, mechY + fireNum, 5, 15);		
+		g.fillRect(user.personX, user.personY + 30, 20, 30);
 		
 		//legs
 		g.setColor(Color.blue);	
-		g.fillRect(mechX + 5, mechY + 61, 5, 25);		
-		g.fillRect(mechX + 19, mechY + 61, 5, 25);		
+		g.fillRect(user.personX + 12, user.personY + 61, 7, 19);		
+		g.fillRect(user.personX + 1, user.personY + 61, 7, 19);		
 	
 		//arms
 		g.setColor(Color.blue);		
-		g.fillRect(mechX + 26, mechY + 30, armMoveX, armMoveY);	
-		g.fillRect(mechX - 2, mechY + 30, 5, 25);
+		g.fillRect(user.personX + 21, user.personY + 30, 7, 25);	
+		g.fillRect(user.personX - 8, user.personY + 30, 7, 25);
 		
+		ImageIcon i2 = new ImageIcon("C:\\Users\\yash0\\Pictures\\imageface.png");
+		i2.paintIcon(this, g, user.personX, user.personY+10);
+		
+		ImageIcon i = new ImageIcon("C:\\Users\\yash0\\Pictures\\ironmanNOFire.png");
+		i.paintIcon(this, g, iron.armorPosX, iron.armorPosY);
+		
+		if(iron.fire) {
+		ImageIcon i3 = new ImageIcon("C:\\Users\\yash0\\Pictures\\ironmanSuitJavaCanvasIMG.png");
+		i3.paintIcon(this, g, iron.armorPosX, iron.armorPosY);
+		}
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void trackSystem() {
 		
-		if(mechY < 865)
-		fireNum = 85;
-		
-		if(mechY >=865)
-		fireNum = 61;
-			
-		if(mechY >= 865) {
-			
-		mechY = 865;	
-			
-		}
-		
-		//CLOUDS
-		a+=2;
-		b+=2;
-		
-		if(a == 2000) {			
-		a = -90;			
-		}
-		
-		if(b == 2000) {			
-		b = -100;			
-		}
-
-		if(c == 2000) {			
-		c = -1600;			
+		if(iron.track) {
+			iron.armorPosX = user.personX-12;
+			iron.armorPosY = user.personY + 8;
 		}		
 		
-		//CLOUDS		
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+			
+		user.move();
+		user.jump();
+		iron.tracking();
+		trackSystem();
+		cloud.move();
 		repaint();
-
 	}
 
 	@Override
@@ -130,41 +114,53 @@ public class fight extends JPanel implements ActionListener, KeyListener{
 		int i = e.getKeyCode();
 
 		if (i == KeyEvent.VK_V) {
-
-			armMoveX = 25;	
-			armMoveY = 5;
+		
+			iron.armorPosX = user.personX;
+			iron.track = true;
 		}
 
 		if (i == KeyEvent.VK_C) {
-
-			armMoveX = 5;	
-			armMoveY = 25;
+			if(user.personY == 870) {
+				iron.track = false;
+			}
+		}
+		if (i == KeyEvent.VK_W) {
+			
+			if(iron.track == true) {
+			user.speedY = -4;	
+			}
+		
+			if(!iron.track) {
+			user.jump = true;	
+				
+			}
 		}
 		
-		if (i == KeyEvent.VK_W) {
+		if (i == KeyEvent.VK_S && iron.track == true) {
 
-			mechY = mechY - speedY;	
-
-		}
-
-		if (i == KeyEvent.VK_S) {
-
-			mechY = mechY + speedY;
+			user.speedY = 4;	
 			
 		}
 
 		if (i == KeyEvent.VK_A) {
 
-			mechX = mechX - speedX;
+			if(iron.track == true)
+				user.speedX = -4;
+			else {
+				user.speedX = -2;	
+			}
 			
 		}
 
 		if (i == KeyEvent.VK_D) {
 
-			mechX = mechX + speedX;
+			if(iron.track == true)
+				user.speedX = 4;
+			else {
+				user.speedX = 2;	
+			}
 			
 		}
-
 	}
 
 	@Override
@@ -173,6 +169,12 @@ public class fight extends JPanel implements ActionListener, KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		
+		if(iron.ignore == false) {
+			
+			user.speedX = 0;
+			user.speedY = 0;
+		}
 		
 	}
 
@@ -188,8 +190,10 @@ public class fight extends JPanel implements ActionListener, KeyListener{
 
 		frame.setSize(preferredSize);
 		contentpane.add(BPanel);
-
 		frame.setVisible(true);
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 
 }

@@ -7,11 +7,14 @@ public class block {
 	boolean hitBlock = false;
 	int xBlock;
 	int yBlock;
+	int blockWidth;
+	int blockHeight;
 	
-	public block(int x, int y) {
+	public block(int x, int y, int width, int height) {
 		xBlock = x;
 		yBlock = y;
-		
+		blockWidth = width;
+		blockHeight = height;
 		hitBlock = false;
 	}
 	
@@ -33,9 +36,12 @@ public class block {
 	//borders for squares
 	public Rectangle bounds() {
 
-		return (new Rectangle(xBlock, yBlock, 60, 60));
+		return (new Rectangle(xBlock, yBlock, blockWidth, blockHeight));
 
 	}
 
+	public String print() {
+		return "x:" + xBlock + " y:" + yBlock + " width:" + blockWidth + " height:" + blockHeight;
+	}
 	
 }

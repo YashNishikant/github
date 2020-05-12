@@ -16,7 +16,7 @@ public class BreakoutPANEL {
 		JFrame frame = new JFrame(gc);
 		
 		Container contentpane = frame.getContentPane();
-		breakoutGAME bPanel = new breakoutGAME();
+		breakoutGAME bPanel = new breakoutGAME(true);
 		
 		Dimension preferredSize = new Dimension();
 		preferredSize.setSize(600, 600);
