@@ -28,13 +28,15 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 	
 	boolean fire = false;
 	boolean create = false;
+	
 	bullet[] b = new bullet[10];
+	target[] t = new target[10];
 
 	human user = new human();
 	clouds cloud = new clouds();
 	armor iron = new armor();
 	Timer time = new Timer(5, this);
-	// bullet missile = new bullet((iron.armorPosX + 19), iron.armorPosY - 5);
+
 
 	public fight() {
 
@@ -43,6 +45,11 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 			b[i] = b1;
 		}
 
+		for (int i = 0; i < t.length; i++) {
+			target t1 = new target((int)(Math.random()*3000) + 1900, (int)(Math.random()*800));
+			t[i] = t1;
+		}
+		
 		time.start();
 		addKeyListener(this);
 		setFocusable(true);
@@ -136,8 +143,22 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 			g.fillRect(1655, 25, powerlength, 20);	
 		}
 
+		//target
+		g.setColor(Color.red);	
+		for (int i = 0; i < t.length; i++) {
+			g.fillRect(t[i].targetx, t[i].targety, 6, 6);	
+		}
+	
 	}
 
+	public void targetmove() {
+		
+		for (int i = 0; i < t.length; i++) {
+			t[i].move();
+		}
+		
+	}
+	
 	public void contain() {
 		for (int i = 0; i < b.length; i++) {
 			if (!b[i].bulletFire) {
@@ -167,6 +188,7 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		targetmove();
 		contain();
 		user.move();
 		user.jump();
