@@ -57,4 +57,5 @@
 <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="java.awt.FlowLayout"/>
+<fullyQualifiedTypeName name="battleGame.bullet"/>
 </qualifiedTypeNameHistroy>

@@ -36,11 +36,8 @@ public class human {
 	public void jump() {
 
 		if (jump == true) {
-			System.out.println("1");
 
 			if (personY >= maxheight && rise == true) {
-				System.out.println("2");
-				System.out.println(personY);
 				personY -= 2;
 			}
 
@@ -50,15 +47,14 @@ public class human {
 
 			if (personY >= maxheight && rise == false) {
 				rise = false;
-				System.out.println("3");
 				personY += 2;
-			
+
 				if (personY >= minheight) {
 					rise = true;
 					jump = false;
 
 				}
-				
+
 			}
 
 		}
