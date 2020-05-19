@@ -25,7 +25,7 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 	int ammo = 10;
 	int powercount = 0;
 	int powerlength = 190;
-	
+
 	boolean fire = false;
 	boolean create = false;
 	
@@ -37,7 +37,6 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 	armor iron = new armor();
 	Timer time = new Timer(5, this);
 
-
 	public fight() {
 
 		for (int i = 0; i < b.length; i++) {
@@ -46,10 +45,10 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		}
 
 		for (int i = 0; i < t.length; i++) {
-			target t1 = new target((int)(Math.random()*3000) + 1900, (int)(Math.random()*800));
+			target t1 = new target((int) (Math.random() * 3000) + 1900, (int) (Math.random() * 800));
 			t[i] = t1;
 		}
-		
+
 		time.start();
 		addKeyListener(this);
 		setFocusable(true);
@@ -96,16 +95,16 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 
 			ImageIcon i2 = new ImageIcon("C:\\Users\\yash0\\Pictures\\imageface.png");
 			i2.paintIcon(this, g, user.personX, user.personY + 10);
-			
+
 		}
-		
+
 		// bullet
 		g.setColor(Color.BLACK);
 		for (int i = 0; i < b.length; i++) {
 			b[i].fire();
-			g.fillRect(b[i].bulletX, b[i].bulletY + 30, 7, 3);
+			b[i].draw(g);
 		}
-		
+
 		if (iron.normal) {
 			ImageIcon i = new ImageIcon("C:\\Users\\yash0\\Pictures\\ironmanNOFire.png");
 			i.paintIcon(this, g, iron.armorPosX, iron.armorPosY);
@@ -128,37 +127,38 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 			g.setFont(new Font("default", Font.BOLD, 25));
 			g.drawString("Ammo: " + ammo, 20, 50);
 
-			//batteryDisplay
+			// batteryDisplay
 			g.setColor(Color.black);
-			g.fillRect(1650, 20, 200, 30);	
-			//cap
+			g.fillRect(1650, 20, 200, 30);
+			// cap
 			g.fillRect(1660, 25, 200, 20);
-			
-			//actualbattery
+
+			// actualbattery
 			g.setColor(Color.white);
-			
-			if(powerlength <= 38) {
-				g.setColor(Color.red);	
+
+			if (powerlength <= 38) {
+				g.setColor(Color.red);
 			}
-			g.fillRect(1655, 25, powerlength, 20);	
+			g.fillRect(1655, 25, powerlength, 20);
 		}
 
-		//target
-		g.setColor(Color.red);	
+		// target
+		g.setColor(Color.red);
+		
 		for (int i = 0; i < t.length; i++) {
-			g.fillRect(t[i].targetx, t[i].targety, 6, 6);	
+			g.fillRect(t[i].targetx, t[i].targety, 30, 30);
 		}
-	
+
 	}
 
 	public void targetmove() {
-		
+
 		for (int i = 0; i < t.length; i++) {
 			t[i].move();
 		}
-		
+
 	}
-	
+
 	public void contain() {
 		for (int i = 0; i < b.length; i++) {
 			if (!b[i].bulletFire) {
@@ -177,16 +177,16 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void batterysystem() {
-		
-		if(iron.track) {
-		powercount++;
+
+		if (iron.track) {
+			powercount++;
 		}
-		if((powercount % 100 == 0) && powerlength > 0 && iron.canfly) {
-			powerlength -=1;
+		if ((powercount % 100 == 0) && powerlength > 0 && iron.canfly) {
+			powerlength -= 1;
 		}
-		
+
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		targetmove();
 		contain();
@@ -196,6 +196,10 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		trackSystem();
 		batterysystem();
 		cloud.move();
+		Collision();
+		for (int i = 0; i < t.length; i++) {
+			t[i].destroy();
+		}
 		repaint();
 	}
 
@@ -295,6 +299,21 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 
 	}
 
+	public void Collision() {
+
+		for (int i = 0; i < 10; i++) {
+			Rectangle BRec = b[i].bounds();
+			for (int j = 0; j < 10; j++) {
+				Rectangle TRec = t[j].bounds();
+				
+			if (BRec.intersects(TRec) && b[i].bulletFire) {
+
+				t[j].letDestroy = true;
+				
+			}
+		}
+	}
+}
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 

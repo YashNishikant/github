@@ -1,10 +1,16 @@
 package battleGame;
 
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
 public class bullet {
 
 	int bulletX = 0;
 	int bulletY = 0;
+	int yoffset = 30;
 	int bulletSpeed = 6;
+	int width = 10;
+	int height = 5;
 	boolean bulletFire = false;
 
 	public bullet(int x, int y) {
@@ -18,4 +24,16 @@ public class bullet {
 			bulletX = bulletX + bulletSpeed;
 		}
 	}
+
+	public Rectangle bounds() {
+
+		return (new Rectangle(bulletX, bulletY + yoffset, width, height));
+
+	}
+
+	public void draw(Graphics g) {
+		g.fillRect(bulletX, bulletY + yoffset, width, height);
+		
+	}
+
 }
