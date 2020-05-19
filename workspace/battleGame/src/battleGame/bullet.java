@@ -12,6 +12,7 @@ public class bullet {
 	int width = 10;
 	int height = 5;
 	boolean bulletFire = false;
+	boolean letdestroy = false;
 
 	public bullet(int x, int y) {
 
@@ -33,7 +34,16 @@ public class bullet {
 
 	public void draw(Graphics g) {
 		g.fillRect(bulletX, bulletY + yoffset, width, height);
-		
+
+	}
+
+	public void destroy() {
+
+		if (letdestroy) {
+			bulletSpeed = 0;
+			bulletX = 9000;
+			bulletY = -40;
+		}
 	}
 
 }

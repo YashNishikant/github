@@ -6,15 +6,16 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="canf" key="selection"/>
+		<item value="ammo" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="package battleGame;"/>
+			<item value="ammo"/>
 			<item value="canf"/>
 			<item value="canfly"/>
-			<item value="ammo"/>
 			<item value="fire"/>
 			<item value="fire = false"/>
 			<item value="addKeyListener"/>
@@ -26,7 +27,6 @@
 			<item value="ignore"/>
 			<item value="mech"/>
 			<item value=" x "/>
-			<item value="x "/>
 		</list>
 		<list key="replacehistory">
 			<item value="speed"/>

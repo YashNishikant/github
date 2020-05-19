@@ -4,9 +4,9 @@ import java.awt.Rectangle;
 
 public class target {
 
-	int targetx = 1900;
-	int targety = (int) (Math.random() * 800);
-	int speed = 2;
+	int targetx;
+	int targety;
+	int speed = (int)(Math.random()*4)+1;
 	boolean letDestroy = false;
 
 	public target(int x, int y) {
@@ -22,6 +22,7 @@ public class target {
 
 		if (letDestroy) {
 			targetx = 2900;
+			targety = 9000;
 			speed = 0;
 		}
 

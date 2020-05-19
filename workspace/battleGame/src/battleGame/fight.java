@@ -22,15 +22,16 @@ import java.awt.Rectangle;
 
 public class fight extends JPanel implements ActionListener, KeyListener {
 
-	int ammo = 10;
+	int ammo = 100;
 	int powercount = 0;
 	int powerlength = 190;
-
+	int hitcount = 0;
+	
 	boolean fire = false;
 	boolean create = false;
-	
-	bullet[] b = new bullet[10];
-	target[] t = new target[10];
+
+	bullet[] b = new bullet[100];
+	target[] t = new target[100];
 
 	human user = new human();
 	clouds cloud = new clouds();
@@ -45,7 +46,7 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		}
 
 		for (int i = 0; i < t.length; i++) {
-			target t1 = new target((int) (Math.random() * 3000) + 1900, (int) (Math.random() * 800));
+			target t1 = new target((int) (Math.random() * 4000) + 2900, (int) (Math.random() * 800) );
 			t[i] = t1;
 		}
 
@@ -127,6 +128,10 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 			g.setFont(new Font("default", Font.BOLD, 25));
 			g.drawString("Ammo: " + ammo, 20, 50);
 
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("default", Font.BOLD, 25));
+			g.drawString("Target Hits: " + hitcount, 20, 100);
+			
 			// batteryDisplay
 			g.setColor(Color.black);
 			g.fillRect(1650, 20, 200, 30);
@@ -144,7 +149,7 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 
 		// target
 		g.setColor(Color.red);
-		
+
 		for (int i = 0; i < t.length; i++) {
 			g.fillRect(t[i].targetx, t[i].targety, 30, 30);
 		}
@@ -199,6 +204,9 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		Collision();
 		for (int i = 0; i < t.length; i++) {
 			t[i].destroy();
+		}
+		for (int i = 0; i < t.length; i++) {
+			b[i].destroy();
 		}
 		repaint();
 	}
@@ -301,19 +309,20 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 
 	public void Collision() {
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < b.length; i++) {
 			Rectangle BRec = b[i].bounds();
-			for (int j = 0; j < 10; j++) {
+			for (int j = 0; j < t.length; j++) {
 				Rectangle TRec = t[j].bounds();
-				
-			if (BRec.intersects(TRec) && b[i].bulletFire) {
 
-				t[j].letDestroy = true;
-				
+				if (BRec.intersects(TRec) && b[i].bulletFire) {
+					t[j].letDestroy = true;
+					b[i].letdestroy = true;
+					hitcount++;
+				}
 			}
 		}
 	}
-}
+
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 
