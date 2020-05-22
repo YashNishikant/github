@@ -2,21 +2,21 @@ package battleGame;
 
 public class human {
 
-	int speedX = 0;
 	int speedY = 0;
-	int personX = 210;
+	int personX = 410;
 	int personY = 870;
 	int maxheight = 770;
 	int minheight = 870;
 
 	boolean jump = false;
 	boolean rise = true;
-
+	boolean insideSuit = false;
+	boolean nobattery = false;
+	
 	public human() {
 
-		speedX = 0;
 		speedY = 0;
-		personX = 210;
+		personX = 810;
 		personY = 870;
 		maxheight = 770;
 		minheight = 870;
@@ -29,10 +29,21 @@ public class human {
 			speedY = 0;
 			personY = 870;
 		}
-		personX += speedX;
 		personY += speedY;
 	}
 
+	public void shutdown() {
+	
+		if(insideSuit && nobattery) {
+		
+			if (personY >= 869) {
+				speedY = 0;
+			}
+			else {
+				speedY = 3;
+			}
+		}
+	}
 	public void jump() {
 
 		if (jump == true) {

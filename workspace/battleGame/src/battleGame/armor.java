@@ -11,8 +11,9 @@ public class armor {
 	boolean activatefire = true;
 	
 	int armorPosX = 10;
-	int armorPosY = 875;
-
+	int armorPosY = 877;
+	int armorspeed = 0;
+	
 	public armor() {
 
 		fire = false;
@@ -40,4 +41,10 @@ public class armor {
 			canfly = true;
 		}
 	}
+
+	public void move() {
+
+		armorPosX = armorPosX + armorspeed;
+		
+	}	
 }

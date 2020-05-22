@@ -8,13 +8,15 @@ public class target {
 	int targety;
 	int speed = (int)(Math.random()*4)+1;
 	boolean letDestroy = false;
-
+	boolean move = false;
+	
 	public target(int x, int y) {
 		targetx = x;
 		targety = y;
 	}
 
 	public void move() {
+		if(move)
 		targetx -= speed;
 	}
 
