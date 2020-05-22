@@ -1,5 +1,8 @@
 package battleGame;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class clouds {
 
 	int cloud1start = 50, cloud2start = -800, cloud3start = -1000;
@@ -31,4 +34,15 @@ public class clouds {
 
 	}
 
+	public void draw(Graphics g) {
+		
+		g.setColor(Color.white);
+		g.fillRect(cloud1start, 60, 200, 40);
+		g.setColor(Color.white);
+		g.fillRect(cloud2start, 120, 200, 40);
+		g.setColor(Color.white);
+		g.fillRect(cloud3start, 80, 200, 40);
+		
+	}
+	
 }

@@ -22,23 +22,19 @@ import java.awt.Rectangle;
 
 public class fight extends JPanel implements ActionListener, KeyListener {
 
-	int ammo = 100;
-	int powercount = 0;
-	int powerlength = 190;
-	int hitcount = 0;
-
 	boolean fire = false;
-	boolean create = false;
 
 	bullet[] b = new bullet[100];
 	target[] t = new target[100];
+	buildings[] towers = new buildings[50];
 
 	human user = new human();
 	clouds cloud = new clouds();
 	armor iron = new armor();
 	Timer time = new Timer(5, this);
-	map building = new map();
-	
+	controls gui = new controls();
+	battery power = new battery();
+
 	public fight() {
 
 		for (int i = 0; i < b.length; i++) {
@@ -47,10 +43,14 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		}
 
 		for (int i = 0; i < t.length; i++) {
-			target t1 = new target((int) (Math.random() * 4000) + 2900, (int) (Math.random() * 800) );
+			target t1 = new target((int) (Math.random() * 4000) + 2900, (int) (Math.random() * 800));
 			t[i] = t1;
 		}
 
+		for (int i = 0; i < towers.length; i++) {
+			buildings building = new buildings(((int) (Math.random() * 30000) + 1));
+			towers[i] = building;
+		}
 		time.start();
 		addKeyListener(this);
 		setFocusable(true);
@@ -61,69 +61,32 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		// Sky
-		g.setColor(Color.cyan);
-		g.fillRect(0, 0, 2000, 2000);
-		
-		building.draw(g);
-		
-		// Ground
-		g.setColor(Color.gray);
-		g.fillRect(0, 950, 2000, 2000);
 
-		// Clouds
-		g.setColor(Color.white);
-		g.fillRect(cloud.cloud1start, 60, 200, 40);
+		gui.naturaldrawings(g);
 
-		g.setColor(Color.white);
-		g.fillRect(cloud.cloud2start, 120, 200, 40);
+		for (int i = 0; i < towers.length; i++) {
+			towers[i].draw(g);
+			ImageIcon i5 = new ImageIcon("C:\\Users\\yash0\\Pictures\\buildingIMG.png");
+			i5.paintIcon(this, g, towers[i].movingsurrounding1, towers[i].bY);
+		}
 
-		g.setColor(Color.white);
-		g.fillRect(cloud.cloud3start, 80, 200, 40);
+		cloud.draw(g);
 
 		if (!iron.track) {
-			
+
+			user.draw(g);
 			iron.normal = true;
 			iron.fire = false;
-			
-			//CONTROL
-			g.setColor(Color.BLACK);
-			g.fillRect(6, 22, 22, 22);
-			g.setColor(Color.CYAN);
-			g.fillRect(8, 24, 18, 18);
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("default", Font.BOLD, 20));
-			g.drawString("V Equip Armor", 10, 40);
-			
-			g.setColor(Color.BLACK);
-			g.fillRect(6, 72, 22, 22);
-			g.setColor(Color.CYAN);
-			g.fillRect(8, 74, 18, 18);
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("default", Font.BOLD, 20));
-			g.drawString("W Jump", 7, 90);
 
-			// mechIMG
-			g.setColor(Color.black);
-			g.fillRect(user.personX, user.personY + 30, 20, 30);
-
-			// legs
-			g.setColor(Color.blue);
-			g.fillRect(user.personX + 12, user.personY + 61, 7, 19);
-			g.fillRect(user.personX + 1, user.personY + 61, 7, 19);
-
-			// arms
-			g.setColor(Color.blue);
-			g.fillRect(user.personX + 21, user.personY + 30, 7, 25);
-			g.fillRect(user.personX - 8, user.personY + 30, 7, 25);
+			gui.draw(g);
 
 			ImageIcon i2 = new ImageIcon("C:\\Users\\yash0\\Pictures\\imageface.png");
 			i2.paintIcon(this, g, user.personX, user.personY + 10);
 
-			if(powerlength <= 0) {
-			g.setColor(Color.RED);
-			g.setFont(new Font("default", Font.BOLD, 25));
-			g.drawString("!", iron.armorPosX, iron.armorPosY);	
+			if (power.powerlength <= 0) {
+				g.setColor(Color.RED);
+				g.setFont(new Font("default", Font.BOLD, 25));
+				g.drawString("!", iron.armorPosX, iron.armorPosY);
 			}
 		}
 
@@ -151,76 +114,23 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if (iron.track) {
-			
-			//CONTROLS
-			g.setColor(Color.BLACK);
-			g.fillRect(20, 182, 22, 22);
-			g.setColor(Color.CYAN);
-			g.fillRect(22, 184, 18, 18);
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("default", Font.BOLD, 20));
-			g.drawString("F Ready Blaster", 24, 200);
-			
-			g.setColor(Color.BLACK);
-			g.fillRect(20, 232, 22, 22);
-			g.setColor(Color.CYAN);
-			g.fillRect(22, 234, 18, 18);
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("default", Font.BOLD, 20));
-			g.drawString("R Fire Bullets", 24, 250);
-			
-			g.setColor(Color.BLACK);
-			g.fillRect(20, 282, 22, 22);
-			g.setColor(Color.CYAN);
-			g.fillRect(22, 284, 18, 18);
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("default", Font.BOLD, 20));
-			g.drawString("C Exit Suit", 24, 300);
-			
-			g.setColor(Color.BLACK);
-			g.fillRect(20, 332, 22, 22);
-			g.setColor(Color.CYAN);
-			g.fillRect(22, 334, 18, 18);
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("default", Font.BOLD, 20));
-			g.drawString("G Unready Blaster", 24, 350);
 
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("default", Font.BOLD, 25));
-			g.drawString("Ammo: " + ammo, 20, 50);
-			
-			g.setColor(Color.BLACK);
-			g.setFont(new Font("default", Font.BOLD, 25));
-			g.drawString("Target Hits: " + hitcount, 20, 100);
-			
-			// batteryDisplay
-			g.setColor(Color.black);
-			g.fillRect(1650, 20, 200, 30);
-			
-			// cap
-			g.setColor(Color.BLACK);
-			g.fillRect(1660, 25, 200, 20);
-			
-			if(powerlength <= 0) {
-		
+			gui.drawArmor(g);
+
+			if (power.powerlength <= 0) {
+
 				g.setColor(Color.RED);
 				g.setFont(new Font("default", Font.BOLD, 25));
-				g.drawString("!          !          !", 1660, 45);	
+				g.drawString("!          !          !", 1660, 45);
 				user.nobattery = true;
-			
+
 				g.setColor(Color.RED);
 				g.setFont(new Font("default", Font.BOLD, 25));
-				g.drawString("!", iron.armorPosX, iron.armorPosY);	
-				
-			}
-		
-			// actualbattery
-			g.setColor(Color.white);
+				g.drawString("!", iron.armorPosX, iron.armorPosY);
 
-			if (powerlength <= 38) {
-				g.setColor(Color.red);
 			}
-			g.fillRect(1655, 25, powerlength, 20);
+			power.draw(g);
+
 		}
 
 		// target
@@ -257,27 +167,28 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 
-	public void batterysystem() {
-
-		if (iron.track) {
-			powercount++;
+	public void batterydecrease() {
+		if (user.insideSuit && iron.armorPosY <= 869) {
+			power.isflyingforbattery = true;
+		} else {
+			power.isflyingforbattery = false;
 		}
-		if ((powercount % 100 == 0) && powerlength > 0 && iron.canfly) {
-			powerlength -= 1;
-		}
-
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		building.move();
+		for (int i = 0; i < towers.length; i++) {
+			towers[i].move();
+		}
+
 		iron.move();
+		batterydecrease();
 		targetmove();
 		contain();
 		user.move();
 		user.jump();
 		iron.tracking();
 		trackSystem();
-		batterysystem();
+		power.batteryfunction();
 		cloud.move();
 		Collision();
 		for (int i = 0; i < t.length; i++) {
@@ -295,17 +206,17 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		int i = e.getKeyCode();
 
 		if (i == KeyEvent.VK_P) {
-			
-			for(int j = 0; j < t.length; j++)
-			t[j].move = true;
+
+			for (int j = 0; j < t.length; j++)
+				t[j].move = true;
 		}
-		
+
 		if (i == KeyEvent.VK_R) {
 			if (iron.blast) {
-				if (ammo > 0) {
-					ammo--;
+				if (gui.ammo > 0) {
+					gui.ammo--;
 					fire = true;
-					b[ammo].bulletFire = true;
+					b[gui.ammo].bulletFire = true;
 				}
 			}
 		}
@@ -313,7 +224,7 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		if (i == KeyEvent.VK_F) {
 
 			if (iron.track) {
-				
+
 				iron.blast = true;
 				iron.normal = false;
 				iron.fire = false;
@@ -332,12 +243,14 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 
 			iron.armorPosX = user.personX;
 			iron.track = true;
+			power.track = true;
 			user.insideSuit = true;
 		}
 
 		if (i == KeyEvent.VK_C) {
 			if (user.personY >= 870) {
 				iron.track = false;
+				power.track = false;
 			}
 			user.insideSuit = false;
 		}
@@ -345,6 +258,10 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 
 			if (iron.track == true) {
 				user.speedY = -4;
+
+				if (user.personY >= 870) {
+					power.isflyingforbattery = false;
+				}
 			}
 
 			if (!iron.track) {
@@ -355,16 +272,20 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 
 		if (i == KeyEvent.VK_S && iron.track == true) {
 
-			user.speedY = 4;
+			user.speedY = 6;
 
 		}
 
 		if (i == KeyEvent.VK_A) {
 
 			if (iron.track == true)
-				building.speed = 4;
+				for (int j = 0; j < towers.length; j++) {
+					towers[j].speed = 6;
+				}
 			else {
-				building.speed = 2;
+				for (int j = 0; j < towers.length; j++) {
+					towers[j].speed = 2;
+				}
 				iron.armorspeed = 2;
 			}
 
@@ -373,9 +294,13 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		if (i == KeyEvent.VK_D) {
 
 			if (iron.track == true)
-				building.speed = -4;
+				for (int j = 0; j < towers.length; j++) {
+					towers[j].speed = -6;
+				}
 			else {
-				building.speed = -2;
+				for (int j = 0; j < towers.length; j++) {
+					towers[j].speed = -2;
+				}
 				iron.armorspeed = -2;
 			}
 
@@ -394,7 +319,10 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		}
 
 		iron.armorspeed = 0;
-		building.speed = 0;
+		for (int j = 0; j < towers.length; j++) {
+			towers[j].speed = 0;
+		}
+
 	}
 
 	public void Collision() {
@@ -407,7 +335,7 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 				if (BRec.intersects(TRec) && b[i].bulletFire) {
 					t[j].letDestroy = true;
 					b[i].letdestroy = true;
-					hitcount++;
+					gui.hitcount++;
 				}
 			}
 		}

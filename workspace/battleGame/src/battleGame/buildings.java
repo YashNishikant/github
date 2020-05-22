@@ -3,7 +3,7 @@ package battleGame;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class map {
+public class buildings {
 	
 	int movingsurrounding1 = 100;
 	int bY = 250;
@@ -11,16 +11,13 @@ public class map {
 	int bH = 700;
 	int speed = 0;
 	
-	public map() {	
-		movingsurrounding1 = 100;	
+	public buildings(int x) {	
+		movingsurrounding1 = x;
 	}
 	
 	public void draw(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(movingsurrounding1, bY, bW, bH);
-		
-		g.setColor(Color.RED);
-		g.fillRect(movingsurrounding1 + 900, bY+300, bW, bH);
 
 	}
 

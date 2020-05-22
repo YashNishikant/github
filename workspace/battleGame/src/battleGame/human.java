@@ -1,5 +1,8 @@
 package battleGame;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class human {
 
 	int speedY = 0;
@@ -70,4 +73,23 @@ public class human {
 
 		}
 	}
+
+	public void draw(Graphics g) {
+		
+		// User
+		g.setColor(Color.black);
+		g.fillRect(personX, personY + 30, 20, 30);
+
+		// legs
+		g.setColor(Color.blue);
+		g.fillRect(personX + 12, personY + 61, 7, 19);
+		g.fillRect(personX + 1, personY + 61, 7, 19);
+
+		// arms
+		g.setColor(Color.blue);
+		g.fillRect(personX + 21, personY + 30, 7, 25);
+		g.fillRect(personX - 8, personY + 30, 7, 25);	
+		
+	}
+	
 }
