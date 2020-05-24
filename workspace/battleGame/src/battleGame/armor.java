@@ -9,6 +9,8 @@ public class armor {
 	boolean blast = false;
 	boolean normal = true;
 	boolean activatefire = true;
+	boolean fireonground = false;
+	boolean confirmgroundfire = false;
 	
 	int armorPosX = 10;
 	int armorPosY = 877;
@@ -28,12 +30,19 @@ public class armor {
 
 	public void tracking() {
 		
-		if (armorPosY >= 870) {
+		if (armorPosY >= 870 && fireonground == false) {
 			fire = false;
-			normal = true;
-			blast = false;
 			activatefire = true;
 			canfly = false;
+			normal = true;
+			blast = false;
+			confirmgroundfire = false;
+		}
+		
+		if (armorPosY >= 870 && fireonground) {
+			
+			confirmgroundfire = true;
+			
 		}
 		
 		if (armorPosY < 865 && activatefire) {

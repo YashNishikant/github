@@ -77,7 +77,7 @@ public class human {
 	public void draw(Graphics g) {
 		
 		// User
-		g.setColor(Color.black);
+		g.setColor(Color.red);
 		g.fillRect(personX, personY + 30, 20, 30);
 
 		// legs
