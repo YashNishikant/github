@@ -1,23 +1,25 @@
 package battleGame;
 
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class NPC {
 
-	int npcY = 870;
-	int npcX = 600;
-	int npcHealth = 100;
-	int speed = 0;
-	int wHitBox = 38;
-	int hHitBox = 70;
-	int healthbarbox = npcX - 1;
-	int healthnpc = npcX;
-	int healthcount = 40;
-	int speedY = 0;
-	int speedaddition = 0;
-	int turnaround = 0;
+	int npcY;
+	int npcX;
+	int npcHealth;
+	int speed;
+	int wHitBox;
+	int hHitBox;
+	int healthbarbox;
+	int healthnpc;
+	int healthcount;
+	int speedY;
+	int speedaddition;
+	int turnaround;
+	int knockbackstr;
 	
 	boolean knockback = false;
 	boolean alive = true;
@@ -33,19 +35,19 @@ public class NPC {
 		healthbarbox = npcX - 1;
 		healthnpc = npcX;
 		healthcount = 40;
-
-		speedaddition = speed1;
-
+		speedaddition = 0;
+		knockbackstr = 6;
+			
 	}
 
 	public void npcBehavior() {
 
-		turnaround = (int)(Math.random() * 105) + 1;
+		turnaround = (int)(Math.random() * 405) + 1;
 		
 		if (knockback) {
-			npcX += 1;
-			healthbarbox += 1;
-			healthnpc += 1;
+			npcX += knockbackstr;
+			healthbarbox += knockbackstr;
+			healthnpc += knockbackstr;
 		}
 
 		if (healthcount == 0) {

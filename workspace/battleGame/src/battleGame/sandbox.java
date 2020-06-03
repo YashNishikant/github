@@ -1,17 +1,11 @@
-
 package battleGame;
-
-import java.awt.Color;
-import java.awt.Component;
+import java.awt.Color; 
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.event.ActionEvent;
@@ -21,17 +15,22 @@ import java.awt.event.KeyListener;
 import javax.swing.Timer;
 import java.awt.Rectangle;
 
-public class fight extends JPanel implements ActionListener, KeyListener {
+@SuppressWarnings("serial")
+public class sandbox extends JPanel implements ActionListener, KeyListener {
 
 	int buildspacing = 0;
 	int knockbackRNG = 0;
+	int landspacing = 0;
+	int blockoffset = 0;
 
 	boolean fire = false;
+	boolean allowmovement = true;
+	boolean gravity = false;
 
 	bullet[] b = new bullet[100];
 	target[] t = new target[100];
 	buildings[] towers = new buildings[50];
-	NPC[] player = new NPC[10];
+	NPC[] player = new NPC[50];
 
 	human user = new human();
 	clouds cloud = new clouds();
@@ -40,10 +39,10 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 	controls gui = new controls();
 	battery power = new battery();
 
-	public fight() {
+	public sandbox() {
 
 		for (int i = 0; i < player.length; i++) {
-			NPC player1 = new NPC((int)(Math.random()*10000) + 500, 1);
+			NPC player1 = new NPC((int) (Math.random() * 10000) + 500, 1);
 			player[i] = player1;
 		}
 
@@ -232,6 +231,7 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		user.move();
 		for (int i = 0; i < player.length; i++) {
 			player[i].npcBehavior();
 		}
@@ -247,7 +247,6 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 		batterydecrease();
 		targetmove();
 		contain();
-		user.move();
 		user.jump();
 		iron.tracking();
 		trackSystem();
@@ -317,8 +316,15 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 
 		if (i == KeyEvent.VK_V) {
 
-			iron.armorPosX = user.personX;
-			iron.track = true;
+			if (iron.armorPosX != user.personX - 12) {
+				if (iron.armorPosX >= user.personX) {
+					iron.armorspeed = -10;
+				}
+
+				if (iron.armorPosX <= user.personX) {
+					iron.armorspeed = 10;
+				}
+			}
 			power.track = true;
 			user.insideSuit = true;
 		}
@@ -327,13 +333,13 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 			if (user.personY >= 870) {
 				iron.track = false;
 				power.track = false;
+				iron.armorPosX = -5;
 			}
 			user.insideSuit = false;
 		}
 		if (i == KeyEvent.VK_W) {
-
 			if (iron.track == true && iron.confirmgroundfire == false && iron.fireonground == false) {
-				user.speedY = -8;
+				user.speedY = -5;
 
 				if (user.personY >= 870) {
 					power.isflyingforbattery = false;
@@ -348,20 +354,21 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 
 		if (i == KeyEvent.VK_S && iron.track == true && !(iron.armorPosY >= 870)) {
 
-			user.speedY = 6;
+			user.speedY = 5;
 
 		}
 
 		if (i == KeyEvent.VK_A) {
-
-			if (iron.track == true) {
+			// ground
+			if (iron.track == true && iron.armorPosY >= 870) {
 				for (int h = 0; h < player.length; h++) {
 					player[h].speed = 6;
 				}
 				for (int j = 0; j < towers.length; j++) {
 					towers[j].speed = 6;
 				}
-			} else {
+			}
+			if (!iron.track) {
 				for (int k = 0; k < player.length; k++) {
 					player[k].speed = 2;
 				}
@@ -370,19 +377,38 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 				}
 				iron.armorspeed = 2;
 			}
+			// air
+			if (iron.track == true && iron.armorPosY < 870) {
+				for (int h = 0; h < player.length; h++) {
+					player[h].speed = 12;
+				}
+				for (int j = 0; j < towers.length; j++) {
+					towers[j].speed = 12;
+				}
+
+			} else {
+				for (int k = 0; k < player.length; k++) {
+					player[k].speed = 4;
+				}
+				for (int j = 0; j < towers.length; j++) {
+					towers[j].speed = 4;
+				}
+				iron.armorspeed = 4;
+			}
 
 		}
 
 		if (i == KeyEvent.VK_D) {
-
-			if (iron.track == true) {
+			// ground
+			if (iron.track == true && iron.armorPosY >= 870) {
 				for (int j = 0; j < player.length; j++) {
 					player[j].speed = -6;
 				}
 				for (int j = 0; j < towers.length; j++) {
 					towers[j].speed = -6;
 				}
-			} else {
+			}
+			if (!iron.track) {
 				for (int k = 0; k < player.length; k++) {
 					player[k].speed = -2;
 				}
@@ -390,6 +416,23 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 					towers[j].speed = -2;
 				}
 				iron.armorspeed = -2;
+			}
+			// air
+			if (iron.track == true && iron.armorPosY < 870) {
+				for (int j = 0; j < player.length; j++) {
+					player[j].speed = -12;
+				}
+				for (int j = 0; j < towers.length; j++) {
+					towers[j].speed = -12;
+				}
+			} else {
+				for (int k = 0; k < player.length; k++) {
+					player[k].speed = -4;
+				}
+				for (int j = 0; j < towers.length; j++) {
+					towers[j].speed = -4;
+				}
+				iron.armorspeed = -4;
 			}
 
 		}
@@ -416,6 +459,9 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void Collision() {
+
+		Rectangle suit = iron.bounds();
+		Rectangle human = user.bounds();
 
 		for (int i = 0; i < b.length; i++) {
 			Rectangle BRec = b[i].bounds();
@@ -445,19 +491,23 @@ public class fight extends JPanel implements ActionListener, KeyListener {
 				}
 			}
 		}
+
+		if (suit.intersects(human)) {
+			iron.track = true;
+		}
 	}
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 
 		Container contentpane = frame.getContentPane();
-		fight BPanel = new fight();
+		sandbox sPanel = new sandbox();
 
 		Dimension preferredSize = new Dimension();
 		preferredSize.setSize(600, 600);
 
 		frame.setSize(preferredSize);
-		contentpane.add(BPanel);
+		contentpane.add(sPanel);
 		frame.setVisible(true);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

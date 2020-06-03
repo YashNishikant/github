@@ -1,5 +1,6 @@
 package battleGame;
 
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -8,7 +9,7 @@ public class bullet {
 	int bulletX = 0;
 	int bulletY = 0;
 	int yoffset = 30;
-	int bulletSpeed = 6;
+	int bulletSpeed = 15;
 	int width = 10;
 	int height = 5;
 	boolean bulletFire = false;

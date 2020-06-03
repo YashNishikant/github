@@ -1,5 +1,8 @@
 package battleGame;
 
+
+import java.awt.Rectangle;
+
 public class armor {
 
 	boolean fire = false;
@@ -12,9 +15,11 @@ public class armor {
 	boolean fireonground = false;
 	boolean confirmgroundfire = false;
 	
-	int armorPosX = 10;
-	int armorPosY = 877;
-	int armorspeed = 0;
+	int armorPosX;
+	int armorPosY;
+	int armorspeed;
+	int wHitBox;
+	int hHitBox;
 	
 	public armor() {
 
@@ -22,10 +27,14 @@ public class armor {
 		track = false;
 		canfly = false;
 		ignore = false;
-
+		
+		wHitBox = 38;
+		hHitBox = 75;
+		
 		armorPosX = 10;
 		armorPosY = 877;
 
+		armorspeed = 0;
 	}
 
 	public void tracking() {
@@ -56,4 +65,11 @@ public class armor {
 		armorPosX = armorPosX + armorspeed;
 		
 	}	
+	
+	public Rectangle bounds() {
+
+		return (new Rectangle(armorPosX+4, armorPosY, wHitBox, hHitBox));
+
+	}
+	
 }

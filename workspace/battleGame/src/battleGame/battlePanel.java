@@ -1,5 +1,6 @@
 package battleGame;
 
+
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
@@ -15,18 +16,18 @@ public class battlePanel {
 		JFrame frame = new JFrame(gc);
 
 		Container contentpane = frame.getContentPane();
-		fight BPanel = new fight();
+		sandbox sPanel = new sandbox();
 
 		Dimension preferredSize = new Dimension();
 		preferredSize.setSize(600, 600);
 
 		frame.setSize(preferredSize);
-		contentpane.add(BPanel);
+		contentpane.add(sPanel);
 
 		frame.setVisible(true);
 
 		while (true) {
-			BPanel.repaint();
+			sPanel.repaint();
 			TimeUnit.MILLISECONDS.sleep(1);
 		}
 	}

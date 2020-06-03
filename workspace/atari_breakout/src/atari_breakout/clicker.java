@@ -16,7 +16,7 @@ public class clicker {
 	
 	public Rectangle bounds() {
 		
-		return (new Rectangle(xclick+10, yclick+20, 1, 1));
+		return (new Rectangle(xclick+10, yclick+20, 30, 30));
 		
 	}
 	

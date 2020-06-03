@@ -108,8 +108,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		setFocusTraversalKeysEnabled(false);
 		addMouseMotionListener(this);
 		addMouseListener(this);
-		// CREATING BLOCKS
-		System.out.println("hi");
+
 
 		if (b)
 		{
@@ -231,7 +230,6 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 
 			g.setColor(Color.white);
 			g.fillRect(0, 0, 20000, 20000);
-
 			g.setColor(Color.black);
 			g.setFont(new Font("default", Font.BOLD, 75));
 			g.drawString("BREAKOUT", 700, 300);
@@ -250,16 +248,9 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 			ball.ballSpeedY = 0;
 
 			g.setColor(Color.black);
-			g.fillRect(c.xclick + 10, c.yclick + 20, 1, 1);
+			g.fillOval(c.xclick + 10, c.yclick + 20, 30, 30);
 
 			board.bringDown = false;
-
-			if (mouseMoveForButton) {
-
-				c.xclick = xmouse;
-				c.yclick = ymouse;
-
-			}
 		} else {
 
 			board.bringDown = true;
@@ -514,19 +505,11 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	@Override
 	public void mouseMoved(MouseEvent e) {
 
-		if (startscreen) {
-
 			xmouse = e.getX() - 10;
 			ymouse = e.getY() - 10;
-
-			mouseMoveForButton = true;
-
-		}
-
-		if (startscreen == false) {
-			mouseX = e.getX() - 10;
-			mouseMove = true;
-		}
+			
+			c.xclick = xmouse;
+			c.yclick = ymouse;
 
 		e.consume();
 

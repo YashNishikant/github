@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="speed" key="selection"/>
+		<item value="int s" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="int s"/>
+			<item value="Syst"/>
+			<item value="drawStr"/>
+			<item value="draw"/>
+			<item value="Syste"/>
+			<item value="gray"/>
+			<item value="random"/>
+			<item value="="/>
+			<item value="ammo"/>
+			<item value="user.inside"/>
+			<item value="personX"/>
+			<item value="user.sp"/>
+			<item value="user"/>
 			<item value="speedaddition"/>
 			<item value="speed"/>
-			<item value="player.speed"/>
-			<item value="blast = true"/>
-			<item value="blast"/>
-			<item value="Ground"/>
-			<item value="BlastOn"/>
-			<item value="871"/>
-			<item value="powercount"/>
-			<item value="powerc"/>
-			<item value="iron.canfly"/>
-			<item value="speedX"/>
-			<item value="draw"/>
-			<item value="package battleGame;"/>
-			<item value="ammo"/>
 		</list>
 		<list key="replacehistory">
 			<item value="speed"/>
