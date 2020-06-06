@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="int s" key="selection"/>
+		<item value="amount" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="int s"/>
-			<item value="Syst"/>
-			<item value="drawStr"/>
-			<item value="draw"/>
-			<item value="Syste"/>
-			<item value="gray"/>
-			<item value="random"/>
-			<item value="="/>
-			<item value="ammo"/>
-			<item value="user.inside"/>
-			<item value="personX"/>
-			<item value="user.sp"/>
-			<item value="user"/>
-			<item value="speedaddition"/>
-			<item value="speed"/>
+			<item value="amount"/>
+			<item value="user.speedY = 1"/>
+			<item value="user.speedY ="/>
+			<item value="user.speedY="/>
+			<item value="Mouse"/>
+			<item value="mouseMoved"/>
+			<item value="c.xclick"/>
+			<item value="xmouse"/>
+			<item value="mouseX"/>
+			<item value="cyan"/>
+			<item value="mouseMove"/>
+			<item value=",1 "/>
+			<item value=" 1 "/>
+			<item value="1 "/>
+			<item value="1 , 1"/>
 		</list>
 		<list key="replacehistory">
 			<item value="speed"/>

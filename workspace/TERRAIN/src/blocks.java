@@ -12,8 +12,19 @@ public class blocks {
 	int block_W_L;
 	int s = 0;
 	boolean place = false;
+	int bx1 = 0;
+	int by1 = 0;
+	
+	int bx = 0;
+	int by = 0;
 	
 	public blocks(int x, int y) {
+
+		bx1 = x + 300;
+		by1 = y + 300;
+		
+		bx = x;
+		by = y;
 		
 		blockX = x;
 		blockY = y;
@@ -33,7 +44,7 @@ public class blocks {
 	}
 	
 	public Rectangle bounds() {
-
+		
 		return (new Rectangle(blockX, blockY, block_W_L, block_W_L));
 
 	}

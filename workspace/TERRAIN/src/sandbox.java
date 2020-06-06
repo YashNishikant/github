@@ -22,12 +22,15 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	int blockoffset = 0;
 	int separate = 0;
 	int separatetree = 0;
-	int amount = 98;
+	int amount = 0;
 	int userX;
 	int userY;
 	boolean destroyIcon = false;
 	boolean start = true;
 	boolean onBlock = false;
+	boolean climb = false;
+	boolean canmoveLeft = true;
+	boolean canmoveRight = true;
 
 	terrainGen[] world = new terrainGen[500];
 	trees[] tree = new trees[500];
@@ -53,7 +56,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			separatetree += 500;
 		}
 		for (int i = 0; i < block.length; i++) {
-			blocks block1 = new blocks(userX, userY - 10080);
+			blocks block1 = new blocks(userX + 10000000, userY);
 			block[i] = block1;
 		}
 
@@ -149,6 +152,9 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int i = e.getKeyCode();
 
+		if (i == KeyEvent.VK_SPACE && destroyIcon) {
+
+		}
 		if (i == KeyEvent.VK_E && destroyIcon) {
 
 			if (amount < 32) {
@@ -162,7 +168,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			amount--;
 		}
 
-		if (i == KeyEvent.VK_A) {
+		if (i == KeyEvent.VK_A && canmoveLeft) {
 
 			for (int j = 0; j < world.length; j++) {
 				world[j].speed = 3;
@@ -175,7 +181,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 
-		if (i == KeyEvent.VK_D) {
+		if (i == KeyEvent.VK_D && canmoveRight) {
 
 			for (int j = 0; j < world.length; j++) {
 				world[j].speed = -3;
@@ -219,8 +225,54 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			Rectangle blocksREC = block[i].bounds();
 
 			if (blocksREC.intersects(human) && block[i].place) {
-				user.personY = block[amount].blockY - 42;
-				user.speedY = 0;
+				if (user.personY <= block[i].blockY) {
+					
+					user.personY = block[amount].blockY - 42;
+					user.speedY = 0;
+				}
+			}
+			
+			if (blocksREC.intersects(human) && block[i].place) {
+				if (user.personY > block[i].blockY) {
+					for (int j = 0; j < world.length; j++) {
+						world[j].speed = 0;
+					}
+					for (int j = 0; j < tree.length; j++) {
+						tree[j].speed = 0;
+					}
+					for (int j = 0; j < block.length; j++) {
+						block[j].blockspeed = 0;
+					}
+					
+					if(user.personX < block[i].blockX) {
+						
+						for (int j = 0; j < world.length; j++) {
+							world[j].chunkX += 5;
+						}
+						for (int j = 0; j < tree.length; j++) {
+							tree[j].xtree += 5;
+						}
+						for (int j = 0; j < block.length; j++) {
+							block[j].blockX += 5;
+						}
+						
+					}
+					
+					if(user.personX > block[i].blockX) {
+						
+						for (int j = 0; j < world.length; j++) {
+							world[j].chunkX -= 5;
+						}
+						for (int j = 0; j < tree.length; j++) {
+							tree[j].xtree -= 5;
+						}
+						for (int j = 0; j < block.length; j++) {
+							block[j].blockX -= 5;
+						}
+						
+					}
+					
+				}
 			}
 
 			for (int j = 0; j < world.length; j++) {

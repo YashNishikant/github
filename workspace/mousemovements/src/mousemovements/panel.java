@@ -1,12 +1,13 @@
-package secondworld;
+package mousemovements;
 
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
-import javax.swing.JFrame;
 import java.util.concurrent.TimeUnit;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class battlePanel {
+public class panel {
 
 	static GraphicsConfiguration gc;
 
@@ -15,19 +16,19 @@ public class battlePanel {
 		JFrame frame = new JFrame(gc);
 
 		Container contentpane = frame.getContentPane();
-		sandboxEXPERIMENTAL sPanel = new sandboxEXPERIMENTAL ();
+		code Panel = new code();
 
 		Dimension preferredSize = new Dimension();
 		preferredSize.setSize(600, 600);
 
 		frame.setSize(preferredSize);
-		contentpane.add(sPanel);
-
+		contentpane.add(Panel);
 		frame.setVisible(true);
 
 		while (true) {
-			sPanel.repaint();
+			Panel.repaint();
 			TimeUnit.MILLISECONDS.sleep(1);
 		}
 	}
+
 }

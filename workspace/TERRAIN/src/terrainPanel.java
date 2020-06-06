@@ -7,7 +7,7 @@ import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
 import java.util.concurrent.TimeUnit;
 
-public class battlePanel {
+public class terrainPanel {
 
 	static GraphicsConfiguration gc;
 
@@ -23,7 +23,6 @@ public class battlePanel {
 
 		frame.setSize(preferredSize);
 		contentpane.add(sPanel);
-
 		frame.setVisible(true);
 
 		while (true) {

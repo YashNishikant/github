@@ -5,12 +5,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.MouseInfo;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -62,25 +58,6 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	boolean blockIsHit = false;
 
 	boolean collisionlock = true;
-	boolean collisionlock2 = true;
-	boolean collisionlock3 = true;
-	boolean collisionlock4 = true;
-	boolean collisionlock5 = true;
-	boolean collisionlock6 = true;
-
-	boolean collisionlock7 = true;
-	boolean collisionlock8 = true;
-	boolean collisionlock9 = true;
-	boolean collisionlock10 = true;
-	boolean collisionlock11 = true;
-	boolean collisionlock12 = true;
-
-	boolean collisionlock13 = true;
-	boolean collisionlock14 = true;
-	boolean collisionlock15 = true;
-	boolean collisionlock16 = true;
-	boolean collisionlock17 = true;
-	boolean collisionlock18 = true;
 
 	boolean right = true;
 	boolean left = true;
@@ -96,11 +73,7 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 	block blockarrayX[] = new block[8];
 	block blockarrayY[] = new block[8];
 	// Array
-
 	int location = 0;
-	
-
-	int locationSub = 0;
 
 	public breakoutGAME(boolean b) {
 		time.start();
@@ -108,7 +81,6 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		setFocusTraversalKeysEnabled(false);
 		addMouseMotionListener(this);
 		addMouseListener(this);
-
 
 		if (b)
 		{
@@ -285,11 +257,8 @@ public class breakoutGAME extends JPanel implements ActionListener, MouseMotionL
 		paddle.move();
 		pL.moveL();
 		pR.moveR();
-
 		ball.move();
-		
 		Collision();
-
 		repaint();
 
 	}

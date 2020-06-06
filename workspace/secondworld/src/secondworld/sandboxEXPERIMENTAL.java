@@ -14,16 +14,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+
 import javax.swing.Timer;
 import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
 
-public class sandbox extends JPanel implements ActionListener, KeyListener {
+public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyListener, MouseMotionListener, MouseListener {
 
 	int buildspacing = 0;
 	int knockbackRNG = 0;
+	int mouseX;
+	int xmouse;
+	int ymouse;
 	boolean fire = false;
+	boolean startScreen = true;
+	boolean changecolor = false;
+	boolean collide = false;
 
 	bullet[] b = new bullet[100];
 	target[] t = new target[100];
@@ -32,8 +42,10 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	armor iron = new armor();
 	Timer time = new Timer(5, this);
 	controls gui = new controls();
+	clicker c = new clicker();
+	playbutton p = new playbutton();
 
-	public sandbox() {
+	public sandboxEXPERIMENTAL() {
 		for (int i = 0; i < b.length; i++) {
 			bullet b1 = new bullet(iron.armorPosX + 19, iron.armorPosY - 5);
 			b[i] = b1;
@@ -48,6 +60,8 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
+		addMouseMotionListener(this);
+		addMouseListener(this);
 
 	}
 
@@ -56,7 +70,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		super.paintComponent(g);
 
 		gui.naturaldrawings(g);
-		
+
 		if (!iron.track) {
 
 			user.draw(g);
@@ -67,11 +81,10 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			ImageIcon i2 = new ImageIcon("C:\\Users\\yash0\\Pictures\\imageface.png");
 			i2.paintIcon(this, g, user.personX, user.personY + 10);
 
-		}
-		else {
-			
-			gui.drawArmor(g);	
-			
+		} else {
+
+			gui.drawArmor(g);
+
 		}
 		// bullet
 		g.setColor(Color.BLACK);
@@ -109,6 +122,28 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			g.fillRect(t[i].targetx, t[i].targety, 30, 30);
 		}
 
+		if (startScreen == true) {
+
+			g.setColor(Color.white);
+			g.fillRect(0, 0, 20000, 20000);
+
+			g.setColor(Color.black);
+			g.setFont(new Font("default", Font.BOLD, 75));
+			g.drawString("IRON MAN", 700, 300);
+			g.setColor(Color.black);
+			g.setFont(new Font("default", Font.BOLD, 75));
+			g.drawString("SIMULATOR", 670, 400);
+
+			 g.setColor(Color.green);
+			if (changecolor) {
+			g.setColor(Color.red);
+			}
+			g.fillOval(p.x, p.y, 80, 80);
+			g.setColor(Color.black);
+			g.setFont(new Font("default", Font.BOLD, 20));
+			g.drawString("Play", 900, 600);
+			g.fillRect(c.xclick, c.yclick, 10, 10);
+		}
 	}
 
 	public void targetmove() {
@@ -144,7 +179,6 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		user.jump();
 		iron.tracking();
 		trackSystem();
-
 		Collision();
 		for (int i = 0; i < t.length; i++) {
 			t[i].destroy();
@@ -272,6 +306,14 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 
 		Rectangle suit = iron.bounds();
 		Rectangle human = user.bounds();
+		Rectangle button = p.bounds();
+		Rectangle mouseREC = c.bounds();
+
+		if (button.intersects(mouseREC)) {
+			collide = true;
+		} else {
+			collide = false;
+		}
 
 		for (int i = 0; i < b.length; i++) {
 			Rectangle BRec = b[i].bounds();
@@ -298,7 +340,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		JFrame frame = new JFrame();
 
 		Container contentpane = frame.getContentPane();
-		sandbox sPanel = new sandbox();
+		sandboxEXPERIMENTAL sPanel = new sandboxEXPERIMENTAL();
 
 		Dimension preferredSize = new Dimension();
 		preferredSize.setSize(600, 600);
@@ -309,4 +351,66 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		xmouse = e.getX() - 10;
+		ymouse = e.getY() - 10;
+
+		e.consume();
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+
+		xmouse = e.getX() - 10;
+		ymouse = e.getY() - 10;
+
+		c.xclick = xmouse;
+		c.yclick = ymouse;
+
+		e.consume();
+
+		if (collide) {
+			changecolor = true;
+		}
+		else {
+			changecolor = false;
+			
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		if(changecolor) {
+			startScreen = false;
+		}
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
