@@ -15,7 +15,7 @@ public class battlePanel {
 		JFrame frame = new JFrame(gc);
 
 		Container contentpane = frame.getContentPane();
-		sandboxEXPERIMENTAL sPanel = new sandboxEXPERIMENTAL ();
+		sandboxEXPERIMENTAL sPanel = new sandboxEXPERIMENTAL();
 
 		Dimension preferredSize = new Dimension();
 		preferredSize.setSize(600, 600);
@@ -24,10 +24,13 @@ public class battlePanel {
 		contentpane.add(sPanel);
 
 		frame.setVisible(true);
-
-		while (true) {
-			sPanel.repaint();
-			TimeUnit.MILLISECONDS.sleep(1);
-		}
+		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		/*
+		 * while (true) { 
+		 *	sPanel.repaint(); 
+		 *	TimeUnit.MILLISECONDS.sleep(1); 
+		 * }
+		 */
 	}
 }

@@ -336,7 +336,8 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 
 	}
 
-	public static void main(String[] args) {
+	/*
+	 * public static void main(String[] args) {	
 		JFrame frame = new JFrame();
 
 		Container contentpane = frame.getContentPane();
@@ -351,7 +352,7 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
+	*/
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		xmouse = e.getX() - 10;

@@ -23,7 +23,7 @@ public class battery {
 		if (track) {
 			powercount++;
 		}
-		if ((powercount % 100 == 0) && powerlength > 0 && isflyingforbattery) {
+		if ((powercount % 10 == 0) && powerlength > 0 && isflyingforbattery) {
 			powerlength -= 1;
 		}
 		
