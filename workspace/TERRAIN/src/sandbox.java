@@ -25,12 +25,14 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	int amount = 0;
 	int userX;
 	int userY;
+	int blockIndex = 0;
 	boolean destroyIcon = false;
 	boolean start = true;
 	boolean onBlock = false;
 	boolean climb = false;
 	boolean canmoveLeft = true;
 	boolean canmoveRight = true;
+	boolean breakblock = false;
 
 	terrainGen[] world = new terrainGen[500];
 	trees[] tree = new trees[500];
@@ -43,7 +45,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	public sandbox() {
 
 		userX = user.personX;
-		userY = user.personY;
+		userY = user.personY - 10000;
 
 		for (int i = 0; i < world.length; i++) {
 			terrainGen world1 = new terrainGen(((int) (Math.random() * 50) + 800), separate, -400);
@@ -56,7 +58,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			separatetree += 500;
 		}
 		for (int i = 0; i < block.length; i++) {
-			blocks block1 = new blocks(userX + 10000000, userY);
+			blocks block1 = new blocks(userX, userY);
 			block[i] = block1;
 		}
 
@@ -140,6 +142,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		for (int j = 0; j < block.length; j++) {
 			block[j].move();
 		}
+		block[blockIndex].destroy();
 		blockUpdate();
 		setminmax();
 		// user.jump();
@@ -152,9 +155,6 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int i = e.getKeyCode();
 
-		if (i == KeyEvent.VK_SPACE && destroyIcon) {
-
-		}
 		if (i == KeyEvent.VK_E && destroyIcon) {
 
 			if (amount < 32) {
@@ -162,7 +162,10 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 				amount += 4;
 			}
 		}
+		if (i == KeyEvent.VK_SPACE && breakblock) {
 
+				block[blockIndex].blockbreak = true;
+		}
 		if (i == KeyEvent.VK_W && amount > 0) {
 			block[amount].place = true;
 			amount--;
@@ -201,7 +204,9 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-
+		
+		//block[blockIndex].blockbreak = false;
+		
 		for (int j = 0; j < world.length; j++) {
 			world[j].speed = 0;
 		}
@@ -220,18 +225,23 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		Rectangle human = user.bounds();
 
 		user.speedY = 3;
+		breakblock = false;
 		for (int i = 0; i < block.length; i++) {
 
 			Rectangle blocksREC = block[i].bounds();
 
+			if (blocksREC.intersects(human)) {
+				blockIndex = i;
+				breakblock = true;
+			}
 			if (blocksREC.intersects(human) && block[i].place) {
 				if (user.personY <= block[i].blockY) {
-					
+
 					user.personY = block[amount].blockY - 42;
 					user.speedY = 0;
 				}
 			}
-			
+
 			if (blocksREC.intersects(human) && block[i].place) {
 				if (user.personY > block[i].blockY) {
 					for (int j = 0; j < world.length; j++) {
@@ -243,9 +253,9 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 					for (int j = 0; j < block.length; j++) {
 						block[j].blockspeed = 0;
 					}
-					
-					if(user.personX < block[i].blockX) {
-						
+
+					if (user.personX < block[i].blockX) {
+
 						for (int j = 0; j < world.length; j++) {
 							world[j].chunkX += 5;
 						}
@@ -255,11 +265,11 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 						for (int j = 0; j < block.length; j++) {
 							block[j].blockX += 5;
 						}
-						
+
 					}
-					
-					if(user.personX > block[i].blockX) {
-						
+
+					if (user.personX > block[i].blockX) {
+
 						for (int j = 0; j < world.length; j++) {
 							world[j].chunkX -= 5;
 						}
@@ -269,9 +279,9 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 						for (int j = 0; j < block.length; j++) {
 							block[j].blockX -= 5;
 						}
-						
+
 					}
-					
+
 				}
 			}
 
@@ -295,22 +305,4 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 	}
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-
-		Container contentpane = frame.getContentPane();
-		sandbox sPanel = new sandbox();
-
-		Dimension preferredSize = new Dimension();
-		preferredSize.setSize(600, 600);
-
-		frame.setSize(preferredSize);
-		contentpane.add(sPanel);
-		frame.setVisible(true);
-
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	}
-
 }

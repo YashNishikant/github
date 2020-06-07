@@ -104,7 +104,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			gui.draw(g);
 
 			ImageIcon i2 = new ImageIcon("C:\\Users\\yash0\\Pictures\\imageface.png");
-			i2.paintIcon(this, g, user.personX, user.personY + 10);
+			i2.paintIcon(this, g, user.personX, (int) (user.personY + 10));
 
 			if (power.powerlength <= 0) {
 				g.setColor(Color.RED);
@@ -190,9 +190,15 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 
 	public void trackSystem() {
 
+		if(user.personY >= 870) {
+			
+			user.speedY = 0;
+			
+		}
+		
 		if (iron.track) {
 			iron.armorPosX = user.personX - 12;
-			iron.armorPosY = user.personY + 8;
+			iron.armorPosY = (int) (user.personY + 8);
 		}
 	}
 
@@ -340,13 +346,14 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		if (i == KeyEvent.VK_W) {
 			if (iron.track == true && iron.confirmgroundfire == false && iron.fireonground == false) {
 				user.speedY = -5;
-
+				user.jump = false;
+				
 				if (user.personY >= 870) {
 					power.isflyingforbattery = false;
 				}
 			}
 
-			if (!iron.track) {
+			if (!iron.track && user.personY >= 870) {
 				user.jump = true;
 
 			}

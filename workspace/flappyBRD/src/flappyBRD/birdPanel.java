@@ -1,10 +1,13 @@
-import java.awt.Container;
+package flappyBRD;
+
+import java.awt.Container; 
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import java.util.concurrent.TimeUnit;
 
-public class terrainPanel {
+public class birdPanel {
 
 	static GraphicsConfiguration gc;
 
@@ -13,14 +16,17 @@ public class terrainPanel {
 		JFrame frame = new JFrame(gc);
 
 		Container contentpane = frame.getContentPane();
-		sandbox sPanel = new sandbox();
+		bird sPanel = new bird();
 
 		Dimension preferredSize = new Dimension();
 		preferredSize.setSize(600, 600);
 
 		frame.setSize(preferredSize);
 		contentpane.add(sPanel);
+
 		frame.setVisible(true);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	}
 }

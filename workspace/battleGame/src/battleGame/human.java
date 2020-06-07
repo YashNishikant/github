@@ -7,10 +7,10 @@ import java.awt.Rectangle;
 
 public class human {
 
-	int speedY;
+	double speedY;
 	int personX;
-	int personY;
-	int maxheight;
+	double personY;
+	double maxheight;
 	int minheight;
 	int hHitBox;
 	int wHitBox;
@@ -21,7 +21,9 @@ public class human {
 	boolean nobattery = false;
 	boolean onground = false;
 	boolean hitgrass = false;
-
+	boolean onetimeJump = true;
+	boolean jumping = false;
+	
 	public human() {
 
 		speedY = 0;
@@ -58,28 +60,31 @@ public class human {
 
 	public void jump() {
 
-		if (jump == true) {
+		if (!jump) {
+			personY += speedY;
 
-			if (personY >= maxheight && rise == true) {
+			jumping = false;
+			
+			if (speedY < 2) {
+				speedY += 0.1;
+			}
+		}
+
+		if (jump) {
+			if (onetimeJump) {
 				speedY = -2;
+				onetimeJump = false;
+				jumping = true;
 			}
 
-			if (personY == maxheight) {
-				rise = false;
+			personY += speedY;
+			if (speedY < 0) {
+				speedY += 0.05;
+			} else {
+				jump = false;
+				onetimeJump = true;
+				jumping = false;
 			}
-
-			if (personY >= maxheight && rise == false) {
-				rise = false;
-				speedY = 2;
-
-				if (personY >= minheight) {
-					rise = true;
-					jump = false;
-
-				}
-
-			}
-
 		}
 	}
 
@@ -87,23 +92,23 @@ public class human {
 
 		// User
 		g.setColor(Color.red);
-		g.fillRect(personX, personY + 30, 20, 30);
+		g.fillRect(personX, (int) (personY + 30), 20, 30);
 
 		// legs
 		g.setColor(Color.blue);
-		g.fillRect(personX + 12, personY + 61, 7, 19);
-		g.fillRect(personX + 1, personY + 61, 7, 19);
+		g.fillRect(personX + 12, (int) (personY + 61), 7, 19);
+		g.fillRect(personX + 1, (int) (personY + 61), 7, 19);
 
 		// arms
 		g.setColor(Color.blue);
-		g.fillRect(personX + 21, personY + 30, 7, 25);
-		g.fillRect(personX - 8, personY + 30, 7, 25);
+		g.fillRect(personX + 21, (int) (personY + 30), 7, 25);
+		g.fillRect(personX - 8, (int) (personY + 30), 7, 25);
 
 	}
 
 	public Rectangle bounds() {
 
-		return (new Rectangle(personX - 10, personY + 10, wHitBox, hHitBox));
+		return (new Rectangle((int)(personX - 10), (int)(personY + 10), wHitBox, hHitBox));
 
 	}
 

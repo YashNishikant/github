@@ -26,11 +26,6 @@ public class battlePanel {
 		frame.setVisible(true);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		/*
-		 * while (true) { 
-		 *	sPanel.repaint(); 
-		 *	TimeUnit.MILLISECONDS.sleep(1); 
-		 * }
-		 */
+
 	}
 }

@@ -22,7 +22,7 @@ public class terrainGen {
 	public void naturaldrawings(Graphics g) {
 		// Ground
 		g.setColor(Color.green);
-		g.fillRect(chunkX + separate, chunkY, 400, 1000);	
+		g.fillRect(chunkX + separate + 15, chunkY, 400, 1000);	
 	}
 	
 	public void move() {
