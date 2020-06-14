@@ -26,7 +26,8 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	boolean fire = false;
 	boolean allowmovement = true;
 	boolean gravity = false;
-
+	boolean allowJ = true;
+	
 	bullet[] b = new bullet[100];
 	target[] t = new target[100];
 	buildings[] towers = new buildings[50];
@@ -253,6 +254,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		batterydecrease();
 		targetmove();
 		contain();
+		if(allowJ)
 		user.jump();
 		iron.tracking();
 		trackSystem();
@@ -340,27 +342,26 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 				iron.track = false;
 				power.track = false;
 				iron.armorPosX = -5;
+				allowJ = true;
 			}
 			user.insideSuit = false;
 		}
 		if (i == KeyEvent.VK_W) {
 			if (iron.track == true && iron.confirmgroundfire == false && iron.fireonground == false) {
 				user.speedY = -5;
-				user.jump = false;
+				allowJ = false;
 				
 				if (user.personY >= 870) {
 					power.isflyingforbattery = false;
 				}
 			}
-
 			if (!iron.track && user.personY >= 870) {
 				user.jump = true;
-
 			}
 		}
 
 		if (i == KeyEvent.VK_S && iron.track == true && !(iron.armorPosY >= 870)) {
-
+			allowJ = false;
 			user.speedY = 5;
 
 		}

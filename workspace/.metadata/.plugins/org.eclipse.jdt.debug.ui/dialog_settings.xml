@@ -10,12 +10,12 @@
 	</section>
 	<section name="org.eclipse.jdt.debug.ui.MAIN_METHOD_SELECTION_DIALOG">
 		<item value="true" key="ShowStatusLine"/>
-		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=BallBounce/src&amp;lt;{BounceBall.java[BounceBall&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=doWhatYouWant/src&amp;lt;doWhatYouWant{myWorld.java[myWorld&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=atari_breakout/src&amp;lt;atari_breakout{breakoutGAME.java[breakoutGAME&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=alienz/src&amp;lt;alienz{spacePanel.java[spacePanel&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=atari_breakout/src&amp;lt;atari_breakout{BreakoutPANEL.java[BreakoutPANEL&lt;/infoNode&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;" key="History"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=BallBounce/src&amp;lt;{BounceBall.java[BounceBall&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=doWhatYouWant/src&amp;lt;doWhatYouWant{myWorld.java[myWorld&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=atari_breakout/src&amp;lt;atari_breakout{breakoutGAME.java[breakoutGAME&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=alienz/src&amp;lt;alienz{spacePanel.java[spacePanel&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=atari_breakout/src&amp;lt;atari_breakout{BreakoutPANEL.java[BreakoutPANEL&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=test/src&amp;lt;test{CaesarCipher2.java[SwapAndShift&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=my-gdx-game-desktop/C:\/Users\/yash0.YASH-DESKTOP\/.gradle\/caches\/modules-2\/files-2.1\/com.badlogicgames.gdx\/gdx-box2d\/1.9.10\/d68a7a3484d47529a8d23cd467579eb098b38a9e\/gdx-box2d-1.9.10.jar&amp;lt;com.badlogic.gdx.physics.box2d.utils(Box2DBuild.class[Box2DBuild&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=my-gdx-game-desktop/src&amp;lt;com.mygdx.game.desktop{DesktopLauncher.java[DesktopLauncher&lt;/infoNode&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;" key="History"/>
 		<section name="DialogBoundsSettings">
 			<item value="600" key="DIALOG_WIDTH"/>
 			<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 			<item value="500" key="DIALOG_HEIGHT"/>
-			<item value="668" key="DIALOG_X_ORIGIN"/>
+			<item value="328" key="DIALOG_X_ORIGIN"/>
 			<item value="200" key="DIALOG_Y_ORIGIN"/>
 		</section>
 	</section>

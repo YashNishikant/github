@@ -189,7 +189,6 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 		repaint();
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e) {
 		int i = e.getKeyCode();
 
@@ -288,11 +287,9 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 		}
 	}
 
-	@Override
 	public void keyTyped(KeyEvent e) {
 	}
 
-	@Override
 	public void keyReleased(KeyEvent e) {
 
 		if (iron.ignore == false) {
@@ -353,7 +350,6 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	*/
-	@Override
 	public void mouseDragged(MouseEvent e) {
 		xmouse = e.getX() - 10;
 		ymouse = e.getY() - 10;
@@ -362,7 +358,6 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 
 	}
 
-	@Override
 	public void mouseMoved(MouseEvent e) {
 
 		xmouse = e.getX() - 10;
@@ -382,7 +377,6 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 		}
 	}
 
-	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if(changecolor) {
 			startScreen = false;
@@ -390,27 +384,19 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -4,9 +4,9 @@ import java.awt.Rectangle;
 
 public class human {
 
-	int speedY;
+	double speedY;
 	int personX;
-	int personY;
+	double personY;
 	int maxheight;
 	int minheight;
 	int hHitBox;
@@ -14,12 +14,9 @@ public class human {
 
 	boolean jump = false;
 	boolean rise = true;
-	boolean insideSuit = false;
-	boolean nobattery = false;
-	boolean onground = false;
-	boolean hitgrass = false;
 	boolean fall = false;
-	boolean alreadyjumped = false;
+	boolean jumping;
+	boolean onetimeJump;
 	
 	public human() {
 
@@ -30,7 +27,6 @@ public class human {
 		minheight = 870;
 		hHitBox = 70;
 		wHitBox = 38;
-		hitgrass = false;
 	}
 
 	public void move() {
@@ -40,21 +36,30 @@ public class human {
 
 	public void jump() {
 		
-		if (jump == true) {
-			if (personY >= maxheight-10 && rise == true) {
-				System.out.println("1");
+		if (!jump) {
+			personY += speedY;
+
+			jumping = false;
+			
+			if (speedY < 4) {
+				speedY += 0.02;
+			}
+		}
+
+		if (jump) {
+			
+			if (onetimeJump) {
 				speedY = -3;
-				if (personY <= maxheight) {
-					rise = false;
-					fall = true;
-					speedY = 3;
-					alreadyjumped = true;
-				}
-				
-				if(speedY == 0) {
-					jump = false;
-					alreadyjumped = false;
-				}
+				onetimeJump = false;
+				jumping = true;
+			}
+			personY += speedY;
+			if (speedY < 3) {//terminal vel
+				speedY += 0.02;
+			} else {
+				jump = false;
+				onetimeJump = true;
+				jumping = false;
 			}
 		}
 	}
@@ -62,23 +67,23 @@ public class human {
 
 		// User
 		g.setColor(Color.red);
-		g.fillRect(personX, personY + 30, 20, 30);
+		g.fillRect(personX, (int)(personY + 30), 20, 30);
 
 		// legs
 		g.setColor(Color.DARK_GRAY);
-		g.fillRect(personX + 12, personY + 61, 7, 19);
-		g.fillRect(personX + 1, personY + 61, 7, 19);
+		g.fillRect(personX + 12, (int)(personY + 61), 7, 19);
+		g.fillRect(personX + 1, (int)(personY + 61), 7, 19);
 
 		// arms
 		g.setColor(Color.GRAY);
-		g.fillRect(personX + 21, personY + 30, 7, 25);
-		g.fillRect(personX - 8, personY + 30, 7, 25);
+		g.fillRect(personX + 21, (int)(personY + 30), 7, 25);
+		g.fillRect(personX - 8, (int)(personY + 30), 7, 25);
 
 	}
 
 	public Rectangle bounds() {
 
-		return (new Rectangle(personX - 10, personY + 10, wHitBox, hHitBox));
+		return (new Rectangle(personX - 10, (int)(personY + 10), wHitBox, hHitBox));
 
 	}
 
