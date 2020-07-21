@@ -1,13 +1,10 @@
 
 package secondworld;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.Color; 
 import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.event.ActionEvent;
@@ -21,12 +18,8 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.Timer;
 import java.awt.Rectangle;
 
-@SuppressWarnings("serial")
-
 public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyListener, MouseMotionListener, MouseListener {
 
-	int buildspacing = 0;
-	int knockbackRNG = 0;
 	int mouseX;
 	int xmouse;
 	int ymouse;
@@ -134,9 +127,9 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 			g.setFont(new Font("default", Font.BOLD, 75));
 			g.drawString("SIMULATOR", 670, 400);
 
-			 g.setColor(Color.green);
+			g.setColor(Color.green);
 			if (changecolor) {
-			g.setColor(Color.red);
+				g.setColor(Color.red);
 			}
 			g.fillOval(p.x, p.y, 80, 80);
 			g.setColor(Color.black);
@@ -166,6 +159,7 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 	public void trackSystem() {
 
 		if (iron.track) {
+			user.jump = false;
 			iron.armorPosX = user.personX - 12;
 			iron.armorPosY = user.personY + 8;
 		}
@@ -250,7 +244,6 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 					iron.armorspeed = 10;
 				}
 			}
-			user.insideSuit = true;
 		}
 
 		if (i == KeyEvent.VK_C) {
@@ -266,24 +259,30 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 				user.speedY = -5;
 			}
 
-			if (!iron.track) {
+			if (!iron.track && user.jump == false) {
 				user.jump = true;
-
+				user.rise = true;
 			}
 		}
 
 		if (i == KeyEvent.VK_S && iron.track == true && !(iron.armorPosY >= 870)) {
-
 			user.speedY = 5;
-
 		}
 
 		if (i == KeyEvent.VK_A) {
-			user.speedX = -5;
+			if (iron.track) {
+				user.speedX = -5;
+			} else {
+				user.speedX = -3;
+			}
 		}
 
 		if (i == KeyEvent.VK_D) {
-			user.speedX = 5;
+			if (iron.track) {
+				user.speedX = 5;
+			} else {
+				user.speedX = 3;
+			}
 		}
 	}
 
@@ -329,27 +328,11 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 
 		if (suit.intersects(human)) {
 			iron.track = true;
+			user.insideSuit = true;
 		}
 
 	}
 
-	/*
-	 * public static void main(String[] args) {	
-		JFrame frame = new JFrame();
-
-		Container contentpane = frame.getContentPane();
-		sandboxEXPERIMENTAL sPanel = new sandboxEXPERIMENTAL();
-
-		Dimension preferredSize = new Dimension();
-		preferredSize.setSize(600, 600);
-
-		frame.setSize(preferredSize);
-		contentpane.add(sPanel);
-		frame.setVisible(true);
-
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-	*/
 	public void mouseDragged(MouseEvent e) {
 		xmouse = e.getX() - 10;
 		ymouse = e.getY() - 10;
@@ -366,19 +349,16 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 		c.xclick = xmouse;
 		c.yclick = ymouse;
 
-		e.consume();
-
 		if (collide) {
 			changecolor = true;
-		}
-		else {
+		} else {
 			changecolor = false;
-			
+
 		}
 	}
 
 	public void mouseClicked(MouseEvent arg0) {
-		if(changecolor) {
+		if (changecolor) {
 			startScreen = false;
 		}
 

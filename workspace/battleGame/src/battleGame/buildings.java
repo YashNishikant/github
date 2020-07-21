@@ -3,6 +3,7 @@ package battleGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class buildings {
 	
@@ -12,6 +13,8 @@ public class buildings {
 	int bH = 700;
 	int speed = 0;
 	
+	int clear;
+	
 	public buildings(int x) {	
 		movingsurrounding1 = x;
 	}
@@ -19,12 +22,10 @@ public class buildings {
 	public void draw(Graphics g) {
 		g.setColor(Color.RED);
 		g.fillRect(movingsurrounding1, bY, bW, bH);
-
 	}
 
 	public void move() {
 		movingsurrounding1 = movingsurrounding1 + speed;
-		
 	}
 	
 }

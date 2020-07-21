@@ -14,6 +14,12 @@ public class armor {
 	boolean activatefire = true;
 	boolean fireonground = false;
 	boolean confirmgroundfire = false;
+	boolean flyIMG = false;
+	boolean turbo = false;
+	boolean ableToTurbo = false;
+	boolean flyIMG_LEFT = false;
+	boolean turbo_LEFT = false;
+	boolean ableToTurbo_LEFT = false;
 	
 	int armorPosX;
 	int armorPosY;
@@ -35,6 +41,10 @@ public class armor {
 		armorPosY = 877;
 
 		armorspeed = 0;
+		flyIMG = false;
+		turbo = false;
+		ableToTurbo = false;
+		
 	}
 
 	public void tracking() {
@@ -49,9 +59,7 @@ public class armor {
 		}
 		
 		if (armorPosY >= 870 && fireonground) {
-			
 			confirmgroundfire = true;
-			
 		}
 		
 		if (armorPosY < 865 && activatefire) {
@@ -61,9 +69,7 @@ public class armor {
 	}
 
 	public void move() {
-
 		armorPosX = armorPosX + armorspeed;
-		
 	}	
 	
 	public Rectangle bounds() {

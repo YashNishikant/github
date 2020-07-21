@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="yb" key="selection"/>
+		<item value="b[i].d" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="yb"/>
-			<item value="gg"/>
-			<item value="cloud"/>
-			<item value="bound"/>
-			<item value="amount"/>
-			<item value="user.speedY = 1"/>
-			<item value="user.speedY ="/>
-			<item value="user.speedY="/>
-			<item value="Mouse"/>
-			<item value="mouseMoved"/>
-			<item value="c.xclick"/>
-			<item value="xmouse"/>
-			<item value="mouseX"/>
+			<item value="b[i].d"/>
+			<item value="b["/>
+			<item value="b[i"/>
+			<item value="b[i].draw"/>
+			<item value="bullet"/>
+			<item value="bullet."/>
+			<item value="&lt; 1800"/>
+			<item value=".draw"/>
+			<item value="VK_R"/>
 			<item value="cyan"/>
-			<item value="mouseMove"/>
+			<item value="CYAN"/>
+			<item value="ignore"/>
+			<item value="Sys"/>
+			<item value="user.jump"/>
+			<item value="user.jump = false"/>
 		</list>
 		<list key="replacehistory">
 			<item value="g"/>

@@ -7,8 +7,10 @@ import java.awt.Graphics;
 
 public class controls {
 	
-	int ammo = 100;	
-	int hitcount = 0;
+	int ammo;	
+	int hitcount;
+	
+	int greenblue = 255;
 	
 	public controls() {
 		
@@ -19,8 +21,10 @@ public class controls {
 	
 	public void naturaldrawings(Graphics g) {
 		
+		Color Cyan = new Color(0,greenblue,greenblue);
+		
 		// Sky
-		g.setColor(Color.cyan);
+		g.setColor(Cyan);
 		g.fillRect(0, 0, 2000, 2000);
 		// Ground
 		g.setColor(Color.gray);
@@ -32,7 +36,7 @@ public class controls {
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(6, 22, 22, 22);
-		g.setColor(Color.CYAN);
+		g.setColor(Color.WHITE);
 		g.fillRect(8, 24, 18, 18);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("default", Font.BOLD, 20));
@@ -40,7 +44,7 @@ public class controls {
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(6, 72, 22, 22);
-		g.setColor(Color.CYAN);
+		g.setColor(Color.WHITE);
 		g.fillRect(8, 74, 18, 18);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("default", Font.BOLD, 20));
@@ -52,7 +56,7 @@ public class controls {
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(20, 182, 22, 22);
-		g.setColor(Color.CYAN);
+		g.setColor(Color.WHITE);
 		g.fillRect(22, 184, 18, 18);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("default", Font.BOLD, 20));
@@ -60,7 +64,7 @@ public class controls {
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(20, 232, 22, 22);
-		g.setColor(Color.CYAN);
+		g.setColor(Color.WHITE);
 		g.fillRect(22, 234, 18, 18);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("default", Font.BOLD, 20));
@@ -68,7 +72,7 @@ public class controls {
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(20, 282, 22, 22);
-		g.setColor(Color.CYAN);
+		g.setColor(Color.WHITE);
 		g.fillRect(22, 284, 18, 18);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("default", Font.BOLD, 20));
@@ -76,7 +80,7 @@ public class controls {
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(20, 332, 22, 22);
-		g.setColor(Color.CYAN);
+		g.setColor(Color.WHITE);
 		g.fillRect(22, 334, 18, 18);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("default", Font.BOLD, 20));
@@ -85,10 +89,6 @@ public class controls {
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("default", Font.BOLD, 25));
 		g.drawString("Ammo: " + ammo, 20, 50);
-		
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("default", Font.BOLD, 25));
-		g.drawString("Target Hits: " + hitcount, 20, 100);
 		
 	}
 	

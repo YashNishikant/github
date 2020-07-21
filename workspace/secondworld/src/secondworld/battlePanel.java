@@ -4,7 +4,6 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
-import java.util.concurrent.TimeUnit;
 
 public class battlePanel {
 
@@ -24,7 +23,7 @@ public class battlePanel {
 		contentpane.add(sPanel);
 
 		frame.setVisible(true);
-		
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}

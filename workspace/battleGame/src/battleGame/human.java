@@ -1,6 +1,5 @@
 package battleGame;
 
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -23,7 +22,7 @@ public class human {
 	boolean hitgrass = false;
 	boolean onetimeJump = true;
 	boolean jumping = false;
-	
+
 	public human() {
 
 		speedY = 0;
@@ -60,38 +59,39 @@ public class human {
 
 	public void jump() {
 
-		if (!jump) {
-			personY += speedY;
-
-			jumping = false;
-			
-			if (speedY < 2) {
-				speedY += 0.1;
-			}
-		}
-
 		if (jump) {
 			if (onetimeJump) {
-				speedY = -2;
+				speedY = -2.5;
 				onetimeJump = false;
 				jumping = true;
 			}
 
 			personY += speedY;
 			if (speedY < 0) {
-				speedY += 0.05;
+				speedY += 0.07;
 			} else {
 				jump = false;
 				onetimeJump = true;
 				jumping = false;
 			}
 		}
+
+		if (!jump) {
+			personY += speedY;
+
+			jumping = false;
+
+			if (speedY < 3) {
+				speedY += 0.07;
+			}
+		}
+
 	}
 
 	public void draw(Graphics g) {
 
 		// User
-		g.setColor(Color.red);
+		g.setColor(Color.green);
 		g.fillRect(personX, (int) (personY + 30), 20, 30);
 
 		// legs
@@ -108,7 +108,7 @@ public class human {
 
 	public Rectangle bounds() {
 
-		return (new Rectangle((int)(personX - 10), (int)(personY + 10), wHitBox, hHitBox));
+		return (new Rectangle((int) (personX - 10), (int) (personY + 10), wHitBox, hHitBox));
 
 	}
 

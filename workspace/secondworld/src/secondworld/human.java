@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 
 public class human {
 
-	int speedY;
+	double speedY;
 	int personX;
 	int personY;
 	int maxheight;
@@ -14,12 +14,14 @@ public class human {
 	int hHitBox;
 	int wHitBox;
 	int speedX;
-	
+
 	boolean jump = false;
 	boolean rise = true;
 	boolean insideSuit = false;
 	boolean nobattery = false;
-	
+	boolean onetimejump = true;
+	boolean max = false;
+
 	public human() {
 		speedX = 0;
 		speedY = 0;
@@ -33,10 +35,15 @@ public class human {
 
 	public void move() {
 
-		if (personY >= 871) {
+		if (personY >= 870 && !jump && !insideSuit) {
 			speedY = 0;
 			personY = 870;
 		}
+
+		if (insideSuit && personY >= 871) {
+			personY = 870;
+		}
+
 		personY += speedY;
 		personX += speedX;
 	}
@@ -44,27 +51,29 @@ public class human {
 	public void jump() {
 
 		if (jump == true) {
-
-			if (personY >= maxheight && rise == true) {
-				personY -= 2;
-			}
-
-			if (personY == maxheight) {
-				rise = false;
-			}
-
-			if (personY >= maxheight && rise == false) {
-				rise = false;
-				personY += 2;
-
-				if (personY >= minheight) {
-					rise = true;
-					jump = false;
-
+			if (rise == true) {
+				if (onetimejump) {
+					speedY = -4;
+					onetimejump = false;
 				}
+				speedY += 0.1;
 
+				if (speedY > 0) {
+					max = true;
+					rise = false;
+				}
 			}
 
+			if (!rise && max) {
+				speedY += 0.1;
+			}
+
+			if (personY >= 870 && max) {
+				speedY = 0;
+				jump = false;
+				onetimejump = true;
+				max = false;
+			}
 		}
 	}
 
@@ -82,8 +91,8 @@ public class human {
 		// arms
 		g.setColor(Color.blue);
 		g.fillRect(personX + 21, personY + 30, 7, 25);
-		g.fillRect(personX - 8, personY + 30, 7, 25);	
-		
+		g.fillRect(personX - 8, personY + 30, 7, 25);
+
 	}
 
 	public Rectangle bounds() {
@@ -91,5 +100,5 @@ public class human {
 		return (new Rectangle(personX - 10, personY + 10, wHitBox, hHitBox));
 
 	}
-	
+
 }

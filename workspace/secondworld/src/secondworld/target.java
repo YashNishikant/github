@@ -17,7 +17,7 @@ public class target {
 
 	public void move() {
 		if(move)
-		targetx -= speed;
+		targetx -= 4;
 	}
 
 	public void destroy() {

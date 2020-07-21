@@ -6,8 +6,8 @@ import java.awt.Graphics;
 
 public class controls {
 	
-	int ammo = 100;	
-	int hitcount = 0;
+	int ammo;	
+	int hitcount;
 	
 	public controls() {
 		

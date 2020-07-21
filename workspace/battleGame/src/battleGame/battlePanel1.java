@@ -7,7 +7,7 @@ import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
 import java.util.concurrent.TimeUnit;
 
-public class battlePanel {
+public class battlePanel1 {
 
 	static GraphicsConfiguration gc;
 
