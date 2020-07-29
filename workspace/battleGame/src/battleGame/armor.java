@@ -21,6 +21,9 @@ public class armor {
 	boolean turbo_LEFT = false;
 	boolean ableToTurbo_LEFT = false;
 	
+	boolean driftleft;
+	boolean driftright;
+	
 	int armorPosX;
 	int armorPosY;
 	int armorspeed;
@@ -61,10 +64,11 @@ public class armor {
 		if (armorPosY >= 870 && fireonground) {
 			confirmgroundfire = true;
 		}
-		
+
 		if (armorPosY < 865 && activatefire) {
-			fire = true;
-			canfly = true;
+			if(!turbo && !turbo_LEFT && !flyIMG && !flyIMG_LEFT)
+				fire = true;
+				canfly = true;
 		}
 	}
 

@@ -11,7 +11,7 @@ public class buildings {
 	int bY = 250;
 	int bW = 200;
 	int bH = 700;
-	int speed = 0;
+	double speed = 0;
 	
 	int clear;
 	
@@ -25,7 +25,7 @@ public class buildings {
 	}
 
 	public void move() {
-		movingsurrounding1 = movingsurrounding1 + speed;
+		movingsurrounding1 = (int)(movingsurrounding1 + speed);
 	}
 	
 }

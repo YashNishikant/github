@@ -10,7 +10,7 @@ public class NPC {
 	int npcY;
 	int npcX;
 	int npcHealth;
-	int speed;
+	double speed;
 	int wHitBox;
 	int hHitBox;
 	int healthbarbox;
@@ -23,7 +23,8 @@ public class NPC {
 	
 	boolean knockback = false;
 	boolean alive = true;
-
+	boolean dropLock = true;
+	
 	public NPC(int x, int speed1) {
 
 		npcY = 870;
@@ -50,7 +51,7 @@ public class NPC {
 			healthnpc += knockbackstr;
 		}
 
-		if (healthcount == 0) {
+		if (healthcount <= 0) {
 			alive = false;
 		} else {
 			alive = true;
@@ -69,7 +70,7 @@ public class NPC {
 		}
 		else {
 			speedaddition = 0;
-		}
+		}		
 	}
 
 	public void drawNPC(Graphics g) {
@@ -97,10 +98,10 @@ public class NPC {
 	}
 
 	public void move() {
-		npcX = npcX + speed + speedaddition;
+		npcX = (int)(npcX + speed + speedaddition);
 		npcY = npcY + speedY;
-		healthbarbox = healthbarbox + speed + speedaddition;
-		healthnpc = healthnpc + speed + speedaddition;
+		healthbarbox = (int)(healthbarbox + speed + speedaddition);
+		healthnpc = (int)(healthnpc + speed + speedaddition);
 	}
 
 	public Rectangle bounds() {

@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="b[i].d" key="selection"/>
+		<item value="health" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="health"/>
+			<item value="&#x09;&#x09;for (int j = 0; j &lt; player.length; j++) {"/>
+			<item value="activatefire"/>
+			<item value="towers[i].dr"/>
+			<item value="towers"/>
+			<item value="tower[i].draw"/>
+			<item value="b[i].draw"/>
 			<item value="b[i].d"/>
 			<item value="b["/>
 			<item value="b[i"/>
-			<item value="b[i].draw"/>
 			<item value="bullet"/>
 			<item value="bullet."/>
 			<item value="&lt; 1800"/>
 			<item value=".draw"/>
 			<item value="VK_R"/>
-			<item value="cyan"/>
-			<item value="CYAN"/>
-			<item value="ignore"/>
-			<item value="Sys"/>
-			<item value="user.jump"/>
-			<item value="user.jump = false"/>
 		</list>
 		<list key="replacehistory">
 			<item value="g"/>

@@ -8,10 +8,11 @@ public class bullet {
 
 	int bulletX = 0;
 	int bulletY = 0;
-	int yoffset = 30;
+	int yoffset = 24;
 	int bulletSpeed = 15;
 	int width = 10;
 	int height = 5;
+	int damage = 40;
 	boolean bulletFire = false;
 	boolean letdestroy = false;
 
@@ -30,11 +31,6 @@ public class bullet {
 	public Rectangle bounds() {
 
 		return (new Rectangle(bulletX, bulletY + yoffset, width, height));
-
-	}
-
-	public void draw(Graphics g) {
-		g.fillRect(bulletX, bulletY + yoffset, width, height);
 
 	}
 
