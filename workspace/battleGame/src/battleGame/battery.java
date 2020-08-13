@@ -9,8 +9,11 @@ public class battery {
 	int powercount = 0;
 	int powerlength = 190;
 	
+	int decreaseFactor = 1000;
+	
 	boolean isflyingforbattery = false;
 	boolean track = false;
+	boolean turboReducePowerMore;
 	
 	public battery() {
 		
@@ -23,8 +26,10 @@ public class battery {
 		if (track) {
 			powercount++;
 		}
-		if ((powercount % 100 == 0) && powerlength > 0 && isflyingforbattery) {
+		
+		if ((powercount % decreaseFactor == 0) && powerlength > 0 && isflyingforbattery) {
 			powerlength -= 1;
+
 		}
 		
 	}

@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="health" key="selection"/>
+		<item value="movePlayer" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="health"/>
-			<item value="&#x09;&#x09;for (int j = 0; j &lt; player.length; j++) {"/>
-			<item value="activatefire"/>
-			<item value="towers[i].dr"/>
-			<item value="towers"/>
-			<item value="tower[i].draw"/>
-			<item value="b[i].draw"/>
-			<item value="b[i].d"/>
-			<item value="b["/>
-			<item value="b[i"/>
-			<item value="bullet"/>
-			<item value="bullet."/>
-			<item value="&lt; 1800"/>
-			<item value=".draw"/>
-			<item value="VK_R"/>
+			<item value="movePlayer"/>
+			<item value="grenadeSpeed = 5"/>
+			<item value="rain"/>
+			<item value="rain[i].d"/>
+			<item value="rain.draw"/>
+			<item value="iron.track = false"/>
+			<item value="normal"/>
+			<item value="normal = true"/>
+			<item value="Syste"/>
+			<item value="Sys"/>
+			<item value="sys"/>
+			<item value="flyL"/>
+			<item value="fly"/>
+			<item value="iron.track = false;"/>
+			<item value="iron.normal"/>
 		</list>
 		<list key="replacehistory">
 			<item value="g"/>

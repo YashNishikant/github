@@ -1,21 +1,29 @@
 package player;
 
+import HUD.UIHud;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.PolygonRegionLoader;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Array;
 import helpers.GameInfo;
 
 public class Player extends Sprite {
     private World world;
     private Body body;
 
+    private TextureAtlas playerAtlas;
+    private Animation animation;
+    private float elapsedTime;
+
+    private boolean isWalking;
+
     public Player(World world, float x, float y){
         super(new Texture("Player/Player 1.png"));
         this.world = world;
         setPosition(x,y);
         createBody();
+        playerAtlas = new TextureAtlas("Player Animation/Player_Animation.png.atlas");
     }
 
     void createBody(){
@@ -34,6 +42,9 @@ public class Player extends Sprite {
         fixtureDef.friction = 2f;
         fixtureDef.shape = shape;
 
+        fixtureDef.filter.categoryBits = GameInfo.PLAYER;
+        fixtureDef.filter.maskBits = GameInfo.DEFAULT | GameInfo.COLLECTABLE;
+
         Fixture fixture = body.createFixture(fixtureDef);
 
         shape.dispose();
@@ -41,14 +52,54 @@ public class Player extends Sprite {
     }
 
     public void movePlayer(float x){
+        if (x < 0 && !this.isFlipX()) {
+            this.flip(true, false);
+        } else if (x > 0 && this.isFlipX()) {
+            this.flip(true, false);
+        }
+        isWalking = true;
         body.setLinearVelocity(x, body.getLinearVelocity().y);
+
     }
 
-    public void drawPlayer(SpriteBatch batch){
-        batch.draw(this, getX() + getWidth()/2f - 15, getY() - getHeight()/2f);
+    public void drawPlayerIdle(SpriteBatch batch){
+        if(!isWalking) {
+            batch.draw(this, getX() + getWidth() / 2f - 15, getY() - getHeight() / 2f);
+        }
     }
 
+    public void drawPlayerAnimation(SpriteBatch batch){
+        if(isWalking){
+            elapsedTime += Gdx.graphics.getDeltaTime();
+
+            Array<TextureAtlas.AtlasRegion> frames = playerAtlas.getRegions();
+            for(TextureRegion frame: frames){
+                if(body.getLinearVelocity().x < 0 && !frame.isFlipX()){
+                    frame.flip(true,false);
+                }
+                else if(body.getLinearVelocity().x > 0 && frame.isFlipX()){
+                    frame.flip(true,false);
+                }
+            }
+
+            animation = new Animation(1f/10f, playerAtlas.getRegions());
+
+            batch.draw((TextureRegion) animation.getKeyFrame(elapsedTime, true), getX() + getWidth() / 2f - 15, getY() - getHeight() / 2f);
+        }
+    }
     public void UpdatePlayer(){
-        setPosition(body.getPosition().x * GameInfo.PPM, body.getPosition().y * GameInfo.PPM);
+        if(body.getLinearVelocity().x > 0){
+            setPosition(body.getPosition().x * GameInfo.PPM,
+                    body.getPosition().y * GameInfo.PPM);
+        }
+        else if(body.getLinearVelocity().x < 0){
+            setPosition((body.getPosition().x - 0.3f) * GameInfo.PPM,
+                    body.getPosition().y * GameInfo.PPM);
+        }
     }
+
+    public void setWalking(boolean isWalking){
+        this.isWalking = isWalking;
+    }
+
 }

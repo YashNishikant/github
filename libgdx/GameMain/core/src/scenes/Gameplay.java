@@ -1,5 +1,7 @@
 package scenes;
 
+import HUD.MainMenuButtons;
+import HUD.UIHud;
 import clouds.Cloud;
 import clouds.CloudsController;
 import com.badlogic.gdx.Game;
@@ -11,16 +13,14 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GameMain;
-import com.sun.prism.image.ViewPort;
 import helpers.GameInfo;
 import player.Player;
 
-public class Gameplay implements Screen {
+public class Gameplay implements Screen, ContactListener {
 
     private GameMain game;
     private OrthographicCamera mainCamera;
@@ -32,6 +32,10 @@ public class Gameplay implements Screen {
     private float lastYPosition;
     private CloudsController cloudsController;
     private Player player;
+
+    private UIHud hud;
+
+    private boolean moveCamera;
 
     public Gameplay(GameMain game){
         this.game = game;
@@ -47,6 +51,7 @@ public class Gameplay implements Screen {
         world = new World(new Vector2(0, -9.8f),true);
         cloudsController = new CloudsController(world);
         player = cloudsController.playerPos(player);
+        hud = new UIHud(game);
 
         createBackgrounds();
     }
@@ -60,7 +65,9 @@ public class Gameplay implements Screen {
     }
 
     void moveCamera(){
-        mainCamera.position.y -= 1;
+        if(moveCamera) {
+            mainCamera.position.y -= 0;
+        }
     }
 
     void createBackgrounds(){
@@ -76,9 +83,13 @@ public class Gameplay implements Screen {
     void handleInput(float dt){
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
             player.movePlayer(-2);
+            moveCamera = true;
         }
         else if(Gdx.input.isKeyPressed(Input.Keys.D)){
             player.movePlayer(2);
+            moveCamera = true;
+        }else{
+            player.setWalking(false);
         }
     }
 
@@ -108,18 +119,22 @@ public class Gameplay implements Screen {
 
         update(delta);
         checkBackgroundPos();
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.getBatch().begin();
         drawBackgrounds();
         cloudsController.drawClouds(game.getBatch());
-        player.drawPlayer(game.getBatch());
+        player.drawPlayerIdle(game.getBatch());
+        player.drawPlayerAnimation(game.getBatch());
         game.getBatch().end();
 
         debugRenderer.render(world, box2dCamera.combined);
         game.getBatch().setProjectionMatrix(mainCamera.combined);
         mainCamera.update();
+
+        cloudsController.drawCollectables(game.getBatch());
+
+        game.getBatch().setProjectionMatrix(hud.getStage().getCamera().combined);
+        hud.getStage().draw();
 
         player.UpdatePlayer();
         world.step(Gdx.graphics.getDeltaTime(),6,2);
@@ -127,7 +142,7 @@ public class Gameplay implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        gameViewport.update(width, height);
     }
 
     @Override
@@ -147,6 +162,31 @@ public class Gameplay implements Screen {
 
     @Override
     public void dispose() {
+        world.dispose();
+        for(int i = 0; i < bgs.length; i++){
+            bgs[i].getTexture().dispose();
+        }
+        player.getTexture().dispose();
+        debugRenderer.dispose();
+    }
+
+    @Override
+    public void beginContact(Contact contact) {
+
+    }
+
+    @Override
+    public void endContact(Contact contact) {
+
+    }
+
+    @Override
+    public void preSolve(Contact contact, Manifold oldManifold) {
+
+    }
+
+    @Override
+    public void postSolve(Contact contact, ContactImpulse impulse) {
 
     }
 }

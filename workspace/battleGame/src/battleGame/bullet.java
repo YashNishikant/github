@@ -1,38 +1,35 @@
 package battleGame;
 
-
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class bullet {
 
 	int bulletX = 0;
-	int bulletY = 0;
+	double bulletY = 0;
 	int yoffset = 24;
 	int bulletSpeed = 15;
 	int width = 10;
 	int height = 5;
-	int damage = 40;
+	int damage = 10;
+	int explodeX;
 	boolean bulletFire = false;
 	boolean letdestroy = false;
 
-	public bullet(int x, int y) {
-
+	public bullet(int x, double y) {
 		bulletX = x;
 		bulletY = y;
 	}
 
 	public void fire() {
-		if (bulletFire) {
 			bulletX = bulletX + bulletSpeed;
-		}
 	}
 
 	public Rectangle bounds() {
-
-		return (new Rectangle(bulletX, bulletY + yoffset, width, height));
-
+		return (new Rectangle(bulletX, (int) bulletY + yoffset, width, height));
 	}
+
 
 	public void destroy() {
 

@@ -10,7 +10,7 @@ public class armor {
 	boolean canfly = false;
 	boolean ignore = false;
 	boolean blast = false;
-	boolean normal = true;
+	boolean normal = false;
 	boolean activatefire = true;
 	boolean fireonground = false;
 	boolean confirmgroundfire = false;

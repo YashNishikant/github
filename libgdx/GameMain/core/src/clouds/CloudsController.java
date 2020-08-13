@@ -1,5 +1,6 @@
 package clouds;
 
+import Collectables.Collectable;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
@@ -13,6 +14,8 @@ public class CloudsController {
     private Array<Cloud> clouds = new Array<Cloud>();
     private float lastCloudPositionY;
     private float cameraY;
+
+    private Array<Collectable> collectables = new Array<Collectable>();
 
     public CloudsController(World world){
         this.world = world;
@@ -63,7 +66,7 @@ public class CloudsController {
                     c.setDrawLeft(false);
                 }
                 else  if (randomPlace == 1){
-                    tempX = 80;
+                    tempX = 100;
                     randomPlace = 0;
                     c.setDrawLeft(true);
                 }
@@ -86,7 +89,21 @@ public class CloudsController {
                         c.getY() - c.getHeight()/2f);
             }
         }
+
+        Collectable c1 = new Collectable(world, "Life");
+        c1.setCollectablePosition(clouds.get(1).getX(), clouds.get(1).getY() + 40);
+        collectables.add(c1);
     }
+
+    public void drawCollectables(SpriteBatch batch){
+        for(Collectable c : collectables){
+            batch.begin();
+            c.updateCollectable();
+            batch.draw(c, c.getX(), c.getY());
+            batch.end();
+        }
+    }
+
     public void createAndArrangeNewCloud(){
         for(int i = 0; i < clouds.size;i++){
             if((clouds.get(i).getY() - GameInfo.HEIGHT/2 - 15) > cameraY){
@@ -102,7 +119,7 @@ public class CloudsController {
     }
 
     public Player playerPos(Player player){
-        player = new Player(world, clouds.get(0).getX(), clouds.get(0).getY() + 100);
+        player = new Player(world, clouds.get(0).getX(), clouds.get(0).getY() + 78);
         return player;
 
     }
