@@ -6,29 +6,32 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="movePlayer" key="selection"/>
+		<item value="VK_A" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="movePlayer"/>
-			<item value="grenadeSpeed = 5"/>
-			<item value="rain"/>
-			<item value="rain[i].d"/>
-			<item value="rain.draw"/>
-			<item value="iron.track = false"/>
-			<item value="normal"/>
-			<item value="normal = true"/>
-			<item value="Syste"/>
-			<item value="Sys"/>
-			<item value="sys"/>
-			<item value="flyL"/>
+			<item value="VK_A"/>
+			<item value="moveT"/>
+			<item value="moveP"/>
 			<item value="fly"/>
-			<item value="iron.track = false;"/>
-			<item value="iron.normal"/>
+			<item value="VK_D"/>
+			<item value="iron.ableToTurbo_RIGHT = true"/>
+			<item value="turbo"/>
+			<item value="shield"/>
+			<item value="move"/>
+			<item value="contain"/>
+			<item value="bulletFire"/>
+			<item value="knockback = true"/>
+			<item value="knockback"/>
+			<item value="knock"/>
+			<item value="user.draw"/>
 		</list>
 		<list key="replacehistory">
+			<item value="bullets[i]"/>
+			<item value="X"/>
+			<item value="Y"/>
 			<item value="g"/>
 			<item value="speed"/>
 			<item value="xWither"/>
@@ -41,7 +44,6 @@
 			<item value="mousePress"/>
 			<item value="myArrL"/>
 			<item value="myInt"/>
-			<item value="largest"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

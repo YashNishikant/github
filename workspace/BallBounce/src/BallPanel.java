@@ -1,12 +1,7 @@
-import java.awt.Color;  
-import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -21,59 +16,55 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 	ball bounceBall = new ball();
 	paddleR RPaddle = new paddleR();
 	paddleL LPaddle = new paddleL();
-	
-	int scoreL = 0;
-	int scoreR = 0;
+
+	int scoreL;
+	int scoreR;
 	int roundNum = 1;
-	int hitNum = 0;
-	
-	int x = 1;
-	
-	boolean speedUP = false;
-	
-	boolean gWin = false;
-	boolean bWin = false;
-	
-	boolean goingUpL = false;
-	boolean goingDownL = false;
-	boolean goingUpR = false;
-	boolean goingDownR = false;
-	boolean startDirection = true;
-	
-	boolean startScreenPingPong = true;
-	boolean replay = false;
-	
+	int paddleSpeeds = 6;
+	//int hitNum;
+	int speedOfBall = bounceBall.speedBall;
+	boolean speedUP;
+	boolean gWin;
+	boolean bWin;
+	boolean goingUpL;
+	boolean goingDownL;
+	boolean goingUpR;
+	boolean goingDownR;
+	boolean startDirection;
+
+	boolean startScreenPingPong;
+	boolean replay;
+
 	public BallPanel() {
-		
+
 		startScreenPingPong = true;
-		
+
 		time.start();
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 	}
 
-	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		//Round
-		g.setFont(new Font("default", Font.BOLD,24));
+		// Round
+		g.setFont(new Font("default", Font.BOLD, 24));
 		g.drawString("Round: " + roundNum, 930, 20);
-		
-		//Score left	
-		g.setFont(new Font("default", Font.BOLD,24));
+
+		// Score left
+		g.setFont(new Font("default", Font.BOLD, 24));
 		g.drawString("TEAM BLUE: " + scoreL, 10, 20);
-		
-		//Score right		
-		g.setFont(new Font("default", Font.BOLD,24));
+
+		// Score right
+		g.setFont(new Font("default", Font.BOLD, 24));
 		g.drawString("TEAM GREEN: " + scoreR, 1700, 20);
-		
-		//hits tracker
-		g.setFont(new Font("default", Font.BOLD,24));
-		g.drawString("Total hits: " + hitNum, 10, 1010);
-		
+
+		// hits tracker
+		// g.setFont(new Font("default", Font.BOLD,24));
+		// g.drawString("Total hits: " + hitNum, 10, 1010);
+
 		// ball
 		g.setColor(Color.BLACK);
 		g.fillOval(bounceBall.xCoordBall, bounceBall.yCoordBall, 50, 50);
@@ -81,7 +72,7 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 		// innerBall
 		g.setColor(Color.red);
 		g.fillOval(bounceBall.xCoordBall + 3, bounceBall.yCoordBall + 3, 45, 45);
-		
+
 		// paddle on the left
 		g.setColor(Color.blue);
 		g.fillRect(LPaddle.xPaddleL, LPaddle.yPaddleL, 30, 150);
@@ -89,172 +80,139 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 		// paddle on the right
 		g.setColor(Color.green);
 		g.fillRect(RPaddle.xPaddleR + 30, RPaddle.yPaddleR, 30, 150);
-		
-		if(startScreenPingPong == true) {
-			
+
+		if (startScreenPingPong == true) {
+
 			roundNum = 1;
-			hitNum = 0;
+			// hitNum = 0;
 			gWin = false;
 			bWin = false;
-			
+
 			g.setColor(Color.white);
 			g.fillRect(0, 0, 20000, 20000);
-			
+
 			g.setColor(Color.black);
-			g.setFont(new Font("default", Font.BOLD,75));
+			g.setFont(new Font("default", Font.BOLD, 75));
 			g.drawString("PING PONG", 700, 300);
-			
+
 			g.setColor(Color.black);
-			g.setFont(new Font("default", Font.BOLD,45));
-			g.drawString("Press P to play", 750, 400);	
-			
+			g.setFont(new Font("default", Font.BOLD, 45));
+			g.drawString("Press P to play", 750, 400);
+
 			bounceBall.speedBall = 0;
-			
+			bounceBall.speedBallY = 0;
+
 		}
-	
+
 		else {
-			
-			bounceBall.speedBall = x;	
-			
+			bounceBall.speedBall = speedOfBall;
 		}
-		
-		if(gWin == true) {
-			
+
+		if (gWin == true) {
+
 			g.setColor(Color.white);
 			g.fillRect(0, 0, 20000, 20000);
-			
+
 			g.setColor(Color.black);
-			g.setFont(new Font("default", Font.BOLD,75));
+			g.setFont(new Font("default", Font.BOLD, 75));
 			g.drawString("GREEN WINS", 700, 300);
 
 			g.setColor(Color.green);
-			g.fillRect(RPaddle.xPaddleR + 30, RPaddle.yPaddleR, 30, 150);		
-			
+			g.fillRect(RPaddle.xPaddleR + 30, RPaddle.yPaddleR, 30, 150);
+
 			g.setColor(Color.black);
-			g.setFont(new Font("default", Font.BOLD,45));
-			g.drawString("Press R to go back to the main menu", 580, 400);	
-			
-			scoreL = 0; 
+			g.setFont(new Font("default", Font.BOLD, 45));
+			g.drawString("Press R to go back to the main menu", 580, 400);
+
+			scoreL = 0;
 			scoreR = 0;
-			
-			if(replay == true) {
-				
-			gWin = false;
-			bWin = false;
-			startScreenPingPong = true;
+
+			if (replay == true) {
+				gWin = false;
+				bWin = false;
+				startScreenPingPong = true;
 			}
-				
+
 		}
-		
-		if(bWin == true) {
-			
+
+		if (bWin == true) {
+
 			g.setColor(Color.white);
 			g.fillRect(0, 0, 20000, 20000);
-			
+
 			g.setColor(Color.black);
-			g.setFont(new Font("default", Font.BOLD,75));
+			g.setFont(new Font("default", Font.BOLD, 75));
 			g.drawString("BLUE WINS", 700, 300);
 
 			g.setColor(Color.blue);
-			g.fillRect(LPaddle.xPaddleL, LPaddle.yPaddleL, 30, 150);	
-			
+			g.fillRect(LPaddle.xPaddleL, LPaddle.yPaddleL, 30, 150);
+
 			g.setColor(Color.black);
-			g.setFont(new Font("default", Font.BOLD,45));
-			g.drawString("Press R to go back to the main menu", 580, 400);	
-		
-			scoreL = 0; 
+			g.setFont(new Font("default", Font.BOLD, 45));
+			g.drawString("Press R to go back to the main menu", 580, 400);
+
+			scoreL = 0;
 			scoreR = 0;
-			
-			if(replay == true) {
-			
-			bWin = false;
-			gWin = false;
-			startScreenPingPong = true;
+
+			if (replay == true) {
+				bWin = false;
+				gWin = false;
+				startScreenPingPong = true;
 			}
 		}
-		
+
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		
-		if (startDirection == true) {
-		bounceBall.starting();
-		startDirection = false;
+	void ultimateWinner() {
+		if (scoreL == 3) {
+			bWin = true;
 		}
+		if (scoreR == 3) {
+			gWin = true;
+		}
+		if (scoreL == 3 && scoreR == 2) {
+			bWin = true;
+		}
+		if (scoreR == 3 && scoreL == 2) {
+			gWin = true;
+		}
+	}
+	
+	void start() {
+		if (startDirection == true) {
+			bounceBall.starting();
+			startDirection = false;
+		}
+	}
+	
+	void roundWinnerReset() {
+		if (bounceBall.xCoordBall >= 1890) {
+			scoreL++;
+			bounceBall.xCoordBall = 900;
+			bounceBall.yCoordBall = 480;
+			startDirection = true;
+			// hitNum = 0;
+			roundNum++;
+		}
+		if (bounceBall.xCoordBall <= -14) {
+			scoreR++;
+			bounceBall.xCoordBall = 900;
+			bounceBall.yCoordBall = 480;
+			startDirection = true;
+			// hitNum = 0;
+			roundNum++;
+		}
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		start();
 		bounceBall.move();
 		RPaddle.move();
 		LPaddle.move();
-		
 		Collision();
-		
-		//Ultimate winner
-		
-		if(scoreL == 3) {
-			
-			bWin = true;
-
-		}
-		
-		if(scoreR == 3) {
-			
-			gWin = true;
-		
-		}
-		
-		if(scoreL == 3 && scoreR == 2) {
-			
-			bWin = true;
-
-		}
-		
-		if(scoreR == 3 && scoreL == 2) {
-			
-			gWin = true;
-		
-		}
-		
-		//NUMBER OF HITS FOR SPEED UP
-		if(hitNum % 5 == 0 && hitNum >= 5 && speedUP == true) {
-			
-		x += 2;	
-		speedUP = false;
-		
-		}
-		
-		if(bounceBall.xCoordBall >= 1890) {
-			
-			scoreL++;
-		
-			bounceBall.xCoordBall = 900;
-			bounceBall.yCoordBall = 480;
-			
-			startDirection = true;
-			
-			hitNum = 0;
-			x = 1;
-			
-			roundNum++;
-		
-		}
-		
-		if(bounceBall.xCoordBall <= -14) {
-			
-			scoreR++;
-		
-			bounceBall.xCoordBall = 900;
-			bounceBall.yCoordBall = 480;
-			
-			startDirection = true;
-			
-			hitNum = 0;
-			x = 1;
-		
-			roundNum++;
-		
-		}
-		
+		ultimateWinner();
+		roundWinnerReset();
 		repaint();
-
 	}
 
 	@Override
@@ -262,46 +220,33 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 		int i = e.getKeyCode();
 
 		if (i == KeyEvent.VK_R) {
-
 			replay = true;
-
 		}
-		
+
 		if (i == KeyEvent.VK_P) {
-
 			startScreenPingPong = false;
-
 		}
-		
+
 		if (i == KeyEvent.VK_S) {
-
-			LPaddle.speed = 2;
-
+			LPaddle.speed = paddleSpeeds;
 			goingUpL = false;
-			
 		}
 
 		if (i == KeyEvent.VK_W) {
-			
-			LPaddle.speed = -2;
+			LPaddle.speed = -paddleSpeeds;
 			goingUpL = true;
-
 		}
 
 		if (i == KeyEvent.VK_DOWN) {
-
-			RPaddle.speed2 = 2;
+			RPaddle.speed2 = paddleSpeeds;
 			goingDownR = true;
 			goingUpR = false;
-
 		}
 
 		if (i == KeyEvent.VK_UP) {
-
-			RPaddle.speed2 = -2;
+			RPaddle.speed2 = -paddleSpeeds;
 			goingDownR = false;
 			goingUpR = true;
-			
 		}
 
 	}
@@ -326,60 +271,32 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void Collision() {
-		
-	Rectangle ballRec = bounceBall.bounds();
-	Rectangle paddleLeft = LPaddle.bounds();
-	Rectangle paddleRight = RPaddle.bounds();
-	
-	if(ballRec.intersects(paddleLeft)) {
-		
-		bounceBall.right = true;
-		
-		if(goingUpL == true) 
-		bounceBall.down = false;
 
-		if(goingUpL == false) 
-		bounceBall.down = true;
-		
-		hitNum++;
-		speedUP = true;
-	
-		bounceBall.yCoordBall += 1;
-		
+		Rectangle ballRec = bounceBall.bounds();
+		Rectangle paddleLeft = LPaddle.bounds();
+		Rectangle paddleRight = RPaddle.bounds();
+
+		if (ballRec.intersects(paddleLeft)) {
+
+			bounceBall.right = true;
+			if (goingUpL == true)
+				bounceBall.down = false;
+			if (goingUpL == false)
+				bounceBall.down = true;
+			bounceBall.yCoordBall += 1;
+
+		}
+
+		if (ballRec.intersects(paddleRight)) {
+
+			bounceBall.right = false;
+			if (goingUpR == true)
+				bounceBall.down = false;
+			if (goingDownR == true)
+				bounceBall.down = true;
+			bounceBall.yCoordBall += 1;
+
+		}
+
 	}
-	
-	if(ballRec.intersects(paddleRight)) {
-		
-		bounceBall.right = false;
-		
-		if(goingUpR == true) 
-		bounceBall.down = false;	
-		
-		if(goingDownR == true) 
-		bounceBall.down = true;
-
-		hitNum++;
-		speedUP = true;
-	
-		bounceBall.yCoordBall += 1;		
-		
-	}
-	
-}
-	
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-
-		Container contentpane = frame.getContentPane();
-		BallPanel BPanel = new BallPanel();
-
-		Dimension preferredSize = new Dimension();
-		preferredSize.setSize(600, 600);
-
-		frame.setSize(preferredSize);
-		contentpane.add(BPanel);
-
-		frame.setVisible(true);
-	}
-
 }

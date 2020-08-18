@@ -8,12 +8,12 @@ public class bullet {
 
 	int bulletX = 0;
 	double bulletY = 0;
+	double damageForBoss = 0.1;
 	int yoffset = 24;
-	int bulletSpeed = 15;
+	int bulletSpeed = 10;
 	int width = 10;
 	int height = 5;
 	int damage = 10;
-	int explodeX;
 	boolean bulletFire = false;
 	boolean letdestroy = false;
 
@@ -23,13 +23,12 @@ public class bullet {
 	}
 
 	public void fire() {
-			bulletX = bulletX + bulletSpeed;
+		bulletX = bulletX + bulletSpeed;
 	}
 
 	public Rectangle bounds() {
 		return (new Rectangle(bulletX, (int) bulletY + yoffset, width, height));
 	}
-
 
 	public void destroy() {
 

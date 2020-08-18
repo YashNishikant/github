@@ -14,6 +14,10 @@ public class human {
 	int hHitBox;
 	int wHitBox;
 
+	int healthbarbox;
+	int health;
+	int healthcount;
+
 	boolean jump = false;
 	boolean rise = true;
 	boolean insideSuit = false;
@@ -29,6 +33,7 @@ public class human {
 		personX = 810;
 		personY = 870;
 		maxheight = personY - 100;
+		healthcount = 40;
 		minheight = 870;
 		hHitBox = 70;
 		wHitBox = 38;
@@ -42,7 +47,6 @@ public class human {
 		}
 
 		personY = personY + speedY;
-
 	}
 
 	public void shutdown() {
@@ -104,6 +108,14 @@ public class human {
 		g.fillRect(personX + 21, (int) (personY + 30), 7, 25);
 		g.fillRect(personX - 8, (int) (personY + 30), 7, 25);
 
+	}
+
+	public void drawHealth(Graphics g) {
+		// healthbar
+		g.setColor(Color.black);
+		g.fillRect(personX - 10, (int) (personY + 1), 42, 6);
+		g.setColor(Color.red);
+		g.fillRect(personX - 9, (int) (personY + 3), healthcount, 2);
 	}
 
 	public Rectangle bounds() {

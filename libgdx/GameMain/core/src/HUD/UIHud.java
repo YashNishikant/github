@@ -20,8 +20,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GameMain;
 import helpers.GameInfo;
-import scenes.Gameplay;
-import scenes.MainMenu;
 
 public class UIHud {
 
@@ -32,7 +30,6 @@ public class UIHud {
     private Image coinImage, scoreImage, lifeImage, pausePanel;
     private Label coinLabel, lifeLabel, scoreLabel;
     private ImageButton pauseBtn, resumeBtn, quitBtn;
-
     public static boolean GamePaused = false;
 
     public UIHud(GameMain game) {
@@ -132,11 +129,6 @@ public class UIHud {
         stage.addActor(quitBtn);
 
     }
-
-    void fixPlayerPosition(){
-
-    }
-
     void removePausePanel(){
         pausePanel.remove();
         resumeBtn.remove();

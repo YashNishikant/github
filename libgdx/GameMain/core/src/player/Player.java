@@ -46,6 +46,7 @@ public class Player extends Sprite {
         fixtureDef.filter.maskBits = GameInfo.DEFAULT | GameInfo.COLLECTABLE;
 
         Fixture fixture = body.createFixture(fixtureDef);
+        fixture.setUserData("Player");
 
         shape.dispose();
 

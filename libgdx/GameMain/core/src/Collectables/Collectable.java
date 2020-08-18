@@ -34,8 +34,10 @@ public class Collectable extends Sprite {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.filter.categoryBits = GameInfo.COLLECTABLE;
+        fixtureDef.isSensor = true;
 
         fixture = body.createFixture(fixtureDef);
+        fixture.setUserData(name);
 
         shape.dispose();
     }
@@ -48,6 +50,16 @@ public class Collectable extends Sprite {
     public void updateCollectable(){
         setPosition((body.getPosition().x - 0.0001f)* GameInfo.PPM,
                 (body.getPosition().y - 0.2f)* GameInfo.PPM);
+    }
+
+    public void changeFilter(){
+        Filter filter = new Filter();
+        filter.categoryBits = GameInfo.DESTROYED;
+        fixture.setFilterData(filter);
+    }
+
+    public Fixture getFixture(){
+        return fixture;
     }
 
 }

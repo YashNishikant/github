@@ -15,12 +15,15 @@ public class CloudsController {
     private float lastCloudPositionY;
     private float cameraY;
 
+    private boolean drawCollectables = true;
+
     private Array<Collectable> collectables = new Array<Collectable>();
 
     public CloudsController(World world){
         this.world = world;
         createClouds();
         positionClouds(true);
+        addCollectable();
     }
     public void createClouds(){
         for(int i = 0; i < 2; i++){
@@ -89,18 +92,30 @@ public class CloudsController {
                         c.getY() - c.getHeight()/2f);
             }
         }
+    }
 
-        Collectable c1 = new Collectable(world, "Life");
+    public void addCollectable(){
+        Collectable c1 = new Collectable(world, "Coin");
         c1.setCollectablePosition(clouds.get(1).getX(), clouds.get(1).getY() + 40);
         collectables.add(c1);
     }
 
-    public void drawCollectables(SpriteBatch batch){
-        for(Collectable c : collectables){
-            batch.begin();
-            c.updateCollectable();
-            batch.draw(c, c.getX(), c.getY());
-            batch.end();
+    public void drawCollectables(SpriteBatch batch) {
+            for (Collectable c : collectables) {
+                batch.begin();
+                c.updateCollectable();
+                batch.draw(c, c.getX(), c.getY());
+                batch.end();
+            }
+    }
+    public void removeCollectables(){
+        for(int i = 0; i < collectables.size; i++){
+            if(collectables.get(i).getFixture().getUserData() == "Remove"){
+                System.out.println("Removing " + collectables.get(i));
+                collectables.get(i).changeFilter();
+                collectables.get(i).getTexture().dispose();
+                collectables.removeIndex(i);
+            }
         }
     }
 

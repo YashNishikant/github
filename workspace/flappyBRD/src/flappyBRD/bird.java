@@ -29,7 +29,7 @@ public class bird extends JPanel implements ActionListener, KeyListener {
 	boolean canNoLongerMove = false;
 	boolean LOSTSCREEN = false;
 	boolean STARTSCREEN = true;
-	
+
 	Timer time = new Timer(5, this);
 	clouds cloud = new clouds();
 	tube[] t = new tube[100];
@@ -55,17 +55,17 @@ public class bird extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.CYAN);
 		g.fillRect(0, 0, 2000, 2000);
 		cloud.draw(g);
-		
+
 		for (int i = 0; i < t.length; i++) {
-			t[i].draw(g);
+				t[i].draw(g);
 		}
-		
-		Color darkerGreen = new Color(21,181,45);
+
+		Color darkerGreen = new Color(21, 181, 45);
 		g.setColor(darkerGreen);
 		g.fillRect(0, 900, 2000, 2000);
 
 		bird.draw(g);
-		
+
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("default", Font.BOLD, 40));
 		g.drawString("" + point, 930, 150);
@@ -87,19 +87,19 @@ public class bird extends JPanel implements ActionListener, KeyListener {
 
 		}
 
-		if(STARTSCREEN) {
-			
-			for(int i = 0; i < t.length; i++) {
+		if (STARTSCREEN) {
+
+			for (int i = 0; i < t.length; i++) {
 				t[i].speed = 0;
 			}
 
 			bird.speed = 0;
-			
+
 			g.setColor(Color.BLACK);
 			g.fillRect(780, 300, 100, 100);
 			g.setColor(Color.WHITE);
 			g.fillRect(790, 310, 80, 80);
-			
+
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("default", Font.BOLD, 55));
 			g.drawString("W", 805, 370);
@@ -140,12 +140,12 @@ public class bird extends JPanel implements ActionListener, KeyListener {
 
 		if (i == KeyEvent.VK_W && STARTSCREEN) {
 			STARTSCREEN = false;
-			for(int j = 0; j < t.length; j++) {
+			for (int j = 0; j < t.length; j++) {
 				t[j].speed = -2;
 			}
 			bird.jump = true;
 		}
-		
+
 		if (i == KeyEvent.VK_P && LOSTSCREEN && canNoLongerMove) {
 			bird.jump = true;
 			LOSTSCREEN = false;
@@ -158,8 +158,8 @@ public class bird extends JPanel implements ActionListener, KeyListener {
 				bird.birdY = 300;
 				point = 0;
 				t[j].speed = -2;
-
 				t[j].boundaryY = 0;
+				t[j].shuffle();
 
 			}
 		}

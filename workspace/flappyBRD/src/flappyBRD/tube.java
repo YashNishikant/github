@@ -25,14 +25,16 @@ public class tube {
 	
 	}
 	
+	public void shuffle() {
+		tubeY = (int)((Math.random() * 500) + -1500);
+	}
+	
 	public void draw(Graphics g) {
 		
 		g.setColor(Color.GRAY);
 		g.fillRect(tubeX + separate,tubeY,50,1500);
-		
 		g.setColor(Color.GRAY);
 		g.fillRect(tubeX + separate,tubeY + 1700,50,1500);
-	
 	}
 	
 	public void move() {

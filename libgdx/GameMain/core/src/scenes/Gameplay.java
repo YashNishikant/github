@@ -48,7 +48,10 @@ public class Gameplay implements Screen, ContactListener {
         box2dCamera.position.set(GameInfo.WIDTH/2f, GameInfo.HEIGHT/2f,0);
 
         debugRenderer = new Box2DDebugRenderer();
+
         world = new World(new Vector2(0, -9.8f),true);
+        world.setContactListener(this);
+
         cloudsController = new CloudsController(world);
         player = cloudsController.playerPos(player);
         hud = new UIHud(game);
@@ -172,6 +175,25 @@ public class Gameplay implements Screen, ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
+       Fixture body1, body2;
+
+       if(contact.getFixtureA().getUserData() == "Player"){
+           body1 = contact.getFixtureA();
+           body2 = contact.getFixtureB();
+       }else{
+           body1 = contact.getFixtureB();
+           body2 = contact.getFixtureA();
+       }
+
+        if(body1.getUserData() == "Player" && body2.getUserData() == "Coin"){
+            body2.setUserData("Remove");
+            cloudsController.removeCollectables();
+        }
+
+        if(body1.getUserData() == "Player" && body2.getUserData() == "Life"){
+            body2.setUserData("Remove");
+            cloudsController.removeCollectables();
+        }
 
     }
 

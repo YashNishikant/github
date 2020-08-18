@@ -17,17 +17,11 @@ public class BounceBall{
 		
 		Dimension preferredSize = new Dimension();
 		preferredSize.setSize(600, 600);
-		
-		//newPanel.setSize(preferredSize);
+
 		frame.setSize(preferredSize);
 		contentpane.add(BPanel);
 	
 		frame.setVisible(true);
-		
-		while(true)
-		{
-			BPanel.repaint();
-			TimeUnit.MILLISECONDS.sleep(1);
-		}
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

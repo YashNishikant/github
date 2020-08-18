@@ -1,6 +1,5 @@
 package battleGame;
 
-
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
@@ -25,10 +24,7 @@ public class battlePanel1 {
 		contentpane.add(sPanel);
 
 		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		while (true) {
-			sPanel.repaint();
-			TimeUnit.MILLISECONDS.sleep(1);
-		}
 	}
 }
