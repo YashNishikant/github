@@ -8,7 +8,7 @@ public class bullet {
 
 	int bulletX = 0;
 	double bulletY = 0;
-	double damageForBoss = 0.1;
+	double damageForBoss = 0.5;
 	int yoffset = 24;
 	int bulletSpeed = 10;
 	int width = 10;

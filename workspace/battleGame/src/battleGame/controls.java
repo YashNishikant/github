@@ -13,6 +13,8 @@ public class controls {
 	int greenblue;
 	int grenadeAmmo;
 
+	int shieldHP;
+	
 	public controls() {
 
 		hitcount = 0;
@@ -21,6 +23,7 @@ public class controls {
 		enemyAmmoR = 99;
 		greenblue = 255;
 		grenadeAmmo = 20;
+		shieldHP = 190;
 	}
 
 	public void naturaldrawings(Graphics g) {
@@ -102,7 +105,25 @@ public class controls {
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("default", Font.BOLD, 25));
 		g.drawString("Explosive Ammo: " + grenadeAmmo, 20, 80);
+		
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("default", Font.BOLD, 15));
+		g.drawString("Battery", 1650, 15);
+		
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("default", Font.BOLD, 15));
+		g.drawString("Shield HP", 1650, 115);
 
+		//battery
+		g.setColor(Color.black);
+		g.fillRect(1650, 120, 200, 30);
+		// cap
+		g.setColor(Color.BLACK);
+		g.fillRect(1660, 125, 200, 20);
+		
+		g.setColor(Color.GREEN);
+		g.fillRect(1655, 125, shieldHP, 20);
+		
 	}
 
 }

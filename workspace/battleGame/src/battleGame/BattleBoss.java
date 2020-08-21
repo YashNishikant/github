@@ -57,7 +57,7 @@ public class BattleBoss {
 			healthBar += knockbackstr;
 		}
 
-		if (healthcount <= 0) {
+		if (healthcount <= 5) {
 			alive = false;
 		} else {
 			alive = true;

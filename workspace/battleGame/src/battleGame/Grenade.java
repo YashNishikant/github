@@ -15,7 +15,7 @@ public class Grenade {
 	int height = 5;
 	int explosiveDamage = 100;
 	double grenadeFallingSpeed;
-	double setBackExplosion = 4;
+	double setBackExplosion = -4;
 	double increaseExplosion = 5;
 
 	boolean explode;
@@ -37,7 +37,6 @@ public class Grenade {
 	public void fire() {
 
 		if (bulletFire && heavyDestruction && !letdestroy) {
-			grenadeX = grenadeX + grenadeSpeed + grenadeSpeedAdditional;
 			grenadeY += grenadeFallingSpeed;
 			grenadeFallingSpeed += 0.05;
 
@@ -54,23 +53,23 @@ public class Grenade {
 		if (explode && lock) {
 
 			g.setColor(Color.BLUE);
-			g.fillOval(grenadeX + 180, explodeHeight, explosionWidthHeight, explosionWidthHeight);
+			g.fillOval(grenadeX - 50, explodeHeight, explosionWidthHeight, explosionWidthHeight);
 
-			g.setColor(Color.WHITE);
-			g.fillOval(grenadeX + 180, explodeHeight + 20, explosionWidthHeight, explosionWidthHeight);
+			//g.setColor(Color.WHITE);
+			//g.fillOval(grenadeX + 180, explodeHeight + 20, explosionWidthHeight, explosionWidthHeight);
 
-			g.setColor(Color.BLUE);
-			g.fillOval(grenadeX + 180, explodeHeight + 40, explosionWidthHeight, explosionWidthHeight);
+			//g.setColor(Color.BLUE);
+			//g.fillOval(grenadeX + 180, explodeHeight + 40, explosionWidthHeight, explosionWidthHeight);
 
-			g.setColor(Color.WHITE);
-			g.fillOval(grenadeX + 180, explodeHeight + 60, explosionWidthHeight, explosionWidthHeight);
+			//g.setColor(Color.WHITE);
+			//g.fillOval(grenadeX + 180, explodeHeight + 60, explosionWidthHeight, explosionWidthHeight);
 
-			g.setColor(Color.BLUE);
-			g.fillOval(grenadeX + 180, explodeHeight + 80, explosionWidthHeight, explosionWidthHeight);
+			//g.setColor(Color.BLUE);
+			//g.fillOval(grenadeX + 180, explodeHeight + 80, explosionWidthHeight, explosionWidthHeight);
 
 			explosionWidthHeight += increaseExplosion;
 			explodeHeight -= increaseExplosion;
-			grenadeX -= setBackExplosion;
+			grenadeX += setBackExplosion;
 
 			if (explosionWidthHeight >= 450) {
 				explode = false;
@@ -80,19 +79,19 @@ public class Grenade {
 
 		if (explosionWidthHeight >= 0 && !explode && !lock) {
 			g.setColor(Color.BLUE);
-			g.fillOval(grenadeX + 180, explodeHeight, explosionWidthHeight, explosionWidthHeight);
+			g.fillOval(grenadeX - 50, explodeHeight, explosionWidthHeight, explosionWidthHeight);
 
-			g.setColor(Color.WHITE);
-			g.fillOval(grenadeX + 180, explodeHeight + 20, explosionWidthHeight, explosionWidthHeight);
+			//g.setColor(Color.WHITE);
+			//g.fillOval(grenadeX + 180, explodeHeight + 20, explosionWidthHeight, explosionWidthHeight);
 
-			g.setColor(Color.BLUE);
-			g.fillOval(grenadeX + 180, explodeHeight + 40, explosionWidthHeight, explosionWidthHeight);
+			//g.setColor(Color.BLUE);
+			//g.fillOval(grenadeX + 180, explodeHeight + 40, explosionWidthHeight, explosionWidthHeight);
 
-			g.setColor(Color.WHITE);
-			g.fillOval(grenadeX + 180, explodeHeight + 60, explosionWidthHeight, explosionWidthHeight);
+			//g.setColor(Color.WHITE);
+			//g.fillOval(grenadeX + 180, explodeHeight + 60, explosionWidthHeight, explosionWidthHeight);
 
-			g.setColor(Color.BLUE);
-			g.fillOval(grenadeX + 180, explodeHeight + 80, explosionWidthHeight, explosionWidthHeight);
+			//g.setColor(Color.BLUE);
+			//g.fillOval(grenadeX + 180, explodeHeight + 80, explosionWidthHeight, explosionWidthHeight);
 
 			if (explosionWidthHeight > 0) {
 				explosionWidthHeight -= increaseExplosion;
@@ -105,6 +104,10 @@ public class Grenade {
 		}
 	}
 
+	public void move() {
+		grenadeX = grenadeX + grenadeSpeed + grenadeSpeedAdditional;
+	}
+	
 	public void destroy() {
 
 		if (letdestroy && explosionOver) {
@@ -119,7 +122,7 @@ public class Grenade {
 
 	public Rectangle boundsExplosive() {
 		if (explode) {
-			return (new Rectangle(grenadeX + 180, explodeHeight + 80, explosionWidthHeight, explosionWidthHeight));
+			return (new Rectangle(grenadeX - 50, explodeHeight + 80, explosionWidthHeight, explosionWidthHeight));
 		} else {
 			return (new Rectangle(grenadeX, (int) grenadeY, 10, 10));
 		}

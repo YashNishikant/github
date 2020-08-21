@@ -21,7 +21,6 @@ public class armor {
 	boolean flyIMG_LEFT = false;
 	boolean turbo_LEFT = false;
 	boolean ableToTurbo_LEFT = false;
-
 	boolean driftleft;
 	boolean driftright;
 

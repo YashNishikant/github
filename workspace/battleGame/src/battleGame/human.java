@@ -26,6 +26,7 @@ public class human {
 	boolean hitgrass = false;
 	boolean onetimeJump = true;
 	boolean jumping = false;
+	boolean death = false;
 
 	public human() {
 
@@ -41,12 +42,17 @@ public class human {
 	}
 
 	public void move() {
-		if (personY >= 871) {
-			speedY = 0;
-			personY = 870;
-		}
+		if (!death) {
+			if (personY >= 871) {
+				speedY = 0;
+				personY = 870;
+			}
 
-		personY = personY + speedY;
+			personY = personY + speedY;
+		} else {
+			if (personY <= 915)
+				speedY += 3;
+		}
 	}
 
 	public void shutdown() {
@@ -56,14 +62,14 @@ public class human {
 			if (personY >= 869) {
 				speedY = 0;
 			} else {
-				speedY = 3;
+				speedY += 0.05;
 			}
 		}
 	}
 
 	public void jump() {
 
-		if (jump) {
+		if (jump && !death) {
 			if (onetimeJump) {
 				speedY = -2.5;
 				onetimeJump = false;
@@ -93,29 +99,31 @@ public class human {
 	}
 
 	public void draw(Graphics g) {
+		if (!death) {
+			// User
+			g.setColor(Color.green);
+			g.fillRect(personX, (int) (personY + 30), 20, 30);
 
-		// User
-		g.setColor(Color.green);
-		g.fillRect(personX, (int) (personY + 30), 20, 30);
+			// legs
+			g.setColor(Color.blue);
+			g.fillRect(personX + 12, (int) (personY + 61), 7, 19);
+			g.fillRect(personX + 1, (int) (personY + 61), 7, 19);
 
-		// legs
-		g.setColor(Color.blue);
-		g.fillRect(personX + 12, (int) (personY + 61), 7, 19);
-		g.fillRect(personX + 1, (int) (personY + 61), 7, 19);
-
-		// arms
-		g.setColor(Color.blue);
-		g.fillRect(personX + 21, (int) (personY + 30), 7, 25);
-		g.fillRect(personX - 8, (int) (personY + 30), 7, 25);
-
+			// arms
+			g.setColor(Color.blue);
+			g.fillRect(personX + 21, (int) (personY + 30), 7, 25);
+			g.fillRect(personX - 8, (int) (personY + 30), 7, 25);
+		}
 	}
 
 	public void drawHealth(Graphics g) {
-		// healthbar
-		g.setColor(Color.black);
-		g.fillRect(personX - 10, (int) (personY + 1), 42, 6);
-		g.setColor(Color.red);
-		g.fillRect(personX - 9, (int) (personY + 3), healthcount, 2);
+		if (!death) {
+			// healthbar
+			g.setColor(Color.black);
+			g.fillRect(personX - 10, (int) (personY + 1), 42, 6);
+			g.setColor(Color.red);
+			g.fillRect(personX - 9, (int) (personY + 3), healthcount, 2);
+		}
 	}
 
 	public Rectangle bounds() {
