@@ -27,15 +27,26 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	int blockoffset = 0;
 	int limitXleft = 1900;
 	int limitXright = -10;
+	int animationSpeed = 30;
+	int animationLimit;
+	int animationNumberR = 1;
+	int animationDelayR;
+	int animationNumberL = 1;
+	int animationDelayL;
+	boolean animateLeft;
+	boolean animateRight;
 	boolean allowJ = true;
 	boolean darkenSky;
 	boolean destroyerFireLock = true;
+
+	boolean turnRight = true;
+	boolean turnLeft;
 
 	int fireBulletTick;
 
 	bullet[] bullets = new bullet[100];
 	buildings[] towers = new buildings[700];
-	NPC[] player = new NPC[100];
+	NPC[] player = new NPC[10];
 	rain[] raindrop = new rain[200];
 	Grenade[] explosive = new Grenade[20];
 	DestroyerBullets[] enemyBulletLeft = new DestroyerBullets[100];
@@ -47,13 +58,13 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	Timer time = new Timer(5, this);
 	controls gui = new controls();
 	battery power = new battery();
-	BattleBoss destroyer = new BattleBoss(1500, 500);
+	BattleBoss destroyer = new BattleBoss(1500, -5000);
 	Shield shield = new Shield(iron.armorPosX + 50, iron.armorPosY);
-	String assetsPath; 
+	String assetsPath;
+
 	public sandbox() {
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";
-		System.out.println("Assets Path " + assetsPath);
 		for (int i = 0; i < raindrop.length; i++) {
 			rain raindrop1 = new rain();
 			raindrop[i] = raindrop1;
@@ -112,8 +123,9 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		for (int i = 0; i < player.length; i++) {
 			if (player[i].alive && player[i].npcX > limitXright && player[i].npcX < limitXleft) {
 				player[i].drawNPC(g);
+				player[i].drawNPCHealth(g);
 
-				addImage(g, "imageface.png", player[i].npcX, player[i].npcY + 10);
+				// addImage(g, "imageface.png", player[i].npcX, player[i].npcY + 10);
 
 			} else {
 				if (player[i].npcX > limitXright && player[i].npcX < limitXleft) {
@@ -135,25 +147,43 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			explosive[i].destruction(g);
 		}
 
-		// Ground
-		g.setColor(Color.gray);
-		g.fillRect(0, 950, 2000, 2000);
+		gui.drawGround(g);
 
-		cloud.draw(g);
+		addImage(g, "Cloud.png", cloud.cloud1start, cloud.cloud1Y);
+		addImage(g, "Cloud.png", cloud.cloud2start, cloud.cloud2Y);
+		addImage(g, "Cloud.png", cloud.cloud3start, cloud.cloud3Y);
 
-		user.drawHealth(g);
 		if (!iron.track) {
+			user.drawHealth(g, user.personX, user.personX);
+		} else {
+			user.drawHealth(g, user.personX - 5, user.personX - 5);
+		}
 
-			user.draw(g);
-
+		if (!iron.track) {
 			iron.normal = true;
 			iron.fire = false;
 
 			gui.draw(g);
 			if (!user.death) {
 
-				addImage(g, "imageface.png", user.personX, (int) (user.personY + 10));
+				if (turnRight && !animateRight) {
+					addImage(g, "PlayerRight.png", user.personX, (int) user.personY + 12);
+				}
 
+				if (turnLeft && !animateLeft) {
+					addImage(g, "PlayerLeft.png", user.personX, (int) user.personY + 12);
+				}
+
+				//ANIMATION
+				animationLimit = 5;
+				animationNumberR = animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight", user.personX,
+						(int) user.personY + 12, animationLimit, animationSpeed);
+				animationDelayR++;
+				animationNumberL = animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft", user.personX,
+						(int) user.personY + 12 , animationLimit, animationSpeed);
+				animationDelayL++;
+				//ANIMATION
+			
 			} else {
 				addImage(g, "skull.png", user.personX, (int) (user.personY + 10));
 			}
@@ -215,51 +245,51 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		}
 		if (iron.normal) {
 
-			addImage(g, "ironmanNOFire.png", iron.armorPosX, iron.armorPosY);
+			addImage(g, "tankNOfire.png", iron.armorPosX, iron.armorPosY);
 
 		}
 
 		if (iron.fire) {
 
-			addImage(g, "ironmanSuitJavaCanvasIMG.png", iron.armorPosX, iron.armorPosY);
+			addImage(g, "TankArmor.png", iron.armorPosX, iron.armorPosY);
 
 		}
 
 		if (iron.blast) {
 
-			addImage(g, "ironmanBlast.png", iron.armorPosX, iron.armorPosY);
+			addImage(g, "tankBlast.png", iron.armorPosX, iron.armorPosY);
 
 		}
 
 		if (iron.confirmgroundfire) {
 
-			addImage(g, "ironmanBlastOnGround.png", iron.armorPosX, iron.armorPosY);
+			addImage(g, "tankBlastGround.png", iron.armorPosX, iron.armorPosY);
 
 		}
 		// fly
 		if (iron.flyIMG && !shield.activateShield) {
 
-			addImage(g, "ironmanFly.png", iron.armorPosX, iron.armorPosY);
+			addImage(g, "TankFlyRight.png", iron.armorPosX, iron.armorPosY);
 
 		} else if (iron.flyIMG && shield.activateShield) {
 
-			addImage(g, "ironmanSuitJavaCanvasIMG.png", iron.armorPosX, iron.armorPosY);
+			addImage(g, "TankArmor.png", iron.armorPosX, iron.armorPosY);
 
 		}
 
 		if (iron.flyIMG_LEFT && !shield.activateShield) {
 
-			addImage(g, "ironmanFlyLEFT.png", iron.armorPosX, iron.armorPosY);
+			addImage(g, "TankFlyLeft.png", iron.armorPosX, iron.armorPosY);
 
 		} else if (iron.flyIMG_LEFT && shield.activateShield) {
 
-			addImage(g, "ironmanSuitJavaCanvasIMG.png", iron.armorPosX, iron.armorPosY);
+			addImage(g, "TankArmor.png", iron.armorPosX, iron.armorPosY);
 
 		}
 		// fly
 		if (iron.turbo) {
 
-			addImage(g, "TURBO.png", iron.armorPosX, iron.armorPosY);
+			addImage(g, "TURBO_RIGHT.png", iron.armorPosX, iron.armorPosY);
 
 		}
 		if (iron.turbo_LEFT) {
@@ -298,6 +328,25 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	public void addImage(Graphics g, String s, int x, int y) {
 		ImageIcon i = new ImageIcon(assetsPath + s);
 		i.paintIcon(this, g, x, (int) y);
+	}
+
+	public int animation(Graphics g, int animationDelay, int animationNumber, boolean animateDirection,
+			String PlayerDirection, int x, int y, int animationLimit, int animationSpeed) {
+
+		animationDelay++;
+		
+		if (animateDirection) {
+			addImage(g, (PlayerDirection + animationNumber + ".png"), (int) x, (int) y);
+
+			if (animationDelay % animationSpeed == 0) {
+				animationNumber++;
+			}
+
+			if (animationNumber == animationLimit) {
+				animationNumber = 1;
+			}
+		}		
+		return animationNumber;
 	}
 
 	public void contain() {
@@ -689,7 +738,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			power.track = true;
 		}
 
-		if (i == KeyEvent.VK_C) {
+		if (i == KeyEvent.VK_C && iron.track) {
 			if (user.personY >= 870) {
 				iron.track = false;
 				power.track = false;
@@ -719,6 +768,11 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if (i == KeyEvent.VK_A && !user.death) {
+
+			turnLeft = true;
+			turnRight = false;
+			animateRight = false;
+			animateLeft = true;
 
 			if (!shield.activateShield) {
 				iron.ableToTurbo_LEFT = true;
@@ -753,6 +807,12 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		}
 
 		if (i == KeyEvent.VK_D && !user.death) {
+
+			turnLeft = false;
+			turnRight = true;
+			animateRight = true;
+			animateLeft = false;
+
 			if (!shield.activateShield) {
 				iron.ableToTurbo = true;
 			}
@@ -832,30 +892,20 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		if (i == KeyEvent.VK_D) {
 			iron.flyIMG = false;
 			iron.ableToTurbo = false;
+			animateRight = false;
 		}
 
 		if (i == KeyEvent.VK_A) {
 			iron.flyIMG_LEFT = false;
 			iron.ableToTurbo_LEFT = false;
-		}
-
-		if (i == KeyEvent.VK_D && iron.armorPosY < 865) {
-			iron.driftright = true;
-			iron.fire = true;
-		}
-
-		if (i == KeyEvent.VK_A && iron.armorPosY < 865) {
-			iron.driftleft = true;
-			iron.fire = true;
+			animateLeft = false;
 		}
 
 		if (i == KeyEvent.VK_D && iron.armorPosY >= 870) {
-
 			movePlayer(0);
 		}
 
 		if (i == KeyEvent.VK_A && iron.armorPosY >= 870) {
-
 			movePlayer(0);
 		}
 

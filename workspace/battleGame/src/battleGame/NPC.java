@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class NPC {
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+public class NPC extends JPanel{
 
 	int npcY;
 	int npcX;
@@ -19,13 +22,30 @@ public class NPC {
 	int speedaddition;
 	int turnaround;
 	int knockbackstr;
+	int animationSpeed = 30;
+	int animationLimit = 5;
+	int animationNumberR = 1;
+	int animationDelayR;
 
+	int animationNumberL = 1;
+	int animationDelayL;
+
+	boolean animateLeft;
+	boolean animateRight;
+	
+	String assetsPath;
+	
 	boolean knockback = false;
 	boolean alive = true;
 	boolean dropLock = true;
-
+	boolean turnleft;
+	boolean turnright;
+	
+	int randomDirection;
+	
 	public NPC(int x, int speed1) {
-
+		assetsPath = System.getProperty("user.dir");
+		assetsPath += "\\src\\assets\\";
 		npcY = 870;
 		npcX = x;
 		npcHealth = 100;
@@ -60,10 +80,14 @@ public class NPC {
 
 			if (turnaround == 50) {
 				speedaddition = -1;
+				turnleft = true;
+				turnright = false;
 			}
 
 			if (turnaround == 60) {
 				speedaddition = 1;
+				turnright = true;
+				turnleft = false;
 			}
 
 		} else {
@@ -72,29 +96,76 @@ public class NPC {
 	}
 
 	public void drawNPC(Graphics g) {
+		
+		randomDirection = (int)(Math.random() * 1);
+		
+		if (alive) {
+			
+			if(!turnright && !turnleft) {
+				if(randomDirection == 1) {
+					addImage(g, "PlayerRight.png", npcX, (int)npcY + 12);
+				}
+				if(randomDirection == 0) {
+					addImage(g, "PlayerLeft.png", npcX, (int)npcY + 12);
+				}
+			}
+			
+			if(turnright) {
+				animateRight = true;
+				animateLeft = false;
+				
+				animationNumberR = animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight", npcX,
+						(int) npcY + 12, animationLimit, animationSpeed);
+				animationDelayR++;
+			}
+			
+			if(turnleft) {
+				animateRight = false;
+				animateLeft = true;
+				
+				addImage(g, "PlayerLeft.png", npcX, (int)npcY + 12);
+				
+				animationNumberL = animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft", npcX,
+						(int) npcY + 12 , animationLimit, animationSpeed);
+				animationDelayL++;
+			}
+		}
+	}
+	
+	public void addImage(Graphics g, String s, int x, int y) {
+		ImageIcon i = new ImageIcon(assetsPath + s);
+		i.paintIcon(this, g, x, (int) y);
+	}
+	
+	public int animation(Graphics g, int animationDelay, int animationNumber, boolean animateDirection, String PlayerDirection, int x, int y, int animationLimit, int animationSpeed) {
+		
+		animationDelay++;
+		
+		if (animateDirection) {
+			addImage(g, (PlayerDirection + animationNumber + ".png"), (int) x, (int) y);
+			
+			if (animationDelay % animationSpeed == 0) {
+				animationNumber++;
+				
+			}
+			if (animationNumber == animationLimit) {
+				
+				animationNumber = 1;
+			}
+		}		
+		return animationNumber;
+	}
+	
+	public void drawNPCHealth(Graphics g) {
 		if (alive) {
 			// healthbar
 			g.setColor(Color.black);
-			g.fillRect(healthbarbox - 10, npcY + 1, 42, 6);
+			g.fillRect(healthbarbox - 5, npcY + 1, 42, 6);
 			g.setColor(Color.green);
-			g.fillRect(healthnpc - 10, npcY + 3, healthcount, 2);
-
-			// User
-			g.setColor(Color.GREEN);
-			g.fillRect(npcX, npcY + 30, 20, 30);
-
-			// legs
-			g.setColor(Color.blue);
-			g.fillRect(npcX + 12, npcY + 61, 7, 19);
-			g.fillRect(npcX + 1, npcY + 61, 7, 19);
-
-			// arms
-			g.setColor(Color.blue);
-			g.fillRect(npcX + 21, npcY + 30, 7, 25);
-			g.fillRect(npcX - 8, npcY + 30, 7, 25);
+			g.fillRect(healthnpc - 5, npcY + 3, healthcount, 2);
 		}
 	}
-
+	
 	public void move() {
 		npcX = (int) (npcX + speed + speedaddition);
 		npcY = npcY + speedY;

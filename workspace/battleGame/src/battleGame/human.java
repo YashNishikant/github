@@ -98,31 +98,13 @@ public class human {
 
 	}
 
-	public void draw(Graphics g) {
-		if (!death) {
-			// User
-			g.setColor(Color.green);
-			g.fillRect(personX, (int) (personY + 30), 20, 30);
-
-			// legs
-			g.setColor(Color.blue);
-			g.fillRect(personX + 12, (int) (personY + 61), 7, 19);
-			g.fillRect(personX + 1, (int) (personY + 61), 7, 19);
-
-			// arms
-			g.setColor(Color.blue);
-			g.fillRect(personX + 21, (int) (personY + 30), 7, 25);
-			g.fillRect(personX - 8, (int) (personY + 30), 7, 25);
-		}
-	}
-
-	public void drawHealth(Graphics g) {
+	public void drawHealth(Graphics g, int xFrame, int xRed) {
 		if (!death) {
 			// healthbar
 			g.setColor(Color.black);
-			g.fillRect(personX - 10, (int) (personY + 1), 42, 6);
+			g.fillRect(xFrame - 5, (int) (personY + 1), 42, 6);
 			g.setColor(Color.red);
-			g.fillRect(personX - 9, (int) (personY + 3), healthcount, 2);
+			g.fillRect(xRed - 4, (int) (personY + 3), healthcount, 2);
 		}
 	}
 

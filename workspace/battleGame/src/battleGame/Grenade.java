@@ -15,7 +15,8 @@ public class Grenade {
 	int height = 5;
 	int explosiveDamage = 100;
 	double grenadeFallingSpeed;
-	double setBackExplosion = -4;
+	double setBackExplosionINC = -4;
+	double setBackExplosionDEC = -1;
 	double increaseExplosion = 5;
 
 	boolean explode;
@@ -55,21 +56,9 @@ public class Grenade {
 			g.setColor(Color.BLUE);
 			g.fillOval(grenadeX - 50, explodeHeight, explosionWidthHeight, explosionWidthHeight);
 
-			//g.setColor(Color.WHITE);
-			//g.fillOval(grenadeX + 180, explodeHeight + 20, explosionWidthHeight, explosionWidthHeight);
-
-			//g.setColor(Color.BLUE);
-			//g.fillOval(grenadeX + 180, explodeHeight + 40, explosionWidthHeight, explosionWidthHeight);
-
-			//g.setColor(Color.WHITE);
-			//g.fillOval(grenadeX + 180, explodeHeight + 60, explosionWidthHeight, explosionWidthHeight);
-
-			//g.setColor(Color.BLUE);
-			//g.fillOval(grenadeX + 180, explodeHeight + 80, explosionWidthHeight, explosionWidthHeight);
-
 			explosionWidthHeight += increaseExplosion;
 			explodeHeight -= increaseExplosion;
-			grenadeX += setBackExplosion;
+			grenadeX += setBackExplosionINC;
 
 			if (explosionWidthHeight >= 450) {
 				explode = false;
@@ -81,22 +70,10 @@ public class Grenade {
 			g.setColor(Color.BLUE);
 			g.fillOval(grenadeX - 50, explodeHeight, explosionWidthHeight, explosionWidthHeight);
 
-			//g.setColor(Color.WHITE);
-			//g.fillOval(grenadeX + 180, explodeHeight + 20, explosionWidthHeight, explosionWidthHeight);
-
-			//g.setColor(Color.BLUE);
-			//g.fillOval(grenadeX + 180, explodeHeight + 40, explosionWidthHeight, explosionWidthHeight);
-
-			//g.setColor(Color.WHITE);
-			//g.fillOval(grenadeX + 180, explodeHeight + 60, explosionWidthHeight, explosionWidthHeight);
-
-			//g.setColor(Color.BLUE);
-			//g.fillOval(grenadeX + 180, explodeHeight + 80, explosionWidthHeight, explosionWidthHeight);
-
 			if (explosionWidthHeight > 0) {
 				explosionWidthHeight -= increaseExplosion;
 				explodeHeight += increaseExplosion;
-				grenadeX += setBackExplosion;
+				grenadeX += setBackExplosionDEC;
 
 			} else {
 				explosionOver = true;

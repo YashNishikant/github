@@ -7,12 +7,17 @@ import java.awt.Graphics;
 public class clouds {
 
 	int cloud1start = 50, cloud2start = -800, cloud3start = -1000;
-
+	int cloud1Y, cloud2Y, cloud3Y;
+	
 	public clouds() {
 
 		cloud1start = 50;
 		cloud2start = -800;
 		cloud3start = -1000;
+		
+		cloud1Y = 60;
+		cloud2Y = 120;
+		cloud3Y = 80;
 
 	}
 
@@ -33,17 +38,5 @@ public class clouds {
 			cloud3start = -1600;
 		}
 
-	}
-
-	public void draw(Graphics g) {
-		
-		g.setColor(Color.white);
-		g.fillRect(cloud1start, 60, 200, 40);
-		g.setColor(Color.white);
-		g.fillRect(cloud2start, 120, 200, 40);
-		g.setColor(Color.white);
-		g.fillRect(cloud3start, 80, 200, 40);
-		
-	}
-	
+	}	
 }

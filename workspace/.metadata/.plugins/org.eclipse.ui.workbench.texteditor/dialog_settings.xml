@@ -6,29 +6,30 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="!destroyer.alive" key="selection"/>
+		<item value="animationLimit" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="!destroyer.alive"/>
-			<item value="!alive"/>
-			<item value="deadN"/>
-			<item value="VK_S"/>
-			<item value="dead"/>
-			<item value="iron.armorspeed = 0"/>
-			<item value="armor.armorspeed = 0"/>
-			<item value="armor.armorSpeed = 0"/>
-			<item value="moveT"/>
-			<item value="VK_A"/>
-			<item value="VK_"/>
-			<item value="iron.armorspeed ="/>
-			<item value="moveP"/>
-			<item value="move"/>
-			<item value="VK_W"/>
+			<item value="animationLimit"/>
+			<item value="turnright = false"/>
+			<item value="animation"/>
+			<item value="animate"/>
+			<item value="anima"/>
+			<item value="animationDelayR"/>
+			<item value="animationDelay"/>
+			<item value="animationDelay "/>
+			<item value="animationDelay = "/>
+			<item value="animationDelay = 1"/>
+			<item value="Player"/>
+			<item value="animati"/>
+			<item value="animatino"/>
+			<item value="TURBO"/>
+			<item value="TURBO."/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
 			<item value="bullets[i]"/>
 			<item value="X"/>
 			<item value="Y"/>
@@ -43,7 +44,6 @@
 			<item value="630"/>
 			<item value="mousePress"/>
 			<item value="myArrL"/>
-			<item value="myInt"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
