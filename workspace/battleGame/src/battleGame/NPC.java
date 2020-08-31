@@ -32,6 +32,7 @@ public class NPC extends JPanel{
 
 	boolean animateLeft;
 	boolean animateRight;
+	boolean oneTimeJump;
 	
 	String assetsPath;
 	
@@ -101,12 +102,18 @@ public class NPC extends JPanel{
 		
 		if (alive) {
 			
+			if (turnright) {
+				addImage(g, "//Player//PlayerRightARMS.png", npcX - 3, (int) npcY + 30);
+			} else {
+				addImage(g, "//Player//PlayerRightARMS.png", npcX - 5, (int) npcY + 30);
+			}
+			
 			if(!turnright && !turnleft) {
 				if(randomDirection == 1) {
 					addImage(g, "PlayerRight.png", npcX, (int)npcY + 12);
 				}
 				if(randomDirection == 0) {
-					addImage(g, "PlayerLeft.png", npcX, (int)npcY + 12);
+					addImage(g, "//Player//PlayerLeft.png", npcX, (int)npcY + 12);
 				}
 			}
 			
@@ -123,7 +130,7 @@ public class NPC extends JPanel{
 				animateRight = false;
 				animateLeft = true;
 				
-				addImage(g, "PlayerLeft.png", npcX, (int)npcY + 12);
+				addImage(g, "//Player//PlayerLeft.png", npcX, (int)npcY + 12);
 				
 				animationNumberL = animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft", npcX,
 						(int) npcY + 12 , animationLimit, animationSpeed);
@@ -142,7 +149,7 @@ public class NPC extends JPanel{
 		animationDelay++;
 		
 		if (animateDirection) {
-			addImage(g, (PlayerDirection + animationNumber + ".png"), (int) x, (int) y);
+			addImage(g, ("//Player//" + PlayerDirection + animationNumber + ".png"), (int) x, (int) y);
 			
 			if (animationDelay % animationSpeed == 0) {
 				animationNumber++;

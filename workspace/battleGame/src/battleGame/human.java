@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class human {
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+public class human extends JPanel {
 
 	double speedY;
 	int personX;
@@ -13,22 +16,41 @@ public class human {
 	int minheight;
 	int hHitBox;
 	int wHitBox;
+	boolean allowJ = true;
 
 	int healthbarbox;
 	int health;
 	int healthcount;
 
-	boolean jump = false;
+	boolean jump;
 	boolean rise = true;
-	boolean insideSuit = false;
-	boolean nobattery = false;
-	boolean onground = false;
-	boolean hitgrass = false;
+	boolean insideSuit;
+	boolean nobattery;
+	boolean onground;
+	boolean hitgrass;
 	boolean onetimeJump = true;
-	boolean jumping = false;
-	boolean death = false;
+	boolean jumping;
+	boolean death;
+	boolean holdingWeapon;
+
+	String assetsPath;
+
+	int animationSpeed = 30;
+	int animationLimit;
+	int animationDelayR;
+	int animationDelayL;
+	boolean animateLeft;
+	boolean animateRight;
+	boolean turnRight = true;
+	boolean turnLeft;
+
+	int_by_ref animationNumberR = new int_by_ref(1);
+	int_by_ref animationNumberL = new int_by_ref(1);
 
 	public human() {
+
+		assetsPath = System.getProperty("user.dir");
+		assetsPath += "\\src\\assets\\";
 
 		speedY = 0;
 		personX = 810;
@@ -38,7 +60,6 @@ public class human {
 		minheight = 870;
 		hHitBox = 70;
 		wHitBox = 38;
-		hitgrass = false;
 	}
 
 	public void move() {
@@ -68,43 +89,104 @@ public class human {
 	}
 
 	public void jump() {
+		if (allowJ) {
+			if (jump && !death) {
+				if (onetimeJump) {
+					speedY = -2.5;
+					onetimeJump = false;
+					jumping = true;
+				}
 
-		if (jump && !death) {
-			if (onetimeJump) {
-				speedY = -2.5;
-				onetimeJump = false;
-				jumping = true;
+				personY += speedY;
+				if (speedY < 0) {
+					speedY += 0.07;
+				} else {
+					jump = false;
+					onetimeJump = true;
+					jumping = false;
+				}
 			}
 
-			personY += speedY;
-			if (speedY < 0) {
-				speedY += 0.07;
-			} else {
-				jump = false;
-				onetimeJump = true;
+			if (!jump) {
+				personY += speedY;
+
 				jumping = false;
+
+				if (speedY < 3) {
+					speedY += 0.07;
+				}
 			}
+
 		}
+	}
 
-		if (!jump) {
-			personY += speedY;
+	public void drawHealth(Graphics g, int xFrame, int xRed, int x) {
+		// healthbar
+		g.setColor(Color.black);
+		g.fillRect(xFrame - (x), (int) (personY + 1), 42, 6);
+		g.setColor(Color.red);
+		g.fillRect(xRed - (x - 1), (int) (personY + 3), healthcount, 2);
+	}
 
-			jumping = false;
+	public void draw(Graphics g) {
+		if (!death) {
 
-			if (speedY < 3) {
-				speedY += 0.07;
+			if (turnRight) {
+				if (!holdingWeapon) {
+					addImage(g, "//Player//PlayerRightARMS.png", personX - 3, (int) personY + 30);
+				} else {
+					addImage(g, "//Player//PlayerRightARMSWeapon.png", personX - 3, (int) personY + 30);
+				}
+			} else {
+				addImage(g, "//Player//PlayerLeftARMS.png", personX - 6, (int) personY + 30);
 			}
+
+			if (turnRight && !animateRight) {
+				addImage(g, "//Player//PlayerRight.png", personX, (int) personY + 12);
+			}
+
+			if (turnLeft && !animateLeft) {
+				addImage(g, "//Player//PlayerLeft.png", personX, (int) personY + 12);
+			}
+
+			// ANIMATION
+			animationLimit = 6;
+
+			animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight", personX, (int) personY + 12,
+					animationLimit, animationSpeed);
+
+			animationDelayR++;
+			animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft", personX, (int) personY + 12,
+					animationLimit, animationSpeed);
+			animationDelayL++;
+			// ANIMATION
+
+		} else {
+			addImage(g, "//Icons//skull.png", personX, (int) (personY + 10));
 		}
 
 	}
 
-	public void drawHealth(Graphics g, int xFrame, int xRed) {
-		if (!death) {
-			// healthbar
-			g.setColor(Color.black);
-			g.fillRect(xFrame - 5, (int) (personY + 1), 42, 6);
-			g.setColor(Color.red);
-			g.fillRect(xRed - 4, (int) (personY + 3), healthcount, 2);
+	public void addImage(Graphics g, String s, int x, int y) {
+		ImageIcon i = new ImageIcon(assetsPath + s);
+		i.paintIcon(this, g, x, (int) y);
+	}
+
+	public void animation(Graphics g, int animationDelay, int_by_ref animationNumberByRef, boolean animateDirection,
+			String PlayerDirection, int x, int y, int animationLimit, int animationSpeed) {
+
+		animationDelay++;
+
+		if (animateDirection) {
+			addImage(g, ("//Player//" + PlayerDirection + animationNumberByRef.int_ref + ".png"), (int) x, (int) y);
+
+			if (animationDelay % animationSpeed == 0) {
+				animationNumberByRef.int_ref++;
+			}
+
+			if (animationNumberByRef.int_ref == animationLimit) {
+				animationNumberByRef.int_ref = 1;
+			}
 		}
 	}
 

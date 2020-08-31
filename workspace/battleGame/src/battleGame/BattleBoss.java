@@ -11,6 +11,7 @@ public class BattleBoss {
 	double speed;
 	double speedY;
 	int wHitBox;
+	int fireBulletTick;
 	int hHitBox;
 	int healthbarbox;
 	int healthBar;
@@ -19,7 +20,7 @@ public class BattleBoss {
 	int turnaround;
 	int knockbackstr;
 	int lengthwidth = 3000;
-
+	boolean destroyerFireLock = true;
 	boolean attackMode;
 	boolean knockback;
 	boolean alive = true;
@@ -57,7 +58,7 @@ public class BattleBoss {
 			healthBar += knockbackstr;
 		}
 
-		if (healthcount <= 5) {
+		if (healthcount <= 0) {
 			alive = false;
 		} else {
 			alive = true;

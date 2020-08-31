@@ -12,7 +12,8 @@ public class controls {
 	int hitcount;
 	int greenblue;
 	int grenadeAmmo;
-
+	boolean darkenSky;
+	int knockbackRNG;
 	int shieldHP;
 
 	public controls() {
@@ -21,7 +22,7 @@ public class controls {
 		ammo = 100;
 		enemyAmmoL = 99;
 		enemyAmmoR = 99;
-		greenblue = 255;
+		greenblue = 250;
 		grenadeAmmo = 20;
 		shieldHP = 190;
 	}

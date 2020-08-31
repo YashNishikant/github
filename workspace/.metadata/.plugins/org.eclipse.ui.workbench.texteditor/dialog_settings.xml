@@ -6,30 +6,34 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="animationLimit" key="selection"/>
+		<item value="movePla" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="animationLimit"/>
-			<item value="turnright = false"/>
-			<item value="animation"/>
-			<item value="animate"/>
-			<item value="anima"/>
-			<item value="animationDelayR"/>
-			<item value="animationDelay"/>
-			<item value="animationDelay "/>
-			<item value="animationDelay = "/>
-			<item value="animationDelay = 1"/>
-			<item value="Player"/>
-			<item value="animati"/>
-			<item value="animatino"/>
-			<item value="TURBO"/>
-			<item value="TURBO."/>
+			<item value="movePla"/>
+			<item value="cityB"/>
+			<item value="darkenSky"/>
+			<item value="destroyerFireLock"/>
+			<item value="destroyerLock"/>
+			<item value="beginR"/>
+			<item value="rain"/>
+			<item value="moveP"/>
+			<item value="tower"/>
+			<item value="treeN"/>
+			<item value="containa"/>
+			<item value="contain"/>
+			<item value="wand.draw"/>
+			<item value="bulletFire = false"/>
+			<item value="bullets"/>
 		</list>
 		<list key="replacehistory">
+			<item value="gui.darkenSky"/>
+			<item value="destroyer.destroyerFireLock"/>
 			<item value=""/>
+			<item value="npcY"/>
+			<item value="npcX"/>
 			<item value="bullets[i]"/>
 			<item value="X"/>
 			<item value="Y"/>
@@ -40,10 +44,6 @@
 			<item value="xCreeper"/>
 			<item value=" limit"/>
 			<item value="limit"/>
-			<item value="a"/>
-			<item value="630"/>
-			<item value="mousePress"/>
-			<item value="myArrL"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
