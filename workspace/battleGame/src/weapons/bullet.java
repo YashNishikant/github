@@ -1,18 +1,18 @@
-package battleGame;
+package weapons;
 import java.awt.Rectangle;
 
 public class bullet {
 
-	int bulletX = 0;
-	double bulletY = 0;
-	double damageForBoss = 0.5;
-	int yoffset = 24;
-	int bulletSpeed = 10;
-	int width = 10;
-	int height = 5;
-	int damage = 10;
-	boolean bulletFire = false;
-	boolean letdestroy = false;
+	public int bulletX = 0;
+	public double bulletY = 0;
+	public double damageForBoss = 0.5;
+	public int yoffset = 24;
+	public int bulletSpeed = 10;
+	public int width = 10;
+	public int height = 5;
+	public int damage = 10;
+	public boolean bulletFire = false;
+	public boolean letdestroy = false;
 
 	public bullet(int x, double y) {
 		bulletX = x;

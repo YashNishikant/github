@@ -1,31 +1,33 @@
-package battleGame;
+package weapons;
+
 import java.awt.Rectangle;
 
 public class armor {
 
-	boolean fire = false;
-	boolean track = false;
-	boolean canfly = false;
-	boolean ignore = false;
-	boolean blast = false;
-	boolean normal = false;
-	boolean activatefire = true;
-	boolean fireonground = false;
-	boolean confirmgroundfire = false;
-	boolean flyIMG = false;
-	boolean turbo = false;
-	boolean ableToTurbo = false;
-	boolean flyIMG_LEFT = false;
-	boolean turbo_LEFT = false;
-	boolean ableToTurbo_LEFT = false;
-	boolean driftleft;
-	boolean driftright;
+	public boolean fire = false;
+	public boolean track = false;
+	public boolean canfly = false;
+	public boolean ignore = false;
+	public boolean blast = false;
+	public boolean normal = false;
+	public boolean activatefire = true;
+	public boolean fireonground = false;
+	public boolean confirmgroundfire = false;
+	public boolean flyIMG = false;
+	public boolean turbo = false;
+	public boolean ableToTurbo = false;
+	public boolean flyIMG_LEFT = false;
+	public boolean turbo_LEFT = false;
+	public boolean ableToTurbo_LEFT = false;
+	public boolean driftleft;
+	public boolean driftright;
+	public boolean crafted;
 
-	int armorPosX;
-	int armorPosY;
-	int armorspeed;
-	int wHitBox;
-	int hHitBox;
+	public int armorPosX;
+	public int armorPosY;
+	public int armorspeed;
+	public int wHitBox;
+	public int hHitBox;
 
 	public armor() {
 
@@ -45,6 +47,13 @@ public class armor {
 		turbo = false;
 		ableToTurbo = false;
 
+	}
+
+	public void uncrafted() {
+		if (!crafted) {
+			armorPosX = 0;
+			armorPosY = -100;
+		}
 	}
 
 	public void tracking() {

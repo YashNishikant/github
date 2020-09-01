@@ -1,4 +1,4 @@
-package battleGame;
+package weapons;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,29 +6,29 @@ import java.awt.Rectangle;
 
 public class Grenade {
 
-	int grenadeX = 0;
-	double grenadeY = 0;
-	int yoffset = 24;
-	int grenadeSpeed = 2;
-	int grenadeSpeedAdditional = 2;
-	int width = 10;
-	int height = 5;
-	int explosiveDamage = 100;
-	double grenadeFallingSpeed;
-	double setBackExplosionINC = -4;
-	double setBackExplosionDEC = -1;
-	double increaseExplosion = 5;
+	public int grenadeX = 0;
+	public double grenadeY = 0;
+	public int yoffset = 24;
+	public int grenadeSpeed = 2;
+	public int grenadeSpeedAdditional = 2;
+	public int width = 10;
+	public int height = 5;
+	public int explosiveDamage = 100;
+	public double grenadeFallingSpeed;
+	public double setBackExplosionINC = -4;
+	public double setBackExplosionDEC = -1;
+	public double increaseExplosion = 5;
 
-	boolean explode;
-	boolean lock = true;
-	boolean bulletFire;
-	boolean letdestroy;
-	boolean heavyDestruction;
-	boolean explosionOver;
-	boolean drawExplosiveForRobotDestruction = true;
+	public boolean explode;
+	public boolean lock = true;
+	public boolean bulletFire;
+	public boolean letdestroy;
+	public boolean heavyDestruction;
+	public boolean explosionOver;
+	public boolean drawExplosiveForRobotDestruction = true;
 
-	int explosionWidthHeight = 50;
-	int explodeHeight = 1105;
+	public int explosionWidthHeight = 50;
+	public int explodeHeight = 1105;
 
 	public Grenade(int x, double y) {
 		grenadeX = x;

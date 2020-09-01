@@ -1,4 +1,4 @@
-package battleGame;
+package weapons;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,20 +7,22 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import playerNpc.int_by_ref;
+
 public class Wand extends JPanel {
 
-	int X;
-	int Y;
-	int spellWidth = 255;
-	boolean drawWand;
-	boolean spell;
-	String assetsPath;
-	int animationSpeed = 10;
-	int animationLimit = 3;
-	int animationDelay;
-	int animationDelay2;
-	boolean turnRight = true;
-	boolean turnLeft;
+	public int X;
+	public int Y;
+	public int spellWidth = 255;
+	public boolean drawWand;
+	public boolean spell;
+	public String assetsPath;
+	public int animationSpeed = 10;
+	public int animationLimit = 3;
+	public int animationDelay;
+	public int animationDelay2;
+	public boolean turnRight = true;
+	public boolean turnLeft;
 
 	int_by_ref animationNumber = new int_by_ref(1);
 	int_by_ref animationNumber2 = new int_by_ref(1);

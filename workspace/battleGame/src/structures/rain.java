@@ -1,16 +1,16 @@
-package battleGame;
+package structures;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 public class rain {
 
-	int raindropX;
-	double raindropY;
+	public int raindropX;
+	public double raindropY;
 	double rainSpeed;
 	int rainSpeedX;
 
-	boolean beginRain = false;
+	public boolean beginRain = false;
 
 	public rain() {
 		raindropX = (int) (Math.random() * 2000) + -10;

@@ -1,4 +1,4 @@
-package battleGame;
+package playerNpc;
 
 public class int_by_ref {
 	public int int_ref;

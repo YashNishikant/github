@@ -1,4 +1,4 @@
-package battleGame;
+package playerNpc;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,40 +9,40 @@ import javax.swing.JPanel;
 
 public class human extends JPanel {
 
-	double speedY;
-	int personX;
-	double personY;
-	double maxheight;
-	int minheight;
-	int hHitBox;
-	int wHitBox;
-	boolean allowJ = true;
+	public double speedY;
+	public int personX;
+	public double personY;
+	public double maxheight;
+	public int minheight;
+	public int hHitBox;
+	public int wHitBox;
+	public boolean allowJ = true;
 
-	int healthbarbox;
-	int health;
-	int healthcount;
+	public int healthbarbox;
+	public int health;
+	public int healthcount;
 
-	boolean jump;
-	boolean rise = true;
-	boolean insideSuit;
-	boolean nobattery;
-	boolean onground;
-	boolean hitgrass;
-	boolean onetimeJump = true;
-	boolean jumping;
-	boolean death;
-	boolean holdingWeapon;
+	public boolean jump;
+	public boolean rise = true;
+	public boolean insideSuit;
+	public boolean nobattery;
+	public boolean onground;
+	public boolean hitgrass;
+	public boolean onetimeJump = true;
+	public boolean jumping;
+	public boolean death;
+	public boolean holdingWeapon;
 
 	String assetsPath;
 
-	int animationSpeed = 30;
-	int animationLimit;
-	int animationDelayR;
-	int animationDelayL;
-	boolean animateLeft;
-	boolean animateRight;
-	boolean turnRight = true;
-	boolean turnLeft;
+	public int animationSpeed = 30;
+	public int animationLimit;
+	public int animationDelayR;
+	public int animationDelayL;
+	public boolean animateLeft;
+	public boolean animateRight;
+	public boolean turnRight = true;
+	public boolean turnLeft;
 
 	int_by_ref animationNumberR = new int_by_ref(1);
 	int_by_ref animationNumberL = new int_by_ref(1);

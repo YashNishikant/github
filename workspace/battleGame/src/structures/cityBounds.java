@@ -1,4 +1,4 @@
-package battleGame;
+package structures;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 public class cityBounds {
 
 	int buildingPos;
-	int speed;
+	public int speed;
 	
 	public cityBounds(int x) {
 		buildingPos = x;

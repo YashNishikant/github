@@ -1,4 +1,4 @@
-package battleGame;
+package playerNpc;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -9,40 +9,39 @@ import javax.swing.JPanel;
 
 public class NPC extends JPanel{
 
-	int npcY;
-	int npcX;
-	int npcHealth;
-	double speed;
-	int wHitBox;
-	int hHitBox;
-	int healthbarbox;
-	int healthnpc;
-	int healthcount;
-	int speedY;
-	int speedaddition;
-	int turnaround;
-	int knockbackstr;
-	int animationSpeed = 30;
-	int animationLimit = 5;
-	int animationNumberR = 1;
-	int animationDelayR;
+	public int npcY;
+	public int npcX;
+	public int npcHealth;
+	public double speed;
+	public int wHitBox;
+	public int hHitBox;
+	public int healthcount;
+	public int speedY;
+	public int speedaddition;
+	public int turnaround;
+	public int knockbackstr;
+	public int animationSpeed = 30;
+	public int animationLimit = 5;
+	public int animationNumberR = 1;
+	public int animationDelayR;
 
-	int animationNumberL = 1;
-	int animationDelayL;
-
-	boolean animateLeft;
-	boolean animateRight;
-	boolean oneTimeJump;
+	public int animationNumberL = 1;
+	public int animationDelayL;
+	
+	public boolean playerPos = true;
+	public boolean animateLeft;
+	public boolean animateRight;
+	public boolean oneTimeJump;
 	
 	String assetsPath;
 	
-	boolean knockback = false;
-	boolean alive = true;
-	boolean dropLock = true;
-	boolean turnleft;
-	boolean turnright;
+	public boolean knockback = false;
+	public boolean alive = true;
+	public boolean dropLock = true;
+	public boolean turnleft;
+	public boolean turnright;
 	
-	int randomDirection;
+	public int randomDirection;
 	
 	public NPC(int x, int speed1) {
 		assetsPath = System.getProperty("user.dir");
@@ -53,12 +52,9 @@ public class NPC extends JPanel{
 		speed = 0;
 		wHitBox = 38;
 		hHitBox = 70;
-		healthbarbox = npcX - 1;
-		healthnpc = npcX;
 		healthcount = 40;
 		speedaddition = 0;
 		knockbackstr = 6;
-
 	}
 
 	public void npcBehavior() {
@@ -67,8 +63,6 @@ public class NPC extends JPanel{
 
 		if (knockback) {
 			npcX += knockbackstr;
-			healthbarbox += knockbackstr;
-			healthnpc += knockbackstr;
 		}
 
 		if (healthcount <= 0) {
@@ -167,17 +161,15 @@ public class NPC extends JPanel{
 		if (alive) {
 			// healthbar
 			g.setColor(Color.black);
-			g.fillRect(healthbarbox - 5, npcY + 1, 42, 6);
+			g.fillRect(npcX - 6, npcY + 1, 42, 6);
 			g.setColor(Color.green);
-			g.fillRect(healthnpc - 5, npcY + 3, healthcount, 2);
+			g.fillRect(npcX - 5, npcY + 3, healthcount, 2);
 		}
 	}
 	
 	public void move() {
 		npcX = (int) (npcX + speed + speedaddition);
 		npcY = npcY + speedY;
-		healthbarbox = (int) (healthbarbox + speed + speedaddition);
-		healthnpc = (int) (healthnpc + speed + speedaddition);
 	}
 
 	public Rectangle bounds() {

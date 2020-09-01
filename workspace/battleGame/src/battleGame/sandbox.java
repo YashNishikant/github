@@ -13,23 +13,42 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
-
 import javax.swing.Timer;
+
+import playerNpc.BattleBoss;
+import playerNpc.NPC;
+import playerNpc.human;
+import structures.Ground;
+import structures.buildings;
+import structures.cityBounds;
+import structures.clouds;
+import structures.land;
+import structures.rain;
+import weapons.DestroyerBullets;
+import weapons.Grenade;
+import weapons.Shield;
+import weapons.Wand;
+import weapons.armor;
+import weapons.battery;
+import weapons.bullet;
 import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
 public class sandbox extends JPanel implements ActionListener, KeyListener {
-
-	int buildspacing = 0;
+	int buildspacing = (int) (Math.random() * -100000) + 100000;
+	int landSpacing = -1500;
+	int landSpacingFloor = -100;
 	int limitXleft = 1900;
 	int limitXright = -10;
 
 	bullet[] bullets = new bullet[100];
 	buildings[] towers = new buildings[10];
+	buildings[] towers2 = new buildings[10];
 	NPC[] player = new NPC[20];
 	rain[] raindrop = new rain[200];
 	Grenade[] explosive = new Grenade[20];
+	land[] landscape = new land[5];
+	Ground[] floor = new Ground[1];
 	DestroyerBullets[] enemyBulletLeft = new DestroyerBullets[100];
 	DestroyerBullets[] enemyBulletRight = new DestroyerBullets[100];
 
@@ -38,19 +57,32 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	clouds cloud = new clouds();
 	armor iron = new armor();
 	Timer time = new Timer(5, this);
-	controls gui = new controls();
+	controls gui = new controls(0);
 	battery power = new battery();
 	BattleBoss destroyer = new BattleBoss(1500, -5000);
 	Shield shield = new Shield(iron.armorPosX + 50, iron.armorPosY);
-	
-	cityBounds cityboundary1 = new cityBounds(-100);
-	cityBounds cityboundary2 = new cityBounds(5550);
-	
+
+	cityBounds cityboundary1 = new cityBounds(buildspacing);
+	cityBounds cityboundary2 = new cityBounds(buildspacing + 6000);
+
 	String assetsPath;
 
 	public sandbox() {
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";
+
+		for (int i = 0; i < floor.length; i++) {
+			Ground floor1 = new Ground(landSpacingFloor);
+			landSpacingFloor += 4200;
+			floor[i] = floor1;
+		}
+
+		for (int i = 0; i < landscape.length; i++) {
+			land land1 = new land(landSpacing);
+			landSpacingFloor += 0;
+			landSpacing += 800;
+			landscape[i] = land1;
+		}
 
 		for (int i = 0; i < raindrop.length; i++) {
 			rain raindrop1 = new rain();
@@ -87,7 +119,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			DestroyerBullets enemyBullet2 = new DestroyerBullets(destroyer.X, destroyer.Y + 10);
 			enemyBulletRight[i] = enemyBullet2;
 		}
-		
+
 		time.start();
 		addKeyListener(this);
 		setFocusable(true);
@@ -99,19 +131,24 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		super.paintComponent(g);
 
 		gui.naturaldrawings(g);
-		
+		enterBuilding(g);
+		for (int i = 0; i < landscape.length; i++) {
+			landscape[i].draw(g);
+		}
+
+		for (int i = 0; i < floor.length; i++) {
+			floor[i].draw(g);
+		}
+
 		for (int i = 0; i < towers.length; i++) {
-			if (towers[i].movingsurrounding1 > limitXright - 180 && towers[i].movingsurrounding1 < limitXleft + 180) {
-				addImage(g, "//Backgrounds//buildingIMG.png", towers[i].movingsurrounding1, towers[i].bY);
+			if (towers[i].bX > limitXright - 180 && towers[i].bX < limitXleft + 180) {
+				addImage(g, "//Backgrounds//buildingIMG.png", towers[i].bX, towers[i].bY);
 			}
 		}
 		for (int i = 0; i < player.length; i++) {
 			if (player[i].alive && player[i].npcX > limitXright && player[i].npcX < limitXleft) {
 				player[i].drawNPC(g);
 				player[i].drawNPCHealth(g);
-
-				// addImage(g, "imageface.png", player[i].npcX, player[i].npcY + 10);
-
 			} else {
 				if (player[i].npcX > limitXright && player[i].npcX < limitXleft) {
 
@@ -120,22 +157,19 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 				}
 			}
 		}
-
 		// wand
 		wand.draw(g);
 
 		// explosive
-		for (int i = 0; i < explosive.length; i++) {
-			if (explosive[i].bulletFire && explosive[i].drawExplosiveForRobotDestruction) {
-
-				addImage(g, "//Bullet//Grenade.png", explosive[i].grenadeX, (int) explosive[i].grenadeY);
-
-			}
-			explosive[i].fire();
-			explosive[i].destruction(g);
-		}
-
-		gui.drawGround(g);
+//		for (int i = 0; i < explosive.length; i++) {
+//			if (explosive[i].bulletFire && explosive[i].drawExplosiveForRobotDestruction) {
+//
+//				addImage(g, "//Bullet//Grenade.png", explosive[i].grenadeX, (int) explosive[i].grenadeY);
+//
+//			}
+//			explosive[i].fire();
+//			explosive[i].destruction(g);
+//		}
 
 		addImage(g, "//Backgrounds//Cloud.png", cloud.cloud1start, cloud.cloud1Y);
 		addImage(g, "//Backgrounds//Cloud.png", cloud.cloud2start, cloud.cloud2Y);
@@ -151,14 +185,12 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		if (!iron.track) {
 			user.draw(g);
 		} else {
-			// user.draw(g, user.personX - 5, user.personX - 5);
+
 		}
 
 		if (!iron.track) {
 			iron.normal = true;
 			iron.fire = false;
-
-			gui.draw(g);
 
 			if (power.powerlength <= 0) {
 				g.setColor(Color.RED);
@@ -297,12 +329,53 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		}
 	}
 
+	public void enterBuilding(Graphics g) {
+		for (int i = 0; i < towers.length; i++) {
+			if (towers[i].enter) {
+				addImage(g, "Icons//E_Icon.png", 10, 10);
+			}
+		}
+
+	}
+
 	public void addImage(Graphics g, String s, int x, int y) {
 		ImageIcon i = new ImageIcon(assetsPath + s);
 		i.paintIcon(this, g, x, (int) y);
 	}
 
 	public void contain() {
+
+		for (int i = 0; i < floor.length; i++) {
+
+			if (floor[i].XGround < -1000) {
+				floor[i].XGround = 2200;
+			}
+
+			if (floor[i].XGround > -10) {
+				floor[i].XGround = -400;
+			}
+
+		}
+
+		for (int i = 0; i < landscape.length; i++) {
+
+			if (landscape[i].X < -1000) {
+				landscape[i].X = 1800;
+			}
+
+			if (landscape[i].X > 1920) {
+				landscape[i].X = -850;
+			}
+
+		}
+
+		for (int i = 0; i < player.length; i++) {
+			if (player[i].playerPos) {
+				player[i].npcX = towers[0].bX + 1000;
+				player[i].playerPos = false;
+			}
+		}
+
 		if (iron.track) {
 			user.holdingWeapon = false;
 			wand.drawWand = false;
@@ -320,12 +393,12 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 			shield.y = iron.armorPosY;
 		}
 
-		for (int i = 0; i < explosive.length; i++) {
-			if (!explosive[i].bulletFire) {
-				explosive[i].grenadeX = iron.armorPosX + 19;
-				explosive[i].grenadeY = iron.armorPosY + 20;
-			}
-		}
+//		for (int i = 0; i < explosive.length; i++) {
+//			if (!explosive[i].bulletFire) {
+//				explosive[i].grenadeX = iron.armorPosX + 19;
+//				explosive[i].grenadeY = iron.armorPosY + 20;
+//			}
+//		}
 
 		for (int i = 0; i < enemyBulletLeft.length; i++) {
 			if (!enemyBulletLeft[i].bulletFire) {
@@ -340,7 +413,6 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 				enemyBulletRight[i].bulletY = destroyer.Y + 10;
 			}
 		}
-
 	}
 
 	public void trackSystem() {
@@ -407,18 +479,20 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 
 	public void beginRain() {
 		int randomRain;
-		randomRain = (int) (Math.random() * 20000);
+		randomRain = (int) (Math.random() * 200000);
 
 		if (randomRain == 10) {
 			gui.darkenSky = true;
 			for (int i = 0; i < raindrop.length; i++) {
 				raindrop[i].beginRain = true;
+				gui.beginRain = true;
 			}
 		}
 		if (randomRain == 20) {
 			gui.darkenSky = false;
 			for (int i = 0; i < raindrop.length; i++) {
 				raindrop[i].beginRain = false;
+				gui.beginRain = false;
 			}
 		}
 
@@ -481,6 +555,12 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 
 		if (!user.death) {
 
+			for (int j = 0; j < floor.length; j++) {
+				floor[j].floorSpeed = x;
+			}
+			for (int j = 0; j < landscape.length; j++) {
+				landscape[j].backgroundspeed = x / 3;
+			}
 			for (int j = 0; j < player.length; j++) {
 				player[j].speed = x;
 			}
@@ -491,9 +571,11 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 				explosive[j].grenadeSpeed = x;
 			}
 
+			// gui.backgroundSpeed = x;
+
 			cityboundary1.speed = x;
 			cityboundary2.speed = x;
-			
+
 			destroyer.speed = x;
 		}
 	}
@@ -606,6 +688,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 
 	public void actionPerformed(ActionEvent e) {
 		beginRain();
+		iron.uncrafted();
 		movingObjects();
 		refreshBullets();
 		cityboundary1.move();
@@ -635,6 +718,12 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int i = e.getKeyCode();
+		
+		for (int j = 0; j < towers.length; j++) {
+			if (i == KeyEvent.VK_E && towers[j].enter) {
+				
+			}
+		}
 
 		if (i == KeyEvent.VK_1 && !iron.track && user.turnRight) {
 			wand.drawWand = true;
@@ -938,7 +1027,7 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		Rectangle spell = wand.bounds();
 		Rectangle firstBuilding = cityboundary1.bounds();
 		Rectangle lastBuilding = cityboundary2.bounds();
-		
+
 		for (int j = 0; j < explosive.length; j++) {
 			Rectangle BRecExplosive = explosive[j].boundsExplosive();
 
@@ -956,18 +1045,18 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 				for (int k = 0; k < player.length; k++) {
 					Rectangle npc = player[k].bounds();
 
-					if(npc.intersects(firstBuilding)) {
+					if (npc.intersects(firstBuilding)) {
 						player[k].turnright = true;
 						player[k].turnleft = false;
 						player[k].speedaddition = 1;
 					}
-					
-					if(npc.intersects(lastBuilding)) {
+
+					if (npc.intersects(lastBuilding)) {
 						player[k].turnright = false;
 						player[k].turnleft = true;
 						player[k].speedaddition = -1;
 					}
-					
+
 					if (BRec.intersects(npc) && bullets[i].bulletFire) {
 						player[k].knockback = true;
 						bullets[i].bulletFire = false;
@@ -1073,6 +1162,14 @@ public class sandbox extends JPanel implements ActionListener, KeyListener {
 		if (spell.intersects(boss) && wand.spell) {
 			destroyer.knockback = true;
 			destroyer.healthcount--;
+		}
+
+		for (int i = 0; i < towers.length; i++) {
+			Rectangle tower = towers[i].bounds();
+			towers[i].enter = false;
+			if (human.intersects(tower)) {
+				towers[i].enter = true;
+			}
 		}
 
 	}

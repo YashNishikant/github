@@ -1,9 +1,12 @@
-package battleGame;
+package structures;
 
 public class clouds {
 
-	int cloud1start = -50, cloud2start = -800, cloud3start = -1000, cloud4start = -1200;
-	int cloud1Y, cloud2Y, cloud3Y, cloud4Y;
+	public int cloud1start = -50;
+	public int cloud2start = -800;
+	public int cloud3start = -1000;
+	public int cloud4start = -1200;
+	public int cloud1Y, cloud2Y, cloud3Y, cloud4Y;
 	
 	public clouds() {
 

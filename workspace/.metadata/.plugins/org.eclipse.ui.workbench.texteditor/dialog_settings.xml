@@ -6,29 +6,32 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="movePla" key="selection"/>
+		<item value="VK_" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="movePla"/>
-			<item value="cityB"/>
-			<item value="darkenSky"/>
-			<item value="destroyerFireLock"/>
-			<item value="destroyerLock"/>
-			<item value="beginR"/>
-			<item value="rain"/>
-			<item value="moveP"/>
-			<item value="tower"/>
-			<item value="treeN"/>
-			<item value="containa"/>
+			<item value="VK_"/>
+			<item value="enterB"/>
+			<item value="begin"/>
+			<item value="syst"/>
+			<item value="beginRain"/>
 			<item value="contain"/>
-			<item value="wand.draw"/>
-			<item value="bulletFire = false"/>
-			<item value="bullets"/>
+			<item value="movePl"/>
+			<item value="moveP"/>
+			<item value="movePlayer"/>
+			<item value="ground"/>
+			<item value="land"/>
+			<item value="public void addImage"/>
+			<item value="action"/>
+			<item value="boolean"/>
+			<item value="double"/>
 		</list>
 		<list key="replacehistory">
+			<item value="public boolean"/>
+			<item value="public double"/>
+			<item value="public int"/>
 			<item value="gui.darkenSky"/>
 			<item value="destroyer.destroyerFireLock"/>
 			<item value=""/>
@@ -41,9 +44,6 @@
 			<item value="speed"/>
 			<item value="xWither"/>
 			<item value="xZombie"/>
-			<item value="xCreeper"/>
-			<item value=" limit"/>
-			<item value="limit"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

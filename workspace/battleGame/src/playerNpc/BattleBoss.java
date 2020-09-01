@@ -1,36 +1,36 @@
-package battleGame;
+package playerNpc;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public class BattleBoss {
-	int Y;
-	int X;
+	public int Y;
+	public int X;
 	int Health;
-	double speed;
-	double speedY;
+	public double speed;
+	public double speedY;
 	int wHitBox;
-	int fireBulletTick;
+	public int fireBulletTick;
 	int hHitBox;
 	int healthbarbox;
 	int healthBar;
-	double healthcount;
-	int speedaddition;
+	public double healthcount;
+	public int speedaddition;
 	int turnaround;
 	int knockbackstr;
 	int lengthwidth = 3000;
-	boolean destroyerFireLock = true;
-	boolean attackMode;
-	boolean knockback;
-	boolean alive = true;
-	boolean dropLock = true;
+	public boolean destroyerFireLock = true;
+	public boolean attackMode;
+	public boolean knockback;
+	public boolean alive = true;
+	public boolean dropLock = true;
 
-	boolean attackRight;
-	boolean attackLeft;
+	public boolean attackRight;
+	public boolean attackLeft;
 
-	boolean goUp;
-	boolean goDown;
+	public boolean goUp;
+	public boolean goDown;
 
 	public BattleBoss(int x, int y) {
 

@@ -1,8 +1,8 @@
-package battleGame;
+package weapons;
 
 public class DestroyerBullets extends bullet {
 
-	int damage;
+	public int damage;
 
 	public DestroyerBullets(int x, double y) {
 		super(x, y);

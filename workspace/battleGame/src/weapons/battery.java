@@ -1,18 +1,18 @@
-package battleGame;
+package weapons;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 public class battery {
 
-	int powercount = 0;
-	int powerlength = 190;
+	public int powercount = 0;
+	public int powerlength = 190;
 
-	int decreaseFactor = 1000;
+	public int decreaseFactor = 1000;
 
-	boolean isflyingforbattery = false;
-	boolean track = false;
-	boolean turboReducePowerMore;
+	public boolean isflyingforbattery = false;
+	public boolean track = false;
+	public boolean turboReducePowerMore;
 
 	public battery() {
 

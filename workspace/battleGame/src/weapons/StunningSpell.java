@@ -1,4 +1,4 @@
-package battleGame;
+package weapons;
 
 public class StunningSpell extends bullet{
 

@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class controls {
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+public class controls extends JPanel {
 
 	int ammo;
 	int enemyAmmoL;
@@ -15,9 +18,13 @@ public class controls {
 	boolean darkenSky;
 	int knockbackRNG;
 	int shieldHP;
+	public boolean beginRain = false;
 
-	public controls() {
+	String assetsPath;
 
+	public controls(int x) {
+		assetsPath = System.getProperty("user.dir");
+		assetsPath += "\\src\\assets\\";
 		hitcount = 0;
 		ammo = 100;
 		enemyAmmoL = 99;
@@ -28,39 +35,19 @@ public class controls {
 	}
 
 	public void naturaldrawings(Graphics g) {
+		if (!beginRain) {
+			addImage(g, "//Backgrounds//Sky.png", 0, 0);
+		}
 
-		Color Cyan = new Color(0, greenblue, greenblue);
-
-		// Sky
-		g.setColor(Cyan);
-		g.fillRect(0, 0, 2000, 2000);
-
+		else {
+			addImage(g, "//Backgrounds//RainSky.png", 0, 0);
+		}
+		
 	}
 
-	public void draw(Graphics g) {
-
-		g.setColor(Color.BLACK);
-		g.fillRect(6, 22, 22, 22);
-		g.setColor(Color.WHITE);
-		g.fillRect(8, 24, 18, 18);
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("default", Font.BOLD, 20));
-		g.drawString("V Equip Armor", 10, 40);
-
-		g.setColor(Color.BLACK);
-		g.fillRect(6, 72, 22, 22);
-		g.setColor(Color.WHITE);
-		g.fillRect(8, 74, 18, 18);
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("default", Font.BOLD, 20));
-		g.drawString("W Jump", 7, 90);
-
-	}
-
-	public void drawGround(Graphics g) {
-		// Ground
-		g.setColor(Color.gray);
-		g.fillRect(0, 950, 2000, 2000);
+	public void addImage(Graphics g, String s, int x, int y) {
+		ImageIcon i = new ImageIcon(assetsPath + s);
+		i.paintIcon(this, g, x, (int) y);
 	}
 
 	public void drawArmor(Graphics g) {
@@ -109,9 +96,9 @@ public class controls {
 		g.setFont(new Font("default", Font.BOLD, 25));
 		g.drawString("Ammo: " + ammo, 20, 50);
 
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("default", Font.BOLD, 25));
-		g.drawString("Explosive Ammo: " + grenadeAmmo, 20, 80);
+//		g.setColor(Color.BLACK);
+//		g.setFont(new Font("default", Font.BOLD, 25));
+//		g.drawString("Explosive Ammo: " + grenadeAmmo, 20, 80);
 
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("default", Font.BOLD, 15));
