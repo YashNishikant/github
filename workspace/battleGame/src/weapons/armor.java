@@ -1,8 +1,13 @@
 package weapons;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class armor {
+import battleGame.Textures;
+
+public class armor extends Textures{
 
 	public boolean fire = false;
 	public boolean track = false;
@@ -23,9 +28,9 @@ public class armor {
 	public boolean driftright;
 	public boolean crafted;
 
-	public int armorPosX;
+	public double armorPosX;
 	public int armorPosY;
-	public int armorspeed;
+	public double armorspeed;
 	public int wHitBox;
 	public int hHitBox;
 
@@ -49,6 +54,12 @@ public class armor {
 
 	}
 
+	public void batteryDrained(Graphics g) {
+		g.setColor(Color.RED);
+		g.setFont(new Font("default", Font.BOLD, 25));
+		g.drawString("!", (int) armorPosX, armorPosY);
+	}
+	
 	public void uncrafted() {
 		if (!crafted) {
 			armorPosX = 0;
@@ -56,6 +67,44 @@ public class armor {
 		}
 	}
 
+	public void Images(Graphics g) {
+		if (normal) {
+
+			addImage(g, "//Armor//tankNOfire.png", armorPosX, armorPosY);
+
+		}
+
+		if (fire) {
+
+			addImage(g, "//Armor//TankArmor.png", armorPosX, armorPosY);
+
+		}
+
+		if (blast) {
+
+			addImage(g, "//Armor//tankBlast.png", armorPosX, armorPosY);
+
+		}
+
+		if (confirmgroundfire) {
+
+			addImage(g, "//Armor//tankBlastGround.png", armorPosX, armorPosY);
+
+		}
+
+		// fly
+		if (turbo) {
+
+			addImage(g, "//Armor//TURBO_RIGHT.png", armorPosX, armorPosY);
+
+		}
+		if (turbo_LEFT) {
+
+			addImage(g, "//Armor//TURBO_LEFT.png", armorPosX, armorPosY);
+
+		}
+	}
+	
 	public void tracking() {
 
 		if (armorPosY >= 870 && fireonground == false) {
@@ -84,7 +133,7 @@ public class armor {
 
 	public Rectangle bounds() {
 
-		return (new Rectangle(armorPosX + 4, armorPosY, wHitBox, hHitBox));
+		return (new Rectangle((int)armorPosX + 4, armorPosY, wHitBox, hHitBox));
 
 	}
 

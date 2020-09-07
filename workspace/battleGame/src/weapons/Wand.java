@@ -11,7 +11,7 @@ import playerNpc.int_by_ref;
 
 public class Wand extends JPanel {
 
-	public int X;
+	public double X;
 	public int Y;
 	public int spellWidth = 255;
 	public boolean drawWand;
@@ -27,7 +27,7 @@ public class Wand extends JPanel {
 	int_by_ref animationNumber = new int_by_ref(1);
 	int_by_ref animationNumber2 = new int_by_ref(1);
 
-	public Wand(int x, int y) {
+	public Wand(double x, int y) {
 		X = x;
 		Y = y;
 		assetsPath = System.getProperty("user.dir");
@@ -37,12 +37,12 @@ public class Wand extends JPanel {
 	public void draw(Graphics g) {
 		
 		if (drawWand) {
-			addImage(g, "//Weapons//wand.png", X, Y);
+			addImage(g, "//Weapons//wand.png", (int) X, Y);
 		}
 		if (spell) {
-			animation(g, animationDelay, animationNumber, "Spell", X, Y, animationLimit, animationSpeed);
+			animation(g, animationDelay, animationNumber, "Spell", (int) X, Y, animationLimit, animationSpeed);
 			animationDelay++;
-			animation(g, animationDelay2, animationNumber2, "Spell", X + spellWidth , Y, animationLimit, animationSpeed);
+			animation(g, animationDelay2, animationNumber2, "Spell", (int) (X + spellWidth) , Y, animationLimit, animationSpeed);
 			animationDelay2++;
 		}
 	}
@@ -65,7 +65,7 @@ public class Wand extends JPanel {
 		i.paintIcon(this, g, x, (int) y);
 	}
 	public Rectangle bounds() {
-		return (new Rectangle(X + 45, Y, 500, 5));
+		return (new Rectangle((int)(X + 45), Y, 500, 5));
 	}
 	
 	

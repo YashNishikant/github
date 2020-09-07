@@ -7,10 +7,14 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class human extends JPanel {
+import battleGame.Textures;
+
+public class human extends Textures {
+
+	int replaceFace = 12;
 
 	public double speedY;
-	public int personX;
+	public double personX;
 	public double personY;
 	public double maxheight;
 	public int minheight;
@@ -44,8 +48,8 @@ public class human extends JPanel {
 	public boolean turnRight = true;
 	public boolean turnLeft;
 
-	int_by_ref animationNumberR = new int_by_ref(1);
-	int_by_ref animationNumberL = new int_by_ref(1);
+	public int animationNumberR = 1;
+	public int animationNumberL = 1;
 
 	public human() {
 
@@ -71,9 +75,13 @@ public class human extends JPanel {
 
 			personY = personY + speedY;
 		} else {
-			if (personY <= 915)
-				speedY += 3;
+			if (personY <= 915) {
+				speedY = 3;
+			} else {
+				speedY = 0;
+			}
 		}
+
 	}
 
 	public void shutdown() {
@@ -116,16 +124,15 @@ public class human extends JPanel {
 					speedY += 0.07;
 				}
 			}
-
 		}
 	}
 
-	public void drawHealth(Graphics g, int xFrame, int xRed, int x) {
+	public void drawHealth(Graphics g, double personX2, double personX3, int x) {
 		// healthbar
 		g.setColor(Color.black);
-		g.fillRect(xFrame - (x), (int) (personY + 1), 42, 6);
+		g.fillRect((int) (personX2 - (x)), (int) (personY + 1), 42, 6);
 		g.setColor(Color.red);
-		g.fillRect(xRed - (x - 1), (int) (personY + 3), healthcount, 2);
+		g.fillRect((int) (personX3 - (x - 1)), (int) (personY + 3), healthcount, 2);
 	}
 
 	public void draw(Graphics g) {
@@ -133,61 +140,43 @@ public class human extends JPanel {
 
 			if (turnRight) {
 				if (!holdingWeapon) {
-					addImage(g, "//Player//PlayerRightARMS.png", personX - 3, (int) personY + 30);
+					addImage(g, "//Player//PlayerRightARMS.png", (int) (personX - 3), (int) personY + 30);
+					addImage(g, "//Player//PlayerFaceRight.png", (int) (personX + 2), (int) personY + replaceFace);
 				} else {
-					addImage(g, "//Player//PlayerRightARMSWeapon.png", personX - 3, (int) personY + 30);
+					addImage(g, "//Player//PlayerRightARMSWeapon.png", (int) (personX - 3), (int) personY + 30);
+					addImage(g, "//Player//PlayerFaceRight.png", (int) (personX + 2), (int) personY + replaceFace);
 				}
 			} else {
-				addImage(g, "//Player//PlayerLeftARMS.png", personX - 6, (int) personY + 30);
+				addImage(g, "//Player//PlayerLeftARMS.png", (int) (personX - 6), (int) personY + 30);
+				addImage(g, "//Player//PlayerFaceLeft.png", (int) personX, (int) personY + replaceFace);
 			}
 
 			if (turnRight && !animateRight) {
 				addImage(g, "//Player//PlayerRight.png", personX, (int) personY + 12);
+				addImage(g, "//Player//PlayerFaceRight.png", (personX + 2), (int) personY + replaceFace);
 			}
 
 			if (turnLeft && !animateLeft) {
-				addImage(g, "//Player//PlayerLeft.png", personX, (int) personY + 12);
+				addImage(g, "//Player//PlayerLeft.png", (int) personX, (int) personY + 12);
+				addImage(g, "//Player//PlayerFaceLeft.png", (int) personX, (int) personY + replaceFace);
 			}
 
 			// ANIMATION
 			animationLimit = 6;
 
-			animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight", personX, (int) personY + 12,
-					animationLimit, animationSpeed);
+			animationNumberR = animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight", personX,
+					(int) personY + 12, animationLimit, animationSpeed);
 
 			animationDelayR++;
-			animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft", personX, (int) personY + 12,
-					animationLimit, animationSpeed);
+			animationNumberL = animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft", personX,
+					(int) personY + 12, animationLimit, animationSpeed);
 			animationDelayL++;
 			// ANIMATION
 
 		} else {
-			addImage(g, "//Icons//skull.png", personX, (int) (personY + 10));
+			addImage(g, "//Icons//skull.png", (int) personX, (int) (personY + 10));
 		}
 
-	}
-
-	public void addImage(Graphics g, String s, int x, int y) {
-		ImageIcon i = new ImageIcon(assetsPath + s);
-		i.paintIcon(this, g, x, (int) y);
-	}
-
-	public void animation(Graphics g, int animationDelay, int_by_ref animationNumberByRef, boolean animateDirection,
-			String PlayerDirection, int x, int y, int animationLimit, int animationSpeed) {
-
-		animationDelay++;
-
-		if (animateDirection) {
-			addImage(g, ("//Player//" + PlayerDirection + animationNumberByRef.int_ref + ".png"), (int) x, (int) y);
-
-			if (animationDelay % animationSpeed == 0) {
-				animationNumberByRef.int_ref++;
-			}
-
-			if (animationNumberByRef.int_ref == animationLimit) {
-				animationNumberByRef.int_ref = 1;
-			}
-		}
 	}
 
 	public Rectangle bounds() {

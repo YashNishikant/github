@@ -1,4 +1,4 @@
-package structures;
+package Environment;
 
 import java.awt.Graphics;
 
@@ -7,10 +7,10 @@ import javax.swing.JPanel;
 
 public class land extends JPanel{
 
-	public int X;
-	public int XGround;
+	public double X;
+	public double XGround;
 	public int Y;
-	public int backgroundspeed;
+	public double backgroundspeed;
 
 	String assetsPath;
 	
@@ -23,7 +23,7 @@ public class land extends JPanel{
 	}
 
 	public void draw(Graphics g) {
-		addImage(g, "Backgrounds//Background.png", X, Y);
+		addImage(g, "Backgrounds//Background.png", (int) X, Y);
 		X += backgroundspeed;
 	}
 

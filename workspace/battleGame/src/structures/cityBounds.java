@@ -6,8 +6,8 @@ import java.awt.Rectangle;
 
 public class cityBounds {
 
-	int buildingPos;
-	public int speed;
+	public double buildingPos;
+	public double speed;
 	
 	public cityBounds(int x) {
 		buildingPos = x;
@@ -15,7 +15,7 @@ public class cityBounds {
 	
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(buildingPos, 30, 100, 1000);
+		g.fillRect((int) buildingPos, 30, 100, 1000);
 	}
 	
 	public void move() {
@@ -23,7 +23,7 @@ public class cityBounds {
 	}
 	
 	public Rectangle bounds() {
-		return (new Rectangle(buildingPos, 30, 100, 1000));
+		return (new Rectangle((int)buildingPos, 30, 100, 1000));
 	}
 	
 }

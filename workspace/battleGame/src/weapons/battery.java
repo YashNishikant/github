@@ -1,6 +1,7 @@
 package weapons;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 public class battery {
@@ -33,7 +34,7 @@ public class battery {
 		}
 
 	}
-
+	
 	public void draw(Graphics g) {
 
 		// batteryDisplay

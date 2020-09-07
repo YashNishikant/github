@@ -1,6 +1,10 @@
-package structures;
+package Environment;
 
-public class clouds {
+import java.awt.Graphics;
+
+import battleGame.Textures;
+
+public class clouds extends Textures{
 
 	public int cloud1start = -50;
 	public int cloud2start = -800;
@@ -22,6 +26,13 @@ public class clouds {
 
 	}
 
+	public void draw(Graphics g) {
+		addImage(g, "//Backgrounds//Cloud.png", cloud1start, cloud1Y);
+		addImage(g, "//Backgrounds//Cloud.png", cloud2start, cloud2Y);
+		addImage(g, "//Backgrounds//Cloud.png", cloud3start, cloud3Y);
+		addImage(g, "//Backgrounds//Cloud.png", cloud4start, cloud4Y);
+	}
+	
 	public void move() {
 
 		cloud1start += 2;

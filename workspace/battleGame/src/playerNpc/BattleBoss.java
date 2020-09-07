@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class BattleBoss {
+import battleGame.Textures;
+
+public class BattleBoss extends Textures{
 	public int Y;
 	public int X;
 	int Health;
@@ -78,8 +80,8 @@ public class BattleBoss {
 			speedaddition = 0;
 		}
 	}
-
-	public void draw(Graphics g) {
+	
+	public void drawHealth(Graphics g) {
 		if (alive) {
 
 			// healthbar
@@ -104,6 +106,15 @@ public class BattleBoss {
 		}	
 	}
 
+	public void draw(Graphics g) {
+		if (alive) {
+			addImage(g, "//Destroyer//Destroyer.png", X - 12, (int) (Y + 10));
+
+		} else {
+			addImage(g, "//Destroyer//DestroyerDead.png", X - 12, (int) (Y + 10));
+		}
+	}
+	
 	public Rectangle bounds() {
 		return (new Rectangle(X - 9, Y + 10, wHitBox, hHitBox));
 	}

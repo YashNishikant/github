@@ -1,16 +1,19 @@
 package weapons;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Shield {
+import battleGame.Textures;
 
-	public int x;
+public class Shield extends Textures{
+
+	public double x;
 	public int y;
 	public int width;
 	public int height;
 
 	public boolean activateShield;
 
-	public Shield(int x1, int y1) {
+	public Shield(double x1, int y1) {
 
 		x = x1;
 		y = y1;
@@ -19,9 +22,13 @@ public class Shield {
 		height = 80;
 	}
 
+	public void draw(Graphics g) {
+		addImage(g, "//Armor//shield.png", x, y);
+	}
+	
 	public Rectangle bounds() {
 		if (activateShield) {
-			return (new Rectangle(x, y, width, height));
+			return (new Rectangle((int)x, y, width, height));
 		} else {
 			return (new Rectangle(0, 0, 0, 0));
 		}

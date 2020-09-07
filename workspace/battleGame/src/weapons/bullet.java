@@ -1,9 +1,13 @@
 package weapons;
+
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class bullet {
+import battleGame.Textures;
 
-	public int bulletX = 0;
+public class bullet extends Textures {
+
+	public double bulletX = 0;
 	public double bulletY = 0;
 	public double damageForBoss = 0.5;
 	public int yoffset = 24;
@@ -14,7 +18,7 @@ public class bullet {
 	public boolean bulletFire = false;
 	public boolean letdestroy = false;
 
-	public bullet(int x, double y) {
+	public bullet(double x, double y) {
 		bulletX = x;
 		bulletY = y;
 	}
@@ -23,8 +27,14 @@ public class bullet {
 		bulletX = bulletX + bulletSpeed;
 	}
 
+	public void draw(Graphics g) {
+		if (bulletFire) {
+			addImage(g, "//Bullet//bullet.png", bulletX, (int) bulletY + yoffset);
+		}
+	}
+
 	public Rectangle bounds() {
-		return (new Rectangle(bulletX, (int) bulletY + yoffset, width, height));
+		return (new Rectangle((int) bulletX, (int) bulletY + yoffset, width, height));
 	}
 
 	public void destroy() {

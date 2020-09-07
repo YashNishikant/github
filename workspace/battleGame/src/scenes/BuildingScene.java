@@ -1,5 +1,25 @@
 package scenes;
 
-public class BuildingScene {
+import java.awt.Graphics;
 
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import battleGame.Textures;
+
+public class BuildingScene extends Textures{
+
+	public boolean entered;
+	String assetsPath;
+	
+	public BuildingScene() {
+		assetsPath = System.getProperty("user.dir");
+		assetsPath += "\\src\\assets\\";
+	}
+
+	public void draw(Graphics g) {
+		if (entered) {
+			addImage(g, "//Backgrounds//buildinginterior.png", 0, 0);
+		}
+	}
 }

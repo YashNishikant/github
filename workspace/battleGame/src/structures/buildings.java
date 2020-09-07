@@ -1,11 +1,14 @@
 package structures;
 
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class buildings {
+import battleGame.Textures;
+
+public class buildings extends Textures{
 	
-	public int bX;
-	public int bY = 250;
+	public double bX;
+	public double bY = 250;
 	int bW = 200;
 	int bH = 700;
 	public boolean enter;
@@ -15,12 +18,16 @@ public class buildings {
 		bX = x;
 	}
 
+	public void draw(Graphics g) {
+		addImage(g, "//Backgrounds//buildingIMG.png", (int)bX, (int)bY);
+	}
+	
 	public void move() {
-		bX = (int)(bX + speed);
+		bX = bX + speed;
 	}
 
 	public Rectangle bounds() {
-		return (new Rectangle(bX, bY, bW, bH));
+		return (new Rectangle((int)bX, (int)bY, bW, bH));
 	}
 	
 }

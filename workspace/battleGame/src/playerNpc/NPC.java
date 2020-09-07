@@ -7,10 +7,13 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class NPC extends JPanel{
+import battleGame.Textures;
 
+public class NPC extends Textures {
+
+	int replaceFace = 12;
 	public int npcY;
-	public int npcX;
+	public double npcX;
 	public int npcHealth;
 	public double speed;
 	public int wHitBox;
@@ -27,22 +30,22 @@ public class NPC extends JPanel{
 
 	public int animationNumberL = 1;
 	public int animationDelayL;
-	
+
 	public boolean playerPos = true;
 	public boolean animateLeft;
 	public boolean animateRight;
 	public boolean oneTimeJump;
-	
+
 	String assetsPath;
-	
+
 	public boolean knockback = false;
 	public boolean alive = true;
 	public boolean dropLock = true;
 	public boolean turnleft;
 	public boolean turnright;
-	
+
 	public int randomDirection;
-	
+
 	public NPC(int x, int speed1) {
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";
@@ -91,82 +94,67 @@ public class NPC extends JPanel{
 	}
 
 	public void drawNPC(Graphics g) {
-		
-		randomDirection = (int)(Math.random() * 1);
-		
+
+		randomDirection = (int) (Math.random() * 1);
+
 		if (alive) {
-			
+
 			if (turnright) {
-				addImage(g, "//Player//PlayerRightARMS.png", npcX - 3, (int) npcY + 30);
+				addImage(g, "//Player//PlayerRightARMS.png", (int) (npcX - 3), (int) npcY + 30);
+				addImage(g, "//Player//PlayerFaceRight.png", (int) (npcX + 1), (int) npcY + replaceFace);
 			} else {
-				addImage(g, "//Player//PlayerRightARMS.png", npcX - 5, (int) npcY + 30);
+				addImage(g, "//Player//PlayerRightARMS.png", (int) (npcX - 5), (int) npcY + 30);
+				addImage(g, "//Player//PlayerFaceLeft.png", (int) npcX, (int) npcY + replaceFace);
 			}
-			
-			if(!turnright && !turnleft) {
-				if(randomDirection == 1) {
-					addImage(g, "PlayerRight.png", npcX, (int)npcY + 12);
+
+			if (!turnright && !turnleft) {
+				if (randomDirection == 1) {
+					addImage(g, "PlayerRight.png", (int) npcX, (int) npcY + 12);
+					addImage(g, "//Player//PlayerFaceRight.png", (int) (npcX + 1), (int) npcY + replaceFace);
 				}
-				if(randomDirection == 0) {
-					addImage(g, "//Player//PlayerLeft.png", npcX, (int)npcY + 12);
+				if (randomDirection == 0) {
+					addImage(g, "//Player//PlayerLeft.png", (int) npcX, (int) npcY + 12);
+					addImage(g, "//Player//PlayerFaceLeft.png", (int) npcX, (int) npcY + replaceFace);
 				}
 			}
-			
-			if(turnright) {
+
+			if (turnright) {
 				animateRight = true;
 				animateLeft = false;
-				
-				animationNumberR = animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight", npcX,
-						(int) npcY + 12, animationLimit, animationSpeed);
+
+				animationNumberR = animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight",
+						(int) npcX, (int) npcY + 12, animationLimit, animationSpeed);
 				animationDelayR++;
 			}
-			
-			if(turnleft) {
+
+			if (turnleft) {
 				animateRight = false;
 				animateLeft = true;
-				
-				addImage(g, "//Player//PlayerLeft.png", npcX, (int)npcY + 12);
-				
-				animationNumberL = animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft", npcX,
-						(int) npcY + 12 , animationLimit, animationSpeed);
+
+				addImage(g, "//Player//PlayerLeft.png", (int) npcX, (int) npcY + 12);
+
+				animationNumberL = animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft",
+						(int) npcX, (int) npcY + 12, animationLimit, animationSpeed);
 				animationDelayL++;
 			}
 		}
 	}
-	
-	public void addImage(Graphics g, String s, int x, int y) {
-		ImageIcon i = new ImageIcon(assetsPath + s);
-		i.paintIcon(this, g, x, (int) y);
+
+	public void dead(Graphics g) {
+		addImage(g, "//Icons//skull.png", (int) npcX, npcY + 10);
+
 	}
-	
-	public int animation(Graphics g, int animationDelay, int animationNumber, boolean animateDirection, String PlayerDirection, int x, int y, int animationLimit, int animationSpeed) {
-		
-		animationDelay++;
-		
-		if (animateDirection) {
-			addImage(g, ("//Player//" + PlayerDirection + animationNumber + ".png"), (int) x, (int) y);
-			
-			if (animationDelay % animationSpeed == 0) {
-				animationNumber++;
-				
-			}
-			if (animationNumber == animationLimit) {
-				
-				animationNumber = 1;
-			}
-		}		
-		return animationNumber;
-	}
-	
+
 	public void drawNPCHealth(Graphics g) {
 		if (alive) {
 			// healthbar
 			g.setColor(Color.black);
-			g.fillRect(npcX - 6, npcY + 1, 42, 6);
+			g.fillRect((int) (npcX - 6), npcY + 1, 42, 6);
 			g.setColor(Color.green);
-			g.fillRect(npcX - 5, npcY + 3, healthcount, 2);
+			g.fillRect((int) (npcX - 5), npcY + 3, healthcount, 2);
 		}
 	}
-	
+
 	public void move() {
 		npcX = (int) (npcX + speed + speedaddition);
 		npcY = npcY + speedY;
@@ -174,7 +162,7 @@ public class NPC extends JPanel{
 
 	public Rectangle bounds() {
 
-		return (new Rectangle(npcX - 9, npcY + 10, wHitBox, hHitBox));
+		return (new Rectangle((int) (npcX - 9), npcY + 10, wHitBox, hHitBox));
 
 	}
 

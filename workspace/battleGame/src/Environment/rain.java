@@ -1,9 +1,11 @@
-package structures;
+package Environment;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class rain {
+import battleGame.Textures;
+
+public class rain extends Textures {
 
 	public int raindropX;
 	public double raindropY;
@@ -31,18 +33,16 @@ public class rain {
 			}
 
 			raindropX = raindropX + rainSpeedX;
-		} else {
-
 		}
 	}
 
 	public void draw(Graphics g) {
 		if (beginRain) {
 			if (raindropY <= 940) {
-				g.setColor(Color.BLUE);
-				g.fillRect(raindropX, (int) raindropY, 5, 10);
+
+				addImage(g, "//Backgrounds//rain.png", raindropX, (int) raindropY);
+
 			}
-		} else {
 		}
 	}
 }

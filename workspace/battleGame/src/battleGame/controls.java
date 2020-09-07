@@ -7,7 +7,7 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class controls extends JPanel {
+public class controls extends Textures {
 
 	int ammo;
 	int enemyAmmoL;
@@ -38,18 +38,10 @@ public class controls extends JPanel {
 		if (!beginRain) {
 			addImage(g, "//Backgrounds//Sky.png", 0, 0);
 		}
-
 		else {
 			addImage(g, "//Backgrounds//RainSky.png", 0, 0);
 		}
-		
 	}
-
-	public void addImage(Graphics g, String s, int x, int y) {
-		ImageIcon i = new ImageIcon(assetsPath + s);
-		i.paintIcon(this, g, x, (int) y);
-	}
-
 	public void drawArmor(Graphics g) {
 
 		g.setColor(Color.BLACK);
