@@ -13,20 +13,20 @@
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
 			<item value="VK_D"/>
-			<item value="VK_4"/>
-			<item value="VK_$"/>
-			<item value="VK4"/>
+			<item value="keepCar"/>
+			<item value="decele"/>
+			<item value="carde"/>
+			<item value="car"/>
+			<item value="c"/>
 			<item value="movePlayer"/>
-			<item value="VK_A"/>
-			<item value="iron."/>
-			<item value="iron.armorPosY = "/>
-			<item value="iron.armorPosX = "/>
-			<item value="iron.armorPos"/>
-			<item value="armor."/>
-			<item value="armor"/>
-			<item value="contain"/>
-			<item value="enemyBulletRight[i]."/>
-			<item value="enemyBulletRight[i].&#x09;&#x09;&#x09;if (enemyBulletRight[i].bulletFire) {"/>
+			<item value="System"/>
+			<item value="System."/>
+			<item value="System.o"/>
+			<item value="System.out"/>
+			<item value="decelerate"/>
+			<item value="plane.decelerate"/>
+			<item value="car.decelerate"/>
+			<item value="2"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

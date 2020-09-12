@@ -58,6 +58,6 @@
 <fullyQualifiedTypeName name="structures.Airport"/>
 <fullyQualifiedTypeName name="vehicles.Plane"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
-<fullyQualifiedTypeName name="java.awt.Graphics"/>
 <fullyQualifiedTypeName name="battleGame.Textures"/>
+<fullyQualifiedTypeName name="java.awt.Graphics"/>
 </qualifiedTypeNameHistroy>

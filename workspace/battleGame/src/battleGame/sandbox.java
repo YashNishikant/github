@@ -1,19 +1,14 @@
 package battleGame;
 
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JFrame;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.Timer;
-
 import Environment.Ground;
 import Environment.clouds;
 import Environment.land;
@@ -28,7 +23,6 @@ import structures.cityBounds;
 import vehicles.Plane;
 import vehicles.car;
 import weapons.DestroyerBullets;
-import weapons.Grenade;
 import weapons.Shield;
 import weapons.Wand;
 import weapons.armor;
@@ -129,8 +123,12 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
-	}
 
+
+		airport.X = user.personX - 500;
+
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		beginRain();
 		airport.move();
@@ -147,6 +145,7 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 		knockbackRNG();
 		deadnpc();
 		keepCarMoving();
+		keepPlaneMoving();
 		iron.move();
 		batterydecrease();
 		contain();
@@ -165,10 +164,11 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 	}
 
 	// PAINT BEGIN
+
 	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
+		super.paintComponent(g);	
+		
 		gui.naturaldrawings(g);
 		// clouds
 		cloud.draw(g);
@@ -317,6 +317,12 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 		}
 	}
 
+	void keepPlaneMoving() {
+		if (plane.enter) {
+			movePlayer(plane.planeSpeed);
+		}
+	}
+	
 	public void enterBuilding(Graphics g) {
 		for (int i = 0; i < towers.length; i++) {
 			if (towers[i].enter) {
@@ -535,7 +541,7 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 	}
 
 	void movePlayer(double x) {
-
+		
 		if (!user.death) {
 
 			for (int j = 0; j < floor.length; j++) {
@@ -809,6 +815,14 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 				car.decelerate = false;
 			}
 
+			if (plane.enter) {
+				movePlayer(plane.planeSpeed);
+				plane.accelerate = true;
+				plane.decelerate = false;
+				plane.planeRight = false;
+				plane.planeLeft = true;
+			}
+
 			if (user.holdingWeapon) {
 				user.animateLeft = false;
 				user.turnRight = true;
@@ -856,7 +870,6 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 
 		if (i == KeyEvent.VK_D && !user.death) {
 			if (car.enter) {
-				movePlayer(car.carSpeed);
 				car.carLeft = false;
 				car.carRight = true;
 				car.accelerate = true;
@@ -864,9 +877,12 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 			}
 
 			if (plane.enter) {
-				movePlayer(plane.planeSpeed);
 				plane.accelerate = true;
 				plane.decelerate = false;
+				plane.planeRight = true;
+				plane.planeLeft = false;
+				plane.rise = true;
+				plane.fall = false;
 			}
 
 			user.turnLeft = false;
@@ -937,7 +953,7 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 
 		iron.turbo = false;
 		iron.turbo_LEFT = false;
-
+		
 		movePlayer(0);
 
 		if (i == KeyEvent.VK_A && user.holdingWeapon) {
@@ -974,6 +990,8 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 			if (plane.enter) {
 				plane.decelerate = true;
 				plane.accelerate = false;
+				plane.rise = false;
+				plane.fall = true;
 			}
 
 		}
@@ -992,6 +1010,11 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 				car.decelerate = true;
 				car.accelerate = false;
 			}
+		
+			if (plane.enter) {
+				plane.decelerate = true;
+				plane.accelerate = false;
+			}
 		}
 
 		if (i == KeyEvent.VK_D && iron.armorPosY >= 870) {
@@ -1005,8 +1028,6 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 		if (iron.track) {
 			user.speedY = 0;
 		}
-
-		iron.armorspeed = 0;
 	}
 
 	public void Collision() {

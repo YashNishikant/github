@@ -87,17 +87,17 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 		}
 
 		if (iron.normal) {
-			ImageIcon i = new ImageIcon("C:\\Users\\yash0\\Pictures\\ironmanNOFire.png");
+			ImageIcon i = new ImageIcon("C:\\Users\\yash0\\Pictures\\TankArmor.png");
 			i.paintIcon(this, g, iron.armorPosX, iron.armorPosY);
 		}
 
 		if (iron.fire) {
-			ImageIcon i3 = new ImageIcon("C:\\Users\\yash0\\Pictures\\ironmanSuitJavaCanvasIMG.png");
+			ImageIcon i3 = new ImageIcon("C:\\Users\\yash0\\Pictures\\TankArmor.png");
 			i3.paintIcon(this, g, iron.armorPosX, iron.armorPosY);
 		}
 
 		if (iron.blast) {
-			ImageIcon i4 = new ImageIcon("C:\\Users\\yash0\\Pictures\\ironmanBlast.png");
+			ImageIcon i4 = new ImageIcon("C:\\Users\\yash0\\Pictures\\tankBlast.png");
 			i4.paintIcon(this, g, iron.armorPosX, iron.armorPosY);
 
 		}

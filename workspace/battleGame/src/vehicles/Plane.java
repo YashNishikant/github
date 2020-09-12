@@ -8,6 +8,10 @@ public class Plane extends Textures {
 
 	public double x;
 	public double y;
+	public double xwheels;
+	public double ywheels;
+	public double fallSpeed;
+	public double accelerationFactor;
 	public double topSpeed;
 	public double ySpeed;
 	public double riseSpeed;
@@ -20,45 +24,116 @@ public class Plane extends Textures {
 	public boolean decelerate;
 	public boolean accelerate;
 	public boolean wheels = true;
+	public boolean planeLeft;
+	public boolean planeRight;
+	public boolean rise = true;
+	public boolean fall;
 
 	public Plane() {
 
 		x = 0;
 		y = 755;
-		riseSpeed = -90;
+		planeSpeed = 0;
+		riseSpeed = -20;
+		fallSpeed = -70;
 		topSpeed = -100;
 		ySpeed = 0;
+		accelerationFactor = 0.05;
+
+		xwheels = x + 1300;
+		ywheels = y;
 
 	}
 
 	public void move() {
+
+		if (y < 200) {
+			y = 199.9;
+		}
+
+		if (y < 700) {
+			wheels = false;
+		}
+
 		if (!enter) {
 			x += illusionspeed;
+			xwheels += illusionspeed;
+		}
+
+		if (y >= 755.1) {
+			y = 755.0;
 		}
 
 		y += ySpeed;
+		ywheels += ySpeed;
 
-		if (accelerate) {
-			if (planeSpeed > topSpeed) {
-				planeSpeed -= 0.1;
+		if (planeRight) {
+			if (enter) {
+				if (!decelerate && accelerate) {
+					if (planeSpeed > topSpeed) {
+						planeSpeed -= accelerationFactor;
+					}
+				}
 			}
-			
-			if ((int) planeSpeed <= (int) riseSpeed) {
-				if (y > 400) {
-					ySpeed = -0.1;
+
+			if (decelerate) {
+				if (planeSpeed < 0) {
+					planeSpeed += accelerationFactor;
+
+					if (planeSpeed > -0.0001 && planeSpeed < 0) {
+						planeSpeed = 0;
+					}
+
 				} else {
-					ySpeed = 0;
+					decelerate = false;
+				}
+			}
+			if ((int) planeSpeed <= (int) riseSpeed && rise) {
+				ySpeed = -0.2;
+				fall = false;
+			}
+
+			if (fall) {
+				ySpeed = 0.5;
+				rise = false;
+			}
+		}
+
+		if (planeLeft) {
+			if (enter) {
+				if (!decelerate && accelerate) {
+					if (planeSpeed < topSpeed) {
+						planeSpeed += accelerationFactor;
+					}
+				}
+			}
+
+			if (decelerate) {
+				if (planeSpeed > 0) {
+					planeSpeed -= accelerationFactor;
+
+					if (planeSpeed < 0.0001) {
+						planeSpeed = 0;
+					}
+
+				} else {
+					decelerate = false;
 				}
 			}
 		}
 	}
 
 	public void draw(Graphics g) {
-		addImage(g, "//Vehicles//plane.png", x, (int) y);
 
 		if (wheels) {
-			addImage(g, "//Vehicles//planeWheels.png", x, (int) y);
+			addImage(g, "//Vehicles//planeWheels.png", xwheels, (int) ywheels);
+		} else {
+			if (ywheels > y - 30) {
+				addImage(g, "//Vehicles//planeWheels.png", xwheels, (int) ywheels);
+				ywheels -= 1;
+			}
 		}
+		addImage(g, "//Vehicles//plane.png", x, (int) y);
 	}
 
 	public Rectangle bounds() {
