@@ -7,7 +7,7 @@ import battleGame.Textures;
 
 public class car extends Textures {
 
-	public int x;
+	public double x;
 	public int y;
 	int topSpeed;
 	double accelerationFactor;
@@ -90,7 +90,7 @@ public class car extends Textures {
 	}
 
 	public Rectangle bounds() {
-		return (new Rectangle(x, y, 150, 100));
+		return (new Rectangle((int)x, y, 150, 100));
 	}
 
 }

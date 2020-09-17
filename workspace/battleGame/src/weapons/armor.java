@@ -68,6 +68,12 @@ public class armor extends Textures{
 	}
 
 	public void Images(Graphics g) {
+		
+		if (!track) {
+			normal = true;
+			fire = false;
+		}
+		
 		if (normal) {
 
 			addImage(g, "//Armor//tankNOfire.png", armorPosX, armorPosY);

@@ -23,7 +23,7 @@ public class NPC extends Textures {
 	public int speedaddition;
 	public int turnaround;
 	public int knockbackstr;
-	public int animationSpeed = 30;
+	public int animationSpeed = 20;
 	public int animationLimit = 5;
 	public int animationNumberR = 1;
 	public int animationDelayR;

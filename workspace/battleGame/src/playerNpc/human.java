@@ -39,7 +39,7 @@ public class human extends Textures {
 
 	String assetsPath;
 
-	public int animationSpeed = 30;
+	public int animationSpeed = 20;
 	public int animationLimit;
 	public int animationDelayR;
 	public int animationDelayL;
@@ -162,7 +162,7 @@ public class human extends Textures {
 			}
 
 			// ANIMATION
-			animationLimit = 6;
+			animationLimit = 5;
 
 			animationNumberR = animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight", personX,
 					(int) personY + 12, animationLimit, animationSpeed);

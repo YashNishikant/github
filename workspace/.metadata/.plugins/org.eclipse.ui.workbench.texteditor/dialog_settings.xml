@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="VK_D" key="selection"/>
+		<item value="VK_4" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="VK_4"/>
+			<item value="VK_A"/>
 			<item value="VK_D"/>
-			<item value="keepCar"/>
-			<item value="decele"/>
-			<item value="carde"/>
+			<item value="user.draw"/>
+			<item value="VK_3"/>
+			<item value="moveP"/>
+			<item value="car.draw"/>
 			<item value="car"/>
-			<item value="c"/>
-			<item value="movePlayer"/>
-			<item value="System"/>
-			<item value="System."/>
-			<item value="System.o"/>
-			<item value="System.out"/>
-			<item value="decelerate"/>
-			<item value="plane.decelerate"/>
-			<item value="car.decelerate"/>
-			<item value="2"/>
+			<item value="spell.draw"/>
+			<item value="wand.draw"/>
+			<item value="wand"/>
+			<item value="Car"/>
+			<item value="ywheels"/>
+			<item value="ywheels "/>
+			<item value="ywheels += 1"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>

@@ -36,25 +36,34 @@ public class Plane extends Textures {
 		planeSpeed = 0;
 		riseSpeed = -20;
 		fallSpeed = -70;
-		topSpeed = -100;
+		topSpeed = -60;
 		ySpeed = 0;
 		accelerationFactor = 0.05;
-
-		xwheels = x + 1300;
 		ywheels = y;
-
 	}
 
 	public void move() {
+		xwheels = x;
 
 		if (y < 200) {
 			y = 199.9;
 		}
 
+		if(ywheels < 170) {
+			ywheels = 169.9;
+		}
+		
+		if(ywheels > 755.1) {
+			ywheels = 755.0;
+		}
+		
 		if (y < 700) {
 			wheels = false;
 		}
-
+		else {
+			wheels = true;
+		}
+		
 		if (!enter) {
 			x += illusionspeed;
 			xwheels += illusionspeed;

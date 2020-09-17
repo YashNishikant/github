@@ -10,8 +10,8 @@ public class Airport extends Textures{
 	public double Y;
 	public double illusionSpeed;
 	
-	public Airport() {
-		X = (int)(Math.random()* 20000);
+	public Airport(int x) {
+		X = x;
 		Y = -36;
 		illusionSpeed = 0;
 	}

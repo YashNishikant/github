@@ -21,6 +21,7 @@ import structures.Airport;
 import structures.buildings;
 import structures.cityBounds;
 import vehicles.Plane;
+import vehicles.SuperCar;
 import vehicles.car;
 import weapons.DestroyerBullets;
 import weapons.Shield;
@@ -42,7 +43,8 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 	buildings[] towers = new buildings[10];
 	cityBounds cityboundary1 = new cityBounds(buildspacing);
 	cityBounds cityboundary2 = new cityBounds(buildspacing + 6000);
-	Airport airport = new Airport();
+	Airport airport = new Airport((int) (Math.random() * 20000) - 10000);
+	Airport airport2 = new Airport((int) (Math.random() * 160000) + 80000);
 	// Environment
 	rain[] raindrop = new rain[200];
 	land[] landscape = new land[5];
@@ -62,6 +64,7 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 	// Vehicles
 	car car = new car();
 	Plane plane = new Plane();
+	SuperCar supercar = new SuperCar();
 	// game controls and scenes
 	controls gui = new controls(0);
 	battery power = new battery();
@@ -124,15 +127,14 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
 
-
-		airport.X = user.personX - 500;
-
 	}
-	
+
 	public void actionPerformed(ActionEvent e) {
 		beginRain();
 		airport.move();
+		airport2.move();
 		car.move();
+		supercar.move();
 		plane.move();
 		iron.uncrafted();
 		movingObjects();
@@ -146,6 +148,7 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 		deadnpc();
 		keepCarMoving();
 		keepPlaneMoving();
+		keepSupercarMoving();
 		iron.move();
 		batterydecrease();
 		contain();
@@ -163,16 +166,58 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 		repaint();
 	}
 
-	// PAINT BEGIN
-
 	@Override
 	public void paintComponent(Graphics g) {
-		super.paintComponent(g);	
-		
-		gui.naturaldrawings(g);
+		super.paintComponent(g);
+
 		// clouds
 		cloud.draw(g);
+
+		// InBuilding
 		enterBuilding(g);
+
+		// World
+		gui.naturaldrawings(g);
+		drawWorld(g);
+		airport.draw(g);
+		airport2.draw(g);
+
+		// NPC
+		drawNPC(g);
+
+		// Vehicles
+		plane.draw(g);
+		car.draw(g);
+		supercar.draw(g);
+
+		// wand
+		wand.draw(g);
+
+		// shield
+		drawShield(g);
+
+		// Destroyer
+		destroyer.draw(g);
+		destroyer.drawHealth(g);
+		drawEnemyBullets(g);
+
+		// bullet
+		batteryAndBullets(g);
+
+		// Armor
+		flyWithShield(g);
+		iron.Images(g);
+
+		// User
+		drawUser(g);
+
+		// Scenery
+		drawRainDrops(g);
+		buildScene.draw(g);
+	}
+
+
+	public void drawWorld(Graphics g) {
 		for (int i = 0; i < landscape.length; i++) {
 			landscape[i].draw(g);
 		}
@@ -187,8 +232,15 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 			}
 		}
 
-		airport.draw(g);
+	}
 
+	public void drawShield(Graphics g) {
+		if (shield.activateShield) {
+			shield.draw(g);
+		}
+	}
+
+	public void drawNPC(Graphics g) {
 		for (int i = 0; i < player.length; i++) {
 			if (player[i].alive && player[i].npcX > limitXright && player[i].npcX < limitXleft) {
 				player[i].drawNPC(g);
@@ -199,95 +251,27 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 				}
 			}
 		}
+	}
 
-		// wand
-		wand.draw(g);
-
-		if (!iron.track) {
-			iron.normal = true;
-			iron.fire = false;
-		}
-
-		// shield
-		if (shield.activateShield) {
-			shield.draw(g);
-		}
-
-		// Destroyer
-
-		destroyer.draw(g);
-		destroyer.drawHealth(g);
-
-		for (int i = 0; i < enemyBulletLeft.length; i++) {
-			enemyBulletLeft[i].fire();
-			enemyBulletLeft[i].bulletSpeed = -10;
-
-			if (enemyBulletLeft[i].bulletFire) {
-
-				addImage(g, "//Bullet//DestroyerBulletsLEFT.png", enemyBulletLeft[i].bulletX,
-						(int) enemyBulletLeft[i].bulletY + enemyBulletLeft[i].yoffset);
-			}
-		}
-
-		for (int i = 0; i < enemyBulletRight.length; i++) {
-			enemyBulletRight[i].fire();
-			enemyBulletRight[i].bulletSpeed = 10;
-			if (enemyBulletRight[i].bulletFire) {
-
-				addImage(g, "//Bullet//DestroyerBulletsRIGHT.png", enemyBulletRight[i].bulletX,
-						(int) enemyBulletRight[i].bulletY + enemyBulletRight[i].yoffset);
-			}
-		}
-
-		// bullet
-		for (int i = 0; i < bullets.length; i++) {
-			if (!iron.flyIMG && !iron.turbo && !iron.ableToTurbo_LEFT && !iron.flyIMG_LEFT) {
-				bullets[i].fire();
-				bullets[i].draw(g);
-			}
-		}
-
-		if (iron.track) {
-
-			gui.drawArmor(g);
-
-			if (power.powerlength <= 0) {
-				user.nobattery = true;
-
-				iron.batteryDrained(g);
-
-			}
-			power.draw(g);
-		}
-
-		plane.draw(g);
-		car.draw(g);
-
-		// Armor
-		flyWithShield(g);
-		iron.Images(g);
-
-		if (!iron.track && !car.enter && !plane.enter) {
+	public void drawUser(Graphics g) {
+		if (!iron.track && !car.enter && !plane.enter && !supercar.enter) {
 			user.drawHealth(g, user.personX, user.personX, 5);
-		} else if (!car.enter && !plane.enter) {
+		} else if (!car.enter && !plane.enter && !supercar.enter) {
 			user.drawHealth(g, user.personX, user.personX, 10);
 		}
 
-		if (!iron.track && !car.enter && !plane.enter) {
+		if (!iron.track && !car.enter && !plane.enter && !supercar.enter) {
 			user.draw(g);
 		}
+	}
 
+	public void drawRainDrops(Graphics g) {
 		for (int i = 0; i < raindrop.length; i++) {
 			if (raindrop[i].beginRain) {
 				raindrop[i].draw(g);
 			}
 		}
-		buildScene.draw(g);
 	}
-
-	// PAINT END
-	// PAINT END
-	// PAINT END
 
 	void flyWithShield(Graphics g) {
 
@@ -317,16 +301,67 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 		}
 	}
 
+	void keepSupercarMoving() {
+		if (supercar.enter) {
+			movePlayer(supercar.carSpeed);
+		}
+	}
+
 	void keepPlaneMoving() {
 		if (plane.enter) {
 			movePlayer(plane.planeSpeed);
 		}
 	}
-	
+
+	public void batteryAndBullets(Graphics g) {
+		for (int i = 0; i < bullets.length; i++) {
+			if (!iron.flyIMG && !iron.turbo && !iron.ableToTurbo_LEFT && !iron.flyIMG_LEFT) {
+				bullets[i].fire();
+				bullets[i].draw(g);
+			}
+		}
+
+		if (iron.track) {
+
+			gui.drawArmor(g);
+
+			if (power.powerlength <= 0) {
+				user.nobattery = true;
+
+				iron.batteryDrained(g);
+
+			}
+			power.draw(g);
+		}
+	}
+
 	public void enterBuilding(Graphics g) {
 		for (int i = 0; i < towers.length; i++) {
 			if (towers[i].enter) {
 				addImage(g, "Icons//E_Icon.png", 10, 10);
+			}
+		}
+	}
+
+	public void drawEnemyBullets(Graphics g) {
+		for (int i = 0; i < enemyBulletLeft.length; i++) {
+			enemyBulletLeft[i].fire();
+			enemyBulletLeft[i].bulletSpeed = -10;
+
+			if (enemyBulletLeft[i].bulletFire) {
+
+				addImage(g, "//Bullet//DestroyerBulletsLEFT.png", enemyBulletLeft[i].bulletX,
+						(int) enemyBulletLeft[i].bulletY + enemyBulletLeft[i].yoffset);
+			}
+		}
+
+		for (int i = 0; i < enemyBulletRight.length; i++) {
+			enemyBulletRight[i].fire();
+			enemyBulletRight[i].bulletSpeed = 10;
+			if (enemyBulletRight[i].bulletFire) {
+
+				addImage(g, "//Bullet//DestroyerBulletsRIGHT.png", enemyBulletRight[i].bulletX,
+						(int) enemyBulletRight[i].bulletY + enemyBulletRight[i].yoffset);
 			}
 		}
 	}
@@ -541,7 +576,7 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 	}
 
 	void movePlayer(double x) {
-		
+
 		if (!user.death) {
 
 			for (int j = 0; j < floor.length; j++) {
@@ -561,10 +596,15 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 				car.illusionspeed = x;
 			}
 
+			if (!supercar.enter) {
+				supercar.illusionspeed = x;
+			}
+
 			plane.illusionspeed = x;
 			cityboundary1.speed = x;
 			cityboundary2.speed = x;
 			airport.illusionSpeed = x;
+			airport2.illusionSpeed = x;
 			destroyer.speed = x;
 			iron.armorspeed = x;
 		}
@@ -684,6 +724,9 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 			if (i == KeyEvent.VK_E && towers[j].enter) {
 				buildScene.entered = true;
 			}
+			if (i == KeyEvent.VK_3 && supercar.canEnter) {
+				supercar.enter = true;
+			}
 			if (i == KeyEvent.VK_3 && car.canEnter) {
 				car.enter = true;
 			}
@@ -694,6 +737,13 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 			if (i == KeyEvent.VK_4) {
 				car.enter = false;
 				car.carSpeed = 0;
+
+				supercar.enter = false;
+				supercar.carSpeed = 0;
+
+				plane.enter = false;
+				plane.planeSpeed = 0;
+
 			}
 			if (i == KeyEvent.VK_Q) {
 				buildScene.entered = false;
@@ -815,6 +865,14 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 				car.decelerate = false;
 			}
 
+			if (supercar.enter) {
+				movePlayer(supercar.carSpeed);
+				supercar.carLeft = true;
+				supercar.carRight = false;
+				supercar.accelerate = true;
+				supercar.decelerate = false;
+			}
+
 			if (plane.enter) {
 				movePlayer(plane.planeSpeed);
 				plane.accelerate = true;
@@ -874,6 +932,13 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 				car.carRight = true;
 				car.accelerate = true;
 				car.decelerate = false;
+			}
+
+			if (supercar.enter) {
+				supercar.carLeft = false;
+				supercar.carRight = true;
+				supercar.accelerate = true;
+				supercar.decelerate = false;
 			}
 
 			if (plane.enter) {
@@ -953,7 +1018,7 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 
 		iron.turbo = false;
 		iron.turbo_LEFT = false;
-		
+
 		movePlayer(0);
 
 		if (i == KeyEvent.VK_A && user.holdingWeapon) {
@@ -994,6 +1059,11 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 				plane.fall = true;
 			}
 
+			if (supercar.enter) {
+				supercar.decelerate = true;
+				supercar.accelerate = false;
+			}
+
 		}
 
 		if (i == KeyEvent.VK_A) {
@@ -1010,7 +1080,12 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 				car.decelerate = true;
 				car.accelerate = false;
 			}
-		
+
+			if (supercar.enter) {
+				supercar.decelerate = true;
+				supercar.accelerate = false;
+			}
+
 			if (plane.enter) {
 				plane.decelerate = true;
 				plane.accelerate = false;
@@ -1041,6 +1116,7 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 		Rectangle firstBuilding = cityboundary1.bounds();
 		Rectangle lastBuilding = cityboundary2.bounds();
 		Rectangle Car = car.bounds();
+		Rectangle superCar = supercar.bounds();
 		Rectangle aircraft = plane.bounds();
 
 		for (int i = 0; i < bullets.length; i++) {
@@ -1178,6 +1254,12 @@ public class sandbox extends Textures implements ActionListener, KeyListener {
 			plane.canEnter = true;
 		} else {
 			plane.canEnter = false;
+		}
+
+		if (human.intersects(superCar)) {
+			supercar.canEnter = true;
+		} else {
+			supercar.canEnter = false;
 		}
 	}
 
