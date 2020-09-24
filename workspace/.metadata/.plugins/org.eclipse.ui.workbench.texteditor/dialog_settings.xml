@@ -6,29 +6,31 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="VK_4" key="selection"/>
+		<item value="Sun." key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="VK_4"/>
-			<item value="VK_A"/>
-			<item value="VK_D"/>
-			<item value="user.draw"/>
-			<item value="VK_3"/>
-			<item value="moveP"/>
-			<item value="car.draw"/>
-			<item value="car"/>
-			<item value="spell.draw"/>
-			<item value="wand.draw"/>
-			<item value="wand"/>
-			<item value="Car"/>
-			<item value="ywheels"/>
-			<item value="ywheels "/>
-			<item value="ywheels += 1"/>
+			<item value="Sun."/>
+			<item value="VK_SPACE"/>
+			<item value="deadNPC"/>
+			<item value="VKSPACE"/>
+			<item value="fireweapon"/>
+			<item value="contain"/>
+			<item value="conatin"/>
+			<item value="BRec.intersects(npc"/>
+			<item value="rbullets[i].draw"/>
+			<item value="rbullet"/>
+			<item value="rbullet[i]"/>
+			<item value="rbullet[i]."/>
+			<item value="rbullet[i].draw"/>
+			<item value="VK_1"/>
+			<item value="VK_!"/>
 		</list>
 		<list key="replacehistory">
+			<item value="y"/>
+			<item value="hi"/>
 			<item value=""/>
 			<item value="car"/>
 			<item value="public boolean"/>
@@ -42,15 +44,13 @@
 			<item value="X"/>
 			<item value="Y"/>
 			<item value="g"/>
-			<item value="speed"/>
-			<item value="xWither"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="391" key="DIALOG_HEIGHT"/>
-		<item value="104" key="DIALOG_X_ORIGIN"/>
-		<item value="576" key="DIALOG_Y_ORIGIN"/>
+		<item value="1008" key="DIALOG_X_ORIGIN"/>
+		<item value="461" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

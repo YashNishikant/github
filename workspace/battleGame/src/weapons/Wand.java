@@ -1,12 +1,8 @@
 package weapons;
-
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
 import playerNpc.int_by_ref;
 
 public class Wand extends JPanel {

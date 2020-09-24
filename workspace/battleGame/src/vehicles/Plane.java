@@ -2,7 +2,8 @@ package vehicles;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import battleGame.Textures;
+
+import engine.Textures;
 
 public class Plane extends Textures {
 
@@ -34,15 +35,16 @@ public class Plane extends Textures {
 		x = 0;
 		y = 755;
 		planeSpeed = 0;
-		riseSpeed = -20;
-		fallSpeed = -70;
-		topSpeed = -60;
+		topSpeed = -1000;
+		riseSpeed = topSpeed / 20;
+		fallSpeed = topSpeed - 10;
 		ySpeed = 0;
 		accelerationFactor = 0.05;
 		ywheels = y;
 	}
 
 	public void move() {
+		
 		xwheels = x;
 
 		if (y < 200) {

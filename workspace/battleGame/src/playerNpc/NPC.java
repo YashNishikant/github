@@ -7,7 +7,7 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import battleGame.Textures;
+import engine.Textures;
 
 public class NPC extends Textures {
 
@@ -32,6 +32,7 @@ public class NPC extends Textures {
 	public int animationDelayL;
 
 	public boolean playerPos = true;
+	public boolean playerPos2 = true;
 	public boolean animateLeft;
 	public boolean animateRight;
 	public boolean oneTimeJump;

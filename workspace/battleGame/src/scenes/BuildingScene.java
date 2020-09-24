@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import battleGame.Textures;
+import engine.Textures;
 
 public class BuildingScene extends Textures{
 

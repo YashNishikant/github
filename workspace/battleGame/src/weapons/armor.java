@@ -5,7 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import battleGame.Textures;
+import engine.Textures;
 
 public class armor extends Textures{
 

@@ -1,4 +1,4 @@
-package battleGame;
+package freeworld;
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -6,7 +6,7 @@ import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
 import java.util.concurrent.TimeUnit;
 
-public class battlePanel1 {
+public class worldPanel {
 
 	static GraphicsConfiguration gc;
 

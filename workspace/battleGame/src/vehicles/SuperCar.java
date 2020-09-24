@@ -10,12 +10,12 @@ public class SuperCar extends car {
 		topSpeed = 60;
 		accelerationFactor = 0.5;
 	}
-
+	
 	public void draw(Graphics g) {
 		if (carRight) {
-			addImage(g, "Vehicles/supercar.png", x, y);
+			addImage(g, "Vehicles/supercar.png", x, (int) y);
 		} else {
-			addImage(g, "Vehicles/supercarFlipped.png", x, y);
+			addImage(g, "Vehicles/supercarFlipped.png", x, (int) y);
 		}
 	}
 

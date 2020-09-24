@@ -2,7 +2,6 @@
 public class DoNow {
 
 	public static void main(String[] args) {
-
 		double sum = 0;
 		int x = 0;
 
@@ -43,33 +42,63 @@ public class DoNow {
 		System.out.println("\n\n");
 		int track = 1;
 		int temp = 1;
-		
+
 		for (int i = 1; i < 5; i++) {
-		
-			for (int j = 1; j < (track*2); j *= 2) {
-				if(i == 1) {
+
+			for (int j = 1; j < (track * 2); j *= 2) {
+				if (i == 1) {
 					j = 1;
 					System.out.println(j);
 				}
 				System.out.print(j + " ");
 			}
-			
-			for(int j = (track*2); j > 0; j/=2) {
+
+			for (int j = (track * 2); j > 0; j /= 2) {
 				System.out.print(j + " ");
 			}
-			
+
 			System.out.println();
 			track *= 2;
 		}
+
+
+		System.out.println("\n\n");
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < (i-1)/2; j++) {
+				System.out.print("*");
+			}
+			System.out.println(i/2);
+		}
+
+		System.out.println("\n\n");
+		int number = 0;
+		int additions = 0;
+		
+		for(int i = 0; i < 2; i++) {
+			for(int j = 0; j < 5; j++) {
+				System.out.print(number+ ", ");
+				additions++; 
+				number += additions;
+			}
+			System.out.println();
+			additions = 0;
+			number = 10;
+		}
 		
 		System.out.println("\n\n");
-		for(int i = 0; i < 5; i+=0) {
-			for(int j = i; j < 4; j++) {
-				
+		for(int i = 81284; i > 0; i-=20020) {
+			
+			if(i != 1204) {
+				System.out.println(i);
+			}
+			else {
+				System.out.print(0 + "" + i);
 			}
 		}
 		
-
+		System.out.println("\n\n");
+		
+		
 //		for (int i = 6; i > 0; i--) {
 //			if (i % 2 == 0) {
 //				for (int j = 1; j < i; j += 2) {

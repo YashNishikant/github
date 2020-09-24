@@ -5,7 +5,9 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class land extends JPanel{
+import engine.Textures;
+
+public class land extends Textures{
 
 	public double X;
 	public double XGround;
@@ -26,10 +28,4 @@ public class land extends JPanel{
 		addImage(g, "Backgrounds//Background.png", (int) X, Y);
 		X += backgroundspeed;
 	}
-
-	public void addImage(Graphics g, String s, int x, int y) {
-		ImageIcon i = new ImageIcon(assetsPath + s);
-		i.paintIcon(this, g, x, (int) y);
-	}
-	
 }

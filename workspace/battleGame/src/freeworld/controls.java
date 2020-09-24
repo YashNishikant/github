@@ -1,4 +1,4 @@
-package battleGame;
+package freeworld;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,9 +7,12 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import engine.Textures;
+
 public class controls extends Textures {
 
 	int ammo;
+	int rifleammo;
 	int enemyAmmoL;
 	int enemyAmmoR;
 	int hitcount;
@@ -19,22 +22,29 @@ public class controls extends Textures {
 	int knockbackRNG;
 	int shieldHP;
 	public boolean beginRain = false;
-
+	public boolean showCity;
+	
 	String assetsPath;
 
 	public controls(int x) {
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";
 		hitcount = 0;
-		ammo = 100;
+		ammo = 99;
 		enemyAmmoL = 99;
 		enemyAmmoR = 99;
 		greenblue = 250;
 		grenadeAmmo = 20;
 		shieldHP = 190;
+		rifleammo = 99;
 	}
 
 	public void naturaldrawings(Graphics g) {
+		
+		if(showCity) {
+			
+		}
+		
 		if (!beginRain) {
 			addImage(g, "//Backgrounds//Sky.png", 0, 0);
 		}

@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -35,6 +36,10 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 	boolean startScreenPingPong;
 	boolean replay;
 
+	Dimension wh = getToolkit(). getScreenSize();
+	Dimension screenHeight = screenSize.height;
+	Dimension screenWidth = screenSize.width;
+	
 	public BallPanel() {
 
 		startScreenPingPong = true;
@@ -49,6 +54,8 @@ public class BallPanel extends JPanel implements ActionListener, KeyListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		System.out.println(screenHeight);
+		screenHeight = getToolkit(). getScreenSize();
 		// Round
 		g.setFont(new Font("default", Font.BOLD, 24));
 		g.drawString("Round: " + roundNum, 930, 20);
