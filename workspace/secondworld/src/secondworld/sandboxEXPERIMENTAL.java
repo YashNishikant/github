@@ -342,7 +342,7 @@ public class sandboxEXPERIMENTAL extends JPanel implements ActionListener, KeyLi
 	}
 
 	public void mouseMoved(MouseEvent e) {
-
+		
 		xmouse = e.getX() - 10;
 		ymouse = e.getY() - 10;
 

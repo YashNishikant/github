@@ -7,14 +7,6 @@ public class Textures extends Physics{
 
 	String assetsPath;
 
-	public int animationSpeed = 15;
-	public int animationLimit;
-	public int animationDelayR;
-	public int animationDelayL;
-	
-	public int animationNumberR = 1;
-	public int animationNumberL = 1;
-	
 	public Textures() {
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";

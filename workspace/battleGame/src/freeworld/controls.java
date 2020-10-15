@@ -11,6 +11,7 @@ import engine.Textures;
 
 public class controls extends Textures {
 
+	public boolean setAmmo = true;
 	int ammo;
 	int rifleammo;
 	int enemyAmmoL;
@@ -23,6 +24,9 @@ public class controls extends Textures {
 	int shieldHP;
 	public boolean beginRain = false;
 	public boolean showCity;
+	public boolean night;
+	public int cooldown;
+	public boolean cooldownOver;
 	
 	String assetsPath;
 
@@ -45,12 +49,17 @@ public class controls extends Textures {
 			
 		}
 		
-		if (!beginRain) {
+		if (!beginRain && !night) {
 			addImage(g, "//Backgrounds//Sky.png", 0, 0);
 		}
-		else {
+		else if(!night){
 			addImage(g, "//Backgrounds//RainSky.png", 0, 0);
 		}
+	
+		if(night) {
+			addImage(g, "//Backgrounds//NightSky.png", 0, 0);
+		}
+		
 	}
 	public void drawArmor(Graphics g) {
 

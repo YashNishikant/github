@@ -12,6 +12,10 @@ public class Rifle extends Textures{
 	public boolean fire;
 	public boolean fireweapon;
 	public int fireCount;
+	public boolean gunClicked;
+	public int delay;
+	public boolean canFire;
+	public boolean flame;
 	
 	public Rifle() {
 		X = 0;
@@ -24,7 +28,7 @@ public class Rifle extends Textures{
 		}
 	
 		if(fireweapon) {
-			addImage(g, "//Weapons//fireWeapon.png", X, Y);
+			addImage(g, "//Weapons//fireWeapon.png", X + 50, Y + 2);
 		}
 		
 	}

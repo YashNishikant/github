@@ -13,6 +13,8 @@ public class human extends Textures {
 
 	int replaceFace = 12;
 
+	public boolean isMoving;
+
 	public double speedY;
 	public double personX;
 	public double maxheight;
@@ -38,17 +40,10 @@ public class human extends Textures {
 
 	String assetsPath;
 
-	public int animationSpeed = 15;
-	public int animationLimit;
-	public int animationDelayR;
-	public int animationDelayL;
 	public boolean animateLeft;
 	public boolean animateRight;
 	public boolean turnRight = true;
 	public boolean turnLeft;
-
-	public int animationNumberR = 1;
-	public int animationNumberL = 1;
 
 	public human() {
 
@@ -109,15 +104,30 @@ public class human extends Textures {
 			}
 
 			// ANIMATION
-			animationLimit = 5;
+			if (isMoving) {
+				animationLimit = 5;
 
-			animationNumberR = animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight", personX,
-					(int) y + 12, animationLimit, animationSpeed);
+				animationNumberR = animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight", personX,
+						(int) y + 12, animationLimit, animationSpeed);
 
-			animationDelayR++;
-			animationNumberL = animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft", personX,
-					(int) y + 12, animationLimit, animationSpeed);
-			animationDelayL++;
+				animationDelayR++;
+				animationNumberL = animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft", personX,
+						(int) y + 12, animationLimit, animationSpeed);
+				animationDelayL++;
+			}
+
+			else {
+				if (turnRight) {
+					addImage(g, "//Player//PlayerRight.png", personX, (int) y + 12);
+					addImage(g, "//Player//PlayerFaceRight.png", (personX + 2), (int) y + replaceFace);
+				}
+
+				if (turnLeft) {
+					addImage(g, "//Player//PlayerLeft.png", (int) personX, (int) y + 12);
+					addImage(g, "//Player//PlayerFaceLeft.png", (int) personX, (int) y + replaceFace);
+				}
+			}
+
 			// ANIMATION
 
 		} else {

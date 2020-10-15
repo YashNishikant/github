@@ -6,29 +6,30 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Sun." key="selection"/>
+		<item value="Floor" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="Sun."/>
+			<item value="floor"/>
 			<item value="VK_SPACE"/>
-			<item value="deadNPC"/>
-			<item value="VKSPACE"/>
-			<item value="fireweapon"/>
-			<item value="contain"/>
-			<item value="conatin"/>
-			<item value="BRec.intersects(npc"/>
-			<item value="rbullets[i].draw"/>
-			<item value="rbullet"/>
-			<item value="rbullet[i]"/>
-			<item value="rbullet[i]."/>
-			<item value="rbullet[i].draw"/>
-			<item value="VK_1"/>
-			<item value="VK_!"/>
+			<item value="SPACE"/>
+			<item value="&amp;quot;"/>
+			<item value="collide"/>
+			<item value="moveP"/>
+			<item value="keepC"/>
+			<item value="kee"/>
+			<item value="user.force"/>
+			<item value="static "/>
+			<item value="static g"/>
+			<item value="fireW"/>
+			<item value="fire"/>
+			<item value="fireT"/>
+			<item value="VK_W"/>
 		</list>
 		<list key="replacehistory">
+			<item value="&quot;"/>
 			<item value="y"/>
 			<item value="hi"/>
 			<item value=""/>
@@ -43,7 +44,6 @@
 			<item value="bullets[i]"/>
 			<item value="X"/>
 			<item value="Y"/>
-			<item value="g"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
