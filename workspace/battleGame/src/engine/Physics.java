@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 public class Physics extends JPanel {
 
 	public double fallingFactor;
-	boolean gravityActivate = true;
+	public boolean gravityActivate = true;
 	public boolean forceUp;
 	public boolean hitground;
 	public double force;

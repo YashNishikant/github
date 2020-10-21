@@ -49,14 +49,6 @@ public class assignment {
 			number++;
 			y++;
 		}
-	
-
-		String a="Have you ever eaten a persimmon?";
-		while(a.indexOf("e")>=0)
-		{
-		a=a.substring(a.indexOf("e")+1)+a.substring(0,a.indexOf("e")-1);
-		}
-		System.out.println(a);
 		
 	}
 }

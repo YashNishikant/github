@@ -12,24 +12,21 @@ public class Player extends engine{
 	
 	public double width;
 	public double height;
-	public double speedY;
-	public double speed = 6;
-	public double speedX = 10;
+	public double speedx = 0;
+	public double speedX = 4;
+	public double speedy = 0;
+	public double speedY = 4;
 	
 	public Player(double x1, double y1) {
-		x = 700;
-		y = 50;
+		x = 900;
+		y = 500;
 		width = x1;
 		height = y1;
 	}
 	
-	public void move() {
-		y += speedY;
-	}
-	
 	public void draw(Graphics g) {
 		g.setColor(Color.WHITE);
-		g.fillRect((int)x, (int)y, (int)(width), (int)(height));
+		g.fillOval((int)x, (int)y, (int)(width), (int)(height));
 	}
 	
 	

@@ -1,6 +1,6 @@
 package freeworld;
 
-import java.awt.Container; 
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JFrame;
@@ -15,7 +15,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.Timer;
 
-import Structures.Platform;
+import Structures.Block;
 import engine.Physics;
 import engine.engine;
 import engine.mouseClicker;
@@ -32,11 +32,10 @@ public class sandbox extends engine
 	boolean onBlock = false;
 
 	Physics Physics = new Physics();
-	mouseClicker click = new mouseClicker();
-	Platform[] block = new Platform[50];
-
 	Miscellaneous game = new Miscellaneous();
-	Player user = new Player(100, 100);
+	Player player = new Player(100, 100);
+
+	Block[] block = new Block[2000];
 
 	Timer time = new Timer(5, this);
 	String assetsPath;
@@ -44,9 +43,11 @@ public class sandbox extends engine
 	public sandbox() {
 
 		for (int i = 0; i < block.length; i++) {
-			Platform block1 = new Platform();
+			Block block1 = new Block();
 			block[i] = block1;
-			spacing += (int) (Math.random() * 700) + 500;
+			
+			block[i].x = randomInt(-18000,18000);
+			block[i].y = randomInt(-10000,10000);
 		}
 
 		time.start();
@@ -60,13 +61,8 @@ public class sandbox extends engine
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
-		movePlayer(user.speed);
 		keepWorldMoving();
-		cameraFollow();
 		Collision();
-		user.gravity(DOWNWARD_FORCE);
-		user.applyForceVertical(5);
 		repaint();
 	}
 
@@ -74,39 +70,31 @@ public class sandbox extends engine
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		game.drawBackground(g);
-		drawBlocks(g);
-		user.draw(g);
+		player.draw(g);
+		blocksDraw(g);
+
 	}
 
-	public void cameraFollow() {
-		if((int)user.x > 700) {
-			for (int x = 0; x < block.length; x++) {
-				block[x].x += -0.4;
-				user.x += -0.4;
-			}
-		}
-
-		if((int)user.x < 700) {
-			for (int x = 0; x < block.length; x++) {
-				block[x].x += 0.4;
-				user.x += 0.4;
-			}
-		}
-	}
-	
-	public void drawBlocks(Graphics g) {
+	public void blocksDraw(Graphics g) {
 		for (int i = 0; i < block.length; i++) {
 			block[i].draw(g);
 		}
 	}
 
 	public void keepWorldMoving() {
-			movePlayer(user.speed);
+		movePlayerHorizontal(player.speedx);
+		movePlayerVertical(player.speedy);
 	}
 
-	public void movePlayer(double speed) {
-			for (int i = 0; i < block.length; i++) {
-				block[i].applyForceHorizontal(speed);
+	public void movePlayerHorizontal(double speed) {
+		for (int i = 0; i < block.length; i++) {
+			block[i].applyForceHorizontal(speed);
+		}
+	}
+
+	public void movePlayerVertical(double speed2) {
+		for (int i = 0; i < block.length; i++) {
+			block[i].applyForceVertical(speed2);
 		}
 	}
 
@@ -114,23 +102,34 @@ public class sandbox extends engine
 	public void keyPressed(KeyEvent e) {
 		int i = e.getKeyCode();
 
-		if (i == KeyEvent.VK_SPACE) {
-			user.forceUp = true;
-			user.setForce = true;
-		}
+		if (i == KeyEvent.VK_W) {
+			for (int j = 0; j < block.length; j++) {
+				block[j].forceVertical = true;
+			}
+			player.speedy = player.speedY;
 
+		}
 		if (i == KeyEvent.VK_A) {
-			user.speed = user.speedX;
 			for (int j = 0; j < block.length; j++) {
 				block[j].forceHorizontal = true;
 			}
+			player.speedx = player.speedX;
+
+		}
+		if (i == KeyEvent.VK_S) {
+			for (int j = 0; j < block.length; j++) {
+				block[j].forceVertical = true;
+			}
+			player.speedy = -player.speedY;
+
 		}
 
 		if (i == KeyEvent.VK_D) {
-			user.speed = -user.speedX;
 			for (int j = 0; j < block.length; j++) {
 				block[j].forceHorizontal = true;
 			}
+			player.speedx = -player.speedX;
+
 		}
 	}
 
@@ -141,9 +140,15 @@ public class sandbox extends engine
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int i = e.getKeyCode();
-		if (i == KeyEvent.VK_D) {
+
+		if (i == KeyEvent.VK_W) {
 			for (int j = 0; j < block.length; j++) {
-				block[j].forceHorizontal = false;
+				block[j].forceVertical = false;
+			}
+		}
+		if (i == KeyEvent.VK_S) {
+			for (int j = 0; j < block.length; j++) {
+				block[j].forceVertical = false;
 			}
 		}
 		if (i == KeyEvent.VK_A) {
@@ -151,49 +156,15 @@ public class sandbox extends engine
 				block[j].forceHorizontal = false;
 			}
 		}
-
-		if (i == KeyEvent.VK_R) {
-			user.y = 100;
-			user.fallingFactor = 0;
+		if (i == KeyEvent.VK_D) {
+			for (int j = 0; j < block.length; j++) {
+				block[j].forceHorizontal = false;
+			}
 		}
-
 	}
 
 	public void Collision() {
 
-		Rectangle player = user.bounds();
-		user.setForce = false;
-		for (int j = 0; j < block.length; j++) {
-
-			Rectangle top = block[j].boundsTop();
-			Rectangle left = block[j].boundsLeft();
-			Rectangle right = block[j].boundsRight();
-
-			onBlock = false;
-			
-			if (player.intersects(top)) {
-				user.fallingFactor = 0;
-				user.setForce = true;
-				onBlock = true;
-			}
-			if (player.intersects(left)) {
-				for (int x = 0; x < block.length; x++) {
-					block[x].speedObject = 0;	
-					user.speed = 0;
-				}
-				
-				user.x = block[j].x - user.width - 0.001;
-
-			}
-			if (player.intersects(right)) {
-				for (int x = 0; x < block.length; x++) {
-					block[x].speedObject = 0;
-					user.speed = 0;
-				}
-				
-				user.x = block[j].x + block[j].width + 0.001;
-			}
-		}
 	}
 
 	public void mouseDragged(MouseEvent e) {
@@ -239,7 +210,6 @@ public class sandbox extends engine
 	@Override
 	public void componentResized(ComponentEvent e) {
 		Dimension newSize = e.getComponent().getBounds().getSize();
-		// System.out.println("1");
 	}
 
 	@Override

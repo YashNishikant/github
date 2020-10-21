@@ -28,7 +28,7 @@ public class Rifle extends Textures{
 		}
 	
 		if(fireweapon) {
-			addImage(g, "//Weapons//fireWeapon.png", X + 50, Y + 2);
+			addImage(g, "//Weapons//fireWeapon.png", X + 50, Y);
 		}
 		
 	}

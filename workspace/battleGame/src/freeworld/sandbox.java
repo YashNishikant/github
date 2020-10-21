@@ -50,7 +50,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	int limitXleft = 1900;
 	int limitXright = -10;
 	int spacing = 450;
-	
+
 	boolean onGround;
 	double brightness = 1;
 
@@ -88,13 +88,13 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	Timer time = new Timer(5, this);
 	String assetsPath;
 
-	int upwardForce = 10;
+	int upwardForce = 4;
 	double gravity = user.DOWNWARD_FORCE;
-	
+
 	public sandbox() {
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";
-		
+
 		for (int i = 0; i < landscape.length; i++) {
 			land land1 = new land(landSpacing);
 			landSpacingFloor += 0;
@@ -215,7 +215,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		destroyer.draw(g);
 		destroyer.drawHealth(g);
 		drawEnemyBullets(g);
-		batteryAndBullets(g);
 		flyWithShield(g);
 		iron.Images(g);
 		drawRainDrops(g);
@@ -230,6 +229,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		drawSlots(g);
 		drawSelect(g);
 		drawItems(g);
+		batteryAndBullets(g);
 	}
 
 	public void fireGun() {
@@ -238,6 +238,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			rbullets[gui.rifleammo].bulletFire = true;
 			gui.rifleammo--;
 			rifle.fireweapon = true;
+			rifle.flame = true;
 		}
 	}
 
@@ -245,9 +246,9 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		if (rifle.flame) {
 			rifle.fireCount++;
 
-			if (rifle.fireCount > 30) {
+			if (rifle.fireCount > 10) {
 				rifle.fireweapon = false;
-				rifle.flame= false; 
+				rifle.flame = false;
 				rifle.fireCount = 0;
 			}
 			
@@ -256,7 +257,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			}
 		}
 	}
-	
+
 	public void gunDelay() {
 		rifle.delay++;
 
@@ -472,6 +473,10 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 	public void contain() {
 
+		if(iron.track) {
+			user.gravityActivate = false;
+		}
+		
 		rifle.X = (int) user.personX + 30;
 		rifle.Y = (int) user.y + 30;
 
@@ -977,6 +982,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		}
 		if (i == KeyEvent.VK_SPACE && !user.nobattery) {
 			if (iron.track == true && iron.confirmgroundfire == false && iron.fireonground == false) {
+
 				user.speedY = -5;
 
 				if (user.y >= 870) {
@@ -1238,7 +1244,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			movePlayer(0);
 		}
 
-		if (iron.track) {
+		if (!iron.track) {
 			user.speedY = 0;
 		}
 	}
@@ -1431,7 +1437,9 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		if (human.intersects(ground)) {
 			user.fallingFactor = 0;
 			user.force = 0;
-			user.speedY = 0;
+			if (!iron.track) {
+				user.speedY = 0;
+			}
 			user.setForce = true;
 			onGround = true;
 
@@ -1485,9 +1493,8 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	}
 
 	public void mousePressed(MouseEvent arg0) {
-		if (rifle.ready) {
+		if (rifle.ready && !inventory[4].drawselect) {
 			rifle.gunClicked = true;
-			rifle.flame = true;
 		}
 	}
 

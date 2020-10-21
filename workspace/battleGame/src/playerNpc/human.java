@@ -63,7 +63,7 @@ public class human extends Textures {
 			if (y <= 915) {
 				speedY = 3;
 			} else {
-				speedY = 0;
+				y += speedY;
 			}
 		}
 

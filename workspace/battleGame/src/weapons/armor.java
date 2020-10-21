@@ -62,8 +62,8 @@ public class armor extends Textures{
 	
 	public void uncrafted() {
 		if (!crafted) {
-			armorPosX = 0;
-			armorPosY = -100;
+			//armorPosX = 0;
+			//armorPosY = -100;
 		}
 	}
 
