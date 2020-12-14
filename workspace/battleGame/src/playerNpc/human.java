@@ -13,7 +13,7 @@ public class human extends Textures {
 
 	int replaceFace = 12;
 
-	public int walkingspeed = 6;
+	public int walkingspeed = 4;
 	
 	public boolean isMoving;
 	public double speedY;

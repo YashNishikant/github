@@ -44,11 +44,11 @@ import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
 public class sandbox extends Textures implements ActionListener, MouseMotionListener, KeyListener, MouseListener {
-	
-	 Date date;
-	 long time2;
-	 Timestamp ts;
-	
+
+	Date date;
+	long time2;
+	Timestamp ts;
+
 	int buildspacing = (int) (Math.random() * -100000) + 100000;
 	int landSpacing = -1500;
 	int landSpacingFloor = -100;
@@ -61,7 +61,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 	buildings[] towers = new buildings[10];
 	land[] landscape = new land[5];
-	Ground floor = new Ground(landSpacingFloor);
+	Ground[] floor = new Ground[5];
 	Airport airport = new Airport((int) (Math.random() * 20000) - 10000);
 	Airport airport2 = new Airport((int) (Math.random() * 160000) + 80000);
 	BattleBoss destroyer = new BattleBoss(1500, -50000);
@@ -95,10 +95,14 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	public sandbox() {
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";
+		for (int i = 0; i < floor.length; i++) {
+			Ground floor1 = new Ground(landSpacingFloor);
+			landSpacingFloor += 319;
+			floor[i] = floor1;
+		}
 
 		for (int i = 0; i < landscape.length; i++) {
 			land land1 = new land(landSpacing);
-			landSpacingFloor += 0;
 			landSpacing += 800;
 			landscape[i] = land1;
 		}
@@ -170,7 +174,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(airport.X);
 		user.gravity(DOWNWARD_FORCE);
 		user.applyForceVertical(upwardForce);
 		car.gravity(DOWNWARD_FORCE);
@@ -346,8 +349,9 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		for (int i = 0; i < landscape.length; i++) {
 			landscape[i].draw(g);
 		}
-
-		floor.draw(g);
+		for (int i = 0; i < floor.length; i++) {
+			floor[i].draw(g);
+		}
 
 		for (int i = 0; i < towers.length; i++) {
 			if (towers[i].bX > limitXright - 180 && towers[i].bX < limitXleft + 180) {
@@ -521,15 +525,16 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			plane.x = airport.X + 1000;
 			plane.planePos = false;
 		}
-
-		if (floor.XGround < -1000) {
-			floor.XGround = 2200;
-		}
-
-		if (floor.XGround > -10) {
-			floor.XGround = -400;
-		}
-
+//		for (int i = 0; i < floor.length; i++) {
+//			if (floor[i].XGround < -1000) {
+//				floor[i].XGround = 2200;
+//			}
+//		}
+//		for (int i = 0; i < floor.length; i++) {
+//			if (floor[i].XGround > -10) {
+//				floor[i].XGround = -400;
+//			}
+//		}
 		for (int i = 0; i < landscape.length; i++) {
 
 			if (landscape[i].X < -1000) {
@@ -712,9 +717,9 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		}
 
 		if (!user.death) {
-
-			floor.floorSpeed = x;
-
+			for (int i = 0; i < floor.length; i++) {
+				floor[i].floorSpeed = x;
+			}
 			for (int j = 0; j < landscape.length; j++) {
 				landscape[j].backgroundspeed = x / 2;
 			}
@@ -841,7 +846,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 							gui.enemyAmmoR--;
 							destroyer.destroyerFireLock = false;
 						}
-					}	
+					}
 				}
 			}
 		}
@@ -863,10 +868,10 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			destroyer.destroyerFireLock = false;
 		}
 	}
-	
+
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+
 		int i = e.getKeyCode();
 
 		for (int j = 0; j < towers.length; j++) {
@@ -1051,7 +1056,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			if (iron.track == true && iron.armorPosY >= 870 && !car.enter && !plane.enter) {
 				movePlayer(6);
 			}
-			if (!iron.track && !car.enter && !plane.enter) {
+			if (!iron.track && !car.enter && !plane.enter && !supercar.enter) {
 				movePlayer(user.walkingspeed);
 				iron.armorspeed = 2;
 			}
@@ -1071,6 +1076,8 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 				movePlayer(12);
 			}
+		} else if (!car.enter && !plane.enter && !supercar.enter) {
+			movePlayer(4);
 		}
 
 		if (i == KeyEvent.VK_D && !user.death) {
@@ -1116,7 +1123,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			if (iron.track == true && iron.armorPosY >= 870 && !car.enter && !plane.enter) {
 				movePlayer(-6);
 			}
-			if (!iron.track && !car.enter && !plane.enter) {
+			if (!iron.track && !car.enter && !plane.enter && !supercar.enter) {
 				movePlayer(-user.walkingspeed);
 			}
 			// air
@@ -1133,9 +1140,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				iron.confirmgroundfire = false;
 
 				movePlayer(-12);
-
 			}
-
 		}
 
 		if (i == KeyEvent.VK_T && iron.ableToTurbo && iron.track) {
@@ -1165,7 +1170,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-	
+
 		int i = e.getKeyCode();
 
 		iron.turbo = false;
@@ -1263,7 +1268,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		Rectangle Car = car.bounds();
 		Rectangle superCar = supercar.bounds();
 		Rectangle aircraft = plane.bounds();
-		Rectangle ground = floor.bounds();
+
 		Rectangle clicker = click.bounds();
 
 		for (int j = 0; j < inventory.length; j++) {
@@ -1419,24 +1424,31 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			supercar.canEnter = false;
 		}
 		onGround = false;
-		if (human.intersects(ground)) {
-			user.fallingFactor = 0;
-			user.force = 0;
-			if (!iron.track) {
-				user.speedY = 0;
-			}
-			user.setForce = true;
-			onGround = true;
 
-			if (!user.jump) {
-				user.y = floor.y + 870;
+		for (int i = 0; i < floor.length; i++) {
+			Rectangle ground = floor[i].bounds();
+			if (Car.intersects(ground)) {
+				car.fallingFactor = 0;
+				car.yspeed = 0;
+				car.gravityActivate = false;
 			}
+
+			if (human.intersects(ground)) {
+				user.fallingFactor = 0;
+				user.force = 0;
+				if (!iron.track) {
+					user.speedY = 0;
+				}
+				user.setForce = true;
+				onGround = true;
+
+			}
+
 		}
-
-		if (Car.intersects(ground)) {
-			car.fallingFactor = 0;
-			car.yspeed = 0;
-			car.gravityActivate = false;
+		for (int j = 0; j < floor.length; j++) {
+			if (!user.jump) {
+				user.y = floor[j].y + 870;
+			}
 		}
 	}
 

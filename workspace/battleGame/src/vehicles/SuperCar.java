@@ -7,7 +7,7 @@ public class SuperCar extends car {
 	public SuperCar() {
 		x = 750.0;
 		y = 860;
-		topSpeed = 60;
+		topSpeed = 120;
 		accelerationFactor = 0.5;
 	}
 	

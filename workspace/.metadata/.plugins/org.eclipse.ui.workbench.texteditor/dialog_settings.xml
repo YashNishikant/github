@@ -6,12 +6,17 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="illusion" key="selection"/>
+		<item value="movePlayer(4" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="true" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="movePlayer(4"/>
+			<item value="movePlayer"/>
+			<item value="movePlayer("/>
+			<item value="movePlayer(1"/>
+			<item value="moveP"/>
 			<item value=""/>
 			<item value="D"/>
 			<item value="DO"/>
@@ -22,11 +27,6 @@
 			<item value="cloud"/>
 			<item value="mouseMoved"/>
 			<item value="drawUser"/>
-			<item value="user.draw"/>
-			<item value="col"/>
-			<item value="collision"/>
-			<item value="endptY"/>
-			<item value="endptX"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Block.endptY"/>
