@@ -1,9 +1,5 @@
 package scenes;
-
-import java.awt.Graphics;
-
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import java.awt.Graphics; 
 
 import engine.Textures;
 
@@ -11,6 +7,7 @@ public class BuildingScene extends Textures{
 
 	public boolean entered;
 	String assetsPath;
+	
 	
 	public BuildingScene() {
 		assetsPath = System.getProperty("user.dir");

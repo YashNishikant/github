@@ -11,7 +11,7 @@ public class bullet extends Textures {
 	public double bulletY = 0;
 	public double damageForBoss = 0.5;
 	public int yoffset = 24;
-	public int bulletSpeed = 10;
+	public int bulletSpeed = 20;
 	public int width = 10;
 	public int height = 5;
 	public int damage = 10;
@@ -42,7 +42,7 @@ public class bullet extends Textures {
 		if (letdestroy) {
 			bulletSpeed = 0;
 			bulletX = 9000;
-			bulletY = -40;
+			bulletY = -4000;
 		}
 	}
 

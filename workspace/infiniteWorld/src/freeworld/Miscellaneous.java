@@ -1,21 +1,20 @@
 package freeworld;
-
-import java.awt.Color;
 import java.awt.Graphics;
 
-public class Miscellaneous {
+import engine.engine;
+
+public class Miscellaneous extends engine{
 
 	int width;
 	int height;
+	String assetsPath;
 	
 	public Miscellaneous() {
+		assetsPath = System.getProperty("user.dir");
+		assetsPath += "\\src\\assets\\";
+		
 		width = 2000;
 		height = 2000;
-	}
-	
-	public void drawBackground(Graphics g) {
-		g.setColor(Color.GREEN);
-		g.fillRect(0, 0, width, height);
 	}
 	
 }

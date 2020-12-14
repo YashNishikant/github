@@ -23,7 +23,7 @@ public class NPC extends Textures {
 	public int speedaddition;
 	public int turnaround;
 	public int knockbackstr;
-	public int animationSpeed = 20;
+	public int animationSpeed = 9;
 	public int animationLimit = 5;
 	public int animationNumberR = 1;
 	public int animationDelayR;
@@ -31,6 +31,9 @@ public class NPC extends Textures {
 	public int animationNumberL = 1;
 	public int animationDelayL;
 
+	public int runninganimationR = 1;
+	public int runninganimationDelayR;
+	
 	public boolean playerPos = true;
 	public boolean playerPos2 = true;
 	public boolean animateLeft;
@@ -39,7 +42,8 @@ public class NPC extends Textures {
 
 	String assetsPath;
 
-	public boolean knockback = false;
+	public boolean knockbackR = false;
+	public boolean knockbackL = false;
 	public boolean alive = true;
 	public boolean dropLock = true;
 	public boolean turnleft;
@@ -47,6 +51,8 @@ public class NPC extends Textures {
 
 	public int randomDirection;
 
+	public int turnCounter;
+	
 	public NPC(int x, int speed1) {
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";
@@ -62,13 +68,22 @@ public class NPC extends Textures {
 	}
 
 	public void npcBehavior() {
-
-		turnaround = (int) (Math.random() * 405) + 1;
-
-		if (knockback) {
+		
+		turnCounter++;
+		if(turnCounter == 100000000) {
+			turnCounter = 0;
+		}
+		
+		if(turnCounter % 200 == 0) {
+			turnaround = (int) (Math.random() * 1001) + 1;
+		}
+		if (knockbackR) {
 			npcX += knockbackstr;
 		}
-
+		if (knockbackL) {
+			npcX -= knockbackstr;
+		}
+		
 		if (healthcount <= 0) {
 			alive = false;
 		} else {
@@ -77,16 +92,22 @@ public class NPC extends Textures {
 
 		if (alive) {
 
-			if (turnaround == 50) {
-				speedaddition = -1;
+			if (turnaround < 200) {
 				turnleft = true;
 				turnright = false;
+				if(turnleft) {
+					speedaddition = -2;
+				}
 			}
 
-			if (turnaround == 60) {
-				speedaddition = 1;
+			if (turnaround > 800) {
 				turnright = true;
 				turnleft = false;
+			
+				if(turnright) {
+					speedaddition = 2;
+				}
+				
 			}
 
 		} else {
@@ -126,13 +147,12 @@ public class NPC extends Textures {
 				animationNumberR = animation(g, animationDelayR, animationNumberR, animateRight, "PlayerRight",
 						(int) npcX, (int) npcY + 12, animationLimit, animationSpeed);
 				animationDelayR++;
+				
 			}
 
 			if (turnleft) {
 				animateRight = false;
 				animateLeft = true;
-
-				addImage(g, "//Player//PlayerLeft.png", (int) npcX, (int) npcY + 12);
 
 				animationNumberL = animation(g, animationDelayL, animationNumberL, animateLeft, "PlayerLeft",
 						(int) npcX, (int) npcY + 12, animationLimit, animationSpeed);

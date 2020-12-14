@@ -12,13 +12,15 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.swing.Timer;
 import Environment.Ground;
 import Environment.clouds;
 import Environment.land;
 import Environment.rain;
 import Environment.sun;
-import engine.Physics;
 import engine.Textures;
 import engine.mouseClicker;
 import playerNpc.BattleBoss;
@@ -28,7 +30,6 @@ import scenes.BuildingScene;
 import scenes.Inventory;
 import structures.Airport;
 import structures.buildings;
-import structures.cityBounds;
 import vehicles.Plane;
 import vehicles.SuperCar;
 import vehicles.car;
@@ -36,7 +37,6 @@ import weapons.DestroyerBullets;
 import weapons.Rifle;
 import weapons.RifleBullets;
 import weapons.Shield;
-import weapons.Wand;
 import weapons.armor;
 import weapons.battery;
 import weapons.bullet;
@@ -44,6 +44,11 @@ import java.awt.Rectangle;
 
 @SuppressWarnings("serial")
 public class sandbox extends Textures implements ActionListener, MouseMotionListener, KeyListener, MouseListener {
+	
+	 Date date;
+	 long time2;
+	 Timestamp ts;
+	
 	int buildspacing = (int) (Math.random() * -100000) + 100000;
 	int landSpacing = -1500;
 	int landSpacingFloor = -100;
@@ -57,18 +62,15 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	buildings[] towers = new buildings[10];
 	land[] landscape = new land[5];
 	Ground floor = new Ground(landSpacingFloor);
-	cityBounds cityboundary1 = new cityBounds(buildspacing);
-	cityBounds cityboundary2 = new cityBounds(buildspacing + 6000);
 	Airport airport = new Airport((int) (Math.random() * 20000) - 10000);
 	Airport airport2 = new Airport((int) (Math.random() * 160000) + 80000);
-	BattleBoss destroyer = new BattleBoss(1500, -50000000);
+	BattleBoss destroyer = new BattleBoss(1500, -50000);
 	NPC[] player = new NPC[40];
 	armor iron = new armor();
 	car car = new car();
 	Plane plane = new Plane();
 	SuperCar supercar = new SuperCar();
 
-	Physics carPhysics = new Physics();
 	mouseClicker click = new mouseClicker();
 	sun Sun = new sun();
 	Inventory[] inventory = new Inventory[5];
@@ -80,7 +82,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	bullet[] bullets = new bullet[100];
 	controls gui = new controls(0);
 	RifleBullets[] rbullets = new RifleBullets[gui.rifleammo];
-	Wand wand = new Wand(user.personX + 40, (int) (user.y + 30));
 	Shield shield = new Shield(iron.armorPosX + 50, iron.armorPosY);
 	Rifle rifle = new Rifle();
 	battery power = new battery();
@@ -88,7 +89,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	Timer time = new Timer(5, this);
 	String assetsPath;
 
-	int upwardForce = 4;
+	int upwardForce = 8;
 	double gravity = user.DOWNWARD_FORCE;
 
 	public sandbox() {
@@ -147,6 +148,18 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 		rifle.X = (int) user.personX + 30;
 		rifle.Y = (int) user.y + 30;
+
+		int randomPosPlayer = (int) (Math.random() * 100) + 1;
+
+		for (int i = 0; i < player.length; i++) {
+			randomPosPlayer = (int) (Math.random() * 100) + 1;
+			if (i < 20) {
+				player[i].npcX = airport.X + 3000 + randomPosPlayer;
+			} else {
+				player[i].npcX = towers[0].bX + 3000 + randomPosPlayer;
+			}
+		}
+
 		time.start();
 		addKeyListener(this);
 		addMouseMotionListener(this);
@@ -157,6 +170,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		System.out.println(airport.X);
 		user.gravity(DOWNWARD_FORCE);
 		user.applyForceVertical(upwardForce);
 		car.gravity(DOWNWARD_FORCE);
@@ -171,8 +185,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		movingObjects();
 		refreshBullets();
 		gunDelay();
-		cityboundary1.move();
-		cityboundary2.move();
 		moveTowardsPlayer();
 		weather();
 		user.move();
@@ -184,7 +196,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		iron.move();
 		fireGun();
 		batterydecrease();
-		contain();
+		miscRandomBugFix();
 		destroyer.move();
 		destroyer.Behavior();
 		iron.tracking();
@@ -220,7 +232,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		drawRainDrops(g);
 		buildScene.draw(g);
 		drawUser(g);
-		wand.draw(g);
 		rifle.draw(g);
 		drawbullets(g);
 		cleargunshot(g);
@@ -234,7 +245,14 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 	public void fireGun() {
 		if (rifle.gunClicked && gui.rifleammo > 0 && rifle.canFire) {
-			rbullets[gui.rifleammo].bulletY = rifle.Y - 25;
+
+			if (rifle.gunR) {
+				rbullets[gui.rifleammo].bulletY = rifle.Y - 25;
+				rbullets[gui.rifleammo].bulletX = rifle.X + 35;
+			} else {
+				rbullets[gui.rifleammo].bulletY = rifle.Y - 25;
+				rbullets[gui.rifleammo].bulletX = rifle.X - 85;
+			}
 			rbullets[gui.rifleammo].bulletFire = true;
 			gui.rifleammo--;
 			rifle.fireweapon = true;
@@ -251,7 +269,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				rifle.flame = false;
 				rifle.fireCount = 0;
 			}
-			
+
 			if (gui.rifleammo <= 0) {
 				rifle.fireweapon = false;
 			}
@@ -471,12 +489,16 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		}
 	}
 
-	public void contain() {
+	public void miscRandomBugFix() {
 
-		if(iron.track) {
+		if (user.death) {
+			movePlayer(0);
+		}
+
+		if (iron.track) {
 			user.gravityActivate = false;
 		}
-		
+
 		rifle.X = (int) user.personX + 30;
 		rifle.Y = (int) user.y + 30;
 
@@ -490,8 +512,8 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			rbullets[i].trackbullet(rifle.X);
 
 			if (!rbullets[i].bulletFire) {
-				rbullets[i].bulletX = rifle.X + 20;
-				rbullets[i].bulletY = rifle.Y - 300;
+				rbullets[i].bulletX = 0;
+				rbullets[i].bulletY = 0;
 			}
 		}
 
@@ -499,9 +521,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			plane.x = airport.X + 1000;
 			plane.planePos = false;
 		}
-
-		cityboundary1.buildingPos = towers[0].bX;
-		cityboundary2.buildingPos = towers[9].bX;
 
 		if (floor.XGround < -1000) {
 			floor.XGround = 2200;
@@ -523,26 +542,9 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 		}
 
-		for (int i = 0; i < player.length; i++) {
-			if (player[i].playerPos && i > 20) {
-				player[i].npcX = (int) (towers[4].bX);
-				player[i].playerPos = false;
-			}
-
-			if (player[i].playerPos2 && i <= 20) {
-				player[i].npcX = (int) (airport.X + 5000);
-				player[i].playerPos2 = false;
-			}
-
-		}
-
 		if (iron.track) {
 			user.holdingWeapon = false;
-			wand.drawWand = false;
 		}
-
-		wand.Y = (int) user.y + 30;
-
 		for (int i = 0; i < bullets.length; i++) {
 			if (!bullets[i].bulletFire) {
 				bullets[i].bulletX = iron.armorPosX + 19;
@@ -589,7 +591,10 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		gui.knockbackRNG++;
 		for (int i = 0; i < player.length; i++) {
 			if (gui.knockbackRNG % 10 == 0) {
-				player[i].knockback = false;
+				player[i].knockbackR = false;
+			}
+			if (gui.knockbackRNG % 10 == 0) {
+				player[i].knockbackL = false;
 			}
 		}
 
@@ -729,8 +734,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			}
 
 			plane.illusionspeed = x;
-			cityboundary1.speed = x;
-			cityboundary2.speed = x;
 			airport.illusionSpeed = x;
 			airport2.illusionSpeed = x;
 			destroyer.speed = x;
@@ -750,10 +753,21 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	}
 
 	void moveTowardsPlayer() {
+
+		if (destroyer.Y > (int) user.y) {
+			destroyer.speedY = -1;
+		} else {
+			destroyer.speedY = 0;
+		}
+		if (destroyer.Y < (int) user.y) {
+			destroyer.speedY = 1;
+		} else {
+			destroyer.speedY = 0;
+		}
 		if (destroyer.alive && !user.death) {
 			if (destroyer.attackLeft) {
 				if (destroyer.X > (int) user.personX + 200) {
-					destroyer.speedaddition = -1;
+					destroyer.speedaddition = -destroyer.bossSpeed;
 				} else {
 					destroyer.speedaddition = 0;
 				}
@@ -772,12 +786,16 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				}
 
 				if (destroyer.goDown) {
-					if (destroyer.Y != (int) user.y) {
-						destroyer.speedY = 1;
+
+					if (destroyer.Y <= (int) user.y && destroyer.Y >= (int) user.y - destroyer.attackRangeVertical) {
+						if (gui.enemyAmmoL > 0 && destroyer.destroyerFireLock) {
+							enemyBulletLeft[gui.enemyAmmoL].bulletFire = true;
+							gui.enemyAmmoL--;
+							destroyer.destroyerFireLock = false;
+						}
 					}
 
-					if (destroyer.Y == (int) user.y) {
-						destroyer.speedY = 0;
+					if (destroyer.Y >= (int) user.y + destroyer.attackRangeVertical && destroyer.Y <= user.y) {
 						if (gui.enemyAmmoL > 0 && destroyer.destroyerFireLock) {
 							enemyBulletLeft[gui.enemyAmmoL].bulletFire = true;
 							gui.enemyAmmoL--;
@@ -789,16 +807,15 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 			if (destroyer.attackRight) {
 				if (destroyer.X < (int) user.personX - 200) {
-					destroyer.speedaddition = 1;
+					destroyer.speedaddition = destroyer.bossSpeed;
 				} else {
 					destroyer.speedaddition = 0;
 				}
+
 				if (destroyer.goUp) {
 					if (destroyer.Y != (int) user.y) {
 						destroyer.speedY = -1;
-					}
-
-					else {
+					} else {
 						destroyer.speedY = 0;
 						if (gui.enemyAmmoR > 0 && destroyer.destroyerFireLock) {
 							enemyBulletRight[gui.enemyAmmoR].bulletFire = true;
@@ -806,22 +823,25 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 							destroyer.destroyerFireLock = false;
 						}
 					}
-
 				}
 
 				if (destroyer.goDown) {
-					if (destroyer.Y != (int) user.y) {
-						destroyer.speedY = 1;
-					}
 
-					else {
-						destroyer.speedY = 0;
+					if (destroyer.Y <= (int) user.y && destroyer.Y >= (int) user.y - destroyer.attackRangeVertical) {
 						if (gui.enemyAmmoR > 0 && destroyer.destroyerFireLock) {
 							enemyBulletRight[gui.enemyAmmoR].bulletFire = true;
 							gui.enemyAmmoR--;
 							destroyer.destroyerFireLock = false;
 						}
 					}
+
+					if (destroyer.Y >= (int) user.y + destroyer.attackRangeVertical && destroyer.Y <= user.y) {
+						if (gui.enemyAmmoL > 0 && destroyer.destroyerFireLock) {
+							enemyBulletRight[gui.enemyAmmoR].bulletFire = true;
+							gui.enemyAmmoR--;
+							destroyer.destroyerFireLock = false;
+						}
+					}	
 				}
 			}
 		}
@@ -843,9 +863,10 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			destroyer.destroyerFireLock = false;
 		}
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
 		int i = e.getKeyCode();
 
 		for (int j = 0; j < towers.length; j++) {
@@ -883,21 +904,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			}
 
 		}
-
-//		if (i == KeyEvent.VK_1 && !iron.track && user.turnRight) {
-//			wand.drawWand = true;
-//			user.holdingWeapon = true;
-//		}
-//
-//		if (i == KeyEvent.VK_SPACE && wand.drawWand) {
-//			wand.spell = true;
-//		}
-//		
-//		if (i == KeyEvent.VK_2 && !iron.track) {
-//			wand.drawWand = false;
-//			user.holdingWeapon = false;
-//			wand.spell = false;
-//		}
 
 		if (i == KeyEvent.VK_1) {
 			for (int j = 0; j < inventory.length; j++) {
@@ -1025,17 +1031,16 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				plane.planeLeft = true;
 			}
 
-			if (user.holdingWeapon) {
-				user.animateLeft = false;
-				user.turnRight = true;
-				user.animateRight = true;
-				user.turnLeft = false;
-			} else {
-				user.turnLeft = true;
-				user.turnRight = false;
-				user.animateLeft = true;
-				user.animateRight = false;
+			for (int j = 0; j < rbullets.length; j++) {
+				rbullets[j].Right = false;
 			}
+
+			rifle.gunR = false;
+			rifle.gunL = true;
+			user.turnLeft = true;
+			user.turnRight = false;
+			user.animateLeft = true;
+			user.animateRight = false;
 
 			iron.blast = false;
 
@@ -1047,7 +1052,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				movePlayer(6);
 			}
 			if (!iron.track && !car.enter && !plane.enter) {
-				movePlayer(4);
+				movePlayer(user.walkingspeed);
 				iron.armorspeed = 2;
 			}
 
@@ -1065,8 +1070,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				iron.confirmgroundfire = false;
 
 				movePlayer(12);
-			} else if (!car.enter && !plane.enter) {
-				movePlayer(4);
 			}
 		}
 
@@ -1094,6 +1097,12 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				plane.fall = false;
 			}
 
+			for (int j = 0; j < rbullets.length; j++) {
+				rbullets[j].Right = true;
+			}
+
+			rifle.gunR = true;
+			rifle.gunL = false;
 			user.turnLeft = false;
 			user.turnRight = true;
 			user.animateRight = true;
@@ -1108,7 +1117,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				movePlayer(-6);
 			}
 			if (!iron.track && !car.enter && !plane.enter) {
-				movePlayer(-4);
+				movePlayer(-user.walkingspeed);
 			}
 			// air
 			if (iron.track == true && iron.armorPosY < 870 && !car.enter && !plane.enter) {
@@ -1125,8 +1134,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 				movePlayer(-12);
 
-			} else if (!car.enter && !plane.enter) {
-				movePlayer(-4);
 			}
 
 		}
@@ -1158,6 +1165,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+	
 		int i = e.getKeyCode();
 
 		iron.turbo = false;
@@ -1167,10 +1175,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 		if (i == KeyEvent.VK_A && user.holdingWeapon) {
 			user.animateRight = false;
-		}
-
-		if (i == KeyEvent.VK_SPACE && user.holdingWeapon) {
-			wand.spell = false;
 		}
 
 		if (i == KeyEvent.VK_Q && iron.ableToTurbo_LEFT) {
@@ -1256,9 +1260,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		Rectangle boss = destroyer.bounds();
 		Rectangle bossDetection = destroyer.detection();
 		Rectangle ShieldRec = shield.bounds();
-		Rectangle spell = wand.bounds();
-		Rectangle firstBuilding = cityboundary1.bounds();
-		Rectangle lastBuilding = cityboundary2.bounds();
 		Rectangle Car = car.bounds();
 		Rectangle superCar = supercar.bounds();
 		Rectangle aircraft = plane.bounds();
@@ -1275,63 +1276,54 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			}
 		}
 
-		for (int i = 0; i < bullets.length; i++) {
-			Rectangle BRec = bullets[i].bounds();
+		if (rifle.ready) {
 
-			if (BRec.intersects(boss) && bullets[i].bulletFire) {
-				bullets[i].bulletFire = false;
-				bullets[i].letdestroy = true;
-				destroyer.knockback = true;
-				if (destroyer.healthcount > 0) {
-					destroyer.healthcount -= bullets[i].damageForBoss;
+			for (int i = 0; i < bullets.length; i++) {
+				Rectangle BRec = bullets[i].bounds();
+				if (BRec.intersects(boss) && bullets[i].bulletFire) {
+					bullets[i].bulletFire = false;
+					bullets[i].letdestroy = true;
+					destroyer.knockback = true;
+					if (destroyer.healthcount > 0) {
+						destroyer.healthcount -= bullets[i].damageForBoss;
+					}
 				}
 			}
+
+			for (int i = 0; i < rbullets.length; i++) {
+				Rectangle BRec = rbullets[i].bounds();
+				if (BRec.intersects(boss) && rbullets[i].bulletFire) {
+					rbullets[i].bulletFire = false;
+					rbullets[i].letdestroy = true;
+					destroyer.knockback = true;
+					if (destroyer.healthcount > 0) {
+						destroyer.healthcount -= rbullets[i].damageForBoss;
+					}
+				}
+			}
+
 			for (int k = 0; k < player.length; k++) {
+
 				Rectangle npc = player[k].bounds();
 
 				for (int j = 0; j < rbullets.length; j++) {
 					Rectangle riflebullet = rbullets[j].bounds();
+					if (riflebullet.intersects(npc)) {
+						if (rifle.gunR) {
+							player[k].knockbackR = true;
+							player[k].knockbackL = false;
+						}
+						if (rifle.gunL) {
+							player[k].knockbackR = false;
+							player[k].knockbackL = true;
+						}
 
-					if (rbullets[j].bulletFire) {
-
-						if (riflebullet.intersects(npc)) {
-							player[k].knockback = true;
-							rbullets[j].bulletFire = false;
-							rbullets[j].letdestroy = true;
-							if (player[k].healthcount > 0) {
-								player[k].healthcount -= rbullets[j].damage;
-							}
+						rbullets[j].bulletFire = false;
+						rbullets[j].letdestroy = true;
+						if (player[k].healthcount > 0) {
+							player[k].healthcount -= rbullets[j].damage;
 						}
 					}
-				}
-
-				if (npc.intersects(firstBuilding)) {
-					player[k].turnright = true;
-					player[k].turnleft = false;
-					player[k].speedaddition = 1;
-				}
-
-				if (npc.intersects(lastBuilding)) {
-					player[k].turnright = false;
-					player[k].turnleft = true;
-					player[k].speedaddition = -1;
-				}
-
-				if (BRec.intersects(npc) && bullets[i].bulletFire) {
-					player[k].knockback = true;
-					bullets[i].bulletFire = false;
-					bullets[i].letdestroy = true;
-					if (player[k].healthcount > 0) {
-						player[k].healthcount -= bullets[i].damage;
-					}
-				}
-
-				if (spell.intersects(npc) && wand.spell) {
-					player[k].knockback = true;
-					if (player[k].healthcount > 0) {
-						player[k].healthcount--;
-					}
-					player[k].oneTimeJump = true;
 				}
 			}
 		}
@@ -1340,7 +1332,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			Rectangle destroyerBulletLeft = enemyBulletLeft[j].bounds();
 			if (destroyerBulletLeft.intersects(human) && enemyBulletLeft[j].bulletFire) {
 				if (user.healthcount > 0) {
-					user.healthcount -= enemyBulletLeft[j].damage;
+					user.healthcountPlaceHolder -= enemyBulletLeft[j].damage;
 				}
 				enemyBulletLeft[j].letdestroy = true;
 			}
@@ -1357,7 +1349,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			Rectangle destroyerBulletRight = enemyBulletRight[j].bounds();
 			if (destroyerBulletRight.intersects(human) && enemyBulletRight[j].bulletFire) {
 				if (user.healthcount > 0) {
-					user.healthcount -= enemyBulletRight[j].damage;
+					user.healthcountPlaceHolder -= enemyBulletRight[j].damage;
 				}
 				enemyBulletRight[j].letdestroy = true;
 			}
@@ -1375,7 +1367,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		}
 
 		if (bossDetection.intersects(human)) {
-			destroyer.attackMode = true;
 
 			if (user.y > destroyer.Y) {
 				destroyer.goDown = true;
@@ -1396,16 +1387,10 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				destroyer.attackLeft = true;
 			}
 		} else {
-			destroyer.attackMode = false;
 			destroyer.attackLeft = false;
 			destroyer.attackRight = false;
 			destroyer.goDown = false;
 			destroyer.goUp = false;
-		}
-
-		if (spell.intersects(boss) && wand.spell) {
-			destroyer.knockback = true;
-			destroyer.healthcount--;
 		}
 
 		for (int i = 0; i < towers.length; i++) {
@@ -1449,13 +1434,16 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		}
 
 		if (Car.intersects(ground)) {
-			carPhysics.fallingFactor = 0;
+			car.fallingFactor = 0;
 			car.yspeed = 0;
+			car.gravityActivate = false;
 		}
 	}
 
 	public void mouseDragged(MouseEvent e) {
-
+		if (rifle.ready && !inventory[4].drawselect) {
+			rifle.gunClicked = true;
+		}
 	}
 
 	public void mouseMoved(MouseEvent e) {

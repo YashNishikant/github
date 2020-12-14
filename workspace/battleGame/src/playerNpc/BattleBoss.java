@@ -23,7 +23,6 @@ public class BattleBoss extends Textures{
 	int knockbackstr;
 	int lengthwidth = 3000;
 	public boolean destroyerFireLock = true;
-	public boolean attackMode;
 	public boolean knockback;
 	public boolean alive = true;
 	public boolean dropLock = true;
@@ -34,6 +33,10 @@ public class BattleBoss extends Textures{
 	public boolean goUp;
 	public boolean goDown;
 
+	public int attackRangeVertical = 30;
+	
+	public int bossSpeed;
+	
 	public BattleBoss(int x, int y) {
 
 		Y = y;
@@ -47,6 +50,7 @@ public class BattleBoss extends Textures{
 		healthcount = 40;
 		speedaddition = 0;
 		knockbackstr = 6;
+		bossSpeed = 2;
 
 	}
 
@@ -108,7 +112,7 @@ public class BattleBoss extends Textures{
 
 	public void draw(Graphics g) {
 		if (alive) {
-			addImage(g, "//Destroyer//Destroyer.png", X - 12, (int) (Y + 10));
+			addImage(g, "//Destroyer//duck.png", X - 12, (int) (Y + 10));
 
 		} else {
 			addImage(g, "//Destroyer//DestroyerDead.png", X - 12, (int) (Y + 10));

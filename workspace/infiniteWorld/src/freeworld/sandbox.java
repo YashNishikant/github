@@ -16,6 +16,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.Timer;
 
 import Structures.Block;
+import Structures.Map;
 import engine.Physics;
 import engine.engine;
 import engine.mouseClicker;
@@ -34,14 +35,19 @@ public class sandbox extends engine
 	Physics Physics = new Physics();
 	Miscellaneous game = new Miscellaneous();
 	Player player = new Player(100, 100);
-
+	Map map = new Map();
 	Block[] block = new Block[2000];
 
 	Timer time = new Timer(5, this);
 	String assetsPath;
 
+	String assetspath;
+	
 	public sandbox() {
 
+		assetsPath = System.getProperty("user.dir");
+		assetsPath += "\\src\\assets\\";
+		
 		for (int i = 0; i < block.length; i++) {
 			Block block1 = new Block();
 			block[i] = block1;
@@ -69,7 +75,7 @@ public class sandbox extends engine
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		game.drawBackground(g);
+		map.drawBackground(g);
 		player.draw(g);
 		blocksDraw(g);
 
@@ -90,12 +96,14 @@ public class sandbox extends engine
 		for (int i = 0; i < block.length; i++) {
 			block[i].applyForceHorizontal(speed);
 		}
+		map.applyForceHorizontal(speed);
 	}
 
 	public void movePlayerVertical(double speed2) {
 		for (int i = 0; i < block.length; i++) {
 			block[i].applyForceVertical(speed2);
 		}
+		map.applyForceVertical(speed2);
 	}
 
 	@Override
@@ -106,6 +114,7 @@ public class sandbox extends engine
 			for (int j = 0; j < block.length; j++) {
 				block[j].forceVertical = true;
 			}
+				map.forceVertical = true;
 			player.speedy = player.speedY;
 
 		}
@@ -113,6 +122,7 @@ public class sandbox extends engine
 			for (int j = 0; j < block.length; j++) {
 				block[j].forceHorizontal = true;
 			}
+				map.forceHorizontal = true;
 			player.speedx = player.speedX;
 
 		}
@@ -120,6 +130,7 @@ public class sandbox extends engine
 			for (int j = 0; j < block.length; j++) {
 				block[j].forceVertical = true;
 			}
+				map.forceVertical = true;
 			player.speedy = -player.speedY;
 
 		}
@@ -128,6 +139,7 @@ public class sandbox extends engine
 			for (int j = 0; j < block.length; j++) {
 				block[j].forceHorizontal = true;
 			}
+				map.forceHorizontal = true;
 			player.speedx = -player.speedX;
 
 		}
@@ -144,21 +156,25 @@ public class sandbox extends engine
 		if (i == KeyEvent.VK_W) {
 			for (int j = 0; j < block.length; j++) {
 				block[j].forceVertical = false;
+				map.forceVertical = false;
 			}
 		}
 		if (i == KeyEvent.VK_S) {
 			for (int j = 0; j < block.length; j++) {
 				block[j].forceVertical = false;
+				map.forceVertical = false;
 			}
 		}
 		if (i == KeyEvent.VK_A) {
 			for (int j = 0; j < block.length; j++) {
 				block[j].forceHorizontal = false;
+				map.forceHorizontal = false;
 			}
 		}
 		if (i == KeyEvent.VK_D) {
 			for (int j = 0; j < block.length; j++) {
 				block[j].forceHorizontal = false;
+				map.forceHorizontal = false;
 			}
 		}
 	}

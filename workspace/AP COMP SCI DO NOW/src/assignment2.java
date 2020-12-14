@@ -29,6 +29,6 @@ public class assignment2 {
 		for(int i = reverse.length()-1; i > -1; i--) {
 			System.out.print(reverse.substring(i, i+1));
 		}
-		
+
 	}
 }

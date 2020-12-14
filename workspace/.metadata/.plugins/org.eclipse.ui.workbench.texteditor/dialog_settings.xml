@@ -6,29 +6,32 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="" key="selection"/>
-		<item value="false" key="casesensitive"/>
-		<item value="false" key="incremental"/>
+		<item value="illusion" key="selection"/>
+		<item value="true" key="casesensitive"/>
+		<item value="true" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="SYst"/>
-			<item value="print"/>
-			<item value="Sys"/>
-			<item value="Re"/>
-			<item value="re"/>
-			<item value="R"/>
-			<item value="Rep"/>
-			<item value="Repl"/>
-			<item value="r"/>
-			<item value="rep"/>
-			<item value="repl"/>
-			<item value="drawA"/>
-			<item value="draw"/>
-			<item value="contain"/>
-			<item value="syst"/>
+			<item value=""/>
+			<item value="D"/>
+			<item value="DO"/>
+			<item value="DOW"/>
+			<item value="DOWN"/>
+			<item value="DOWNWARD"/>
+			<item value="animationSpeed"/>
+			<item value="cloud"/>
+			<item value="mouseMoved"/>
+			<item value="drawUser"/>
+			<item value="user.draw"/>
+			<item value="col"/>
+			<item value="collision"/>
+			<item value="endptY"/>
+			<item value="endptX"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Block.endptY"/>
+			<item value="Block.endptX"/>
+			<item value="PlayerAnimation"/>
 			<item value="&quot;"/>
 			<item value="y"/>
 			<item value="hi"/>
@@ -41,16 +44,13 @@
 			<item value="destroyer.destroyerFireLock"/>
 			<item value="npcY"/>
 			<item value="npcX"/>
-			<item value="bullets[i]"/>
-			<item value="X"/>
-			<item value="Y"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
-		<item value="361" key="DIALOG_HEIGHT"/>
-		<item value="434" key="DIALOG_X_ORIGIN"/>
-		<item value="519" key="DIALOG_Y_ORIGIN"/>
+		<item value="391" key="DIALOG_HEIGHT"/>
+		<item value="1322" key="DIALOG_X_ORIGIN"/>
+		<item value="279" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

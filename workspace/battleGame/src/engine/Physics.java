@@ -12,11 +12,10 @@ public class Physics extends JPanel {
 	public boolean setForce = true;
 	public double y;
 	int random;
-	public double DOWNWARD_FORCE = 1.0;
+	public double DOWNWARD_FORCE = 0.5;
 	
 	public Physics() {
 		fallingFactor = 0;
-		DOWNWARD_FORCE /= 10;
 	}
 
 	public double gravity(double gravity) {

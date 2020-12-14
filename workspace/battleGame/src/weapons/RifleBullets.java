@@ -6,11 +6,14 @@ import java.awt.Graphics;
 public class RifleBullets extends bullet{
 	
 	double bulletTrail;
+	public boolean Right = true;
+	int bulletSpeedConstant;
 	
 	public RifleBullets(double x, double y) {
 		super(x, y);
-		bulletSpeed = 40;
-		damage = 15;
+		
+		bulletSpeedConstant = 80;
+		damage = 20;
 		bulletTrail = 5;
 	}
 
@@ -20,14 +23,23 @@ public class RifleBullets extends bullet{
 		
 			g.setColor(Color.YELLOW);
 			g.fillRect((int)bulletX + 1, (int) bulletY + 29, (int) bulletTrail, 2);
-			if(bulletTrail > -540) {
+			if(Right && bulletTrail > -540) {
 				bulletTrail-=30;
+			}
+			else if(bulletTrail < 540){
+				bulletTrail+=30;
 			}
 		}	
 	}
 	
 	public void trackbullet(double x) {
 		
+		if(Right && !bulletFire) {
+			bulletSpeed = bulletSpeedConstant;
+		}
+		if(!Right && !bulletFire) {
+			bulletSpeed = -bulletSpeedConstant;
+		}
 		if(bulletX > x + 2000) {
 	
 			bulletX = -200;

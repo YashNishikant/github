@@ -12,6 +12,8 @@ public class clouds extends Textures{
 	public int cloud4start = -1200;
 	public int cloud1Y, cloud2Y, cloud3Y, cloud4Y;
 	
+	public int cloudSpeed;
+	public int returningArea;
 	public clouds() {
 
 		cloud1start = -50;
@@ -19,11 +21,13 @@ public class clouds extends Textures{
 		cloud3start = -1600;
 		cloud4start = -2100;
 		
-		cloud1Y = 60;
+		cloud1Y = 80;
 		cloud2Y = 120;
-		cloud3Y = 80;
+		cloud3Y = 100;
 		cloud4Y = 150;
 
+		cloudSpeed = 1*2;
+		returningArea = -100;
 	}
 
 	public void draw(Graphics g) {
@@ -35,25 +39,25 @@ public class clouds extends Textures{
 	
 	public void move() {
 
-		cloud1start += 2;
-		cloud2start += 2;
-		cloud3start += 2;
-		cloud4start += 2;
+		cloud1start += cloudSpeed;
+		cloud2start += cloudSpeed;
+		cloud3start += cloudSpeed;
+		cloud4start += cloudSpeed;
 
 		if (cloud1start == 2500) {
-			cloud1start = -100;
+			cloud1start = returningArea ;
 		}
 
 		if (cloud2start == 2500) {
-			cloud2start = -100;
+			cloud2start = returningArea ;
 		}
 
 		if (cloud3start == 2500) {
-			cloud3start = -100;
+			cloud3start = returningArea ;
 		}
 
 		if (cloud4start == 2500) {
-			cloud4start = -100;
+			cloud4start = returningArea ;
 		}
 		
 	}	

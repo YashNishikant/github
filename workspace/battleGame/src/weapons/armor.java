@@ -44,8 +44,8 @@ public class armor extends Textures{
 		wHitBox = 38;
 		hHitBox = 75;
 
-		armorPosX = 10;
-		armorPosY = 877;
+		armorPosX = -100000;
+		armorPosY = 877000;
 
 		armorspeed = 0;
 		flyIMG = false;

@@ -40,7 +40,7 @@ public class controls extends Textures {
 		greenblue = 250;
 		grenadeAmmo = 20;
 		shieldHP = 190;
-		rifleammo = 99;
+		rifleammo = 400;
 	}
 
 	public void naturaldrawings(Graphics g) {
