@@ -17,7 +17,7 @@ public class tube {
 		
 	tubeX = x;
 	tubeY = y;
-	speed = -2;	
+	speed = -5;	
 	separate = z;
 	offsetX = 25;
 	collide = false;

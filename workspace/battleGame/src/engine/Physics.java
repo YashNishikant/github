@@ -39,7 +39,6 @@ public class Physics extends JPanel {
 				force = -ForceReplace;
 				setForce = false;
 			}
-			
 			y += force;
 			force += DOWNWARD_FORCE;
 			gravityActivate = false;

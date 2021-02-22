@@ -13,9 +13,11 @@ public class Player extends engine{
 	public double width;
 	public double height;
 	public double speedx = 0;
-	public double speedX = 4;
+	public double speedX = 8;
 	public double speedy = 0;
-	public double speedY = 4;
+	public double speedY = 8;
+	
+	public boolean flip;
 	
 	public Player(double x1, double y1) {
 		x = 900;
@@ -25,8 +27,12 @@ public class Player extends engine{
 	}
 	
 	public void draw(Graphics g) {
-		g.setColor(Color.WHITE);
-		g.fillOval((int)x, (int)y, (int)(width), (int)(height));
+		if(!flip)
+		addImage(g, "\\Backgrounds\\Player.png", x + 25, (int)y + 10);
+		else {
+			addImage(g, "\\Backgrounds\\PlayerFlip.png", x + 25, (int)y + 10);	
+		}
+		
 	}
 	
 	

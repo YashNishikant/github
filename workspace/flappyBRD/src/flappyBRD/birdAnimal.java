@@ -105,20 +105,20 @@ public class birdAnimal {
 		if (!jump) {
 			birdY += speed;
 
-			if (speed < 8) {
-				speed += 0.1;
+			if (speed < 16) {
+				speed += 1;
 			}
 		}
 
 		if (jump) {
 			if (onetimeJump) {
-				speed = -4;
+				speed = -15;
 				onetimeJump = false;
 			}
 
 			birdY += speed;
 			if (speed < 0) {
-				speed += 0.05;
+				speed += 1;
 			} else {
 				jump = false;
 				onetimeJump = true;

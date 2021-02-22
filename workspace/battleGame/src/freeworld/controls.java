@@ -27,7 +27,8 @@ public class controls extends Textures {
 	public boolean night;
 	public int cooldown;
 	public boolean cooldownOver;
-	
+	public double farthestChunk = Double.MIN_VALUE;
+	public double closestChunk = Double.MAX_VALUE;
 	String assetsPath;
 
 	public controls(int x) {

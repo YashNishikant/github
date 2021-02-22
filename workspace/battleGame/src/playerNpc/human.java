@@ -13,7 +13,7 @@ public class human extends Textures {
 
 	int replaceFace = 12;
 
-	public int walkingspeed = 4;
+	public int walkingspeed = 1*5;
 	
 	public boolean isMoving;
 	public double speedY;
@@ -53,11 +53,13 @@ public class human extends Textures {
 
 	public int dropSpeed = 10;
 	
+	public int height = 78;
+	
 	public human() {
 
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";
-		personX = 810;
+		personX = (1920/2);
 		y = 470;
 		maxheight = y - 100;
 		healthcount = 800;
@@ -65,6 +67,7 @@ public class human extends Textures {
 		hHitBox = 70;
 		wHitBox = 38;
 		healthcountPlaceHolder = healthcount;
+		animationSpeed = 9;
 	}
 
 	public void move() {
@@ -97,33 +100,17 @@ public class human extends Textures {
 	}
 
 	public void draw(Graphics g) {
+		
 		if (!death) {
-
-			if (turnRight) {
-				if (!holdingWeapon) {
-					addImage(g, "//Player//PlayerRightARMS.png", (int) (personX - 3), (int) y + 30);
-					addImage(g, "//Player//PlayerFaceRight.png", (int) (personX + 2), (int) y + replaceFace);
-				} else {
-					addImage(g, "//Player//PlayerArmsWeapon.png", (int) (personX - 3), (int) y + 30);
-					addImage(g, "//Player//PlayerFaceRight.png", (int) (personX + 2), (int) y + replaceFace);		
-				}
-			}
-
-			if (turnLeft) {
-				if (!holdingWeapon) {
-					addImage(g, "//Player//PlayerLeftARMS.png", (int) (personX - 6), (int) y + 30);
-					addImage(g, "//Player//PlayerFaceLeft.png", (int) (personX), (int) y + replaceFace);
-				} else {
-					addImage(g, "//Player//PlayerArmsWeaponFlip.png", (int) (personX - 19), (int) y + 30);
-					addImage(g, "//Player//PlayerFaceLeft.png", (int) (personX), (int) y + replaceFace);		
-				}
-			}
 			
 			if (turnRight && !animateRight) {
 				addImage(g, "//Player//PlayerRight.png", personX, (int) y + 12);
 				addImage(g, "//Player//PlayerFaceRight.png", (personX + 2), (int) y + replaceFace);
 			}
-
+			if (turnLeft && !animateLeft) {
+				addImage(g, "//Player//PlayerLeft.png", personX, (int) y + 12);
+				addImage(g, "//Player//PlayerFaceLeft.png", (personX), (int) y + replaceFace);
+			}
 			// ANIMATION
 			if (isMoving) {
 				animationLimit = 5;
@@ -151,6 +138,26 @@ public class human extends Textures {
 
 			// ANIMATION
 
+			if (turnRight) {
+				if (!holdingWeapon) {
+					addImage(g, "//Player//PlayerRightARMS.png", (int) (personX - 3), (int) y + 30);
+					addImage(g, "//Player//PlayerFaceRight.png", (int) (personX + 2), (int) y + replaceFace);
+				} else {
+					addImage(g, "//Player//PlayerArmsWeapon.png", (int) (personX - 3), (int) y + 30);
+					addImage(g, "//Player//PlayerFaceRight.png", (int) (personX + 2), (int) y + replaceFace);		
+				}
+			}
+
+			if (turnLeft) {
+				if (!holdingWeapon) {
+					addImage(g, "//Player//PlayerLeftARMS.png", (int) (personX - 6), (int) y + 30);
+					addImage(g, "//Player//PlayerFaceLeft.png", (int) (personX), (int) y + replaceFace);
+				} else {
+					addImage(g, "//Player//PlayerArmsWeaponFlip.png", (int) (personX - 19), (int) y + 30);
+					addImage(g, "//Player//PlayerFaceLeft.png", (int) (personX), (int) y + replaceFace);		
+				}
+			}
+			
 		} else {
 			addImage(g, "//Icons//skull.png", (int) personX, (int) (y + 10));
 		}

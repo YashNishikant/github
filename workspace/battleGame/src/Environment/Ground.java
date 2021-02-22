@@ -7,8 +7,8 @@ public class Ground extends land {
 	
 	public double floorSpeed;
 	public int YGround;
-	
-	public Ground(int x1) {
+	public int width = 320;
+	public Ground(double x1) {
 		super(x1);
 		XGround = x1;
 		YGround = 948;
@@ -22,8 +22,7 @@ public class Ground extends land {
 
 	public Rectangle bounds() {
 
-		return (new Rectangle((int) XGround, YGround, 3200, 600));
+		return (new Rectangle((int) XGround, YGround, width, 124));
 
 	}
-	
 }

@@ -44,7 +44,7 @@ public class testing extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
+		
 		setColor(g, c);
 		drawRect(g, Block.x, Block.y, -(Block.width * Block.scale), -(Block.height * Block.scale));
 		setColor(g, c1);

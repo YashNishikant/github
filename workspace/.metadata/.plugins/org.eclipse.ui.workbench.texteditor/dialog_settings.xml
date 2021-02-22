@@ -6,51 +6,51 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="movePlayer(4" key="selection"/>
+		<item value="print" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="true" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="movePlayer(4"/>
-			<item value="movePlayer"/>
-			<item value="movePlayer("/>
-			<item value="movePlayer(1"/>
-			<item value="moveP"/>
-			<item value=""/>
-			<item value="D"/>
-			<item value="DO"/>
-			<item value="DOW"/>
-			<item value="DOWN"/>
-			<item value="DOWNWARD"/>
-			<item value="animationSpeed"/>
-			<item value="cloud"/>
-			<item value="mouseMoved"/>
-			<item value="drawUser"/>
+			<item value="print"/>
+			<item value="blocks[j]"/>
+			<item value="blocks[i]"/>
+			<item value="blocks.length"/>
+			<item value="blocks.get(j)"/>
+			<item value="blocks.get(i)"/>
+			<item value="blocks.length()"/>
+			<item value="blocks.size"/>
+			<item value="block.get(j)"/>
+			<item value="block.get(i)"/>
+			<item value="block[j]"/>
+			<item value="block[i]"/>
+			<item value="block.length"/>
+			<item value="forceUp"/>
+			<item value="other"/>
 		</list>
 		<list key="replacehistory">
-			<item value="Block.endptY"/>
-			<item value="Block.endptX"/>
-			<item value="PlayerAnimation"/>
-			<item value="&quot;"/>
-			<item value="y"/>
-			<item value="hi"/>
-			<item value=""/>
-			<item value="car"/>
-			<item value="public boolean"/>
-			<item value="public double"/>
-			<item value="public int"/>
-			<item value="gui.darkenSky"/>
-			<item value="destroyer.destroyerFireLock"/>
-			<item value="npcY"/>
-			<item value="npcX"/>
+			<item value="blocks.get(j)"/>
+			<item value="blocks.get(i)"/>
+			<item value="blocks.size()"/>
+			<item value="blocks[j]"/>
+			<item value="blocks[i]"/>
+			<item value="blocks.length"/>
+			<item value="block"/>
+			<item value="block[j]"/>
+			<item value="block[i]"/>
+			<item value="secondPlayer"/>
+			<item value="ju.get(j)."/>
+			<item value="ju.get(i)."/>
+			<item value="ju.size()"/>
+			<item value="jump"/>
+			<item value="jump.size()"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="284" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="391" key="DIALOG_HEIGHT"/>
-		<item value="1322" key="DIALOG_X_ORIGIN"/>
-		<item value="279" key="DIALOG_Y_ORIGIN"/>
+		<item value="684" key="DIALOG_X_ORIGIN"/>
+		<item value="275" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

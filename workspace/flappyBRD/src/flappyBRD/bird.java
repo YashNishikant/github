@@ -141,7 +141,7 @@ public class bird extends JPanel implements ActionListener, KeyListener {
 		if (i == KeyEvent.VK_W && STARTSCREEN) {
 			STARTSCREEN = false;
 			for (int j = 0; j < t.length; j++) {
-				t[j].speed = -2;
+				t[j].speed = -8;
 			}
 			bird.jump = true;
 		}
@@ -157,7 +157,7 @@ public class bird extends JPanel implements ActionListener, KeyListener {
 				t[j].tubeX = separateTube + 1000;
 				bird.birdY = 300;
 				point = 0;
-				t[j].speed = -2;
+				t[j].speed = -8;
 				t[j].boundaryY = 0;
 				t[j].shuffle();
 

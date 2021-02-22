@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.Timer;
@@ -41,36 +42,36 @@ import weapons.armor;
 import weapons.battery;
 import weapons.bullet;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 public class sandbox extends Textures implements ActionListener, MouseMotionListener, KeyListener, MouseListener {
 
-	Date date;
-	long time2;
-	Timestamp ts;
-
 	int buildspacing = (int) (Math.random() * -100000) + 100000;
 	int landSpacing = -1500;
-	int landSpacingFloor = -100;
+	double landSpacingFloor = 320;
 	int limitXleft = 1900;
 	int limitXright = -10;
 	int spacing = 450;
-
-	boolean onGround;
+	double farthestChunk;
+	int grounds = 5;
+	
+	boolean onGround = false;
 	double brightness = 1;
 
 	buildings[] towers = new buildings[10];
-	land[] landscape = new land[5];
-	Ground[] floor = new Ground[5];
+	land[] landscape = new land[10];
+	ArrayList<Ground> floor = new ArrayList<Ground>();
 	Airport airport = new Airport((int) (Math.random() * 20000) - 10000);
 	Airport airport2 = new Airport((int) (Math.random() * 160000) + 80000);
-	BattleBoss destroyer = new BattleBoss(1500, -50000);
+	BattleBoss destroyer = new BattleBoss(1500, -5000);
 	NPC[] player = new NPC[40];
 	armor iron = new armor();
 	car car = new car();
 	Plane plane = new Plane();
 	SuperCar supercar = new SuperCar();
 
+	Ground floor1;
 	mouseClicker click = new mouseClicker();
 	sun Sun = new sun();
 	Inventory[] inventory = new Inventory[5];
@@ -88,17 +89,18 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	BuildingScene buildScene = new BuildingScene();
 	Timer time = new Timer(5, this);
 	String assetsPath;
-
 	int upwardForce = 8;
 	double gravity = user.DOWNWARD_FORCE;
+	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
 	public sandbox() {
+
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";
-		for (int i = 0; i < floor.length; i++) {
+		for (int i = 0; i < grounds; i++) {
 			Ground floor1 = new Ground(landSpacingFloor);
-			landSpacingFloor += 319;
-			floor[i] = floor1;
+			landSpacingFloor += 320;
+			floor.add(floor1);
 		}
 
 		for (int i = 0; i < landscape.length; i++) {
@@ -177,6 +179,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		user.gravity(DOWNWARD_FORCE);
 		user.applyForceVertical(upwardForce);
 		car.gravity(DOWNWARD_FORCE);
+		supercar.gravity(DOWNWARD_FORCE);
 		Sun.sunPath();
 		beginRain();
 		airport.move();
@@ -199,7 +202,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		iron.move();
 		fireGun();
 		batterydecrease();
-		miscRandomBugFix();
+		miscRandomBugFix(floor1);
 		destroyer.move();
 		destroyer.Behavior();
 		iron.tracking();
@@ -220,9 +223,9 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		Sun.draw(g);
 		drawWorld(g);
 		cloud.draw(g);
-		airport.draw(g);
-		airport2.draw(g);
-		drawNPC(g);
+		//airport.draw(g);
+		//airport2.draw(g);
+		//drawNPC(g);
 		plane.draw(g);
 		car.draw(g);
 		supercar.draw(g);
@@ -246,6 +249,122 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		batteryAndBullets(g);
 	}
 
+	public void miscRandomBugFix(Ground ground) {
+
+		if((floor.get(0).XGround + floor.get(0).width) < 0) {
+			landSpacingFloor = floor.get(floor.size()-1).XGround;
+			landSpacingFloor += 307;
+			Ground floor1 = new Ground(landSpacingFloor);
+			floor.add(floor1);
+		}
+
+		if (user.death) {
+			movePlayer(0);
+		}
+
+		if (iron.track) {
+			user.gravityActivate = false;
+		}
+
+		rifle.X = (int) user.personX + 30;
+		rifle.Y = (int) user.y + 30;
+
+		if (gui.setAmmo) {
+			gui.rifleammo = rbullets.length - 1;
+			gui.setAmmo = false;
+		}
+
+		for (int i = 0; i < rbullets.length; i++) {
+
+			rbullets[i].trackbullet(rifle.X);
+
+			if (!rbullets[i].bulletFire) {
+				rbullets[i].bulletX = 0;
+				rbullets[i].bulletY = 0;
+			}
+		}
+
+		if (plane.planePos) {
+			plane.x = airport.X + 1000;
+			plane.planePos = false;
+		}
+		for (int i = 0; i < landscape.length; i++) {
+
+			if (landscape[i].X < -1000) {
+				landscape[i].X = 1800;
+			}
+
+			if (landscape[i].X > 1920) {
+				landscape[i].X = -850;
+			}
+
+		}
+
+		if (iron.track) {
+			user.holdingWeapon = false;
+		}
+		for (int i = 0; i < bullets.length; i++) {
+			if (!bullets[i].bulletFire) {
+				bullets[i].bulletX = iron.armorPosX + 19;
+				bullets[i].bulletY = iron.armorPosY - 5;
+			}
+
+			shield.x = iron.armorPosX + 50;
+			shield.y = iron.armorPosY;
+		}
+
+		for (int i = 0; i < enemyBulletLeft.length; i++) {
+			if (!enemyBulletLeft[i].bulletFire) {
+				enemyBulletLeft[i].bulletX = destroyer.X;
+				enemyBulletLeft[i].bulletY = destroyer.Y + 10;
+			}
+		}
+
+		for (int i = 0; i < enemyBulletRight.length; i++) {
+			if (!enemyBulletRight[i].bulletFire) {
+				enemyBulletRight[i].bulletX = destroyer.X;
+				enemyBulletRight[i].bulletY = destroyer.Y + 10;
+			}
+		}
+	}
+
+	void movePlayer(double x) {
+		if ((int) x == 0) {
+			user.isMoving = false;
+		} else {
+			user.isMoving = true;
+		}
+
+		if (!user.death) {
+			for (int i = 0; i < floor.size(); i++) {
+				floor.get(i).floorSpeed = x;
+			}
+			for (int j = 0; j < landscape.length; j++) {
+				landscape[j].backgroundspeed = x / 2;
+			}
+			for (int j = 0; j < player.length; j++) {
+				player[j].speed = x;
+			}
+			for (int j = 0; j < towers.length; j++) {
+				towers[j].speed = x;
+			}
+
+			if (!car.enter) {
+				car.illusionspeed = x;
+			}
+
+			if (!supercar.enter) {
+				supercar.illusionspeed = x;
+			}
+
+			plane.illusionspeed = x;
+			airport.illusionSpeed = x;
+			airport2.illusionSpeed = x;
+			destroyer.speed = x;
+			iron.armorspeed = x;
+		}
+	}
+	
 	public void fireGun() {
 		if (rifle.gunClicked && gui.rifleammo > 0 && rifle.canFire) {
 
@@ -349,8 +468,8 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		for (int i = 0; i < landscape.length; i++) {
 			landscape[i].draw(g);
 		}
-		for (int i = 0; i < floor.length; i++) {
-			floor[i].draw(g);
+		for (int i = 0; i < floor.size(); i++) {
+			floor.get(i).draw(g);
 		}
 
 		for (int i = 0; i < towers.length; i++) {
@@ -473,7 +592,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 	public void drawEnemyBullets(Graphics g) {
 		for (int i = 0; i < enemyBulletLeft.length; i++) {
 			enemyBulletLeft[i].fire();
-			enemyBulletLeft[i].bulletSpeed = -10;
+			enemyBulletLeft[i].bulletSpeed = -30;
 
 			if (enemyBulletLeft[i].bulletFire) {
 
@@ -484,93 +603,11 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 		for (int i = 0; i < enemyBulletRight.length; i++) {
 			enemyBulletRight[i].fire();
-			enemyBulletRight[i].bulletSpeed = 10;
+			enemyBulletRight[i].bulletSpeed = 30;
 			if (enemyBulletRight[i].bulletFire) {
 
 				addImage(g, "//Bullet//DestroyerBulletsRIGHT.png", enemyBulletRight[i].bulletX,
 						(int) enemyBulletRight[i].bulletY + enemyBulletRight[i].yoffset);
-			}
-		}
-	}
-
-	public void miscRandomBugFix() {
-
-		if (user.death) {
-			movePlayer(0);
-		}
-
-		if (iron.track) {
-			user.gravityActivate = false;
-		}
-
-		rifle.X = (int) user.personX + 30;
-		rifle.Y = (int) user.y + 30;
-
-		if (gui.setAmmo) {
-			gui.rifleammo = rbullets.length - 1;
-			gui.setAmmo = false;
-		}
-
-		for (int i = 0; i < rbullets.length; i++) {
-
-			rbullets[i].trackbullet(rifle.X);
-
-			if (!rbullets[i].bulletFire) {
-				rbullets[i].bulletX = 0;
-				rbullets[i].bulletY = 0;
-			}
-		}
-
-		if (plane.planePos) {
-			plane.x = airport.X + 1000;
-			plane.planePos = false;
-		}
-//		for (int i = 0; i < floor.length; i++) {
-//			if (floor[i].XGround < -1000) {
-//				floor[i].XGround = 2200;
-//			}
-//		}
-//		for (int i = 0; i < floor.length; i++) {
-//			if (floor[i].XGround > -10) {
-//				floor[i].XGround = -400;
-//			}
-//		}
-		for (int i = 0; i < landscape.length; i++) {
-
-			if (landscape[i].X < -1000) {
-				landscape[i].X = 1800;
-			}
-
-			if (landscape[i].X > 1920) {
-				landscape[i].X = -850;
-			}
-
-		}
-
-		if (iron.track) {
-			user.holdingWeapon = false;
-		}
-		for (int i = 0; i < bullets.length; i++) {
-			if (!bullets[i].bulletFire) {
-				bullets[i].bulletX = iron.armorPosX + 19;
-				bullets[i].bulletY = iron.armorPosY - 5;
-			}
-
-			shield.x = iron.armorPosX + 50;
-			shield.y = iron.armorPosY;
-		}
-
-		for (int i = 0; i < enemyBulletLeft.length; i++) {
-			if (!enemyBulletLeft[i].bulletFire) {
-				enemyBulletLeft[i].bulletX = destroyer.X;
-				enemyBulletLeft[i].bulletY = destroyer.Y + 10;
-			}
-		}
-
-		for (int i = 0; i < enemyBulletRight.length; i++) {
-			if (!enemyBulletRight[i].bulletFire) {
-				enemyBulletRight[i].bulletX = destroyer.X;
-				enemyBulletRight[i].bulletY = destroyer.Y + 10;
 			}
 		}
 	}
@@ -705,44 +742,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				DestroyerBullets enemyBullet1 = new DestroyerBullets(destroyer.X, destroyer.Y + 10);
 				enemyBulletLeft[i] = enemyBullet1;
 			}
-		}
-	}
-
-	void movePlayer(double x) {
-
-		if ((int) x == 0) {
-			user.isMoving = false;
-		} else {
-			user.isMoving = true;
-		}
-
-		if (!user.death) {
-			for (int i = 0; i < floor.length; i++) {
-				floor[i].floorSpeed = x;
-			}
-			for (int j = 0; j < landscape.length; j++) {
-				landscape[j].backgroundspeed = x / 2;
-			}
-			for (int j = 0; j < player.length; j++) {
-				player[j].speed = x;
-			}
-			for (int j = 0; j < towers.length; j++) {
-				towers[j].speed = x;
-			}
-
-			if (!car.enter) {
-				car.illusionspeed = x;
-			}
-
-			if (!supercar.enter) {
-				supercar.illusionspeed = x;
-			}
-
-			plane.illusionspeed = x;
-			airport.illusionSpeed = x;
-			airport2.illusionSpeed = x;
-			destroyer.speed = x;
-			iron.armorspeed = x;
 		}
 	}
 
@@ -1000,7 +999,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 					power.isflyingforbattery = false;
 				}
 			}
-			if (!iron.track && onGround) {
+			if (!iron.track) {
 				user.forceUp = true;
 			}
 		}
@@ -1009,9 +1008,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 			user.speedY = 5;
 
 		}
-
 		if (i == KeyEvent.VK_A && !user.death) {
-
 			if (car.enter) {
 				movePlayer(car.carSpeed);
 				car.carLeft = true;
@@ -1076,10 +1073,8 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 				movePlayer(12);
 			}
-		} else if (!car.enter && !plane.enter && !supercar.enter) {
-			movePlayer(4);
 		}
-
+		
 		if (i == KeyEvent.VK_D && !user.death) {
 			if (car.enter) {
 				car.carLeft = false;
@@ -1142,7 +1137,7 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				movePlayer(-12);
 			}
 		}
-
+		
 		if (i == KeyEvent.VK_T && iron.ableToTurbo && iron.track) {
 
 			iron.turbo = true;
@@ -1175,8 +1170,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 
 		iron.turbo = false;
 		iron.turbo_LEFT = false;
-
-		movePlayer(0);
 
 		if (i == KeyEvent.VK_A && user.holdingWeapon) {
 			user.animateRight = false;
@@ -1216,7 +1209,6 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 				supercar.decelerate = true;
 				supercar.accelerate = false;
 			}
-
 		}
 
 		if (i == KeyEvent.VK_A) {
@@ -1246,13 +1238,11 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		}
 
 		if (i == KeyEvent.VK_D && iron.armorPosY >= 870) {
-			movePlayer(0);
+				movePlayer(0);
 		}
-
 		if (i == KeyEvent.VK_A && iron.armorPosY >= 870) {
-			movePlayer(0);
+				movePlayer(0);
 		}
-
 		if (!iron.track) {
 			user.speedY = 0;
 		}
@@ -1423,33 +1413,46 @@ public class sandbox extends Textures implements ActionListener, MouseMotionList
 		} else {
 			supercar.canEnter = false;
 		}
-		onGround = false;
 
-		for (int i = 0; i < floor.length; i++) {
-			Rectangle ground = floor[i].bounds();
+		for (int i = 0; i < floor.size(); i++) {
+			Rectangle ground = floor.get(i).bounds();
 			if (Car.intersects(ground)) {
 				car.fallingFactor = 0;
 				car.yspeed = 0;
 				car.gravityActivate = false;
-			}
+				if (car.y > 850) {
+					car.y--;
+				}
 
+			}
+			if (superCar.intersects(ground)) {
+				supercar.fallingFactor = 0;
+				supercar.yspeed = 0;
+				supercar.gravityActivate = false;
+				if (supercar.y > 860) {
+					supercar.y--;
+				}
+
+			}
+			
 			if (human.intersects(ground)) {
+				onGround = true;
+				if (user.y > 870) {
+					user.y -= 1;
+				}
+
 				user.fallingFactor = 0;
 				user.force = 0;
 				if (!iron.track) {
 					user.speedY = 0;
 				}
 				user.setForce = true;
-				onGround = true;
-
 			}
-
-		}
-		for (int j = 0; j < floor.length; j++) {
-			if (!user.jump) {
-				user.y = floor[j].y + 870;
+			if(user.y + user.height < floor.get(0).YGround) {
+				onGround = false;
 			}
 		}
+
 	}
 
 	public void mouseDragged(MouseEvent e) {

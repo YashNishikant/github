@@ -5,6 +5,11 @@ public class card {
 	private int value;
 	private String suit;
 	private String color;
+	
+	private String Ace =  "Ace of ";
+	private String Jack =  "Jack of ";
+	private String Queen =  "Queen of ";
+	private String King =  "King of ";
 
 	public card(int v, String s) {
 
@@ -33,17 +38,17 @@ public class card {
 	public String getColor() {
 		return color;
 	}
-
+	
 	public String toString() {
 		switch (value) {
 		case 1:
-			return "Ace of " + suit;
+			return Ace + suit;
 		case 11:
-			return "Jack of " + suit;
+			return Jack + suit;
 		case 12:
-			return "Queen of " + suit;
+			return Queen + suit;
 		case 13:
-			return "King of " + suit;
+			return King + suit;
 		}
 		return value + " of " + suit;
 	}

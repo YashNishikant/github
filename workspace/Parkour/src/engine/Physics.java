@@ -6,6 +6,7 @@ public class Physics extends JPanel {
 
 	public double fallingFactor;
 	boolean gravityActivate = true;
+	boolean gravityInverseActivate = true;
 	public boolean forceUp;
 	public boolean hitground;
 	public double force;
@@ -14,9 +15,10 @@ public class Physics extends JPanel {
 	public double x;
 	public double speedObject = 0;
 	int random;
-	public boolean forceHorizontal;
+	public boolean forceHorizontalL;
+	public boolean forceHorizontalR;
 
-	public double DOWNWARD_FORCE = 1;
+	public double DOWNWARD_FORCE = 6;
 
 	public Physics() {
 		fallingFactor = 0;
@@ -31,60 +33,50 @@ public class Physics extends JPanel {
 		return y;
 	}
 
-	public int randomInt(int a, int b) {
-
-		random = (int) ((Math.random() * (b - a + 1)) + a);
-		return random;
-
+	public double gravityInverse(double gravity) {
+		if (gravityInverseActivate) {
+			y -= fallingFactor;
+			fallingFactor -= gravity;
+		}
+		return y;
 	}
 
-	public double applyForceVertical(double ForceReplace) {
+	public int randomInt(int a, int b) {
+		random = (int) ((Math.random() * (b - a + 1)) + a);
+		return random;
+	}
+
+	public double applyForceVerticalDOWN(double ForceReplace) {
+
 		if (forceUp) {
 			if (setForce) {
 				fallingFactor = 0;
-				force = -ForceReplace;
+				force = ForceReplace;
 				setForce = false;
 			}
-
 			y += force;
-			force += DOWNWARD_FORCE;
-			gravityActivate = false;
+			force -= DOWNWARD_FORCE;
+			gravityInverseActivate = false;
 		}
-
-		if (force > 0) {
+		if (force <= 0) {
 			forceUp = false;
-			gravityActivate = true;
+			gravityInverseActivate = true;
 		}
-
 		return y;
 	}
 
 	public double applyForceHorizontal(double speed) {
-		if (forceHorizontal) {
-
-			if(speedObject < speed) {
-				speedObject += 0.05;
-			}
-			if(speedObject > speed) {
-				speedObject -= 0.05;
-			}
-		
+		if (forceHorizontalL) {
+			speedObject = speed;
 			x += speedObject;
-			
-		} else {
-			if ((int) speedObject != 0) {
-
-				x += speedObject;
-
-				if (speed > 0) {
-					speedObject -= 0.1;
-				}
-				if (speed < 0) {
-					speedObject += 0.1;
-				}
-			}
 		}
+
+		if (forceHorizontalR) {
+			speedObject = speed;
+			x -= speedObject;
+			
+		}
+		
 		return x;
 	}
-
 }

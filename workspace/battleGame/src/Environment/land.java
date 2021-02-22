@@ -16,7 +16,7 @@ public class land extends Textures{
 
 	String assetsPath;
 	
-	public land(int x1) {
+	public land(double x1) {
 		assetsPath = System.getProperty("user.dir");
 		assetsPath += "\\src\\assets\\";
 		X = x1;

@@ -25,8 +25,8 @@ public class rain extends Textures {
 		if (beginRain) {
 			if (raindropY <= 940) {
 				raindropY = raindropY + rainSpeed;
-				if (rainSpeed < 9) {
-					rainSpeed += 0.09;
+				if (rainSpeed < 20) {
+					rainSpeed += 0.20;
 				}
 			} else {
 				raindropY = (int) (Math.random() * -1200) + 0;
@@ -39,9 +39,7 @@ public class rain extends Textures {
 	public void draw(Graphics g) {
 		if (beginRain) {
 			if (raindropY <= 940) {
-
 				addImage(g, "//Backgrounds//rain.png", raindropX, (int) raindropY);
-
 			}
 		}
 	}

@@ -7,7 +7,7 @@ public class Textures extends Physics{
 
 	String assetsPath;
 
-	public int animationSpeed = 9;
+	public int animationSpeed;
 	public int animationLimit;
 	public int animationDelayR;
 	public int animationDelayL;

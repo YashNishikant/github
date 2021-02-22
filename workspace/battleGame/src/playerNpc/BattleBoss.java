@@ -112,7 +112,7 @@ public class BattleBoss extends Textures{
 
 	public void draw(Graphics g) {
 		if (alive) {
-			addImage(g, "//Destroyer//duck.png", X - 12, (int) (Y + 10));
+			addImage(g, "//Destroyer//Destroyer.png", X - 12, (int) (Y + 10));
 
 		} else {
 			addImage(g, "//Destroyer//DestroyerDead.png", X - 12, (int) (Y + 10));

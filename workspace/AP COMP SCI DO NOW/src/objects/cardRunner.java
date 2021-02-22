@@ -18,23 +18,25 @@ public class cardRunner {
 		}
 
 		divide();
-		System.out.println("You have:\t" + hand1);
-
-		System.out.println("What would you like to do next? (Hit, Stand)");
+		while(true) {
+		System.out.println("You have:\t" + hand1 );
+		System.out.println("Final Value:\t" + hand1.getTotalValue());
+		
+		System.out.println("What would you like to do next? (Hit, Stay)");
 		String answer = scan.nextLine();
 
 		if (answer.equalsIgnoreCase("hit")) {
 			hand1.addCard(deck.deal());
 			System.out.println("You have:\t" + hand1);
 		}
-		if (answer.equalsIgnoreCase("stand")) {
+		if (answer.equalsIgnoreCase("stay")) {
 			System.out.println("You have:\t" + hand1);
 		}
 		divide();
 	}
-	
+	}
 	public void divide() {
 		System.out.println("______________________________________________________");
 	}
-
+	
 }

@@ -13,22 +13,19 @@ public class Player extends engine{
 	public double width;
 	public double height;
 	public double speedY;
-	public double speed = 6;
-	public double speedX = 10;
+	public double speed = 10;
+	
+	public int yCoord = 400;
 	
 	public Player(double x1, double y1) {
 		x = 700;
-		y = 50;
+		y = yCoord;
 		width = x1;
 		height = y1;
 	}
 	
-	public void move() {
-		y += speedY;
-	}
-	
 	public void draw(Graphics g) {
-		g.setColor(Color.WHITE);
+		g.setColor(Color.BLUE);
 		g.fillRect((int)x, (int)y, (int)(width), (int)(height));
 	}
 	
