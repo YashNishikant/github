@@ -2,7 +2,9 @@ package Structures;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import engine.engine;
 
@@ -15,13 +17,16 @@ public class Platform extends engine {
 	private boolean stopCollisionTop;
 	private boolean stopCollisionLeft;
 	private boolean stopCollisionRight;
+	private boolean stopCollisionBottom;
 	private boolean renderTop = false;
 	private boolean renderLeft = false;
 	private boolean renderRight = false;
+	private boolean renderBottom = false;
+	private boolean highlight = false;
 
 	public Platform(double x, double y) {
-		width = 80;
-		height = 80;
+		width = 60;
+		height = 60;
 
 		this.x = x;
 		this.y = y;
@@ -43,25 +48,29 @@ public class Platform extends engine {
 		g.fillRect((int) x, (int) (y + height), (int) (width), (int) (5));
 	}
 	
-	public void draw(Graphics g) {
+	public void setHighlight(boolean x) {
+		highlight = x;
+	}
+	public boolean getHighlight() {
+		return highlight;
+	}
+	public void draw(Graphics2D g2d, Graphics g) {
 
-		addImage(g, "Platform.png", x, (int) y);
-
-		if (!changeTexture) {
-			addImage(g, "Platform.png", x, (int) y);
-		} else {
-			addImage(g, "PlatformDirt.png", x, (int) y);
-		}
 	}
 
 	public void setDirtTexture(boolean x) {
 		changeTexture = x;
 	}
 
+	public boolean getDirtTexture() {
+		return changeTexture;
+	}
 	public boolean getSolid() {
 		return solid;
 	}
-
+	public void setSolid(boolean x) {
+		solid = x;
+	}
 	public void stopCollisionTop(boolean x) {
 		stopCollisionTop = x;
 	}
@@ -70,6 +79,9 @@ public class Platform extends engine {
 	}
 	public void stopCollisionLeft(boolean x) {
 		stopCollisionLeft = x;
+	}
+	public void stopCollisionBottom(boolean x) {
+		stopCollisionBottom = x;
 	}
 	
 	public boolean getCRight() {
@@ -81,7 +93,13 @@ public class Platform extends engine {
 	public boolean getCTop() {
 		return stopCollisionLeft;
 	}
+	public boolean getCBottom() {
+		return stopCollisionBottom;
+	}
 	
+	public Rectangle bounds() {
+		return (new Rectangle((int) x, (int) y, (int) (width), (int) (height)));
+	}
 	
 	public Rectangle bounds1() {
 		if (!stopCollisionTop) {
@@ -113,7 +131,17 @@ public class Platform extends engine {
 		}
 	}
 
+	public boolean getChangeTexture() {
+		return changeTexture;
+	}
+
 	public Rectangle bounds4() {
-		return (new Rectangle((int) x + 10, (int) (y + height), (int) (width) - 20, (int) (height / 30)));
+		if (!stopCollisionBottom) {
+			renderBottom = true;
+			return (new Rectangle((int) x + 10, (int) (y + height), (int) (width) - 20, (int) (height / 30)));
+		} else {
+			renderBottom = false;
+			return (new Rectangle(0, 0, 0, 0));
+		}
 	}
 }

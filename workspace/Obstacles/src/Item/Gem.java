@@ -2,14 +2,14 @@ package Item;
 
 import java.awt.Graphics;
 
-public class Coin extends Item {
+public class Gem extends Item {
 
 	private int width;
 	private int height;
 
 	private boolean red;
 
-	public Coin(double x1, double y1) {
+	public Gem(double x1, double y1) {
 		super();
 		x = x1;
 		y = y1;

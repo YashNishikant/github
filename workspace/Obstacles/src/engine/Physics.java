@@ -25,6 +25,33 @@ public class Physics extends JPanel {
 		DOWNWARD_FORCE /= 10;
 	}
 
+	public double gravityInverse(double gravity) {
+		if (gravityInverseActivate) {
+			y -= fallingFactor;
+			fallingFactor -= gravity;
+		}
+		return y;
+	}
+	
+	public double applyForceVerticalDOWN(double ForceReplace) {
+
+		if (forceUp) {
+			if (setForce) {
+				fallingFactor = 0;
+				force = ForceReplace;
+				setForce = false;
+			}
+			y += force;
+			force -= DOWNWARD_FORCE;
+			gravityInverseActivate = false;
+		}
+		if (force <= 0) {
+			forceUp = false;
+			gravityInverseActivate = true;
+		}
+		return y;
+	}
+	
 	public double gravity(double gravity) {
 		if (gravityActivate) {
 			y += fallingFactor;
@@ -62,7 +89,7 @@ public class Physics extends JPanel {
 	}
 
 	public double applyForceHorizontal(double speed) {
-
+		
 		if (forceHorizontalL) {
 			speedObject = speed;
 			x += speedObject;
@@ -71,7 +98,7 @@ public class Physics extends JPanel {
 		if (forceHorizontalR) {
 			speedObject = speed;
 			x -= speedObject;
-
+			
 		}
 
 		return x;

@@ -5,16 +5,12 @@ import java.awt.Rectangle;
 
 public class AirBlock extends Platform{
 	
-	double width;
-	double height;
 	private boolean solid = false;
 	
 	public AirBlock(double x, double y) {
 		
 		super(x,y);
 		
-		width = 80;
-		height = 80;
 		
 		this.x = x;
 		this.y = y;

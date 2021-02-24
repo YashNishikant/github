@@ -6,27 +6,27 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="print" key="selection"/>
+		<item value=":" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="true" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value=":"/>
+			<item value="terrain"/>
+			<item value="contain"/>
+			<item value="gravity"/>
+			<item value="addText"/>
 			<item value="print"/>
+			<item value="no"/>
+			<item value="try"/>
+			<item value="rotate = 0"/>
 			<item value="blocks[j]"/>
 			<item value="blocks[i]"/>
 			<item value="blocks.length"/>
 			<item value="blocks.get(j)"/>
 			<item value="blocks.get(i)"/>
 			<item value="blocks.length()"/>
-			<item value="blocks.size"/>
-			<item value="block.get(j)"/>
-			<item value="block.get(i)"/>
-			<item value="block[j]"/>
-			<item value="block[i]"/>
-			<item value="block.length"/>
-			<item value="forceUp"/>
-			<item value="other"/>
 		</list>
 		<list key="replacehistory">
 			<item value="blocks.get(j)"/>

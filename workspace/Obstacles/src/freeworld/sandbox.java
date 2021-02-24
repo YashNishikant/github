@@ -1,11 +1,10 @@
 package freeworld;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,16 +14,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.NoninvertibleTransformException;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Timer;
 
-import Item.Coin;
+import Item.Gem;
+import Item.clicker;
 import Structures.AirBlock;
+import Structures.GrassBlock;
 import Structures.JumpPlatform;
 import Structures.Platform;
 import Structures.StoneBlock;
@@ -38,6 +36,17 @@ import java.awt.Toolkit;
 @SuppressWarnings("serial")
 public class sandbox extends engine implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
 
+	BufferedImage knight = addImageG2D("Player.png");
+	BufferedImage sword = addImageG2D("Sword.png");
+	
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	
+	static double screensizeX = screenSize.getWidth();
+	static double screensizeY = screenSize.getHeight();
+	
+	int lineSpace = 0;
+	boolean fallingFactorReset;
+	boolean onGround;
 	int spacingX = 0;
 	int spacingY = 0;
 	boolean onground;
@@ -49,12 +58,15 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	int randomColor = randomInt(1, 2);
 	boolean flip;
 	int rotate;
-
+	boolean highlight;
+	boolean breakblock = false;
+	int rockLevel;
+	
 	int playerx;
 	int playery;
-	
+	int blockIndex;
 	boolean swing;
-	
+
 	mouseClicker click = new mouseClicker();
 	ArrayList<Platform> blocks = new ArrayList<Platform>();
 
@@ -64,63 +76,94 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	Timer time = new Timer(5, this);
 	String assetsPath;
 	ArrayList<JumpPlatform> ju = new ArrayList<JumpPlatform>();
-	ArrayList<Coin> Coins = new ArrayList<Coin>();
+	ArrayList<Gem> Gems = new ArrayList<Gem>();
+
+	clicker Clicker = new clicker();
 
 	JumpPlatform ju1 = new JumpPlatform(0, 0);
-	Platform block1;
+	Platform block1 = new Platform(10, 10);
+	GrassBlock gb1;
 	AirBlock air1;
 	StoneBlock sb1;
-	Coin c1;
-
-	String mapGen = "------------------------a" + 
-					"########################a" + 
-					".######################.a" + 
-					".##############......##.a" + 
-					".-----------####....###.a" + 
-					".----------#####...####.a" + 
-					".-###############.#####.a" + 
-					".-#####################.a" + 
-					".----------##########...a" + 
-					".--##--##---#########...a" + 
-					".--##--##----########...a" + 
-					".--##--##-----#######...a" + 
-					"........................a";
+	Gem g1;
 
 	public sandbox() {
 
+		String mapGen = 
+
+						"################################################a" + 
+						"################################################a" + 
+						".##############################################.a" + 
+						".##############################################.a" + 
+						".##############################################.a" + 
+						".##############################################.a" + 
+						".##############################################.a" + 
+						".##############################################.a" + 
+						".----------#####################################a" + 
+						".--##--##---#########...........................a" + 
+						".--##--##----########...........................a" + 
+						".--##--##-----#######...........................a" + 
+						"................................................a$" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"#################################################";
+		
+		lineSpace = mapGen.indexOf('a') - mapGen.indexOf('#') + 1;
 		for (char ch : mapGen.toCharArray()) {
 			if (ch == '#') {
 				air1 = new AirBlock(spacingX, spacingY);
 				blocks.add(air1);
-				spacingX += 80;
+				spacingX += block1.width;
 			}
 			if (ch == 'a') {
 				air1 = new AirBlock(spacingX, spacingY);
 				blocks.add(air1);
-				spacingY += 80;
+				spacingY += block1.height;
 				spacingX = 0;
 			}
 			if (ch == '.') {
-				block1 = new Platform(spacingX, spacingY);
-				blocks.add(block1);
-				spacingX += 80;
+				gb1 = new GrassBlock(spacingX, spacingY);
+				blocks.add(gb1);
+				spacingX += block1.width;
 			}
 
 			if (ch == '-') {
 				sb1 = new StoneBlock(spacingX, spacingY);
 				blocks.add(sb1);
-				spacingX += 80;
-			}
-
-		}
-		for (int i = 0; i < 300; i++) {
-			if (blocks.get(i).getSolid() && (blocks.get(i + 25).getSolid())) {
-				blocks.get(i + 25).setDirtTexture(true);
-				blocks.get(i + 25).stopCollisionTop(true);
+				spacingX += block1.width;
 			}
 		}
 
-		for (int i = 0; i < mapGen.length(); i++) {
+		for (int i = 0; i < blocks.size() - lineSpace; i++) {
+
+			if (blocks.get(i).getSolid() && (blocks.get(i + lineSpace).getSolid())) {
+				blocks.get(i + lineSpace).setDirtTexture(true);
+				blocks.get(i + lineSpace).stopCollisionTop(true);
+			}
+		}
+
+		for (int i = 0; i < blocks.size() - 1; i++) {
 			if (blocks.get(i).getSolid() && (blocks.get(i + 1).getSolid())) {
 				blocks.get(i + 1).stopCollisionLeft(true);
 				blocks.get(i).stopCollisionRight(true);
@@ -129,18 +172,18 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 
 		spacingX = (int) ((blocks.get(0).width));
 
-		for (int i = 0; i < 4; i++) {
-			randomColor = randomInt(1, 2);
-			c1 = new Coin(100 + spacingX, 100);
-			spacingX += block1.width;
-			if (randomColor == 1) {
-				c1.setGem(true);
-			} else {
-				c1.setGem(false);
-			}
-			Coins.add(c1);
-
-		}
+//		for (int i = 0; i < 20; i++) {
+//			randomColor = randomInt(1, 2);
+//			g1 = new Gem(100 + spacingX, 100);
+//			spacingX += block1.width;
+//			if (randomColor == 1) {
+//				g1.setGem(true);
+//			} else {
+//				g1.setGem(false);
+//			}
+//			Gems.add(g1);
+//
+//		}
 
 		time.start();
 		addKeyListener(this);
@@ -151,120 +194,211 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
-		for (Coin c : Coins) {
-			c.gravity(DOWNWARD_FORCE);
-		}
 		moveforceHorizontal(user.speed);
-		user.gravity(DOWNWARD_FORCE);
-		jumpPadGravity();
-		user.applyForceVertical(jumpStrength);
+		gameGravity();
+		ItemGravity();
 		Collision();
+		contain();
+		terrainCheck();
 		repaint();
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		game.drawBackground(g);
-		drawJumps(g);
-		for (Coin c : Coins) {
-			c.draw(g);
-		}
-		drawBlocks(g);
-		user.draw(g);
-		addText(g, "Coins: " + coinnum, (int) 10, (int) 150, 20);
-
-		BufferedImage knight = LoadImage("Player.png");
-		BufferedImage sword = LoadImage("Sword.png");
 		Graphics2D g2d = (Graphics2D) g;
-		
-		AffineTransform at = AffineTransform.getTranslateInstance(playerx, playery);
-		
-		if (flip) {
-			g2d.drawImage(knight, (int) (user.x + user.width), (int) (user.y), (int) -user.width, (int) user.height, null);
-			if(!swing) {
-				g2d.drawImage(sword, (int) (user.x + user.width) - 15, (int) (user.y) - 15, 25, 75, null);
-			}
-			playerx = (int)(user.x) + 40;
-			playery = (int)(user.y);
-			
-			rotate = -rotate;
-			
-		} else {
-			g2d.drawImage(knight, (int) (user.x), (int) (user.y), (int) user.width, (int) user.height, null);
-			if(!swing) {
-				g2d.drawImage(sword, (int) (user.x) - 15, (int) (user.y) - 15, 25, 75, null);
-			}
-			playerx = (int)(user.x) - 10;
-			playery = (int)(user.y);
+		AffineTransform at = setTransformations(playerx, playery);
+		game.drawBackground(g);
+		drawGems(g);
+		drawBlocks(g2d, g);
+		user.draw(g);
+		PlayerAnimations(g2d, knight, sword, at);
+		highlight(g2d, g);
+	}
+	
+	public void highlight(Graphics2D g2d, Graphics g) {
+		if(highlight) {
+			g.setColor(Color.YELLOW);
+			g.fillRect((int)blocks.get(blockIndex).x, (int)blocks.get(blockIndex).y, (int)blocks.get(blockIndex).width, (int)blocks.get(blockIndex).height);
+			g.setColor(Color.BLACK);
 		}
-		if(swing && !flip) {
-			
-			at.rotate(Math.toRadians(-rotate), 25/1.8, 75/1.8);
-			g2d.drawImage(sword, at, null);
-			rotate+=10;
-			
-			if(rotate >= 90) {
-				
-				rotate -= 10;
-				rotate = 0;
-				swing = false;
+	}
+	
+	public void gameGravity() {
 
+		for(Platform b : blocks) {
+			if(!onground)
+			b.gravityInverse(-DOWNWARD_FORCE);
+			b.applyForceVerticalDOWN(jumpStrength);
+			
+			if(fallingFactorReset) {
+				b.fallingFactor = 0;
 			}
 		}
 	
-		if(swing && flip) {
-			
-			at.rotate(Math.toRadians(rotate), 25/1.8, 75/1.8);
-			g2d.drawImage(sword, at, null);
-			rotate+=10;
-			
-			if(rotate >= 90) {
-				
-				rotate -= 10;
-				rotate = 0;
-				swing = false;
+		for(Gem g : Gems) {
 
+			g.gravity(-DOWNWARD_FORCE);
+			g.applyForceVerticalDOWN(jumpStrength);
+			
+			if(fallingFactorReset) {
+				g.fallingFactor = 0;
 			}
 		}
 		
 	}
-
-	BufferedImage LoadImage(String FileName) {
-		BufferedImage img = null;
-
-		try {
-			img = ImageIO.read(new File(FileName));
-		} catch (IOException e) {
-			System.out.println("no");
+	
+	public void terrainCheck() {
+		for (int i = 0; i < blocks.size() - lineSpace; i++) {
+			
+			if (blocks.get(i).getSolid() && (!blocks.get(i - lineSpace).getSolid())) {
+				blocks.get(i).setDirtTexture(false);
+				blocks.get(i).stopCollisionTop(false);
+			}
+			
+			if (blocks.get(i).getSolid() && (!blocks.get(i + 1).getSolid())) {
+				blocks.get(i).stopCollisionRight(false);
+			}
+			
+			if (blocks.get(i).getSolid() && (!blocks.get(i - 1).getSolid())) {
+				blocks.get(i).stopCollisionLeft(false);
+			}
+			
+			if (blocks.get(i).getSolid() && (!blocks.get(i + lineSpace).getSolid())) {
+				blocks.get(i).stopCollisionBottom(false);
+			}
+			
+			if (blocks.get(i).getSolid() && (blocks.get(i + lineSpace).getSolid())) {
+				blocks.get(i + lineSpace).setDirtTexture(true);
+				blocks.get(i + lineSpace).stopCollisionTop(true);
+			}
 		}
-		return img;
+
+		for (int i = 0; i < blocks.size() - 1; i++) {
+			if (blocks.get(i).getSolid() && (blocks.get(i + 1).getSolid())) {
+				blocks.get(i + 1).stopCollisionLeft(true);
+				blocks.get(i).stopCollisionRight(true);
+			}
+		}
+	}
+	
+	public void contain() {
+		
+		if(user.x > 800) {
+			user.x-=5;
+			
+			for(Platform b: blocks) {
+				b.x-=user.speed;
+			}
+			for(Gem g: Gems) {
+				g.x-=user.speed;
+			}
+		}
+		if(user.x < 800) {
+			for(Platform b: blocks) {
+				b.x+=user.speed;
+			}
+			for(Gem g: Gems) {
+				g.x+=user.speed;
+			}
+			user.x+=5;
+		}
+	
+		if(user.y > 400) {
+			user.y-=5;
+			
+			for(Platform b: blocks) {
+				b.y-=user.speed;
+			}
+			for(Gem g: Gems) {
+				g.y-=user.speed;
+			}
+		}
+		if(user.y < 400) {
+			for(Platform b: blocks) {
+				b.y+=user.speed;
+			}
+			for(Gem g: Gems) {
+				g.y+=user.speed;
+			}
+			user.y+=5;
+		}
+		
+	}
+	
+	public void PlayerAnimations(Graphics2D g2d, BufferedImage a, BufferedImage b, AffineTransform at) {
+		if (flip) {
+			user.FlipImage(g2d, a, (int) user.x + 50, (int) user.y, (int) user.width, (int) user.height);
+			if (!swing) {
+				g2d.drawImage(b, (int) (user.x + user.width) - 15, (int) (user.y) - 15, 25, 75, null);
+			}
+			playerx = (int) (user.x) + 40;
+			playery = (int) (user.y);
+
+		} else {
+			g2d.drawImage(a, (int) (user.x), (int) (user.y), (int) user.width, (int) user.height, null);
+			if (!swing) {
+				g2d.drawImage(b, (int) (user.x) - 15, (int) (user.y) - 15, 25, 75, null);
+			}
+			playerx = (int) (user.x) - 10;
+			playery = (int) (user.y);
+		}
+		if (swing && !flip) {
+
+			at.rotate(Math.toRadians(-rotate), 25 / 1.8, 75 / 1.8);
+			g2d.drawImage(b, at, null);
+			rotate += 10;
+
+			if (rotate >= 100) {
+				rotate = 0;
+				swing = false;
+			}
+		}
+
+		if (swing && flip) {
+
+			at.rotate(Math.toRadians(-rotate), 25 / 1.8, 75 / 1.8);
+			g2d.drawImage(b, at, null);
+			rotate -= 10;
+
+			if (rotate <= -100) {
+				rotate = 0;
+				swing = false;
+			}
+		}
 	}
 
-	public void jumpPadGravity() {
+	public void drawGems(Graphics g) {
+		for (Gem g1 : Gems) {
+			g1.draw(g);
+		}
+	}
+
+	public void ItemGravity() {
 		for (int i = 0; i < ju.size(); i++) {
 			ju.get(i).gravity(DOWNWARD_FORCE);
 		}
-	}
-
-	public void drawJumps(Graphics g) {
-		for (int i = 0; i < ju.size(); i++) {
-			ju.get(i).draw(g);
+		for (Gem g : Gems) {
+			g.gravity(DOWNWARD_FORCE);
+			g.applyForceVerticalDOWN(jumpStrength);
 		}
 	}
 
-	public void drawBlocks(Graphics g) {
-
+	public void drawBlocks(Graphics2D g2d, Graphics g) {
 		for (int i = 0; i < blocks.size(); i++) {
-			if (blocks.get(i).x > 0 - blocks.get(i).width || blocks.get(i).x < 1920) {
-				blocks.get(i).draw(g);
+			if ((blocks.get(i).x > 0 - blocks.get(i).width || blocks.get(i).x < 1920) && blocks.get(i).getSolid()) {
+				blocks.get(i).draw(g2d, g);
 			}
 		}
 	}
 
 	public void moveforceHorizontal(double speed) {
 		user.applyForceHorizontal(speed);
+		for (int i = 0; i < blocks.size(); i++) {
+			blocks.get(i).applyForceHorizontal(user.speed);
+		}
+		for (int i = 0; i < Gems.size(); i++) {
+			Gems.get(i).applyForceHorizontal(user.speed);
+		}
 	}
 
 	@Override
@@ -278,18 +412,29 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 
 		if (i == KeyEvent.VK_SPACE && onground) {
 			jumpStrength = 10;
-			user.forceUp = true;
-			user.setForce = true;
-
+			for(Platform b : blocks) {
+			b.forceUp = true;
+			b.setForce = true;
+			}
 		}
 
 		if (i == KeyEvent.VK_A && !disableleft) {
-			user.forceHorizontalR = true;
+			for (int j = 0; j < blocks.size(); j++) {
+				blocks.get(j).forceHorizontalL = true;
+			}
+			for (int j = 0; j < Gems.size(); j++) {
+				Gems.get(j).forceHorizontalL = true;
+			}
 			flip = false;
 		}
 
 		if (i == KeyEvent.VK_D && !disableright) {
-			user.forceHorizontalL = true;
+			for (int j = 0; j < blocks.size(); j++) {
+				blocks.get(j).forceHorizontalR = true;
+			}
+			for (int j = 0; j < Gems.size(); j++) {
+				Gems.get(j).forceHorizontalR = true;
+			}
 			flip = true;
 		}
 	}
@@ -302,15 +447,26 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	public void keyReleased(KeyEvent e) {
 		int i = e.getKeyCode();
 		if (i == KeyEvent.VK_D) {
-			user.forceHorizontalL = false;
+			for (int j = 0; j < blocks.size(); j++) {
+				blocks.get(j).forceHorizontalR = false;
+			}
+			for (int j = 0; j < Gems.size(); j++) {
+				Gems.get(j).forceHorizontalR = false;
+			}
 		}
 		if (i == KeyEvent.VK_A) {
-			user.forceHorizontalR = false;
+			for (int j = 0; j < blocks.size(); j++) {
+				blocks.get(j).forceHorizontalL = false;
+			}
+		
+			for (int j = 0; j < Gems.size(); j++) {
+				Gems.get(j).forceHorizontalL = false;
+			}
 		}
 	}
 
 	public void Collision() {
-
+		Rectangle clicking = Clicker.bounds();
 		Rectangle player = user.bounds();
 		for (int i = 0; i < ju.size(); i++) {
 			Rectangle jumpPlatform = ju.get(i).bounds();
@@ -327,27 +483,48 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 			ju.get(i).setForce = false;
 		}
 		onground = false;
-
+		fallingFactorReset = false;
+		highlight = false;
 		for (int j = 0; j < blocks.size(); j++) {
 
 			Rectangle recTop = blocks.get(j).bounds1();
 			Rectangle recLeft = blocks.get(j).bounds2();
 			Rectangle recRight = blocks.get(j).bounds3();
 			Rectangle recBottom = blocks.get(j).bounds4();
-
-			for (int k = 0; k < Coins.size(); k++) {
-				Rectangle collectable = Coins.get(k).bounds();
+			Rectangle rec = blocks.get(j).bounds();
+			
+			if(clicking.intersects(rec)) {
+				blocks.get(j).setHighlight(true);
+				blockIndex = j;
+				if(blocks.get(j).getSolid())
+					highlight = true;
+				
+				if(breakblock) {
+					blocks.get(j).stopCollisionLeft(true);
+					blocks.get(j).stopCollisionRight(true);
+					blocks.get(j).stopCollisionTop(true);
+					blocks.get(j).stopCollisionBottom(true);
+					blocks.get(j).setSolid(false);
+					
+				}
+				
+			}
+			else {
+				blocks.get(j).setHighlight(false);
+			}
+			for (int k = 0; k < Gems.size(); k++) {
+				Rectangle collectable = Gems.get(k).bounds();
 
 				if (player.intersects(collectable)) {
-					Coins.remove(k);
+					Gems.remove(k);
 					coinnum++;
 				}
 
 				// TOP COLLISION COIN
 				if (collectable.intersects(recTop)) {
-					Coins.get(k).y = blocks.get(j).y - Coins.get(k).getHeight() + 2;
-					Coins.get(k).fallingFactor = 0;
-					Coins.get(k).gravityActivate = false;
+					//Gems.get(k).y = blocks.get(j).y - Gems.get(k).getHeight() + 2;
+					Gems.get(k).fallingFactor = 0;
+					Gems.get(k).gravityActivate = false;
 				}
 
 			}
@@ -355,7 +532,7 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 			// TOP COLLISION
 			if (player.intersects(recTop)) {
 				user.y = blocks.get(j).y - user.height + 1;
-				user.fallingFactor = 0;
+				fallingFactorReset = true;
 				onground = true;
 			}
 			// LEFT COLLISION
@@ -384,14 +561,7 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	}
 
 	public static void main(String[] args) {
-
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-		double screensizeX = screenSize.getWidth();
-		double screensizeY = screenSize.getHeight();
-
 		JFrame frame = new JFrame();
-
 		Container contentpane = frame.getContentPane();
 		sandbox sPanel = new sandbox();
 
@@ -409,36 +579,41 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		
+	public void mouseMoved(MouseEvent e) {
+
+		Clicker.setX(e.getX());
+		Clicker.setY(e.getY());
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		swing = true;
+
+		breakblock = true;
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		//swing = false;
+		// swing = false;
+		breakblock = false;
 	}
 }

@@ -12,10 +12,10 @@ public class Player extends engine{
 	public double height;
 	public double speedY;
 	public double speed;
-	public int yCoord = 100;
+	public int yCoord = 400;
 	
 	public Player(double x1, double y1) {
-		x = 600;
+		x = 800;
 		y = yCoord;
 		width = x1;
 		height = y1;
