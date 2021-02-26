@@ -19,7 +19,7 @@ public class Player extends engine{
 		y = yCoord;
 		width = x1;
 		height = y1;
-		speed = 10;
+		speed = 8;
 	}
 	
 	public void draw(Graphics g) {

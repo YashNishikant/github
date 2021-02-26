@@ -6,12 +6,13 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value=":" key="selection"/>
+		<item value="map.getLineSpace()" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="true" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="lineSpace"/>
 			<item value=":"/>
 			<item value="terrain"/>
 			<item value="contain"/>
@@ -26,9 +27,9 @@
 			<item value="blocks.length"/>
 			<item value="blocks.get(j)"/>
 			<item value="blocks.get(i)"/>
-			<item value="blocks.length()"/>
 		</list>
 		<list key="replacehistory">
+			<item value="map.getLineSpace()"/>
 			<item value="blocks.get(j)"/>
 			<item value="blocks.get(i)"/>
 			<item value="blocks.size()"/>
@@ -43,7 +44,6 @@
 			<item value="ju.get(i)."/>
 			<item value="ju.size()"/>
 			<item value="jump"/>
-			<item value="jump.size()"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

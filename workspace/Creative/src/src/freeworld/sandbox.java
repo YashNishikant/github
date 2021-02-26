@@ -24,7 +24,6 @@ import Item.clicker;
 import Structures.AirBlock;
 import Structures.GrassBlock;
 import Structures.JumpPlatform;
-import Structures.Map;
 import Structures.Platform;
 import Structures.StoneBlock;
 import engine.engine;
@@ -44,7 +43,8 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	
 	static double screensizeX = screenSize.getWidth();
 	static double screensizeY = screenSize.getHeight();
-
+	
+	int lineSpace = 0;
 	boolean fallingFactorReset;
 	boolean onGround;
 	int spacingX = 0;
@@ -67,8 +67,6 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	int blockIndex;
 	boolean swing;
 
-	Map map = new Map();
-	
 	mouseClicker click = new mouseClicker();
 	ArrayList<Platform> blocks = new ArrayList<Platform>();
 
@@ -91,8 +89,48 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 
 	public sandbox() {
 
+		String mapGen = 
+
+						"################################################a" + 
+						"################################################a" + 
+						".##############################################.a" + 
+						".##############################################.a" + 
+						".##############################################.a" + 
+						".##############################################.a" + 
+						".##############################################.a" + 
+						".##############################################.a" + 
+						".----------#####################################a" + 
+						".--##--##---#########...........................a" + 
+						".--##--##----########...........................a" + 
+						".--##--##-----#######...........................a" + 
+						"................................................a$" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"................................................a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"------------------------------------------------a" +
+						"#################################################";
 		
-		for (char ch : map.getMap().toCharArray()) {
+		lineSpace = mapGen.indexOf('a') - mapGen.indexOf('#') + 1;
+		for (char ch : mapGen.toCharArray()) {
 			if (ch == '#') {
 				air1 = new AirBlock(spacingX, spacingY);
 				blocks.add(air1);
@@ -117,7 +155,20 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 			}
 		}
 
-		terrainCheck();
+		for (int i = 0; i < blocks.size() - lineSpace; i++) {
+
+			if (blocks.get(i).getSolid() && (blocks.get(i + lineSpace).getSolid())) {
+				blocks.get(i + lineSpace).setDirtTexture(true);
+				blocks.get(i + lineSpace).stopCollisionTop(true);
+			}
+		}
+
+		for (int i = 0; i < blocks.size() - 1; i++) {
+			if (blocks.get(i).getSolid() && (blocks.get(i + 1).getSolid())) {
+				blocks.get(i + 1).stopCollisionLeft(true);
+				blocks.get(i).stopCollisionRight(true);
+			}
+		}
 
 		spacingX = (int) ((blocks.get(0).width));
 
@@ -148,6 +199,7 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 		ItemGravity();
 		Collision();
 		contain();
+		terrainCheck();
 		repaint();
 	}
 
@@ -195,18 +247,10 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 		
 	}
 	
-	public void blockDissapear() {
-		blocks.get(blockIndex).stopCollisionLeft(true);
-		blocks.get(blockIndex).stopCollisionRight(true);
-		blocks.get(blockIndex).stopCollisionTop(true);
-		blocks.get(blockIndex).stopCollisionBottom(true);
-		blocks.get(blockIndex).setSolid(false);
-	}
-	
 	public void terrainCheck() {
-		for (int i = 0; i < blocks.size() - map.getLineSpace(); i++) {
-
-			if (blocks.get(i).getSolid() && (!blocks.get(i - map.getLineSpace()).getSolid())) {
+		for (int i = 0; i < blocks.size() - lineSpace; i++) {
+			
+			if (blocks.get(i).getSolid() && (!blocks.get(i - lineSpace).getSolid())) {
 				blocks.get(i).setDirtTexture(false);
 				blocks.get(i).stopCollisionTop(false);
 			}
@@ -219,13 +263,13 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 				blocks.get(i).stopCollisionLeft(false);
 			}
 			
-			if (blocks.get(i).getSolid() && (!blocks.get(i + map.getLineSpace()).getSolid())) {
+			if (blocks.get(i).getSolid() && (!blocks.get(i + lineSpace).getSolid())) {
 				blocks.get(i).stopCollisionBottom(false);
 			}
 			
-			if (blocks.get(i).getSolid() && (blocks.get(i + map.getLineSpace()).getSolid())) {
-				blocks.get(i + map.getLineSpace()).setDirtTexture(true);
-				blocks.get(i + map.getLineSpace()).stopCollisionTop(true);
+			if (blocks.get(i).getSolid() && (blocks.get(i + lineSpace).getSolid())) {
+				blocks.get(i + lineSpace).setDirtTexture(true);
+				blocks.get(i + lineSpace).stopCollisionTop(true);
 			}
 		}
 
@@ -341,12 +385,8 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 
 	public void drawBlocks(Graphics2D g2d, Graphics g) {
 		for (int i = 0; i < blocks.size(); i++) {
-			if((blocks.get(i).x > -block1.width && blocks.get(i).x < 1920) && (blocks.get(i).y < screensizeY && blocks.get(i).y > -block1.height)) {
-
-				if ((blocks.get(i).x > 0 - blocks.get(i).width || blocks.get(i).x < 1920) && blocks.get(i).getSolid()) {
+			if ((blocks.get(i).x > 0 - blocks.get(i).width || blocks.get(i).x < 1920) && blocks.get(i).getSolid()) {
 				blocks.get(i).draw(g2d, g);
-				}
-			
 			}
 		}
 	}
@@ -460,8 +500,12 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 					highlight = true;
 				
 				if(breakblock) {
-					blockDissapear();
-					terrainCheck();
+					blocks.get(j).stopCollisionLeft(true);
+					blocks.get(j).stopCollisionRight(true);
+					blocks.get(j).stopCollisionTop(true);
+					blocks.get(j).stopCollisionBottom(true);
+					blocks.get(j).setSolid(false);
+					
 				}
 				
 			}

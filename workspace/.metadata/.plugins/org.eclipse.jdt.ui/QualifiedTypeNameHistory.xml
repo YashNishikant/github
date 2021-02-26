@@ -27,7 +27,6 @@
 <fullyQualifiedTypeName name="java.awt.event.ComponentListener"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="Structures.Block"/>
-<fullyQualifiedTypeName name="Structures.Map"/>
 <fullyQualifiedTypeName name="java.lang.Math"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="engine.engine"/>
 <fullyQualifiedTypeName name="Structures.GrassBlock"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="Structures.Map"/>
 </qualifiedTypeNameHistroy>

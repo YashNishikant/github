@@ -24,7 +24,6 @@ import Item.clicker;
 import Structures.AirBlock;
 import Structures.GrassBlock;
 import Structures.JumpPlatform;
-import Structures.Map;
 import Structures.Platform;
 import Structures.StoneBlock;
 import engine.engine;
@@ -44,7 +43,8 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	
 	static double screensizeX = screenSize.getWidth();
 	static double screensizeY = screenSize.getHeight();
-
+	
+	int lineSpace = 0;
 	boolean fallingFactorReset;
 	boolean onGround;
 	int spacingX = 0;
@@ -67,8 +67,6 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	int blockIndex;
 	boolean swing;
 
-	Map map = new Map();
-	
 	mouseClicker click = new mouseClicker();
 	ArrayList<Platform> blocks = new ArrayList<Platform>();
 
@@ -90,34 +88,33 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 	Gem g1;
 
 	public sandbox() {
-
 		
-		for (char ch : map.getMap().toCharArray()) {
-			if (ch == '#') {
-				air1 = new AirBlock(spacingX, spacingY);
-				blocks.add(air1);
-				spacingX += block1.width;
-			}
-			if (ch == 'a') {
-				air1 = new AirBlock(spacingX, spacingY);
-				blocks.add(air1);
-				spacingY += block1.height;
-				spacingX = 0;
-			}
-			if (ch == '.') {
-				gb1 = new GrassBlock(spacingX, spacingY);
-				blocks.add(gb1);
-				spacingX += block1.width;
-			}
+		for(int i = 0; i < 300; i++) {
+			air1 = new AirBlock(spacingX, 1000);
+			blocks.add(air1);
+			spacingX += 60;
+		}
+		spacingX = 0;
+		for(int i = 0; i < 300; i++) {
+			gb1 = new GrassBlock(spacingX, 1000 + 60);
+			blocks.add(gb1);
+			spacingX += 60;
+		}
 
-			if (ch == '-') {
-				sb1 = new StoneBlock(spacingX, spacingY);
-				blocks.add(sb1);
-				spacingX += block1.width;
+		for (int i = 0; i < blocks.size() - lineSpace; i++) {
+
+			if (blocks.get(i).getSolid() && (blocks.get(i + lineSpace).getSolid())) {
+				blocks.get(i + lineSpace).setDirtTexture(true);
+				blocks.get(i + lineSpace).stopCollisionTop(true);
 			}
 		}
 
-		terrainCheck();
+		for (int i = 0; i < blocks.size() - 1; i++) {
+			if (blocks.get(i).getSolid() && (blocks.get(i + 1).getSolid())) {
+				blocks.get(i + 1).stopCollisionLeft(true);
+				blocks.get(i).stopCollisionRight(true);
+			}
+		}
 
 		spacingX = (int) ((blocks.get(0).width));
 
@@ -148,6 +145,7 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 		ItemGravity();
 		Collision();
 		contain();
+		terrainCheck();
 		repaint();
 	}
 
@@ -195,46 +193,39 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 		
 	}
 	
-	public void blockDissapear() {
-		blocks.get(blockIndex).stopCollisionLeft(true);
-		blocks.get(blockIndex).stopCollisionRight(true);
-		blocks.get(blockIndex).stopCollisionTop(true);
-		blocks.get(blockIndex).stopCollisionBottom(true);
-		blocks.get(blockIndex).setSolid(false);
-	}
-	
 	public void terrainCheck() {
-		for (int i = 0; i < blocks.size() - map.getLineSpace(); i++) {
-
-			if (blocks.get(i).getSolid() && (!blocks.get(i - map.getLineSpace()).getSolid())) {
-				blocks.get(i).setDirtTexture(false);
-				blocks.get(i).stopCollisionTop(false);
-			}
-			
-			if (blocks.get(i).getSolid() && (!blocks.get(i + 1).getSolid())) {
-				blocks.get(i).stopCollisionRight(false);
-			}
-			
-			if (blocks.get(i).getSolid() && (!blocks.get(i - 1).getSolid())) {
-				blocks.get(i).stopCollisionLeft(false);
-			}
-			
-			if (blocks.get(i).getSolid() && (!blocks.get(i + map.getLineSpace()).getSolid())) {
-				blocks.get(i).stopCollisionBottom(false);
-			}
-			
-			if (blocks.get(i).getSolid() && (blocks.get(i + map.getLineSpace()).getSolid())) {
-				blocks.get(i + map.getLineSpace()).setDirtTexture(true);
-				blocks.get(i + map.getLineSpace()).stopCollisionTop(true);
-			}
-		}
-
-		for (int i = 0; i < blocks.size() - 1; i++) {
-			if (blocks.get(i).getSolid() && (blocks.get(i + 1).getSolid())) {
-				blocks.get(i + 1).stopCollisionLeft(true);
-				blocks.get(i).stopCollisionRight(true);
-			}
-		}
+		
+//		for (int i = 0; i < blocks.size() - lineSpace; i++) {
+//			
+//			if (blocks.get(i).getSolid() && (!blocks.get(i - lineSpace).getSolid())) {
+//				blocks.get(i).setDirtTexture(false);
+//				blocks.get(i).stopCollisionTop(false);
+//			}
+//			
+//			if (blocks.get(i).getSolid() && (!blocks.get(i + 1).getSolid())) {
+//				blocks.get(i).stopCollisionRight(false);
+//			}
+//			
+//			if (blocks.get(i).getSolid() && (!blocks.get(i - 1).getSolid())) {
+//				blocks.get(i).stopCollisionLeft(false);
+//			}
+//			
+//			if (blocks.get(i).getSolid() && (!blocks.get(i + lineSpace).getSolid())) {
+//				blocks.get(i).stopCollisionBottom(false);
+//			}
+//			
+//			if (blocks.get(i).getSolid() && (blocks.get(i + lineSpace).getSolid())) {
+//				blocks.get(i + lineSpace).setDirtTexture(true);
+//				blocks.get(i + lineSpace).stopCollisionTop(true);
+//			}
+//		}
+//
+//		for (int i = 0; i < blocks.size() - 1; i++) {
+//			if (blocks.get(i).getSolid() && (blocks.get(i + 1).getSolid())) {
+//				blocks.get(i + 1).stopCollisionLeft(true);
+//				blocks.get(i).stopCollisionRight(true);
+//			}
+//		}
 	}
 	
 	public void contain() {
@@ -341,12 +332,8 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 
 	public void drawBlocks(Graphics2D g2d, Graphics g) {
 		for (int i = 0; i < blocks.size(); i++) {
-			if((blocks.get(i).x > -block1.width && blocks.get(i).x < 1920) && (blocks.get(i).y < screensizeY && blocks.get(i).y > -block1.height)) {
-
-				if ((blocks.get(i).x > 0 - blocks.get(i).width || blocks.get(i).x < 1920) && blocks.get(i).getSolid()) {
+			if ((blocks.get(i).x > 0 - blocks.get(i).width || blocks.get(i).x < 1920) && blocks.get(i).getSolid()) {
 				blocks.get(i).draw(g2d, g);
-				}
-			
 			}
 		}
 	}
@@ -447,6 +434,8 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 		highlight = false;
 		for (int j = 0; j < blocks.size(); j++) {
 
+
+			
 			Rectangle recTop = blocks.get(j).bounds1();
 			Rectangle recLeft = blocks.get(j).bounds2();
 			Rectangle recRight = blocks.get(j).bounds3();
@@ -460,33 +449,36 @@ public class sandbox extends engine implements ActionListener, KeyListener, Mous
 					highlight = true;
 				
 				if(breakblock) {
-					blockDissapear();
-					terrainCheck();
+					blocks.get(j).stopCollisionLeft(true);
+					blocks.get(j).stopCollisionRight(true);
+					blocks.get(j).stopCollisionTop(true);
+					blocks.get(j).stopCollisionBottom(true);
+					blocks.get(j).setSolid(false);
 				}
-				
 			}
 			else {
 				blocks.get(j).setHighlight(false);
 			}
-			for (int k = 0; k < Gems.size(); k++) {
-				Rectangle collectable = Gems.get(k).bounds();
-
-				if (player.intersects(collectable)) {
-					Gems.remove(k);
-					coinnum++;
-				}
-
-				// TOP COLLISION COIN
-				if (collectable.intersects(recTop)) {
-					//Gems.get(k).y = blocks.get(j).y - Gems.get(k).getHeight() + 2;
-					Gems.get(k).fallingFactor = 0;
-					Gems.get(k).gravityActivate = false;
-				}
-
-			}
+//			for (int k = 0; k < Gems.size(); k++) {
+//				Rectangle collectable = Gems.get(k).bounds();
+//
+//				if (player.intersects(collectable)) {
+//					Gems.remove(k);
+//					coinnum++;
+//				}
+//
+//				// TOP COLLISION COIN
+//				if (collectable.intersects(recTop)) {
+//					//Gems.get(k).y = blocks.get(j).y - Gems.get(k).getHeight() + 2;
+//					Gems.get(k).fallingFactor = 0;
+//					Gems.get(k).gravityActivate = false;
+//				}
+//
+//			}
 
 			// TOP COLLISION
 			if (player.intersects(recTop)) {
+				System.out.println("??");
 				user.y = blocks.get(j).y - user.height + 1;
 				fallingFactorReset = true;
 				onground = true;
